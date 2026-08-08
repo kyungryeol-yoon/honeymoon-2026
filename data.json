@@ -8,72 +8,392 @@
 
   "cities": [
     { "id": "bcn", "name": "바르셀로나", "short": "BCN", "flag": "ES", "color": "#D4744A", "colorLight": "#B85A32", "icon": "sagrada",  "map": "Barcelona, Spain" },
-    { "id": "swi", "name": "스위스",     "short": "CH",  "flag": "CH", "color": "#5B94C4", "colorLight": "#3C74A6", "icon": "alps",     "map": "Interlaken, Switzerland" },
+    { "id": "swi", "name": "스위스",     "short": "CH",  "flag": "CH", "color": "#5B94C4", "colorLight": "#3C74A6", "icon": "alps",     "map": "Switzerland" },
     { "id": "vce", "name": "베네치아",   "short": "VCE", "flag": "IT", "color": "#8AA05A", "colorLight": "#677F3C", "icon": "gondola",  "map": "Venezia, Italy" },
     { "id": "flr", "name": "피렌체",     "short": "FLR", "flag": "IT", "color": "#8AA05A", "colorLight": "#677F3C", "icon": "duomo",    "map": "Firenze, Italy" },
     { "id": "rom", "name": "로마",       "short": "ROM", "flag": "IT", "color": "#8AA05A", "colorLight": "#677F3C", "icon": "colosseo", "map": "Roma, Italy" },
-    { "id": "prg", "name": "프라하",     "short": "PRG", "flag": "CZ", "color": "#B0576B", "colorLight": "#963E53", "icon": "charles",  "map": "Praha, Czechia" }
+    { "id": "prg", "name": "프라하",     "short": "PRG", "flag": "CZ", "color": "#B0576B", "colorLight": "#963E53", "icon": "charles",  "map": "Praha, Czechia" },
+    { "id": "sel", "name": "서울",       "short": "SEL", "flag": "KR", "color": "#A78BB5", "colorLight": "#7D5E8E", "icon": "namsan",   "map": "Seoul, South Korea", "home": true }
   ],
 
   "days": [
     {
-      "date": "2026-09-28",
-      "city": "rom",
-      "dayNo": 15,
-      "chips": [
-        { "t": "현금 €46", "warn": true },
-        { "t": "여권 지참" },
-        { "t": "복장 규정" }
-      ],
+      "date": "2026-09-14", "city": "bcn", "dayNo": 1,
+      "chips": [ { "t": "도착일 = 가볍게" }, { "t": "고딕지구 소매치기 주의", "warn": true } ],
       "items": [
-        { "time": "08:20", "name": "호텔 출발", "desc": "A선 레푸블리카역 → Ottaviano", "map": false },
-        { "time": "09:00", "name": "바티칸 집중 투어", "desc": "라오콘 · 벨베데레 토르소 · 시스티나 · 피에타", "end": "12:30", "place": "Musei Vaticani" },
-        { "time": "13:00", "name": "점심", "desc": "Borgo Pio 골목", "place": "Borgo Pio" },
-        { "time": "14:30", "name": "산탄젤로 성", "desc": "외관 · 다리 · 사진", "place": "Castel Sant'Angelo" },
-        { "time": "16:30", "name": "산 루이지 데이 프란체시", "desc": "카라바조 · 성 마태의 소명 · 무료", "end": "17:15", "place": "San Luigi dei Francesi" },
-        { "time": "17:15", "name": "판테온 외관", "desc": "광장에서", "place": "Pantheon" },
-        { "time": "18:00", "name": "나보나 광장", "desc": "베르니니 · 4대강 분수", "place": "Piazza Navona" },
-        { "time": "19:30", "name": "저녁", "desc": "나보나 · 판테온 근처", "map": false },
+        { "time": "14:40", "name": "BCN 공항 도착", "place": "Barcelona El Prat Airport" },
+        { "time": "15:00", "name": "입국 · 짐 찾기", "map": false },
+        { "time": "16:00", "name": "공항 버스", "desc": "공항 → 호텔", "map": false },
+        { "time": "16:45", "name": "HCC 몽블랑 체크인", "place": "HCC Montblanc, Barcelona" },
+        { "time": "17:30", "name": "람블라스 · 고딕지구 산책", "place": "La Rambla, Barcelona" },
+        { "time": "18:15", "name": "바르셀로나 대성당", "desc": "고딕 양식 · 회랑 안뜰의 거위 13마리", "place": "Catedral de Barcelona" },
+        { "time": "19:30", "name": "첫 디너", "desc": "타파스 · 호텔 근처", "map": false },
+        { "time": "21:30", "name": "호텔 복귀 · 휴식", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-15", "city": "bcn", "dayNo": 2,
+      "chips": [ { "t": "여권 필수 (실명제)", "warn": true }, { "t": "사그라다 ±15분", "warn": true }, { "t": "예약 2건" } ],
+      "items": [
+        { "time": "08:00", "name": "조식", "desc": "호텔", "map": false },
+        { "time": "08:30", "name": "메트로 → 구엘 공원", "desc": "L3 Lesseps역 · 오르막 도보 15분", "map": false },
+        { "time": "09:30", "name": "구엘 공원", "desc": "Monumental Zone · 도마뱀 분수 · 모자이크 벤치 · 30분 유예", "end": "11:00", "place": "Park Güell" },
+        { "time": "11:45", "name": "점심", "desc": "사그라다 근처 타파스 · 샌드위치", "map": false },
+        { "time": "13:00", "name": "사그라다 파밀리아", "desc": "한국어 오디오 · 탑 등반 X · 여권 지참", "end": "14:30", "place": "Sagrada Família" },
+        { "time": "15:00", "name": "자유 · 휴식", "desc": "호텔 낮잠 또는 보케리아 시장 · 고딕 골목", "map": false },
+        { "time": "18:15", "name": "까사 밀라 외관", "desc": "라 페드레라 · 채석장 곡선 파사드", "place": "Casa Milà" },
+        { "time": "18:45", "name": "그라시아 거리 산책", "place": "Passeig de Gràcia" },
+        { "time": "19:00", "name": "까사 바트요 외관", "desc": "일몰 19:45 전후 조명이 가장 예쁨", "place": "Casa Batlló" },
+        { "time": "19:45", "name": "저녁", "desc": "Cervecería Catalana 또는 Tapas 24", "place": "Cervecería Catalana, Barcelona" },
+        { "time": "21:15", "name": "식후 야경 산책", "desc": "바트요 · 밀라 불 켜진 파사드", "map": false },
+        { "time": "22:00", "name": "호텔 복귀", "desc": "내일 07:40 몬세라트 투어", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-16", "city": "bcn", "dayNo": 3,
+      "chips": [ { "t": "07:40 픽업 엄수", "warn": true }, { "t": "일찍 취침" } ],
+      "items": [
+        { "time": "07:40", "name": "몬세라트 & 지로나 투어", "desc": "만다린 오리엔탈 호텔 앞 픽업 · 검은 성모 · 수도원", "end": "18:30", "place": "Mandarin Oriental Barcelona" },
+        { "time": "19:00", "name": "호텔 복귀", "map": false },
+        { "time": "19:30", "name": "호텔 근처 산책 또는 휴식", "map": false },
+        { "time": "20:00", "name": "저녁", "desc": "호텔 근처", "map": false },
+        { "time": "21:00", "name": "휴식", "desc": "취리히 이동 전 컨디션 회복", "map": false },
+        { "time": "22:00", "name": "짐 정리 · 일찍 취침", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-17", "city": "swi", "dayNo": 4,
+      "label": "라우터브룬넨", "map": "Lauterbrunnen, Switzerland",
+      "chips": [ { "t": "02:30 기상 · 알람 2개", "warn": true }, { "t": "보증금용 신용카드", "warn": true }, { "t": "캠프 게이트 22:00" } ],
+      "items": [
+        { "time": "02:30", "name": "기상", "map": false },
+        { "time": "03:00", "name": "HCC 몽블랑 체크아웃", "desc": "24시간 리셉션", "map": false },
+        { "time": "03:05", "name": "공항 버스 → BCN T1", "map": false },
+        { "time": "04:00", "name": "스위스항공 체크인 · 짐 위탁", "desc": "23kg 확인", "place": "Barcelona Airport Terminal 1" },
+        { "time": "06:00", "name": "BCN → ZRH", "desc": "스위스항공 직항 1h40m", "end": "07:40", "map": false,
+          "refs": [ { "label": "편명", "value": "LX1951" } ] },
+        { "time": "07:50", "name": "솅겐 입국", "desc": "EES 생체등록 = 첫 등록이라 시간 더", "map": false },
+        { "time": "09:30", "name": "렌터카 픽업", "desc": "취리히 공항 · 360도 영상 촬영 · 비네트 부착 확인", "place": "Zurich Airport" },
+        { "time": "11:30", "name": "툰 호수", "desc": "호숫가 산책 · 알프스 배경", "place": "Thunersee" },
+        { "time": "12:30", "name": "슈피츠", "desc": "성 외관 · 호수 파노라마 · 포도밭 전망", "place": "Spiez" },
+        { "time": "13:45", "name": "인터라켄 점심", "place": "Interlaken" },
+        { "time": "14:30", "name": "Migros / Coop 장보기", "desc": "5일치 식재료 · 라클렛 · 와인", "place": "Migros Interlaken" },
+        { "time": "15:40", "name": "Camping Jungfrau 체크인", "desc": "체크인 15:00–18:30", "place": "Camping Jungfrau, Lauterbrunnen" },
+        { "time": "16:00", "name": "텐트 셋업", "map": false },
+        { "time": "17:00", "name": "Staubbach 폭포", "desc": "캠프 도보 5분", "place": "Staubbachfall" },
+        { "time": "17:45", "name": "라우터브룬넨 마을 산책", "place": "Lauterbrunnen" },
+        { "time": "19:30", "name": "캠프 첫 디너", "desc": "라클렛 또는 그릴", "map": false },
+        { "time": "21:00", "name": "폭포 야경 · 별빛", "map": false },
+        { "time": "22:00", "name": "취침", "desc": "게이트 22:00–07:00 폐쇄", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-18", "city": "swi", "dayNo": 5,
+      "label": "융프라우요흐", "map": "Lauterbrunnen, Switzerland",
+      "chips": [ { "t": "여권 필수 (e티켓)", "warn": true }, { "t": "하산 정오~13시대" } ],
+      "items": [
+        { "time": "06:30", "name": "기상 · 캠프 조식", "map": false },
+        { "time": "07:35", "name": "라우터브룬넨역 도보 5분", "place": "Lauterbrunnen Bahnhof" },
+        { "time": "07:45", "name": "라우터브룬넨 → Wengen", "desc": "톱니바퀴 기차", "map": false },
+        { "time": "08:30", "name": "Wengen → Kleine Scheidegg", "place": "Wengen" },
+        { "time": "09:15", "name": "Kleine Scheidegg", "desc": "2,061m", "place": "Kleine Scheidegg" },
+        { "time": "10:00", "name": "융프라우요흐", "desc": "3,463m · 톱 오브 유럽", "place": "Jungfraujoch" },
+        { "time": "10:30", "name": "얼음 궁전 · 전망대", "desc": "스핑크스 야외 데크 X", "map": false },
+        { "time": "12:30", "name": "정상 레스토랑 점심", "map": false },
+        { "time": "14:00", "name": "하산 시작", "desc": "그린델발트 방향 가능", "map": false },
+        { "time": "16:30", "name": "라우터브룬넨 복귀", "map": false },
+        { "time": "19:30", "name": "캠프 디너 또는 마을 식당", "map": false },
+        { "time": "21:30", "name": "휴식", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-19", "city": "swi", "dayNo": 6,
+      "label": "그린델발트", "map": "Grindelwald, Switzerland",
+      "chips": [ { "t": "캠프 선착순 · 정오 도착", "warn": true }, { "t": "마을 진입 30km/h" } ],
+      "items": [
+        { "time": "07:30", "name": "기상 · 캠프 조식", "map": false },
+        { "time": "09:00", "name": "캠프 정리 · 체크아웃", "desc": "Camping Jungfrau", "map": false },
+        { "time": "09:30", "name": "Trümmelbach 폭포", "desc": "산 안 폭포 10개 코스", "end": "11:30", "place": "Trümmelbachfälle" },
+        { "time": "12:00", "name": "Camping Eigernordwand 도착", "desc": "선착순 현장 체크인 · 울타리 쪽 = 아이거 뷰", "place": "Camping Eigernordwand, Grindelwald" },
+        { "time": "12:30", "name": "텐트 셋업", "map": false },
+        { "time": "13:30", "name": "그린델발트 마을 점심", "place": "Grindelwald" },
+        { "time": "15:45", "name": "Iseltwald", "desc": "사랑의 불시착 호숫가 · 부두 사진 €5 현장", "place": "Iseltwald" },
+        { "time": "17:00", "name": "브리엔츠 호숫가 산책", "desc": "에메랄드빛", "place": "Brienzersee" },
+        { "time": "18:30", "name": "캠프 복귀", "map": false },
+        { "time": "19:30", "name": "캠프 디너", "map": false },
+        { "time": "21:30", "name": "아이거 야경 · 휴식", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-20", "city": "swi", "dayNo": 7,
+      "label": "그린델발트", "map": "Grindelwald, Switzerland",
+      "chips": [ { "t": "일요일 = 마트 휴무", "warn": true }, { "t": "First 케이블카 X" } ],
+      "items": [
+        { "time": "08:00", "name": "기상 · 캠프 조식", "map": false },
+        { "time": "09:30", "name": "그린델발트 마을 산책", "place": "Grindelwald" },
+        { "time": "10:30", "name": "아이거 정면 뷰", "place": "Eiger" },
+        { "time": "11:30", "name": "Männlichen 곤돌라", "desc": "비교적 부드러움 (선택)", "place": "Männlichen" },
+        { "time": "13:00", "name": "마을 점심", "map": false },
+        { "time": "15:15", "name": "Giessbach 폭포", "desc": "14단 폭포 · 푸니쿨라 또는 도보 전망대", "place": "Giessbachfälle" },
+        { "time": "17:00", "name": "브리엔츠 호숫가 산책", "place": "Brienz" },
+        { "time": "18:00", "name": "캠프 복귀", "map": false },
+        { "time": "19:30", "name": "마지막 그린델발트 디너", "map": false },
+        { "time": "21:30", "name": "아이거 야경 · 휴식", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-21", "city": "swi", "dayNo": 8,
+      "label": "루가노", "map": "Lugano, Switzerland",
+      "chips": [ { "t": "Gotthard 평균속도 단속", "warn": true }, { "t": "성수기 정체" } ],
+      "items": [
+        { "time": "07:30", "name": "기상 · 캠프 조식", "map": false },
+        { "time": "09:00", "name": "캠프 정리 · 체크아웃", "desc": "Camping Eigernordwand", "map": false },
+        { "time": "10:00", "name": "출발 → 루가노", "desc": "약 3시간 · Gotthard 터널 경유", "map": false },
+        { "time": "11:30", "name": "Andermatt", "desc": "산악 마을", "place": "Andermatt" },
+        { "time": "12:00", "name": "Andermatt 점심", "desc": "전통 스위스 음식", "map": false },
+        { "time": "13:30", "name": "Gotthard 터널", "desc": "17km · 평균 속도 단속 주의", "map": false },
+        { "time": "15:00", "name": "벨린초나 성", "desc": "UNESCO 세계유산 · 30분", "place": "Castelgrande, Bellinzona" },
+        { "time": "16:30", "name": "Camping TCS Lugano 체크인", "place": "Camping TCS Lugano-Muzzano" },
+        { "time": "17:00", "name": "마지막 텐트 셋업", "map": false },
+        { "time": "18:00", "name": "루가노 호숫가 산책", "desc": "야자수 + 알프스", "place": "Lago di Lugano" },
+        { "time": "19:30", "name": "호숫가 디너", "desc": "이탈리아어권 분위기", "map": false },
+        { "time": "22:00", "name": "캠프 휴식", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-22", "city": "vce", "dayNo": 9,
+      "chips": [ { "t": "렌터카 09:30 반납 엄수", "warn": true }, { "t": "본섬 골목 = 구글맵 약함" } ],
+      "items": [
+        { "time": "07:00", "name": "기상 · 조식", "map": false },
+        { "time": "07:30", "name": "텐트 · 캠핑 장비 정리", "map": false },
+        { "time": "08:00", "name": "Camping TCS Lugano 체크아웃", "map": false },
+        { "time": "08:30", "name": "렌터카 반납", "desc": "루가노역 · 360도 영상 · 연료 확인 · 09:30 마감", "place": "Lugano Stazione" },
+        { "time": "10:30", "name": "루가노 → 베네치아 메스트레", "desc": "EC 31 직행 4시간 · 8호차 21·22번", "end": "14:30", "map": false,
+          "refs": [ { "label": "열차", "value": "EC 31" } ] },
+        { "time": "14:50", "name": "Hotel Plaza Venice 체크인", "desc": "메스트레역 도보 1분", "place": "Hotel Plaza Venice, Mestre" },
+        { "time": "15:30", "name": "기차로 본섬 이동", "desc": "Mestre → Santa Lucia €1.45 · 10분", "place": "Venezia Santa Lucia" },
+        { "time": "16:30", "name": "대운하 도보 산책", "desc": "리알토 방향", "map": false },
+        { "time": "17:30", "name": "리알토 다리", "desc": "일몰 무렵", "place": "Ponte di Rialto" },
+        { "time": "18:30", "name": "산마르코 광장", "desc": "대성당 · 두칼레 궁전 외관", "place": "Piazza San Marco" },
+        { "time": "19:30", "name": "저녁", "desc": "치케티 바 또는 해산물", "map": false },
+        { "time": "21:00", "name": "야간 산마르코 광장", "desc": "라이브 음악 · 조명", "map": false },
+        { "time": "22:00", "name": "메스트레 복귀", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-23", "city": "vce", "dayNo": 10,
+      "chips": [ { "t": "Vaporetto 24시간권 €25/인", "warn": true }, { "t": "곤돌라 = 정가, 흥정 X" } ],
+      "items": [
+        { "time": "07:30", "name": "조식", "desc": "호텔", "map": false },
+        { "time": "08:00", "name": "기차로 본섬 이동", "desc": "Mestre → Santa Lucia €1.45", "map": false },
+        { "time": "08:20", "name": "Vaporetto 24시간권 구매", "desc": "€25/인 · 무라노·부라노 + 본섬 커버", "map": false },
+        { "time": "08:40", "name": "Fondamente Nove 선착장", "place": "Fondamente Nove, Venezia" },
+        { "time": "09:30", "name": "무라노", "desc": "유리공예 마을 · 공방 시연", "end": "10:45", "place": "Murano, Venezia" },
+        { "time": "11:15", "name": "부라노", "desc": "색색 어부마을 · 레이스 공예 · 인생샷", "end": "12:30", "place": "Burano, Venezia" },
+        { "time": "12:30", "name": "점심", "desc": "부라노 · 해산물 리조또 · 부솔라 쿠키", "map": false },
+        { "time": "14:00", "name": "Line 12 → 본섬 복귀", "map": false },
+        { "time": "15:00", "name": "두칼레 궁전", "desc": "탄식의 다리 · 황금계단 · €30/인", "place": "Palazzo Ducale, Venezia" },
+        { "time": "17:00", "name": "살루테 성당", "place": "Basilica di Santa Maria della Salute" },
+        { "time": "18:00", "name": "곤돌라 일몰 탑승", "desc": "운하 따라 40분 · 신혼여행 하이라이트", "map": false },
+        { "time": "19:00", "name": "저녁", "desc": "본섬 골목 트라토리아", "map": false },
+        { "time": "20:30", "name": "야경 산책", "desc": "리알토 · 산마르코 조명", "map": false },
+        { "time": "22:00", "name": "호텔 휴식", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-24", "city": "flr", "dayNo": 11,
+      "chips": [ { "t": "기베르티 패스 현장 구매", "warn": true }, { "t": "복장규정 어깨·무릎" }, { "t": "줄 20~30분" } ],
+      "items": [
+        { "time": "07:00", "name": "조식 · 체크아웃", "desc": "메스트레 호텔", "map": false },
+        { "time": "08:40", "name": "베네치아 → 피렌체", "desc": "프레차로사 1등석 2호차 17A·17B", "end": "10:39", "map": false,
+          "refs": [ { "label": "열차", "value": "FR 9409" } ] },
+        { "time": "11:00", "name": "Hotel Nella 짐 맡기기", "desc": "역에서 도보 6~7분", "place": "Hotel Nella, Firenze" },
+        { "time": "11:30", "name": "점심", "desc": "중앙시장 또는 트라토리아", "place": "Mercato Centrale Firenze" },
+        { "time": "13:00", "name": "시뇨리아 광장 · 로지아 데이 란치", "desc": "첼리니 페르세우스 · 잠볼로냐 사비니 여인 (무료)", "place": "Piazza della Signoria, Firenze" },
+        { "time": "13:45", "name": "베키오 다리", "desc": "아르노 강변 산책", "place": "Ponte Vecchio" },
+        { "time": "14:30", "name": "기베르티 패스 구매", "desc": "Piazza San Giovanni 7 · €15/인", "place": "Piazza San Giovanni, Firenze" },
+        { "time": "15:10", "name": "두오모 성당 내부", "desc": "패스 소지자 옆문", "place": "Cattedrale di Santa Maria del Fiore" },
+        { "time": "15:45", "name": "산타 크로체 성당", "desc": "미켈란젤로 · 갈릴레오 · 마키아벨리 무덤", "place": "Basilica di Santa Croce, Firenze" },
+        { "time": "16:45", "name": "두오모 박물관", "desc": "반디니 피에타 · 천국의 문 원본 · Piazza del Duomo 9", "place": "Museo dell'Opera del Duomo, Firenze" },
+        { "time": "18:15", "name": "호텔 체크인 · 휴식", "map": false },
+        { "time": "19:30", "name": "저녁", "desc": "피렌체 첫 끼 · 비스테카", "map": false },
+        { "time": "21:00", "name": "두오모 야경", "desc": "호텔 도보 10분 (선택)", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-25", "city": "flr", "dayNo": 12,
+      "chips": [ { "t": "우피치 08:30 미팅", "warn": true }, { "t": "바우처 실물 교환", "warn": true }, { "t": "백팩 락커 의무" } ],
+      "items": [
+        { "time": "07:30", "name": "조식", "desc": "호텔", "map": false },
+        { "time": "08:20", "name": "시뇨리아 광장 도착", "desc": "미팅 = 넵튠 분수", "place": "Piazza della Signoria, Firenze" },
+        { "time": "08:30", "name": "우피치 미술관 투어", "desc": "9인 소그룹 한국어 · 비너스의 탄생 · 프리마베라 · 다빈치 · 카라바조", "end": "11:30", "place": "Galleria degli Uffizi" },
+        { "time": "12:00", "name": "점심", "desc": "중앙시장 · 여유롭게 1시간 이상", "place": "Mercato Centrale Firenze" },
+        { "time": "13:10", "name": "아카데미아로 도보 이동", "desc": "Via Ricasoli 105 매표소에서 실물티켓 교환", "map": false },
+        { "time": "13:30", "name": "아카데미아 미술관", "desc": "다비드 원본 · 죄수들 연작 · 미완성 성 마태오", "end": "15:00", "place": "Galleria dell'Accademia, Firenze" },
+        { "time": "15:15", "name": "카페 · 젤라또", "desc": "Gelateria dei Neri / Vivoli", "place": "Vivoli, Firenze" },
+        { "time": "16:00", "name": "자유시간", "desc": "두오모 재방문 / 오트라르노 산책 / 호텔 휴식", "map": false },
+        { "time": "18:00", "name": "베키오 다리 골든아워", "place": "Ponte Vecchio" },
+        { "time": "19:00", "name": "저녁", "desc": "오스테리아 · 키안티 와인", "map": false },
+        { "time": "21:00", "name": "일찍 취침", "desc": "내일 06:00 기상", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-26", "city": "flr", "dayNo": 13,
+      "label": "피사 · 친퀘테레",
+      "chips": [ { "t": "백팩만 · 편한 신발" }, { "t": "복귀 20:10", "warn": true } ],
+      "items": [
+        { "time": "07:00", "name": "조식 · 짐 최소화", "desc": "당일치기, 백팩만", "map": false },
+        { "time": "07:30", "name": "피렌체 SMN 출발 → 피사", "desc": "기차 약 1시간", "place": "Firenze Santa Maria Novella" },
+        { "time": "08:40", "name": "피사 센트랄레 도착", "desc": "코인로커에 백팩 보관", "place": "Pisa Centrale" },
+        { "time": "09:10", "name": "피사의 사탑 · 두오모 광장", "desc": "인증샷 30~40분 · 등반 X", "end": "09:50", "place": "Torre di Pisa" },
+        { "time": "10:20", "name": "피사 → 라스페치아", "desc": "기차 약 1시간", "map": false },
+        { "time": "11:20", "name": "친퀘테레 카드 구매", "desc": "€18.20/인 · 기차 무제한", "place": "La Spezia Centrale" },
+        { "time": "11:40", "name": "마나롤라", "desc": "절벽 파스텔 마을 · Punta Bonfiglio 뷰포인트 (평탄)", "end": "14:20", "place": "Manarola" },
+        { "time": "13:00", "name": "점심", "desc": "해산물 파스타 · 트로피에 알 페스토", "map": false },
+        { "time": "14:30", "name": "베르나차", "desc": "가장 예쁜 항구 마을 · 중앙 광장 · 방파제", "end": "17:00", "place": "Vernazza" },
+        { "time": "17:40", "name": "라스페치아 → 피렌체 SMN", "desc": "기차 약 2시간 30분", "end": "20:10", "map": false },
+        { "time": "20:30", "name": "가벼운 저녁", "desc": "호텔 근처", "map": false },
+        { "time": "21:30", "name": "짐 정리 · 일찍 취침", "desc": "내일 06:00 기상", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-27", "city": "rom", "dayNo": 14,
+      "chips": [ { "t": "06:45 더몰 버스 정류장", "warn": true }, { "t": "현금 €74", "warn": true }, { "t": "관광세 현장 현금" } ],
+      "items": [
+        { "time": "06:00", "name": "기상 · 조식 · 체크아웃 준비", "map": false },
+        { "time": "06:30", "name": "Hotel Nella 체크아웃", "place": "Hotel Nella, Firenze" },
+        { "time": "06:45", "name": "토스카나 투어 미팅", "desc": "피렌체 중앙역 옆 더몰 버스 정류장 · 정시 출발", "place": "The Mall bus stop, Firenze" },
+        { "time": "08:30", "name": "발도르차 평원", "desc": "사이프러스 줄지은 언덕길", "place": "Val d'Orcia" },
+        { "time": "10:00", "name": "피엔차", "desc": "유네스코 · 르네상스 이상도시 · 페코리노 치즈", "place": "Pienza" },
+        { "time": "11:30", "name": "몬테풀치아노 와이너리", "desc": "와인 시음 4종 + 토스카나 정통 점심", "place": "Montepulciano" },
+        { "time": "15:00", "name": "치비타 디 반뇨레조", "desc": "천공의 섬 라퓨타 모델 · 절벽 위 마을", "place": "Civita di Bagnoregio" },
+        { "time": "17:00", "name": "로마로 이동", "map": false },
+        { "time": "18:00", "name": "로마 테르미니 하차", "place": "Roma Termini" },
+        { "time": "18:30", "name": "마그니피코 로마 체크인", "desc": "테르미니 도보 8분", "place": "Hotel Magnifico Roma" },
+        { "time": "19:30", "name": "첫 로마 디너", "desc": "카르보나라 · 카초 에 페페", "map": false },
+        { "time": "22:00", "name": "호텔", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-28", "city": "rom", "dayNo": 15,
+      "chips": [ { "t": "현금 €46", "warn": true }, { "t": "여권 지참" }, { "t": "복장 규정 어깨·무릎" } ],
+      "items": [
+        { "time": "07:30", "name": "조식", "map": false },
+        { "time": "08:20", "name": "호텔 → 지하철 A선 Ottaviano역", "desc": "미팅 = OKAIDI 옷가게 앞", "place": "Ottaviano Metro Station, Roma" },
+        { "time": "09:00", "name": "바티칸 집중 투어", "desc": "라오콘 · 벨베데레 토르소 · 아테네 학당 · 시스티나 · 피에타", "end": "12:30", "place": "Musei Vaticani" },
+        { "time": "13:00", "name": "점심", "desc": "Borgo Pio 골목 · 카치오 에 페페", "place": "Borgo Pio, Roma" },
+        { "time": "14:30", "name": "산탄젤로 성", "desc": "외관 · 다리 · 사진 (무료)", "place": "Castel Sant'Angelo" },
+        { "time": "15:30", "name": "테베레 강변 산책", "place": "Lungotevere Castello, Roma" },
+        { "time": "16:30", "name": "산 루이지 데이 프란체시", "desc": "카라바조 성 마태의 소명 · 무료", "end": "17:15", "place": "San Luigi dei Francesi" },
+        { "time": "17:15", "name": "판테온 외관", "desc": "광장에서", "place": "Pantheon, Roma" },
+        { "time": "18:00", "name": "나보나 광장", "desc": "베르니니 4대강 분수 · 야경 조명", "place": "Piazza Navona" },
+        { "time": "18:40", "name": "캄포 데 피오리", "desc": "저녁 분위기 · 바 · 광장", "place": "Campo de' Fiori" },
+        { "time": "19:30", "name": "디너", "desc": "나보나 · 판테온 근처 트라토리아", "map": false },
         { "time": "21:00", "name": "트레비 분수 야경", "desc": "€2 · 동전 던지기", "place": "Fontana di Trevi" },
+        { "time": "21:40", "name": "스페인 광장 야경", "desc": "계단 조명 · 앉기 금지", "place": "Piazza di Spagna" },
+        { "time": "22:30", "name": "호텔 복귀", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-29", "city": "rom", "dayNo": 16,
+      "chips": [ { "t": "현금 €76", "warn": true }, { "t": "보르게세 17:00 엄수", "warn": true }, { "t": "큰가방 반입 X" } ],
+      "items": [
+        { "time": "08:00", "name": "조식", "desc": "호텔", "map": false },
+        { "time": "09:00", "name": "콜로세움 투어", "desc": "첫 슬롯 · 콤보 = 콜로세움 + 포로 로마노 + 팔라티노", "end": "11:00", "place": "Colosseo" },
+        { "time": "11:00", "name": "포로 로마노", "desc": "걸어서 이동", "place": "Foro Romano" },
+        { "time": "12:30", "name": "팔라티노 언덕", "desc": "콤보 포함 · 시내 파노라마", "place": "Palatino, Roma" },
+        { "time": "13:15", "name": "캄피돌리오 광장", "desc": "미켈란젤로 설계 · 코르도나타 계단", "place": "Piazza del Campidoglio" },
+        { "time": "14:00", "name": "점심", "desc": "몬티", "place": "Monti, Roma" },
+        { "time": "14:45", "name": "산 피에트로 인 빈콜리", "desc": "미켈란젤로 모세상 · 무료", "place": "San Pietro in Vincoli" },
+        { "time": "15:30", "name": "판테온", "desc": "€5 입장 · 사전 예약 권장", "place": "Pantheon, Roma" },
+        { "time": "16:00", "name": "보르게세로 이동", "desc": "메트로/택시 20~25분 · 입구 찾기 여유", "map": false },
+        { "time": "17:00", "name": "보르게세 미술관", "desc": "아폴로와 다프네 · 페르세포네의 납치 · 2시간 슬롯제", "end": "19:00", "place": "Galleria Borghese" },
+        { "time": "19:15", "name": "빌라 보르게세 공원 산책", "desc": "무료 · 일몰", "place": "Villa Borghese" },
+        { "time": "20:00", "name": "마지막 로마 디너", "map": false },
+        { "time": "22:00", "name": "호텔", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-30", "city": "prg", "dayNo": 17,
+      "chips": [ { "t": "전날 온라인 체크인 필수", "warn": true }, { "t": "24번 플랫폼", "warn": true }, { "t": "백팩 40×30×20" }, { "t": "CZK 환전" } ],
+      "items": [
+        { "time": "07:30", "name": "조식", "desc": "마그니피코 로마", "map": false },
+        { "time": "08:30", "name": "짐 정리 · 마지막 점검", "map": false },
+        { "time": "09:30", "name": "호텔 체크아웃", "desc": "관광세 현장 현금 정산", "map": false },
+        { "time": "09:45", "name": "도보 8분 → 테르미니역", "place": "Roma Termini" },
+        { "time": "10:00", "name": "레오나르도 익스프레스", "desc": "테르미니 → FCO 32분 · 24번 플랫폼", "end": "10:35", "map": false },
+        { "time": "10:40", "name": "위즈에어 체크인 · 수하물 위탁", "desc": "한국 여권 = 카운터 서류확인·스탬프 필요", "place": "Rome Fiumicino Airport Terminal 3" },
+        { "time": "11:15", "name": "보안검사", "map": false },
+        { "time": "11:40", "name": "게이트 도착", "desc": "출발 30분 전 마감", "map": false },
+        { "time": "12:40", "name": "FCO → PRG", "desc": "위즈에어 1h55m", "end": "14:35", "map": false,
+          "refs": [ { "label": "편명", "value": "W46065" } ] },
+        { "time": "15:00", "name": "입국 · 짐 찾기", "desc": "Václav Havel 공항 T2", "map": false },
+        { "time": "15:30", "name": "Bolt / 택시 → 구시가", "desc": "30~40분", "map": false },
+        { "time": "16:15", "name": "Golden Angel Suites 체크인", "desc": "이메일 출입코드 확인", "place": "Golden Angel Suites, Praha" },
+        { "time": "17:30", "name": "구시가 광장 첫 산책", "desc": "천문시계 · 틴 성당 · 화약탑", "place": "Staroměstské náměstí, Praha" },
+        { "time": "19:30", "name": "첫 디너", "desc": "굴라쉬 + 코젤 · Lokál Dlouhááá 또는 Mlejnice", "place": "Lokál Dlouhááá, Praha" },
+        { "time": "21:00", "name": "카를교 야경", "place": "Karlův most" },
+        { "time": "22:00", "name": "구시가 광장 야경", "map": false },
         { "time": "22:30", "name": "호텔", "map": false }
       ]
     },
     {
-      "date": "2026-09-29",
-      "city": "rom",
-      "dayNo": 16,
-      "chips": [
-        { "t": "현금 €76", "warn": true },
-        { "t": "보르게세 17:00 엄수", "warn": true }
-      ],
+      "date": "2026-10-01", "city": "prg", "dayNo": 18,
+      "chips": [ { "t": "프라하성 오전 = 인파 적음" }, { "t": "천문시계 정시 쇼 기대 X" } ],
       "items": [
-        { "time": "08:20", "name": "호텔 출발", "desc": "B선 → 콜로세움", "map": false },
-        { "time": "08:50", "name": "콜로세움 투어 미팅", "desc": "콜로세움 인포 포인트", "place": "Colosseo" },
-        { "time": "09:00", "name": "콜로세움 · 포로로마노 · 팔라티노", "desc": "패스트트랙", "end": "12:30", "place": "Foro Romano" },
-        { "time": "13:15", "name": "점심", "desc": "몬티", "place": "Monti, Roma" },
-        { "time": "15:00", "name": "산 피에트로 인 빈콜리", "desc": "미켈란젤로 모세상 · 무료", "place": "San Pietro in Vincoli" },
-        { "time": "16:00", "name": "보르게세로 이동", "desc": "택시 · 입구 찾기 여유", "map": false },
-        { "time": "17:00", "name": "보르게세 미술관", "desc": "베르니니 아폴로와 다프네", "end": "19:00", "place": "Galleria Borghese" },
-        { "time": "20:00", "name": "마지막 로마 디너", "map": false }
+        { "time": "08:00", "name": "조식", "desc": "여유롭게", "map": false },
+        { "time": "08:45", "name": "트램 22번 또는 도보 → 프라하성", "map": false },
+        { "time": "09:15", "name": "프라하성 (Circuit B)", "desc": "성 비투스 무하 스테인드글라스 · 구 왕궁 · 황금소로 카프카 집 No.22", "end": "12:00", "place": "Pražský hrad" },
+        { "time": "12:00", "name": "말라스트라나 지구", "desc": "존 레논 벽 · 캄파 섬 물레방아 수로", "place": "Malá Strana" },
+        { "time": "13:00", "name": "점심", "desc": "말라스트라나 · 여유롭게", "map": false },
+        { "time": "14:30", "name": "카를교 건너기", "desc": "음악가 · 화가 · 낮 풍경", "place": "Karlův most" },
+        { "time": "15:00", "name": "구시가 광장 · 천문시계", "place": "Pražský orloj" },
+        { "time": "15:30", "name": "오후 자유", "desc": "큐비즘 카페 / 하벨 시장 / 낮잠 / 나플라브카 강변", "map": false },
+        { "time": "19:00", "name": "디너", "desc": "Lokál Dlouhááá · 현지 인기 펍", "place": "Lokál Dlouhááá, Praha" },
+        { "time": "21:00", "name": "야경 산책", "desc": "카를교 · 구시가 조명", "map": false },
+        { "time": "22:30", "name": "호텔", "map": false }
       ]
     },
     {
-      "date": "2026-09-30",
-      "city": "prg",
-      "dayNo": 17,
-      "chips": [
-        { "t": "온라인 체크인 완료?", "warn": true },
-        { "t": "CZK 환전" }
-      ],
+      "date": "2026-10-02", "city": "prg", "dayNo": 19,
+      "label": "체스키 크룸로프", "map": "Český Krumlov, Czechia",
+      "chips": [ { "t": "왕복 3시간씩", "warn": true }, { "t": "성 내부 = 가이드 투어 의무" } ],
       "items": [
-        { "time": "09:30", "name": "체크아웃", "desc": "마그니피코 로마", "map": false },
-        { "time": "10:00", "name": "레오나르도 익스프레스", "desc": "테르미니 24번 플랫폼", "place": "Roma Termini" },
-        { "time": "12:40", "name": "FCO → PRG", "desc": "위즈에어 W46065", "end": "14:35", "map": false,
-          "refs": [ { "label": "항공편", "value": "W46065" } ] },
-        { "time": "15:30", "name": "Bolt → 구시가", "map": false },
-        { "time": "16:15", "name": "Golden Angel 체크인", "desc": "이메일 출입코드 확인", "place": "Golden Angel, Praha" },
-        { "time": "17:30", "name": "구시가 광장 첫 산책", "place": "Staroměstské náměstí" },
-        { "time": "21:00", "name": "카를교 야경", "place": "Karlův most" }
+        { "time": "06:30", "name": "기상 · 가벼운 조식", "map": false },
+        { "time": "07:30", "name": "호텔 출발 → 버스 터미널", "desc": "Na Knížecí 또는 Florenc", "place": "Florenc bus terminal, Praha" },
+        { "time": "08:00", "name": "프라하 → 체스키 크룸로프", "desc": "RegioJet 또는 Student Agency · 3시간", "end": "11:00", "map": false },
+        { "time": "11:30", "name": "마을 산책", "desc": "Vltava 강변 컬러풀 집들 · 시내 광장", "place": "Český Krumlov" },
+        { "time": "12:30", "name": "점심", "desc": "Krčma v Šatlavské · Eggenberg 맥주", "place": "Krčma v Šatlavské" },
+        { "time": "14:00", "name": "체스키 크룸로프 성", "desc": "성 정원 · 망토 다리 · 채색된 탑 전망", "place": "Státní hrad a zámek Český Krumlov" },
+        { "time": "16:30", "name": "골목 산책 · 카페", "map": false },
+        { "time": "18:00", "name": "프라하 행 버스", "desc": "3시간", "end": "21:00", "map": false },
+        { "time": "21:30", "name": "가벼운 야식", "map": false },
+        { "time": "22:30", "name": "호텔", "map": false }
+      ]
+    },
+    {
+      "date": "2026-10-03", "city": "prg", "dayNo": 20,
+      "chips": [ { "t": "체크아웃 10:00 · 짐 보관", "warn": true }, { "t": "픽업 = 화약탑 쪽 큰길" } ],
+      "items": [
+        { "time": "08:00", "name": "조식", "desc": "여유롭게", "map": false },
+        { "time": "09:00", "name": "마지막 오전 산책", "desc": "구시가 광장 · 화약탑 · 바츨라프 광장 · 블타바 강변", "place": "Prašná brána, Praha" },
+        { "time": "11:00", "name": "마지막 쇼핑", "desc": "보헤미안 크리스털 · 마리오네트 · 코젤 맥주", "map": false },
+        { "time": "12:00", "name": "마지막 점심", "desc": "U Modré Kachničky 오리 또는 Mlejnice", "place": "U Modré Kachničky, Praha" },
+        { "time": "14:00", "name": "호텔에서 짐 찾기", "desc": "체크아웃 후 짐 보관 이용", "map": false },
+        { "time": "15:00", "name": "카페에서 휴식", "map": false },
+        { "time": "15:30", "name": "Bolt / 택시 → 공항", "desc": "30~40분", "place": "Václav Havel Airport Prague" },
+        { "time": "16:15", "name": "공항 도착 · 체크인 · 면세점", "map": false },
+        { "time": "19:05", "name": "PRG → 서울", "desc": "대한항공", "map": false,
+          "refs": [ { "label": "편명", "value": "KE970" } ] }
+      ]
+    },
+    {
+      "date": "2026-10-04", "city": "sel", "dayNo": 21,
+      "chips": [ { "t": "신혼여행 완료" } ],
+      "items": [
+        { "time": "13:20", "name": "인천공항 도착", "place": "Incheon International Airport" },
+        { "time": "14:30", "name": "입국 · 짐 찾기", "map": false },
+        { "time": "15:00", "name": "신혼여행 완료", "map": false }
       ]
     }
   ]

@@ -401,7 +401,7 @@ footer{
     <div class="journey">
       <div class="j-track" id="j-track"></div>
       <div class="j-meta">
-        <span>Seoul → <b id="j-now">—</b> → Seoul</span>
+        <span id="j-route">Seoul → <b id="j-now">—</b> → Seoul</span>
         <span><b id="j-prog">0</b> / <span id="j-total">21</span></span>
       </div>
     </div>
@@ -573,6 +573,14 @@ const ICONS = {
     <path class="lm-fill" d="M16 82V38c0-12 20-20 44-20s44 8 44 20v44z"/>
   </svg>`,
 
+  namsan:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
+    <path d="M8 82h104"/>
+    <path d="M14 82c12-13 28-19 46-19s34 6 46 19"/>
+    <path d="M60 63V38"/><path d="M53 38h14"/><path d="M50 31h20"/>
+    <path d="M53 31l3-7h8l3 7"/><path d="M60 24V8"/></g>
+    <path class="lm-fill" d="M14 82c12-13 28-19 46-19s34 6 46 19z"/>
+  </svg>`,
+
   charles:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
     <path d="M6 66h108"/>
     <path d="M20 66c0-9 7-15 15-15s15 6 15 15"/>
@@ -621,12 +629,13 @@ async function copyText(text){
 function mapHref(query){
   return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query);
 }
-function mapQuery(item, city){
-  const base = item.place || item.name;
-  if(!city || !city.map) return base;
-  // 이미 도시/국가가 들어간 검색어면 중복으로 붙이지 않음
-  const head = city.map.split(',')[0].trim().toLowerCase();
-  return base.toLowerCase().includes(head) ? base : `${base}, ${city.map}`;
+// place 를 적었으면 그대로 검색합니다 (이동일엔 하루 안에 도시가 두 개라
+// 도시명을 덧붙이면 오히려 엉뚱한 곳이 나옵니다). place 가 없을 때만
+// 그날의 거점(day.map) 또는 도시 기본값을 붙입니다.
+function mapQuery(item, city, day){
+  if(item.place) return item.place;
+  const area = (day && day.map) || (city && city.map);
+  return area ? `${item.name}, ${area}` : item.name;
 }
 
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -667,11 +676,11 @@ function pickDay(){
 /* -----------------------------------------------------------
    타임라인 아이템 렌더
    ----------------------------------------------------------- */
-function itemHTML(it, city, cls){
+function itemHTML(it, city, cls, day){
   const time = `${it.time}${it.end ? ' – ' + it.end : ''}`;
   const mappable = it.map !== false && (it.place || it.name);
   const name = mappable
-    ? `<a class="map-link" href="${esc(mapHref(mapQuery(it, city)))}" target="_blank" rel="noopener noreferrer">${esc(it.name)}${PIN}</a>`
+    ? `<a class="map-link" href="${esc(mapHref(mapQuery(it, city, day)))}" target="_blank" rel="noopener noreferrer">${esc(it.name)}${PIN}</a>`
     : esc(it.name);
 
   const refs = (it.refs || []).map(r =>
@@ -708,7 +717,8 @@ function render(){
   /* ---- 헤더 ---- */
   $('#clock').textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
   $('#landmark').innerHTML = ICONS[headCity.icon] || '';
-  $('#city-name').textContent = headCity.name;
+  // 스위스처럼 한 노드 안에서 거점이 바뀌는 날은 day.label 로 실제 지명을 보여줍니다
+  $('#city-name').textContent = (ph !== 'pre' && day.label) ? day.label : headCity.name;
   $('#ey-flag').textContent = headCity.flag;
 
   const dLeft = daysBetween(today(), TRIP.start);
@@ -743,7 +753,10 @@ function render(){
     node.innerHTML = `<span class="j-dot"></span><span class="j-label">${esc(c.short)}</span>`;
     track.appendChild(node);
   });
-  $('#j-now').textContent  = ph === 'pre' ? CITIES[0].name : city.name;
+  // 귀국일에는 "Seoul → 서울 → Seoul" 이 되지 않도록
+  $('#j-route').innerHTML = (ph !== 'pre' && city.home)
+    ? `Seoul → <b>${esc(city.name)}</b> · 완주`
+    : `Seoul → <b>${esc(ph === 'pre' ? CITIES[0].name : city.name)}</b> → Seoul`;
   $('#j-prog').textContent = ph === 'pre' ? 0 : (ph === 'post' ? TOTAL_DAYS : day.dayNo);
   $('#j-total').textContent = TOTAL_DAYS;
 
@@ -812,7 +825,7 @@ function render(){
     ? (hasFirstDay ? '첫날 일정' : `${fmtDate(day.date)} · 미리보기`)
     : (isToday ? '오늘' : fmtDate(day.date));
   $('#tl').innerHTML = day.items
-    .map((it,i) => itemHTML(it, city, i === liveIdx ? 'live' : (liveIdx > -1 && i < liveIdx ? 'past' : '')))
+    .map((it,i) => itemHTML(it, city, i === liveIdx ? 'live' : (liveIdx > -1 && i < liveIdx ? 'past' : ''), day))
     .join('');
 
   /* ---- 이후 날들 (펼침 상태는 유지) ---- */
@@ -832,7 +845,7 @@ function render(){
         <span class="up-arrow">›</span>
       </button>
       <div class="up-body${isOpen ? ' open' : ''}" data-body="${d.date}">
-        <ul class="tl">${d.items.map(it => itemHTML(it, c, '')).join('')}</ul>
+        <ul class="tl">${d.items.map(it => itemHTML(it, c, '', d)).join('')}</ul>
       </div>`;
   }).join('');
 
