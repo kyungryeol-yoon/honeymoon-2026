@@ -192,7 +192,14 @@ body{
 .j-node{
   display:flex;flex-direction:column;align-items:center;gap:7px;
   flex:0 0 auto;position:relative;
+  background:none;border:0;padding:2px 4px 0;margin:0;
+  font:inherit;color:inherit;cursor:pointer;
 }
+/* 탭 영역을 점 크기보다 넉넉하게 */
+.j-node::after{content:"";position:absolute;inset:-8px -6px -4px}
+.j-node:hover .j-label{color:var(--now)}
+.j-node:hover .j-dot{border-color:var(--now)}
+.j-node:active{transform:scale(.92)}
 .j-dot{
   width:9px;height:9px;border-radius:50%;
   background:var(--ink);border:1.5px solid var(--line);
@@ -491,7 +498,7 @@ footer{
 
   <!-- ============ 다음 ============ -->
   <section id="sec-upcoming" hidden>
-    <div class="sec-head">이후</div>
+    <div class="sec-head" id="head-upcoming">이후</div>
     <div class="upcoming" id="upcoming"></div>
   </section>
 
@@ -877,8 +884,12 @@ function render(){
       seg.className = 'j-seg ' + (i <= hereIdx ? 'done' : 'pending');
       track.appendChild(seg);
     }
-    const node = document.createElement('div');
+    // 도시 노드를 눌러 그 도시 첫날로 이동
+    const node = document.createElement('button');
+    node.type = 'button';
     node.className = 'j-node ' + (i < hereIdx ? 'done' : i === hereIdx ? 'here' : '');
+    node.dataset.city = c.id;
+    node.setAttribute('aria-label', `${c.name}로 이동`);
     node.innerHTML = `<span class="j-dot"></span><span class="j-label">${esc(c.short)}</span>`;
     track.appendChild(node);
   });
@@ -893,7 +904,7 @@ function render(){
   /* ---- 칩 (현금이 맨 앞) ---- */
   const strip = $('#strip');
   strip.innerHTML = '';
-  if(!preHead && day.cash){
+  if(day.cash){
     const el = document.createElement('span');
     el.className = 'chip cash';
     el.innerHTML = `${COIN}<span class="amt">${esc(day.cash.amount)}</span>` +
@@ -901,7 +912,7 @@ function render(){
     if(day.cash.for) el.title = day.cash.for;
     strip.appendChild(el);
   }
-  (preHead ? [] : (day.chips || [])).forEach(c => {
+  (day.chips || []).forEach(c => {
     const el = document.createElement('span');
     el.className = 'chip' + (c.warn ? ' warn' : '');
     el.textContent = c.t;
@@ -996,12 +1007,21 @@ function render(){
 
   /* ---- 이후 날들 — 탭하면 그 날로 이동 ---- */
   const up = $('#upcoming');
-  const rest = DAYS.filter(d => d.date > day.date).slice(0, 6);
+  const rest = DAYS.filter(d => d.date > day.date);
   $('#sec-upcoming').hidden = rest.length === 0;
+  $('#head-upcoming').textContent = `이후 ${rest.length}일`;
   up.innerHTML = rest.map(d => {
     const c = cityById(d.city);
     const md = d.date.slice(5).replace('-','/');
-    const label = d.label || d.items[1]?.name || d.items[0].name;
+    // 그날을 대표하는 일정: 투어 미팅 → 가장 오래 잡힌 활동 → 장소가 있는 일정 순
+    const longest = d.items
+      .filter(i => i.end)
+      .sort((a,b) => (toMin(b.end) - toMin(b.time)) - (toMin(a.end) - toMin(a.time)))[0];
+    const label = d.label
+      || d.items.find(i => i.meet)?.name
+      || longest?.name
+      || d.items.find(i => i.place)?.name
+      || d.items[0].name;
     const r = relLabel(d.date);
     return `<button class="up-row" type="button" data-date="${d.date}">
         <span class="up-bar" style="--c:${cityColor(c)}"></span>
@@ -1061,6 +1081,17 @@ document.addEventListener('click', async (e) => {
     viewDate = row.dataset.date;
     render();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+
+  const node = e.target.closest('.j-node');
+  if(node){
+    const first = DAYS.find(d => d.city === node.dataset.city);
+    if(first){
+      viewDate = first.date;
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 });
 
