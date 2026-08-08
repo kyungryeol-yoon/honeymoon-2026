@@ -298,6 +298,18 @@ section{margin-top:34px}
 }
 .tl li.live .map-link .pin{color:var(--now);opacity:1}
 
+/* 일정별 준비물 */
+.prep{display:flex;align-items:flex-start;gap:6px;margin-top:7px}
+.prep .ic{width:11px;height:11px;flex:0 0 auto;color:var(--paper-faint);opacity:.8;margin-top:5px}
+.prep .tags{display:flex;flex-wrap:wrap;gap:5px;flex:1 1 auto;min-width:0}
+.prep i{
+  font-style:normal;font-size:11px;letter-spacing:.01em;line-height:1.45;
+  padding:3px 9px;border-radius:100px;
+  background:var(--ink-2);border:1px solid var(--line);color:var(--paper-dim);
+}
+.tl li.live .prep .ic{color:var(--now);opacity:1}
+.tl li.live .prep i{border-color:color-mix(in srgb,var(--now) 32%,var(--line))}
+
 /* 예약번호 → 클립보드 복사 */
 .refs{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
 .ref{
@@ -593,6 +605,7 @@ const ICONS = {
 
 const PIN = `<svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg>`;
 const CP  = `<svg class="cp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>`;
+const CK  = `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>`;
 
 /* -----------------------------------------------------------
    토스트 / 클립보드 / 지도
@@ -688,10 +701,15 @@ function itemHTML(it, city, cls, day){
        ${r.label ? `<span class="lb">${esc(r.label)}</span>` : ''}<span>${esc(r.value)}</span>${CP}
      </button>`).join('');
 
+  const prep = (it.prep || []).length
+    ? `<div class="prep">${CK}<span class="tags">${it.prep.map(p => `<i>${esc(p)}</i>`).join('')}</span></div>`
+    : '';
+
   return `<li class="${cls}">
     <div class="tl-t">${esc(time)}</div>
     <div class="tl-n">${name}</div>
     ${it.desc ? `<div class="tl-d">${esc(it.desc)}</div>` : ''}
+    ${prep}
     ${refs ? `<div class="refs">${refs}</div>` : ''}
   </li>`;
 }
