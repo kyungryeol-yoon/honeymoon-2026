@@ -106,10 +106,31 @@ body{
   font-family:var(--f-mono);
   font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
   color:var(--paper-faint);
-  display:flex;align-items:center;gap:8px;
+  display:flex;align-items:center;gap:7px;
   padding-right:44px;
+  min-height:28px;
 }
 .eyebrow b{color:var(--now);font-weight:500}
+
+/* ---------- 날짜 이동 ---------- */
+.nav-btn{
+  width:26px;height:26px;flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;background:none;border:1px solid transparent;
+  color:var(--paper-faint);cursor:pointer;
+  font:400 17px/1 var(--f-body);padding:0 0 2px;
+  transition:color .15s,border-color .15s;
+}
+.nav-btn:hover:not(:disabled){color:var(--now);border-color:var(--line)}
+.nav-btn:active:not(:disabled){transform:scale(.9)}
+.nav-btn:disabled{opacity:.25;cursor:default}
+.today-pill{
+  font-family:var(--f-mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  padding:3px 8px;border-radius:100px;
+  border:1px solid var(--now);color:var(--now);background:none;
+  cursor:pointer;flex:0 0 auto;
+}
+.today-pill[hidden]{display:none}
 
 /* ---------- 테마 토글 ---------- */
 .theme-toggle{
@@ -253,6 +274,14 @@ body{
   display:flex;align-items:center;gap:5px;
 }
 .chip.warn{border-color:color-mix(in srgb,var(--now) 45%,var(--line));color:var(--now)}
+/* 오늘 필요한 현금 — 호텔 나서기 전에 보는 값이라 제일 눈에 띄게 */
+.chip.cash{
+  background:color-mix(in srgb,var(--now) 13%,var(--ink-2));
+  border-color:color-mix(in srgb,var(--now) 50%,var(--line));
+  color:var(--now);font-weight:600;
+}
+.chip.cash .amt{font-family:var(--f-mono);letter-spacing:.02em}
+.chip.cash svg{width:11px;height:11px;flex:0 0 auto}
 
 /* ---------- 타임라인 ---------- */
 section{margin-top:34px}
@@ -292,11 +321,30 @@ section{margin-top:34px}
   display:inline-flex;align-items:center;gap:5px;
 }
 .map-link:active{color:var(--now)}
-.map-link .pin{
-  width:10px;height:10px;flex:0 0 auto;
-  color:var(--paper-faint);opacity:.8;
-}
+.pin{width:10px;height:10px;flex:0 0 auto}
+.map-link .pin{color:var(--paper-faint);opacity:.8}
 .tl li.live .map-link .pin{color:var(--now);opacity:1}
+
+/* 모임 장소 — 투어는 늦으면 끝이라 이름 바로 아래 강조 */
+.meet{
+  display:flex;align-items:baseline;gap:7px;margin-top:5px;
+  font-size:12.5px;color:var(--now);
+}
+.meet .mt{font-family:var(--f-mono);font-size:11px;flex:0 0 auto;opacity:.9}
+.meet a{
+  color:inherit;text-decoration:none;
+  border-bottom:1px dashed color-mix(in srgb,var(--now) 55%,transparent);
+  display:inline-flex;align-items:center;gap:5px;
+}
+.meet .pin{width:11px;height:11px;color:inherit;opacity:.95}
+
+/* 다음 일정까지의 이동 */
+.mv{
+  display:inline-flex;align-items:center;gap:6px;margin-top:10px;
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.07em;
+  color:var(--paper-faint);
+}
+.mv svg{width:12px;height:12px;flex:0 0 auto;opacity:.7}
 
 /* 일정별 준비물 */
 .prep{display:flex;align-items:flex-start;gap:6px;margin-top:7px}
@@ -338,15 +386,12 @@ section{margin-top:34px}
 .up-date{font-family:var(--f-mono);font-size:11px;color:var(--paper-faint);flex:0 0 46px;letter-spacing:.04em}
 .up-city{font-size:14px;flex:1}
 .up-bar{width:3px;height:26px;border-radius:2px;background:var(--c,var(--line));flex:0 0 auto}
-.up-arrow{color:var(--paper-faint);font-size:15px;transition:transform .25s ease}
-.up-row[aria-expanded="true"] .up-arrow{transform:rotate(90deg);color:var(--now)}
-.up-body{
-  display:none;
-  padding:14px 0 16px 22px;
-  border-bottom:1px solid var(--line);
+.up-arrow{color:var(--paper-faint);font-size:15px}
+.up-row:active .up-arrow{color:var(--now)}
+.up-cash{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.03em;
+  color:var(--c,var(--paper-faint));flex:0 0 auto;
 }
-.up-body.open{display:block}
-.up-body .tl{padding-left:22px}
 
 footer{
   margin:44px 0 30px;text-align:center;
@@ -396,7 +441,13 @@ footer{
       </svg>
     </button>
 
-    <div class="eyebrow"><b id="ey-flag">··</b> <span id="ey-date">불러오는 중</span></div>
+    <div class="eyebrow">
+      <button class="nav-btn" id="day-prev" type="button" aria-label="이전 날">‹</button>
+      <b id="ey-flag">··</b>
+      <span id="ey-date">불러오는 중</span>
+      <button class="nav-btn" id="day-next" type="button" aria-label="다음 날">›</button>
+      <button class="today-pill" id="today-pill" type="button" hidden>오늘</button>
+    </div>
 
     <div class="landmark" id="landmark"></div>
 
@@ -606,6 +657,8 @@ const ICONS = {
 const PIN = `<svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg>`;
 const CP  = `<svg class="cp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>`;
 const CK  = `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>`;
+const ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16"/><path d="M6 14l6 6 6-6"/></svg>`;
+const COIN  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.6-.9-1.7-1.5-3-1.5-2 0-3.5 1.8-3.5 4s1.5 4 3.5 4c1.3 0 2.4-.6 3-1.5"/><path d="M7.5 11.5h5M7.5 13.5h5"/></svg>`;
 
 /* -----------------------------------------------------------
    토스트 / 클립보드 / 지도
@@ -686,15 +739,59 @@ function pickDay(){
   return DAYS[DAYS.length - 1];
 }
 
+/* 사용자가 화살표/스와이프로 넘겨본 날. null 이면 오늘(자동) */
+let viewDate = null;
+
+function autoDay(){ return phase() === 'pre' ? DAYS[0] : pickDay(); }
+function currentDay(){
+  return (viewDate && DAYS.find(d => d.date === viewDate)) || autoDay();
+}
+function stepDay(delta){
+  const i = DAYS.findIndex(d => d.date === currentDay().date);
+  const next = DAYS[i + delta];
+  if(!next) return;
+  viewDate = next.date;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function goToday(){
+  viewDate = null;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* 오늘 기준 상대 표현 — "내일 일정 미리보기"가 이 앱의 핵심 용도 */
+function relLabel(date){
+  const diff = daysBetween(today(), date);
+  if(diff === 0) return '오늘';
+  if(diff === 1) return '내일';
+  if(diff === 2) return '모레';
+  if(diff === -1) return '어제';
+  return null;
+}
+
 /* -----------------------------------------------------------
    타임라인 아이템 렌더
    ----------------------------------------------------------- */
-function itemHTML(it, city, cls, day){
+function itemHTML(it, city, cls, day, next){
   const time = `${it.time}${it.end ? ' – ' + it.end : ''}`;
   const mappable = it.map !== false && (it.place || it.name);
   const name = mappable
     ? `<a class="map-link" href="${esc(mapHref(mapQuery(it, city, day)))}" target="_blank" rel="noopener noreferrer">${esc(it.name)}${PIN}</a>`
     : esc(it.name);
+
+  // 모임 장소 — 지도로 바로 갈 수 있어야 의미가 있음
+  const m = it.meet;
+  // 미팅 시각이 일정 시각과 같으면 위에 이미 떠 있으므로 생략
+  const mTime = m && m.time && m.time !== it.time ? m.time : null;
+  const meet = m ? `<div class="meet">
+      ${mTime ? `<span class="mt">${esc(mTime)}</span>` : ''}
+      <a href="${esc(mapHref(m.place || mapQuery(it, city, day)))}" target="_blank" rel="noopener noreferrer">${PIN}${esc(m.where)}</a>
+    </div>` : '';
+
+  // 다음 일정까지 어떻게 가는지 — 블록 맨 아래에 붙여 이어지게
+  const mv = next && next.move
+    ? `<div class="mv">${ARROW}${esc(next.move)}</div>` : '';
 
   const refs = (it.refs || []).map(r =>
     `<button type="button" class="ref" data-copy="${esc(r.value)}">
@@ -708,9 +805,11 @@ function itemHTML(it, city, cls, day){
   return `<li class="${cls}">
     <div class="tl-t">${esc(time)}</div>
     <div class="tl-n">${name}</div>
+    ${meet}
     ${it.desc ? `<div class="tl-d">${esc(it.desc)}</div>` : ''}
     ${prep}
     ${refs ? `<div class="refs">${refs}</div>` : ''}
+    ${mv}
   </li>`;
 }
 
@@ -721,16 +820,24 @@ function render(){
   if(!DAYS.length) return;
 
   const ph   = phase();
-  const day  = ph === 'pre' ? DAYS[0] : pickDay();
+  const day  = ph === 'pre' && !viewDate ? DAYS[0] : currentDay();
   const city = cityById(day.city);
   const now  = new Date();
   const nowMin = now.getHours()*60 + now.getMinutes();
   const isToday = day.date === today();
+  const browsing = !isToday;        // 오늘이 아닌 날을 넘겨보는 중
+  const rel = relLabel(day.date);
 
-  activeCity = ph === 'pre' ? CITIES[0] : city;
+  activeCity = (ph === 'pre' && !viewDate) ? CITIES[0] : city;
   paintCityColor();
 
   const headCity = activeCity;
+
+  /* ---- 날짜 이동 버튼 ---- */
+  const di = DAYS.findIndex(d => d.date === day.date);
+  $('#day-prev').disabled = di <= 0;
+  $('#day-next').disabled = di >= DAYS.length - 1;
+  $('#today-pill').hidden = !(browsing && ph === 'live');
 
   /* ---- 헤더 ---- */
   $('#clock').textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
@@ -741,10 +848,14 @@ function render(){
 
   const dLeft = daysBetween(today(), TRIP.start);
 
-  if(ph === 'pre'){
+  if(ph === 'pre' && !viewDate){
     $('#ey-date').textContent = `${fmtDate(TRIP.start)} 출발`;
     $('#day-count').textContent = dLeft === 0 ? '오늘 출발' : `D-${dLeft}`;
     $('#left').textContent = `${TOTAL_DAYS}일간의 여정`;
+  }else if(browsing){
+    $('#ey-date').textContent = (rel ? rel + ' · ' : '') + fmtDate(day.date);
+    $('#day-count').textContent = `여행 ${day.dayNo}일차`;
+    $('#left').textContent = `${day.items.length}개 일정`;
   }else if(ph === 'post'){
     $('#ey-date').textContent = fmtDate(TRIP.end);
     $('#day-count').textContent = `여행 ${TOTAL_DAYS}일 완주`;
@@ -757,7 +868,7 @@ function render(){
   }
 
   /* ---- 여정 라인 ---- */
-  const hereIdx = ph === 'pre' ? -1 : CITIES.findIndex(c => c.id === city.id);
+  const hereIdx = (ph === 'pre' && !viewDate) ? -1 : CITIES.findIndex(c => c.id === city.id);
   const track = $('#j-track');
   track.innerHTML = '';
   CITIES.forEach((c,i) => {
@@ -772,16 +883,25 @@ function render(){
     track.appendChild(node);
   });
   // 귀국일에는 "Seoul → 서울 → Seoul" 이 되지 않도록
-  $('#j-route').innerHTML = (ph !== 'pre' && city.home)
+  const preHead = ph === 'pre' && !viewDate;
+  $('#j-route').innerHTML = (!preHead && city.home)
     ? `Seoul → <b>${esc(city.name)}</b> · 완주`
-    : `Seoul → <b>${esc(ph === 'pre' ? CITIES[0].name : city.name)}</b> → Seoul`;
-  $('#j-prog').textContent = ph === 'pre' ? 0 : (ph === 'post' ? TOTAL_DAYS : day.dayNo);
+    : `Seoul → <b>${esc(preHead ? CITIES[0].name : city.name)}</b> → Seoul`;
+  $('#j-prog').textContent = preHead ? 0 : (ph === 'post' && !viewDate ? TOTAL_DAYS : day.dayNo);
   $('#j-total').textContent = TOTAL_DAYS;
 
-  /* ---- 칩 ---- */
+  /* ---- 칩 (현금이 맨 앞) ---- */
   const strip = $('#strip');
   strip.innerHTML = '';
-  (ph === 'pre' ? [] : (day.chips || [])).forEach(c => {
+  if(!preHead && day.cash){
+    const el = document.createElement('span');
+    el.className = 'chip cash';
+    el.innerHTML = `${COIN}<span class="amt">${esc(day.cash.amount)}</span>` +
+                   (day.cash.note ? ` <span>· ${esc(day.cash.note)}</span>` : '');
+    if(day.cash.for) el.title = day.cash.for;
+    strip.appendChild(el);
+  }
+  (preHead ? [] : (day.chips || [])).forEach(c => {
     const el = document.createElement('span');
     el.className = 'chip' + (c.warn ? ' warn' : '');
     el.textContent = c.t;
@@ -804,7 +924,7 @@ function render(){
   const card = $('#now-card');
   const hasFirstDay = DAYS[0].date === TRIP.start;
 
-  if(ph === 'pre'){
+  if(ph === 'pre' && !viewDate){
     card.classList.add('countdown');
     countdownTarget = parseDate(TRIP.start, hasFirstDay ? DAYS[0].items[0].time : '00:00');
     $('#nc-tag-label').textContent = '출발까지';
@@ -817,10 +937,35 @@ function render(){
       $('#next-time').textContent = first.time;
       $('#next-name').textContent = `첫 일정 · ${first.name}`;
     }
+  }else if(browsing){
+    /* 다른 날을 미리 볼 때 — 몇 시에 시작해서 몇 시에 끝나는지, 미팅은 언제인지 */
+    card.classList.remove('countdown');
+    countdownTarget = null;
+
+    const first = day.items[0];
+    const last  = day.items[day.items.length - 1];
+    const meetItem = day.items.find(i => i.meet);
+
+    $('#nc-tag-label').textContent = rel || fmtDate(day.date);
+    $('#now-title').textContent = `${first.time} ${first.name}`;
+    $('#now-time').textContent  = `일정 ${day.items.length}개 · 마지막 ${last.time} ${last.name}`;
+
+    $('#nc-next').hidden = false;
+    if(meetItem){
+      $('#next-time').textContent = meetItem.meet.time || meetItem.time;
+      $('#next-name').textContent = `미팅 · ${meetItem.meet.where}`;
+    }else if(day.cash){
+      $('#next-time').textContent = '현금';
+      $('#next-name').textContent = day.cash.for
+        ? `${day.cash.amount} · ${day.cash.for}` : day.cash.amount;
+    }else{
+      $('#next-time').textContent = '';
+      $('#next-name').textContent = day.label || cityById(day.city).name;
+    }
   }else{
     card.classList.remove('countdown');
     countdownTarget = null;
-    $('#nc-tag-label').textContent = ph === 'post' ? '여행 종료' : (isToday ? '지금' : '다음 일정');
+    $('#nc-tag-label').textContent = ph === 'post' ? '여행 종료' : '지금';
 
     const live = day.items[liveIdx] || day.items[0];
     $('#now-title').textContent = live.name;
@@ -833,38 +978,38 @@ function render(){
       $('#next-name').textContent = nxt.desc ? `${nxt.name} · ${nxt.desc}` : nxt.name;
     }else{
       $('#next-time').textContent = '';
-      $('#next-name').textContent = ph === 'post' ? '모든 일정 완료' : (isToday ? '오늘 일정 끝' : fmtDate(day.date));
+      $('#next-name').textContent = ph === 'post' ? '모든 일정 완료' : '오늘 일정 끝';
     }
   }
 
   /* ---- 타임라인 ---- */
   $('#sec-today').hidden = false;
-  $('#head-today').textContent = ph === 'pre'
+  $('#head-today').textContent = (ph === 'pre' && !viewDate)
     ? (hasFirstDay ? '첫날 일정' : `${fmtDate(day.date)} · 미리보기`)
-    : (isToday ? '오늘' : fmtDate(day.date));
+    : (isToday ? '오늘' : (rel ? `${rel} 일정` : fmtDate(day.date)));
   $('#tl').innerHTML = day.items
-    .map((it,i) => itemHTML(it, city, i === liveIdx ? 'live' : (liveIdx > -1 && i < liveIdx ? 'past' : ''), day))
+    .map((it,i) => itemHTML(
+      it, city,
+      i === liveIdx ? 'live' : (liveIdx > -1 && i < liveIdx ? 'past' : ''),
+      day, day.items[i+1]))
     .join('');
 
-  /* ---- 이후 날들 (펼침 상태는 유지) ---- */
+  /* ---- 이후 날들 — 탭하면 그 날로 이동 ---- */
   const up = $('#upcoming');
-  const opened = new Set($$('.up-row[aria-expanded="true"]').map(r => r.dataset.date));
   const rest = DAYS.filter(d => d.date > day.date).slice(0, 6);
   $('#sec-upcoming').hidden = rest.length === 0;
   up.innerHTML = rest.map(d => {
     const c = cityById(d.city);
     const md = d.date.slice(5).replace('-','/');
-    const label = d.items[1]?.name || d.items[0].name;
-    const isOpen = opened.has(d.date);
-    return `<button class="up-row" type="button" aria-expanded="${isOpen}" data-date="${d.date}">
+    const label = d.label || d.items[1]?.name || d.items[0].name;
+    const r = relLabel(d.date);
+    return `<button class="up-row" type="button" data-date="${d.date}">
         <span class="up-bar" style="--c:${cityColor(c)}"></span>
-        <span class="up-date">${md}</span>
+        <span class="up-date">${r || md}</span>
         <span class="up-city">${esc(c.name)} · ${esc(label)}</span>
+        ${d.cash ? `<span class="up-cash" style="--c:${cityColor(c)}">${esc(d.cash.amount)}</span>` : ''}
         <span class="up-arrow">›</span>
-      </button>
-      <div class="up-body${isOpen ? ' open' : ''}" data-body="${d.date}">
-        <ul class="tl">${d.items.map(it => itemHTML(it, c, '', d)).join('')}</ul>
-      </div>`;
+      </button>`;
   }).join('');
 
   /* ---- 푸터 ---- */
@@ -913,12 +1058,39 @@ document.addEventListener('click', async (e) => {
 
   const row = e.target.closest('.up-row');
   if(row){
-    const open = row.getAttribute('aria-expanded') === 'true';
-    const body = document.querySelector(`.up-body[data-body="${row.dataset.date}"]`);
-    row.setAttribute('aria-expanded', String(!open));
-    if(body) body.classList.toggle('open', !open);
+    viewDate = row.dataset.date;
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 });
+
+/* -----------------------------------------------------------
+   날짜 이동 — 버튼 / 스와이프 / 좌우 방향키
+   ----------------------------------------------------------- */
+$('#day-prev').addEventListener('click', () => stepDay(-1));
+$('#day-next').addEventListener('click', () => stepDay(1));
+$('#today-pill').addEventListener('click', goToday);
+
+document.addEventListener('keydown', (e) => {
+  if(e.metaKey || e.ctrlKey || e.altKey) return;
+  if(e.key === 'ArrowLeft')  stepDay(-1);
+  if(e.key === 'ArrowRight') stepDay(1);
+});
+
+let tx = 0, ty = 0, tracking = false;
+document.addEventListener('touchstart', (e) => {
+  if(e.touches.length !== 1) return;
+  tx = e.touches[0].clientX; ty = e.touches[0].clientY; tracking = true;
+}, { passive: true });
+document.addEventListener('touchend', (e) => {
+  if(!tracking) return;
+  tracking = false;
+  const t = e.changedTouches[0];
+  const dx = t.clientX - tx, dy = t.clientY - ty;
+  // 세로 스크롤과 헷갈리지 않게 가로가 확실히 클 때만
+  if(Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.8) return;
+  stepDay(dx < 0 ? 1 : -1);
+}, { passive: true });
 
 /* -----------------------------------------------------------
    부팅
@@ -949,8 +1121,13 @@ document.addEventListener('click', async (e) => {
   setInterval(render, 60000);
   setInterval(() => { if(countdownTarget) tickCountdown(); }, 1000);
 
-  // 백그라운드/탭 복귀 시 즉시 갱신
-  document.addEventListener('visibilitychange', () => { if(!document.hidden) render(); });
+  // 백그라운드/탭 복귀 시 즉시 갱신. 날이 바뀌었으면 오늘로 되돌립니다
+  let lastToday = today();
+  document.addEventListener('visibilitychange', () => {
+    if(document.hidden) return;
+    if(today() !== lastToday){ lastToday = today(); viewDate = null; }
+    render();
+  });
 })();
 
 /* -----------------------------------------------------------
