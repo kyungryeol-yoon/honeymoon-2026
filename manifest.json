@@ -1,0 +1,22 @@
+{
+  "name": "Honeymoon 2026",
+  "short_name": "Honeymoon",
+  "description": "Kyungryeol & Hojeong · 2026 신혼여행 일정",
+  "lang": "ko",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "id": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#12151F",
+  "theme_color": "#12151F",
+  "categories": ["travel", "lifestyle"],
+  "icons": [
+    { "src": "icons/icon-192.png",          "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png",          "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

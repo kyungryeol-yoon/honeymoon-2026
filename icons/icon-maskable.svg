@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#12151F"/>
+  <!-- 마스크 안전영역(중앙 80%) 안에 들어오도록 0.66배 축소 -->
+  <g transform="translate(256 256) scale(0.66) translate(-256 -256)">
+    <path d="M90 238 C 160 92, 352 92, 422 238"
+          fill="none" stroke="#F2EFE8" stroke-opacity=".20"
+          stroke-width="6" stroke-linecap="round" stroke-dasharray="2 16"/>
+    <path d="M90 300 H422" fill="none" stroke="#2E3448" stroke-width="7" stroke-linecap="round"/>
+    <path d="M90 300 H311" fill="none" stroke="#5A6076" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="311" cy="300" r="54" fill="#8AA05A" fill-opacity=".16"/>
+    <circle cx="90"  cy="300" r="19" fill="#D4744A"/>
+    <circle cx="201" cy="300" r="19" fill="#5B94C4"/>
+    <circle cx="311" cy="300" r="31" fill="#8AA05A"/>
+    <circle cx="422" cy="300" r="16" fill="#12151F" stroke="#B0576B" stroke-width="7"/>
+  </g>
+</svg>

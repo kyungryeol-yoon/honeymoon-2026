@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#12151F" id="meta-theme">
+<meta name="description" content="Kyungryeol & Hojeong · 2026 신혼여행 일정">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Honeymoon">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Honeymoon 2026</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<script>
+/* 페인트 전에 테마 확정 — FOUC 방지 */
+(function(){
+  var t;
+  try{ t = localStorage.getItem('hm26-theme'); }catch(e){}
+  if(t !== 'light' && t !== 'dark'){
+    t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+  document.documentElement.dataset.theme = t;
+  var m = document.querySelector('#meta-theme');
+  if(m) m.content = t === 'light' ? '#F7F5F0' : '#12151F';
+})();
+</script>
+<style>
+:root{
+  --es:#D4744A;
+  --ch:#5B94C4;
+  --it:#8AA05A;
+  --cz:#B0576B;
+
+  --now:var(--city, #D4744A);
+
+  --f-display:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --f-body:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo",system-ui,sans-serif;
+  --f-mono:"SF Mono",ui-monospace,Menlo,monospace;
+}
+
+/* ---------- 다크 (기본) ---------- */
+:root,
+:root[data-theme="dark"]{
+  --ink:#12151F;
+  --ink-2:#1A1F2E;
+  --ink-3:#252B3D;
+  --paper:#F2EFE8;
+  --paper-dim:#A8AABA;
+  --paper-faint:#5A6076;
+  --line:#2E3448;
+  --hush:#2E3448;
+  --glow:.16;
+  --fill-op:.14;
+  --card-shadow:none;
+  --scrim:rgba(0,0,0,.5);
+}
+
+/* ---------- 라이트 ---------- */
+:root[data-theme="light"]{
+  --ink:#F7F5F0;
+  --ink-2:#FFFFFF;
+  --ink-3:#F2EEE5;
+  --paper:#1A1F2E;
+  --paper-dim:#4A5164;
+  --paper-faint:#767C8E;
+  --line:#E0DCD3;
+  --hush:#C9C4B8;
+  --glow:.13;
+  --fill-op:.13;
+  --card-shadow:0 1px 2px rgba(26,31,46,.05), 0 10px 26px -16px rgba(26,31,46,.28);
+  --scrim:rgba(26,31,46,.42);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+/* 히어로 글로우가 좌우로 넘쳐 가로 스크롤이 생기지 않도록 */
+html{overflow-x:clip}
+
+body{
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--f-body);
+  font-size:15px;
+  line-height:1.6;
+  padding-bottom:env(safe-area-inset-bottom);
+  overflow-x:hidden;
+  transition:background-color .25s ease,color .25s ease;
+}
+
+.wrap{max-width:520px;margin:0 auto;padding:0 20px}
+
+/* ---------- HERO ---------- */
+.hero{
+  padding:calc(28px + env(safe-area-inset-top)) 0 22px;
+  position:relative;
+}
+.hero::before{
+  content:"";position:absolute;inset:-40% -50% auto;height:420px;
+  background:radial-gradient(ellipse at 50% 0%,var(--now) 0%,transparent 62%);
+  opacity:var(--glow);pointer-events:none;
+}
+
+.eyebrow{
+  font-family:var(--f-mono);
+  font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--paper-faint);
+  display:flex;align-items:center;gap:8px;
+  padding-right:44px;
+}
+.eyebrow b{color:var(--now);font-weight:500}
+
+/* ---------- 테마 토글 ---------- */
+.theme-toggle{
+  position:absolute;
+  top:calc(22px + env(safe-area-inset-top));
+  right:0;
+  width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  background:var(--ink-2);
+  border:1px solid var(--line);
+  color:var(--paper-dim);
+  cursor:pointer;
+  transition:color .2s,border-color .2s,background-color .25s;
+  z-index:2;
+}
+.theme-toggle:hover{color:var(--now);border-color:color-mix(in srgb,var(--now) 45%,var(--line))}
+.theme-toggle:active{transform:scale(.94)}
+.theme-toggle svg{width:17px;height:17px;display:none}
+:root[data-theme="dark"] .theme-toggle .i-moon{display:block}
+:root[data-theme="light"] .theme-toggle .i-sun{display:block}
+
+/* 도시 랜드마크 아이콘 */
+.landmark{
+  margin:18px 0 12px;
+  height:96px;
+  display:flex;align-items:flex-end;
+}
+.landmark svg{height:100%;width:auto;overflow:visible}
+.lm-stroke{fill:none;stroke:var(--now);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.lm-fill{fill:var(--now);opacity:var(--fill-op)}
+.lm-dim{fill:none;stroke:var(--now);stroke-width:1.2;opacity:.45}
+
+.city-name{
+  font-family:var(--f-display);
+  font-size:clamp(38px,11vw,52px);
+  line-height:.95;
+  letter-spacing:-.015em;
+  font-weight:400;
+}
+.city-sub{
+  margin-top:10px;
+  font-size:13.5px;
+  color:var(--paper-dim);
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+}
+.city-sub .dot{width:3px;height:3px;border-radius:50%;background:var(--line)}
+
+/* ---------- 여정 라인 (시그니처) ---------- */
+.journey{
+  margin:26px 0 8px;
+  padding:18px 0 4px;
+  border-top:1px solid var(--line);
+}
+.j-track{
+  display:flex;align-items:center;
+  width:100%;
+}
+.j-node{
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+  flex:0 0 auto;position:relative;
+}
+.j-dot{
+  width:9px;height:9px;border-radius:50%;
+  background:var(--ink);border:1.5px solid var(--line);
+  transition:all .3s;
+}
+.j-node.done .j-dot{background:var(--paper-faint);border-color:var(--paper-faint)}
+.j-node.here .j-dot{
+  width:13px;height:13px;
+  background:var(--now);border-color:var(--now);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--now) 22%,transparent);
+}
+.j-label{
+  font-family:var(--f-mono);
+  font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--paper-faint);white-space:nowrap;
+}
+.j-node.here .j-label{color:var(--now)}
+.j-seg{flex:1 1 auto;height:1.5px;background:var(--line);margin:0 3px;margin-bottom:22px;border-radius:2px}
+.j-seg.done{background:var(--paper-faint)}
+.j-seg.pending{
+  background:repeating-linear-gradient(90deg,var(--line) 0 4px,transparent 4px 8px);
+  height:1.5px;
+}
+
+.j-meta{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-top:14px;
+  font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;
+  color:var(--paper-faint);
+}
+.j-meta b{color:var(--paper-dim);font-weight:500}
+
+/* ---------- NOW 카드 ---------- */
+.now-card{
+  margin:22px 0 0;
+  background:linear-gradient(160deg,var(--ink-2),var(--ink-3));
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px;
+  position:relative;overflow:hidden;
+  box-shadow:var(--card-shadow);
+}
+.now-card::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--now);
+}
+.nc-tag{
+  font-family:var(--f-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--now);display:flex;align-items:center;gap:6px;
+}
+.pulse{width:5px;height:5px;border-radius:50%;background:var(--now);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+.nc-title{font-size:19px;font-weight:600;margin:9px 0 3px;letter-spacing:-.01em}
+.nc-time{font-family:var(--f-mono);font-size:12px;color:var(--paper-dim)}
+.nc-next{
+  margin-top:14px;padding-top:13px;border-top:1px solid var(--line);
+  display:flex;align-items:baseline;gap:9px;font-size:13.5px;color:var(--paper-dim);
+}
+.nc-next .t{font-family:var(--f-mono);font-size:11.5px;color:var(--paper-faint);flex:0 0 auto}
+.nc-next[hidden]{display:none}
+
+/* D-day 카운트다운 */
+.now-card.countdown .nc-title{
+  font-family:var(--f-mono);
+  font-size:23px;font-weight:500;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;
+  margin:11px 0 4px;
+}
+.dday{
+  font-family:var(--f-display);
+  font-size:15px;color:var(--now);letter-spacing:.02em;
+}
+
+/* ---------- 알림 스트립 ---------- */
+.strip{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 0}
+.chip{
+  font-size:11.5px;padding:6px 11px;border-radius:100px;
+  background:var(--ink-2);border:1px solid var(--line);color:var(--paper-dim);
+  display:flex;align-items:center;gap:5px;
+}
+.chip.warn{border-color:color-mix(in srgb,var(--now) 45%,var(--line));color:var(--now)}
+
+/* ---------- 타임라인 ---------- */
+section{margin-top:34px}
+.sec-head{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--paper-faint);margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.sec-head::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.tl{list-style:none;position:relative;padding-left:22px}
+.tl::before{content:"";position:absolute;left:4px;top:8px;bottom:8px;width:1px;background:var(--line)}
+
+.tl li{position:relative;padding:0 0 20px}
+.tl li::before{
+  content:"";position:absolute;left:-22px;top:6px;
+  width:9px;height:9px;border-radius:50%;
+  background:var(--ink);border:1.5px solid var(--line);
+}
+.tl li.past{opacity:.42}
+.tl li.past::before{background:var(--paper-faint);border-color:var(--paper-faint)}
+.tl li.live::before{
+  background:var(--now);border-color:var(--now);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--now) 20%,transparent);
+}
+.tl-t{font-family:var(--f-mono);font-size:11.5px;color:var(--paper-faint);letter-spacing:.04em}
+.tl li.live .tl-t{color:var(--now)}
+.tl-n{font-size:15px;margin-top:2px;font-weight:450}
+.tl li.live .tl-n{font-weight:600}
+.tl-d{font-size:12.5px;color:var(--paper-faint);margin-top:3px;line-height:1.5}
+
+/* 장소명 → 구글맵 딥링크 */
+.map-link{
+  color:inherit;text-decoration:none;
+  border-bottom:1px dashed color-mix(in srgb,var(--paper-faint) 70%,transparent);
+  padding-bottom:1px;
+  display:inline-flex;align-items:center;gap:5px;
+}
+.map-link:active{color:var(--now)}
+.map-link .pin{
+  width:10px;height:10px;flex:0 0 auto;
+  color:var(--paper-faint);opacity:.8;
+}
+.tl li.live .map-link .pin{color:var(--now);opacity:1}
+
+/* 예약번호 → 클립보드 복사 */
+.refs{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.ref{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;
+  padding:4px 9px;border-radius:7px;
+  background:var(--ink-2);border:1px dashed var(--line);
+  color:var(--paper-dim);
+  display:inline-flex;align-items:center;gap:6px;
+  cursor:pointer;
+}
+.ref:active{border-color:var(--now);color:var(--now)}
+.ref .lb{color:var(--paper-faint);font-size:10px}
+.ref .cp{width:11px;height:11px;flex:0 0 auto;opacity:.7}
+.ref.copied{border-style:solid;border-color:var(--now);color:var(--now)}
+
+/* ---------- 접힌 날들 ---------- */
+.upcoming{margin-top:10px}
+.up-row{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 2px;border-bottom:1px solid var(--line);
+  cursor:pointer;
+  width:100%;background:none;border-left:0;border-right:0;border-top:0;
+  color:inherit;font:inherit;text-align:left;
+}
+.up-row:first-child{border-top:1px solid var(--line)}
+.up-date{font-family:var(--f-mono);font-size:11px;color:var(--paper-faint);flex:0 0 46px;letter-spacing:.04em}
+.up-city{font-size:14px;flex:1}
+.up-bar{width:3px;height:26px;border-radius:2px;background:var(--c,var(--line));flex:0 0 auto}
+.up-arrow{color:var(--paper-faint);font-size:15px;transition:transform .25s ease}
+.up-row[aria-expanded="true"] .up-arrow{transform:rotate(90deg);color:var(--now)}
+.up-body{
+  display:none;
+  padding:14px 0 16px 22px;
+  border-bottom:1px solid var(--line);
+}
+.up-body.open{display:block}
+.up-body .tl{padding-left:22px}
+
+footer{
+  margin:44px 0 30px;text-align:center;
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;
+  color:var(--hush);text-transform:uppercase;
+}
+
+/* ---------- 상태 / 토스트 ---------- */
+.state{
+  margin:40px 0;text-align:center;color:var(--paper-faint);
+  font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;
+}
+.offline-note{
+  margin-top:10px;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--paper-faint);
+}
+
+#toast{
+  position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom));
+  transform:translate(-50%,14px);
+  background:var(--ink-2);border:1px solid var(--line);color:var(--paper);
+  padding:10px 16px;border-radius:100px;
+  font-size:12.5px;letter-spacing:.01em;
+  box-shadow:0 8px 30px -10px var(--scrim);
+  opacity:0;pointer-events:none;
+  transition:opacity .2s ease,transform .2s ease;
+  z-index:50;max-width:calc(100vw - 40px);
+}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="테마 전환">
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+    </button>
+
+    <div class="eyebrow"><b id="ey-flag">··</b> <span id="ey-date">불러오는 중</span></div>
+
+    <div class="landmark" id="landmark"></div>
+
+    <h1 class="city-name" id="city-name">Honeymoon</h1>
+    <div class="city-sub">
+      <span id="day-count">2026</span>
+      <span class="dot"></span>
+      <span id="clock">--:--</span>
+      <span class="dot"></span>
+      <span id="left"></span>
+    </div>
+
+    <!-- ===== 시그니처: 여정 라인 ===== -->
+    <div class="journey">
+      <div class="j-track" id="j-track"></div>
+      <div class="j-meta">
+        <span>Seoul → <b id="j-now">—</b> → Seoul</span>
+        <span><b id="j-prog">0</b> / <span id="j-total">21</span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ NOW ============ -->
+  <div class="now-card" id="now-card">
+    <div class="nc-tag"><span class="pulse"></span> <span id="nc-tag-label">지금</span></div>
+    <div class="nc-title" id="now-title">—</div>
+    <div class="nc-time" id="now-time"></div>
+    <div class="nc-next" id="nc-next">
+      <span class="t" id="next-time"></span>
+      <span id="next-name"></span>
+    </div>
+  </div>
+
+  <div class="strip" id="strip"></div>
+
+  <!-- ============ 오늘 ============ -->
+  <section id="sec-today" hidden>
+    <div class="sec-head" id="head-today">오늘</div>
+    <ul class="tl" id="tl"></ul>
+  </section>
+
+  <!-- ============ 다음 ============ -->
+  <section id="sec-upcoming" hidden>
+    <div class="sec-head">이후</div>
+    <div class="upcoming" id="upcoming"></div>
+  </section>
+
+  <div class="state" id="state" hidden></div>
+
+  <footer id="footer">Kyungryeol &amp; Hojeong · 2026</footer>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ===========================================================
+   Honeymoon 2026 — PWA
+   데이터는 data.json 에서 불러옵니다.
+   =========================================================== */
+
+const $  = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+const LS_THEME = 'hm26-theme';
+const LS_DATA  = 'hm26-data';
+
+/* 현재 헤더에 표시 중인 도시 — 테마가 바뀌면 도시 색도 같이 바뀝니다 */
+let activeCity = null;
+
+/* -----------------------------------------------------------
+   테마
+   ----------------------------------------------------------- */
+const mql = window.matchMedia('(prefers-color-scheme: light)');
+
+function storedTheme(){
+  try{ const t = localStorage.getItem(LS_THEME); return (t === 'light' || t === 'dark') ? t : null; }
+  catch(e){ return null; }
+}
+function systemTheme(){ return mql.matches ? 'light' : 'dark'; }
+function currentTheme(){ return document.documentElement.dataset.theme === 'light' ? 'light' : 'dark'; }
+
+function applyTheme(t, persist){
+  document.documentElement.dataset.theme = t;
+  $('#meta-theme').content = t === 'light' ? '#F7F5F0' : '#12151F';
+  $('#theme-toggle').setAttribute('aria-label', t === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환');
+  if(persist){
+    try{ localStorage.setItem(LS_THEME, t); }catch(e){}
+  }
+  paintCityColor();
+}
+
+$('#theme-toggle').addEventListener('click', () => {
+  applyTheme(currentTheme() === 'light' ? 'dark' : 'light', true);
+});
+
+/* 사용자가 직접 고른 적 없으면 시스템 설정을 계속 따라감 */
+mql.addEventListener('change', () => { if(!storedTheme()) applyTheme(systemTheme(), false); });
+
+applyTheme(storedTheme() || systemTheme(), false);
+
+/* -----------------------------------------------------------
+   날짜 유틸 (로컬 기준 — toISOString 은 UTC라 하루 밀릴 수 있음)
+   ----------------------------------------------------------- */
+const pad = n => String(n).padStart(2,'0');
+function dstr(d){ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+function today(){ return dstr(new Date()); }
+function parseDate(s, time){
+  const [y,m,d] = s.split('-').map(Number);
+  const [hh,mm] = (time || '00:00').split(':').map(Number);
+  return new Date(y, m-1, d, hh, mm, 0, 0);
+}
+function toMin(t){ const [h,m] = t.split(':').map(Number); return h*60+m; }
+function fmtDate(s){
+  const dt = parseDate(s);
+  const w = ['일','월','화','수','목','금','토'][dt.getDay()];
+  return `${dt.getMonth()+1}월 ${dt.getDate()}일 ${w}요일`;
+}
+function daysBetween(a, b){ // 날짜 단위 차이 (b - a)
+  return Math.round((parseDate(b) - parseDate(a)) / 864e5);
+}
+
+/* -----------------------------------------------------------
+   데이터 로딩 (fetch → localStorage 캐시 폴백)
+   ----------------------------------------------------------- */
+async function loadData(){
+  let fresh = null;
+  try{
+    const res = await fetch('data.json', { cache: 'no-cache' });
+    if(res.ok) fresh = await res.json();
+  }catch(e){ /* 오프라인 */ }
+
+  if(fresh){
+    try{ localStorage.setItem(LS_DATA, JSON.stringify(fresh)); }catch(e){}
+    return { data: fresh, cached: false };
+  }
+  try{
+    const raw = localStorage.getItem(LS_DATA);
+    if(raw) return { data: JSON.parse(raw), cached: true };
+  }catch(e){}
+  return { data: null, cached: false };
+}
+
+/* -----------------------------------------------------------
+   랜드마크 아이콘 (SVG)
+   ----------------------------------------------------------- */
+const ICONS = {
+  sagrada:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
+    <path d="M18 88V44c0-9 4-16 8-22 4 6 8 13 8 22v44"/>
+    <path d="M42 88V36c0-11 5-19 10-26 5 7 10 15 10 26v52"/>
+    <path d="M70 88V44c0-9 4-16 8-22 4 6 8 13 8 22v44"/>
+    <path d="M94 88V52c0-7 3-12 6-17 3 5 6 10 6 17v36"/>
+    <path d="M8 88h104"/></g>
+    <g class="lm-dim"><path d="M26 30v-8M52 14v-9M78 30v-8"/></g>
+  </svg>`,
+
+  alps:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
+    <path d="M6 82L38 26l18 30 12-18 30 44z"/>
+    <path d="M30 40l8 12 8-9"/><path d="M62 46l6-9 7 11"/></g>
+    <path class="lm-fill" d="M6 82L38 26l18 30 12-18 30 44z"/>
+    <g class="lm-dim"><path d="M76 82l8-13 8 13"/></g>
+  </svg>`,
+
+  gondola:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
+    <path d="M10 62c14 8 26 10 46 10s34-3 50-11"/>
+    <path d="M14 60c-4-6-2-9 4-9h76c7 0 9 4 5 10"/>
+    <path d="M18 51V34M18 34l10 5"/>
+    <path d="M100 51c6-6 10-9 14-9"/></g>
+    <g class="lm-dim"><path d="M8 78c10 4 22 6 44 6s38-2 52-7"/></g>
+  </svg>`,
+
+  duomo:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
+    <path d="M32 88V56c0-16 12-26 28-26s28 10 28 26v32"/>
+    <path d="M60 30V18"/><path d="M54 18h12"/>
+    <path d="M22 88V60h10M98 88V60H88"/>
+    <path d="M14 88h92"/></g>
+    <path class="lm-fill" d="M32 88V56c0-16 12-26 28-26s28 10 28 26v32z"/>
+    <g class="lm-dim"><path d="M46 88V72c0-7 6-11 14-11s14 4 14 11v16"/></g>
+  </svg>`,
+
+  colosseo:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
+    <path d="M16 82V38c0-12 20-20 44-20s44 8 44 20v44"/>
+    <path d="M16 52h88M16 66h88"/>
+    <path d="M32 38v14M50 34v18M70 34v18M88 38v14"/>
+    <path d="M32 52v14M50 52v14M70 52v14M88 52v14"/>
+    <path d="M10 82h100"/></g>
+    <path class="lm-fill" d="M16 82V38c0-12 20-20 44-20s44 8 44 20v44z"/>
+  </svg>`,
+
+  charles:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
+    <path d="M6 66h108"/>
+    <path d="M20 66c0-9 7-15 15-15s15 6 15 15"/>
+    <path d="M70 66c0-9 7-15 15-15s15 6 15 15"/>
+    <path d="M54 66V26c0-6 3-10 6-13 3 3 6 7 6 13v40"/>
+    <path d="M60 13V6"/></g>
+    <g class="lm-dim"><path d="M6 78h108M14 66v12M106 66v12"/></g>
+  </svg>`,
+};
+
+const PIN = `<svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg>`;
+const CP  = `<svg class="cp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>`;
+
+/* -----------------------------------------------------------
+   토스트 / 클립보드 / 지도
+   ----------------------------------------------------------- */
+let toastTimer;
+function toast(msg){
+  const el = $('#toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 1900);
+}
+
+async function copyText(text){
+  try{
+    await navigator.clipboard.writeText(text);
+    return true;
+  }catch(e){
+    try{ // http / 구형 사파리 폴백
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly','');
+      ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, text.length);
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    }catch(e2){ return false; }
+  }
+}
+
+function mapHref(query){
+  return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query);
+}
+function mapQuery(item, city){
+  const base = item.place || item.name;
+  if(!city || !city.map) return base;
+  // 이미 도시/국가가 들어간 검색어면 중복으로 붙이지 않음
+  const head = city.map.split(',')[0].trim().toLowerCase();
+  return base.toLowerCase().includes(head) ? base : `${base}, ${city.map}`;
+}
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* -----------------------------------------------------------
+   상태
+   ----------------------------------------------------------- */
+let TRIP = null, CITIES = [], DAYS = [], TOTAL_DAYS = 0, IS_CACHED = false;
+let countdownTarget = null;
+
+const cityById = id => CITIES.find(c => c.id === id) || CITIES[0];
+
+function cityColor(c){
+  if(!c) return '#D4744A';
+  return currentTheme() === 'light' ? (c.colorLight || c.color) : c.color;
+}
+function paintCityColor(){
+  if(activeCity) document.documentElement.style.setProperty('--city', cityColor(activeCity));
+}
+
+/* 여행 전 / 중 / 후 */
+function phase(){
+  const t = today();
+  if(t < TRIP.start) return 'pre';
+  if(t > TRIP.end)   return 'post';
+  return 'live';
+}
+
+function pickDay(){
+  const t = today();
+  const exact = DAYS.find(d => d.date === t);
+  if(exact) return exact;
+  const upcoming = DAYS.find(d => d.date > t);
+  if(upcoming) return upcoming;
+  return DAYS[DAYS.length - 1];
+}
+
+/* -----------------------------------------------------------
+   타임라인 아이템 렌더
+   ----------------------------------------------------------- */
+function itemHTML(it, city, cls){
+  const time = `${it.time}${it.end ? ' – ' + it.end : ''}`;
+  const mappable = it.map !== false && (it.place || it.name);
+  const name = mappable
+    ? `<a class="map-link" href="${esc(mapHref(mapQuery(it, city)))}" target="_blank" rel="noopener noreferrer">${esc(it.name)}${PIN}</a>`
+    : esc(it.name);
+
+  const refs = (it.refs || []).map(r =>
+    `<button type="button" class="ref" data-copy="${esc(r.value)}">
+       ${r.label ? `<span class="lb">${esc(r.label)}</span>` : ''}<span>${esc(r.value)}</span>${CP}
+     </button>`).join('');
+
+  return `<li class="${cls}">
+    <div class="tl-t">${esc(time)}</div>
+    <div class="tl-n">${name}</div>
+    ${it.desc ? `<div class="tl-d">${esc(it.desc)}</div>` : ''}
+    ${refs ? `<div class="refs">${refs}</div>` : ''}
+  </li>`;
+}
+
+/* -----------------------------------------------------------
+   렌더
+   ----------------------------------------------------------- */
+function render(){
+  if(!DAYS.length) return;
+
+  const ph   = phase();
+  const day  = ph === 'pre' ? DAYS[0] : pickDay();
+  const city = cityById(day.city);
+  const now  = new Date();
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  const isToday = day.date === today();
+
+  activeCity = ph === 'pre' ? CITIES[0] : city;
+  paintCityColor();
+
+  const headCity = activeCity;
+
+  /* ---- 헤더 ---- */
+  $('#clock').textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  $('#landmark').innerHTML = ICONS[headCity.icon] || '';
+  $('#city-name').textContent = headCity.name;
+  $('#ey-flag').textContent = headCity.flag;
+
+  const dLeft = daysBetween(today(), TRIP.start);
+
+  if(ph === 'pre'){
+    $('#ey-date').textContent = `${fmtDate(TRIP.start)} 출발`;
+    $('#day-count').textContent = dLeft === 0 ? '오늘 출발' : `D-${dLeft}`;
+    $('#left').textContent = `${TOTAL_DAYS}일간의 여정`;
+  }else if(ph === 'post'){
+    $('#ey-date').textContent = fmtDate(TRIP.end);
+    $('#day-count').textContent = `여행 ${TOTAL_DAYS}일 완주`;
+    $('#left').textContent = '집으로';
+  }else{
+    $('#ey-date').textContent = fmtDate(day.date);
+    $('#day-count').textContent = `여행 ${day.dayNo}일차`;
+    const leftDays = Math.max(0, daysBetween(today(), TRIP.end));
+    $('#left').textContent = leftDays > 0 ? `${leftDays}일 남음` : '마지막 날';
+  }
+
+  /* ---- 여정 라인 ---- */
+  const hereIdx = ph === 'pre' ? -1 : CITIES.findIndex(c => c.id === city.id);
+  const track = $('#j-track');
+  track.innerHTML = '';
+  CITIES.forEach((c,i) => {
+    if(i > 0){
+      const seg = document.createElement('div');
+      seg.className = 'j-seg ' + (i <= hereIdx ? 'done' : 'pending');
+      track.appendChild(seg);
+    }
+    const node = document.createElement('div');
+    node.className = 'j-node ' + (i < hereIdx ? 'done' : i === hereIdx ? 'here' : '');
+    node.innerHTML = `<span class="j-dot"></span><span class="j-label">${esc(c.short)}</span>`;
+    track.appendChild(node);
+  });
+  $('#j-now').textContent  = ph === 'pre' ? CITIES[0].name : city.name;
+  $('#j-prog').textContent = ph === 'pre' ? 0 : (ph === 'post' ? TOTAL_DAYS : day.dayNo);
+  $('#j-total').textContent = TOTAL_DAYS;
+
+  /* ---- 칩 ---- */
+  const strip = $('#strip');
+  strip.innerHTML = '';
+  (ph === 'pre' ? [] : (day.chips || [])).forEach(c => {
+    const el = document.createElement('span');
+    el.className = 'chip' + (c.warn ? ' warn' : '');
+    el.textContent = c.t;
+    strip.appendChild(el);
+  });
+
+  /* ---- 현재 / 다음 판별 ---- */
+  let liveIdx = -1, nextIdx = -1;
+  if(isToday && ph === 'live'){
+    day.items.forEach((it,i) => {
+      const s = toMin(it.time);
+      const e = it.end ? toMin(it.end) : (day.items[i+1] ? toMin(day.items[i+1].time) : 1440);
+      if(nowMin >= s && nowMin < e) liveIdx = i;
+      if(nextIdx === -1 && s > nowMin) nextIdx = i;
+    });
+    if(liveIdx === -1 && nextIdx === -1) liveIdx = day.items.length - 1;
+  }
+
+  /* ---- NOW 카드 ---- */
+  const card = $('#now-card');
+  const hasFirstDay = DAYS[0].date === TRIP.start;
+
+  if(ph === 'pre'){
+    card.classList.add('countdown');
+    countdownTarget = parseDate(TRIP.start, hasFirstDay ? DAYS[0].items[0].time : '00:00');
+    $('#nc-tag-label').textContent = '출발까지';
+    tickCountdown();
+    $('#now-time').innerHTML = `<span class="dday">${TRIP.start.replace(/-/g,'.')}</span> · ${esc(CITIES[0].name)}에서 시작`;
+    // 1일차 일정이 아직 등록되지 않았으면 "첫 일정" 이라고 말하지 않음
+    $('#nc-next').hidden = !hasFirstDay;
+    if(hasFirstDay){
+      const first = DAYS[0].items[0];
+      $('#next-time').textContent = first.time;
+      $('#next-name').textContent = `첫 일정 · ${first.name}`;
+    }
+  }else{
+    card.classList.remove('countdown');
+    countdownTarget = null;
+    $('#nc-tag-label').textContent = ph === 'post' ? '여행 종료' : (isToday ? '지금' : '다음 일정');
+
+    const live = day.items[liveIdx] || day.items[0];
+    $('#now-title').textContent = live.name;
+    $('#now-time').textContent  = live.end ? `${live.time} – ${live.end}` : live.time;
+
+    const nxt = day.items[nextIdx];
+    $('#nc-next').hidden = false;
+    if(nxt){
+      $('#next-time').textContent = nxt.time;
+      $('#next-name').textContent = nxt.desc ? `${nxt.name} · ${nxt.desc}` : nxt.name;
+    }else{
+      $('#next-time').textContent = '';
+      $('#next-name').textContent = ph === 'post' ? '모든 일정 완료' : (isToday ? '오늘 일정 끝' : fmtDate(day.date));
+    }
+  }
+
+  /* ---- 타임라인 ---- */
+  $('#sec-today').hidden = false;
+  $('#head-today').textContent = ph === 'pre'
+    ? (hasFirstDay ? '첫날 일정' : `${fmtDate(day.date)} · 미리보기`)
+    : (isToday ? '오늘' : fmtDate(day.date));
+  $('#tl').innerHTML = day.items
+    .map((it,i) => itemHTML(it, city, i === liveIdx ? 'live' : (liveIdx > -1 && i < liveIdx ? 'past' : '')))
+    .join('');
+
+  /* ---- 이후 날들 (펼침 상태는 유지) ---- */
+  const up = $('#upcoming');
+  const opened = new Set($$('.up-row[aria-expanded="true"]').map(r => r.dataset.date));
+  const rest = DAYS.filter(d => d.date > day.date).slice(0, 6);
+  $('#sec-upcoming').hidden = rest.length === 0;
+  up.innerHTML = rest.map(d => {
+    const c = cityById(d.city);
+    const md = d.date.slice(5).replace('-','/');
+    const label = d.items[1]?.name || d.items[0].name;
+    const isOpen = opened.has(d.date);
+    return `<button class="up-row" type="button" aria-expanded="${isOpen}" data-date="${d.date}">
+        <span class="up-bar" style="--c:${cityColor(c)}"></span>
+        <span class="up-date">${md}</span>
+        <span class="up-city">${esc(c.name)} · ${esc(label)}</span>
+        <span class="up-arrow">›</span>
+      </button>
+      <div class="up-body${isOpen ? ' open' : ''}" data-body="${d.date}">
+        <ul class="tl">${d.items.map(it => itemHTML(it, c, '')).join('')}</ul>
+      </div>`;
+  }).join('');
+
+  /* ---- 푸터 ---- */
+  $('#footer').textContent = `${TRIP.couple} · ${TRIP.start.slice(0,4)}`;
+  if(IS_CACHED){
+    const note = document.createElement('div');
+    note.className = 'offline-note';
+    note.textContent = '오프라인 · 저장된 일정';
+    $('#footer').appendChild(note);
+  }
+}
+
+/* -----------------------------------------------------------
+   D-day 카운트다운 (초 단위)
+   ----------------------------------------------------------- */
+function tickCountdown(){
+  if(!countdownTarget) return;
+  const diff = countdownTarget - new Date();
+  if(diff <= 0){ render(); return; }
+  const d = Math.floor(diff / 864e5);
+  const h = Math.floor(diff % 864e5 / 36e5);
+  const m = Math.floor(diff % 36e5 / 6e4);
+  const s = Math.floor(diff % 6e4 / 1000);
+  $('#now-title').textContent = d > 0
+    ? `${d}일 ${pad(h)}:${pad(m)}:${pad(s)}`
+    : `${pad(h)}:${pad(m)}:${pad(s)}`;
+}
+
+/* -----------------------------------------------------------
+   이벤트 위임 — 예약번호 복사 / 이후 날 펼치기
+   ----------------------------------------------------------- */
+document.addEventListener('click', async (e) => {
+  const ref = e.target.closest('.ref');
+  if(ref){
+    const val = ref.dataset.copy;
+    const ok = await copyText(val);
+    if(ok){
+      ref.classList.add('copied');
+      setTimeout(() => ref.classList.remove('copied'), 1400);
+      toast(`복사됨 · ${val}`);
+    }else{
+      toast('복사에 실패했어요');
+    }
+    return;
+  }
+
+  const row = e.target.closest('.up-row');
+  if(row){
+    const open = row.getAttribute('aria-expanded') === 'true';
+    const body = document.querySelector(`.up-body[data-body="${row.dataset.date}"]`);
+    row.setAttribute('aria-expanded', String(!open));
+    if(body) body.classList.toggle('open', !open);
+  }
+});
+
+/* -----------------------------------------------------------
+   부팅
+   ----------------------------------------------------------- */
+(async function boot(){
+  const { data, cached } = await loadData();
+
+  if(!data){
+    $('#state').hidden = false;
+    $('#state').textContent = '일정을 불러오지 못했습니다. 온라인 상태에서 한 번 열어주세요.';
+    $('#now-card').hidden = true;
+    return;
+  }
+
+  TRIP   = data.trip;
+  CITIES = data.cities || [];
+  DAYS   = (data.days || []).slice().sort((a,b) => a.date < b.date ? -1 : 1);
+  TOTAL_DAYS = daysBetween(TRIP.start, TRIP.end) + 1;
+  IS_CACHED = cached;
+
+  if(!DAYS.length){
+    $('#state').hidden = false;
+    $('#state').textContent = '등록된 일정이 없습니다.';
+    return;
+  }
+
+  render();
+  setInterval(render, 60000);
+  setInterval(() => { if(countdownTarget) tickCountdown(); }, 1000);
+
+  // 백그라운드/탭 복귀 시 즉시 갱신
+  document.addEventListener('visibilitychange', () => { if(!document.hidden) render(); });
+})();
+
+/* -----------------------------------------------------------
+   서비스 워커
+   ----------------------------------------------------------- */
+if('serviceWorker' in navigator){
+  // 첫 설치 때의 claim 으로는 새로고침하지 않음 (최초 방문 리로드 방지)
+  const hadController = !!navigator.serviceWorker.controller;
+  let reloading = false;
+
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('service-worker.js', { updateViaCache: 'none' })
+      .catch(() => {});
+  });
+
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if(!hadController || reloading) return;
+    reloading = true;
+    location.reload();
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+{
+  "trip": {
+    "title": "Honeymoon 2026",
+    "couple": "Kyungryeol & Hojeong",
+    "start": "2026-09-14",
+    "end": "2026-10-04"
+  },
+
+  "cities": [
+    { "id": "bcn", "name": "바르셀로나", "short": "BCN", "flag": "ES", "color": "#D4744A", "colorLight": "#B85A32", "icon": "sagrada",  "map": "Barcelona, Spain" },
+    { "id": "swi", "name": "스위스",     "short": "CH",  "flag": "CH", "color": "#5B94C4", "colorLight": "#3C74A6", "icon": "alps",     "map": "Interlaken, Switzerland" },
+    { "id": "vce", "name": "베네치아",   "short": "VCE", "flag": "IT", "color": "#8AA05A", "colorLight": "#677F3C", "icon": "gondola",  "map": "Venezia, Italy" },
+    { "id": "flr", "name": "피렌체",     "short": "FLR", "flag": "IT", "color": "#8AA05A", "colorLight": "#677F3C", "icon": "duomo",    "map": "Firenze, Italy" },
+    { "id": "rom", "name": "로마",       "short": "ROM", "flag": "IT", "color": "#8AA05A", "colorLight": "#677F3C", "icon": "colosseo", "map": "Roma, Italy" },
+    { "id": "prg", "name": "프라하",     "short": "PRG", "flag": "CZ", "color": "#B0576B", "colorLight": "#963E53", "icon": "charles",  "map": "Praha, Czechia" }
+  ],
+
+  "days": [
+    {
+      "date": "2026-09-28",
+      "city": "rom",
+      "dayNo": 15,
+      "chips": [
+        { "t": "현금 €46", "warn": true },
+        { "t": "여권 지참" },
+        { "t": "복장 규정" }
+      ],
+      "items": [
+        { "time": "08:20", "name": "호텔 출발", "desc": "A선 레푸블리카역 → Ottaviano", "map": false },
+        { "time": "09:00", "name": "바티칸 집중 투어", "desc": "라오콘 · 벨베데레 토르소 · 시스티나 · 피에타", "end": "12:30", "place": "Musei Vaticani" },
+        { "time": "13:00", "name": "점심", "desc": "Borgo Pio 골목", "place": "Borgo Pio" },
+        { "time": "14:30", "name": "산탄젤로 성", "desc": "외관 · 다리 · 사진", "place": "Castel Sant'Angelo" },
+        { "time": "16:30", "name": "산 루이지 데이 프란체시", "desc": "카라바조 · 성 마태의 소명 · 무료", "end": "17:15", "place": "San Luigi dei Francesi" },
+        { "time": "17:15", "name": "판테온 외관", "desc": "광장에서", "place": "Pantheon" },
+        { "time": "18:00", "name": "나보나 광장", "desc": "베르니니 · 4대강 분수", "place": "Piazza Navona" },
+        { "time": "19:30", "name": "저녁", "desc": "나보나 · 판테온 근처", "map": false },
+        { "time": "21:00", "name": "트레비 분수 야경", "desc": "€2 · 동전 던지기", "place": "Fontana di Trevi" },
+        { "time": "22:30", "name": "호텔", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-29",
+      "city": "rom",
+      "dayNo": 16,
+      "chips": [
+        { "t": "현금 €76", "warn": true },
+        { "t": "보르게세 17:00 엄수", "warn": true }
+      ],
+      "items": [
+        { "time": "08:20", "name": "호텔 출발", "desc": "B선 → 콜로세움", "map": false },
+        { "time": "08:50", "name": "콜로세움 투어 미팅", "desc": "콜로세움 인포 포인트", "place": "Colosseo" },
+        { "time": "09:00", "name": "콜로세움 · 포로로마노 · 팔라티노", "desc": "패스트트랙", "end": "12:30", "place": "Foro Romano" },
+        { "time": "13:15", "name": "점심", "desc": "몬티", "place": "Monti, Roma" },
+        { "time": "15:00", "name": "산 피에트로 인 빈콜리", "desc": "미켈란젤로 모세상 · 무료", "place": "San Pietro in Vincoli" },
+        { "time": "16:00", "name": "보르게세로 이동", "desc": "택시 · 입구 찾기 여유", "map": false },
+        { "time": "17:00", "name": "보르게세 미술관", "desc": "베르니니 아폴로와 다프네", "end": "19:00", "place": "Galleria Borghese" },
+        { "time": "20:00", "name": "마지막 로마 디너", "map": false }
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "city": "prg",
+      "dayNo": 17,
+      "chips": [
+        { "t": "온라인 체크인 완료?", "warn": true },
+        { "t": "CZK 환전" }
+      ],
+      "items": [
+        { "time": "09:30", "name": "체크아웃", "desc": "마그니피코 로마", "map": false },
+        { "time": "10:00", "name": "레오나르도 익스프레스", "desc": "테르미니 24번 플랫폼", "place": "Roma Termini" },
+        { "time": "12:40", "name": "FCO → PRG", "desc": "위즈에어 W46065", "end": "14:35", "map": false,
+          "refs": [ { "label": "항공편", "value": "W46065" } ] },
+        { "time": "15:30", "name": "Bolt → 구시가", "map": false },
+        { "time": "16:15", "name": "Golden Angel 체크인", "desc": "이메일 출입코드 확인", "place": "Golden Angel, Praha" },
+        { "time": "17:30", "name": "구시가 광장 첫 산책", "place": "Staroměstské náměstí" },
+        { "time": "21:00", "name": "카를교 야경", "place": "Karlův most" }
+      ]
+    }
+  ]
+}
