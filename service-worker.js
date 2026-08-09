@@ -6,7 +6,7 @@
    배포 시 VERSION 만 올리면 캐시가 통째로 교체됩니다.
    =========================================================== */
 
-const VERSION = 'v5';
+const VERSION = 'v8';
 const CACHE   = `honeymoon-2026-${VERSION}`;
 
 const SHELL = [
@@ -72,10 +72,23 @@ async function cacheFirst(request){
   return res || new Response('', { status: 504, statusText: 'Offline' });
 }
 
+/* 응답이 안 오고 매달려 있으면 페이지가 통째로 멈추므로 시간을 끊습니다 */
+const NET_TIMEOUT = 4000;
+
+function timedFetch(request, ms){
+  return new Promise((resolve, reject) => {
+    const t = setTimeout(() => reject(new Error('timeout')), ms);
+    fetch(request).then(
+      res => { clearTimeout(t); resolve(res); },
+      err => { clearTimeout(t); reject(err); }
+    );
+  });
+}
+
 async function networkFirst(request){
   const cache = await caches.open(CACHE);
   try{
-    const res = await fetch(request);
+    const res = await timedFetch(request, NET_TIMEOUT);
     if(res && res.ok) cache.put(request, res.clone());
     return res;
   }catch(e){

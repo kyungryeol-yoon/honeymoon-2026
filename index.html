@@ -316,6 +316,8 @@ section{margin-top:34px}
 }
 .tl-t{font-family:var(--f-mono);font-size:11.5px;color:var(--paper-faint);letter-spacing:.04em}
 .tl li.live .tl-t{color:var(--now)}
+/* 색만으로 현재/지난 일정을 구분하지 않도록 글자도 함께 */
+.tl li.live .tl-t::after{content:" · 지금";font-weight:600;letter-spacing:.08em}
 .tl-n{font-size:15px;margin-top:2px;font-weight:450}
 .tl li.live .tl-n{font-weight:600}
 .tl-d{font-size:12.5px;color:var(--paper-faint);margin-top:3px;line-height:1.5}
@@ -379,6 +381,10 @@ section{margin-top:34px}
 .ref .lb{color:var(--paper-faint);font-size:10px}
 .ref .cp{width:11px;height:11px;flex:0 0 auto;opacity:.7}
 .ref.copied{border-style:solid;border-color:var(--now);color:var(--now)}
+/* 가려진 예약번호 — 화면엔 뒤 4자리만, 복사는 원본 */
+.ref .masked{letter-spacing:.08em}
+.ref.note-only{cursor:default;border-style:dotted}
+.ref.note-only .cp{display:none}
 
 /* ---------- 접힌 날들 ---------- */
 .upcoming{margin-top:10px}
@@ -406,6 +412,12 @@ footer{
   color:var(--hush);text-transform:uppercase;
 }
 
+/* 스크린리더 전용 — 색으로만 구분되지 않게 텍스트를 함께 넣습니다 */
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+
 /* ---------- 상태 / 토스트 ---------- */
 .state{
   margin:40px 0;text-align:center;color:var(--paper-faint);
@@ -415,6 +427,84 @@ footer{
   margin-top:10px;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--paper-faint);
 }
+
+/* ---------- 로딩 실패 화면 ---------- */
+.errbox{
+  margin:26px 0 0;padding:20px;
+  background:linear-gradient(160deg,var(--ink-2),var(--ink-3));
+  border:1px solid color-mix(in srgb,var(--now) 40%,var(--line));
+  border-radius:14px;box-shadow:var(--card-shadow);
+}
+.errbox h2{
+  font-size:16px;font-weight:600;letter-spacing:-.01em;margin-bottom:7px;
+}
+.errbox p{font-size:13px;color:var(--paper-dim);line-height:1.65}
+.errbox .why{
+  margin-top:10px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.04em;
+  color:var(--paper-faint);word-break:break-all;
+}
+.errbox .acts{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font:inherit;font-size:13px;font-weight:500;
+  padding:9px 16px;border-radius:100px;cursor:pointer;
+  background:var(--now);border:1px solid var(--now);color:var(--ink);
+}
+.btn.ghost{background:none;color:var(--paper-dim);border-color:var(--line)}
+.btn:active{transform:scale(.97)}
+.btn[disabled]{opacity:.5;cursor:default}
+
+/* 네트워크 대신 캐시·백업으로 뜬 경우 알림 */
+.src-note{
+  display:flex;align-items:center;gap:7px;
+  margin:14px 0 0;padding:9px 13px;border-radius:10px;
+  background:var(--ink-2);border:1px dashed var(--line);
+  font-size:11.5px;color:var(--paper-dim);
+}
+.src-note button{
+  margin-left:auto;font:inherit;font-size:11px;background:none;border:0;
+  color:var(--now);cursor:pointer;padding:2px 4px;flex:0 0 auto;
+}
+.src-note[hidden]{display:none}
+
+/* ---------- 오늘로 이동 (플로팅) ---------- */
+#to-today{
+  position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));
+  display:flex;align-items:center;gap:6px;
+  padding:11px 16px;border-radius:100px;
+  background:var(--now);border:0;color:var(--ink);
+  font:inherit;font-size:13px;font-weight:600;
+  box-shadow:0 6px 22px -6px var(--scrim);
+  cursor:pointer;z-index:40;
+  opacity:0;transform:translateY(10px);pointer-events:none;
+  transition:opacity .2s ease,transform .2s ease;
+}
+#to-today.show{opacity:1;transform:none;pointer-events:auto}
+#to-today svg{width:13px;height:13px}
+
+/* ---------- 여행 완료 ---------- */
+.finale{
+  margin:26px 0 0;padding:24px 20px;text-align:center;
+  background:linear-gradient(160deg,var(--ink-2),var(--ink-3));
+  border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--card-shadow);
+}
+.finale .ttl{
+  font-family:var(--f-display);font-size:26px;line-height:1.15;
+  letter-spacing:-.01em;margin-bottom:8px;
+}
+.finale .sub{font-size:13px;color:var(--paper-dim)}
+.finale .stats{
+  display:flex;justify-content:center;gap:26px;margin:20px 0 4px;
+}
+.finale .stat b{
+  display:block;font-family:var(--f-mono);font-size:21px;font-weight:500;
+  color:var(--now);letter-spacing:-.01em;
+}
+.finale .stat span{
+  font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--paper-faint);
+}
+.finale .acts{display:flex;justify-content:center;margin-top:18px}
 
 #toast{
   position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom));
@@ -462,7 +552,7 @@ footer{
     <div class="city-sub">
       <span id="day-count">2026</span>
       <span class="dot"></span>
-      <span id="clock">--:--</span>
+      <span><span id="clock">--:--</span> <span id="tz" title=""></span></span>
       <span class="dot"></span>
       <span id="left"></span>
     </div>
@@ -477,8 +567,39 @@ footer{
     </div>
   </header>
 
+  <!-- ============ 로딩 실패 ============ -->
+  <div class="errbox" id="errbox" hidden>
+    <h2>일정을 불러오지 못했습니다</h2>
+    <p id="err-msg">네트워크에 연결되어 있는지 확인해 주세요.</p>
+    <div class="why" id="err-why"></div>
+    <div class="acts">
+      <button class="btn" id="err-retry" type="button">다시 시도</button>
+      <button class="btn ghost" id="err-reload" type="button">새로고침</button>
+    </div>
+  </div>
+
+  <!-- 네트워크 대신 캐시/백업으로 뜬 경우 -->
+  <div class="src-note" id="src-note" hidden>
+    <span id="src-text"></span>
+    <button type="button" id="src-retry">다시 시도</button>
+  </div>
+
+  <!-- ============ 여행 완료 ============ -->
+  <div class="finale" id="finale" hidden>
+    <div class="ttl" id="fin-title">여정이 끝났습니다</div>
+    <div class="sub" id="fin-sub"></div>
+    <div class="stats">
+      <div class="stat"><b id="fin-days">21</b><span>Days</span></div>
+      <div class="stat"><b id="fin-cities">6</b><span>Cities</span></div>
+      <div class="stat"><b id="fin-items">300</b><span>Moments</span></div>
+    </div>
+    <div class="acts">
+      <button class="btn ghost" id="fin-review" type="button">전체 일정 다시보기</button>
+    </div>
+  </div>
+
   <!-- ============ NOW ============ -->
-  <div class="now-card" id="now-card">
+  <div class="now-card" id="now-card" role="status" aria-live="polite">
     <div class="nc-tag"><span class="pulse"></span> <span id="nc-tag-label">지금</span></div>
     <div class="nc-title" id="now-title">—</div>
     <div class="nc-time" id="now-time"></div>
@@ -493,7 +614,7 @@ footer{
   <!-- ============ 오늘 ============ -->
   <section id="sec-today" hidden>
     <div class="sec-head" id="head-today">오늘</div>
-    <ul class="tl" id="tl"></ul>
+    <ul class="tl" id="tl" aria-label="오늘 일정"></ul>
   </section>
 
   <!-- ============ 다음 ============ -->
@@ -507,7 +628,15 @@ footer{
   <footer id="footer">Kyungryeol &amp; Hojeong · 2026</footer>
 </div>
 
+<button id="to-today" type="button" aria-label="오늘 일정으로 이동">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+  오늘
+</button>
+
 <div id="toast" role="status" aria-live="polite"></div>
+
+<!-- 네트워크도 캐시도 없을 때 쓰는 최소 백업. tools/build-fallback.py 로 생성 -->
+<script type="application/json" id="fallback-data">{"trip":{"title":"Honeymoon 2026","couple":"Kyungryeol & Hojeong","start":"2026-09-14","end":"2026-10-04"},"cities":[{"id":"bcn","name":"바르셀로나","short":"BCN","flag":"ES","color":"#D4744A","colorLight":"#B85A32","icon":"sagrada","map":"Barcelona, Spain"},{"id":"swi","name":"스위스","short":"CH","flag":"CH","color":"#5B94C4","colorLight":"#3C74A6","icon":"alps","map":"Switzerland"},{"id":"vce","name":"베네치아","short":"VCE","flag":"IT","color":"#8AA05A","colorLight":"#677F3C","icon":"gondola","map":"Venezia, Italy"},{"id":"flr","name":"피렌체","short":"FLR","flag":"IT","color":"#8AA05A","colorLight":"#677F3C","icon":"duomo","map":"Firenze, Italy"},{"id":"rom","name":"로마","short":"ROM","flag":"IT","color":"#8AA05A","colorLight":"#677F3C","icon":"colosseo","map":"Roma, Italy"},{"id":"prg","name":"프라하","short":"PRG","flag":"CZ","color":"#B0576B","colorLight":"#963E53","icon":"charles","map":"Praha, Czechia"},{"id":"sel","name":"서울","short":"SEL","flag":"KR","color":"#A78BB5","colorLight":"#7D5E8E","icon":"namsan","map":"Seoul, South Korea","home":true}],"days":[{"date":"2026-09-14","city":"bcn","dayNo":1,"cash":{"amount":"€46.20"},"items":[{"time":"14:40","name":"BCN 공항 도착","place":"Barcelona El Prat Airport"},{"time":"15:00","name":"입국 · 짐 찾기","map":false},{"time":"16:00","name":"공항 버스 출발","map":false},{"time":"16:45","name":"HCC 몽블랑 체크인","place":"HCC Montblanc, Barcelona"},{"time":"17:30","name":"람블라스 · 고딕지구 산책","place":"La Rambla, Barcelona"},{"time":"18:15","name":"바르셀로나 대성당","place":"Catedral de Barcelona"},{"time":"19:30","name":"첫 디너","map":false},{"time":"21:30","name":"호텔 복귀 · 휴식","map":false}]},{"date":"2026-09-15","city":"bcn","dayNo":2,"items":[{"time":"08:00","name":"조식","map":false},{"time":"08:30","name":"메트로 → 구엘 공원","map":false},{"time":"09:30","name":"구엘 공원","end":"11:00","place":"Park Güell"},{"time":"11:00","name":"구엘 공원 종료 → 메트로 이동","map":false},{"time":"11:45","name":"점심","map":false},{"time":"13:00","name":"사그라다 파밀리아","end":"14:30","place":"Sagrada Família"},{"time":"14:30","name":"사그라다 종료","map":false},{"time":"15:00","name":"자유 · 휴식 (약 3시간)","map":false},{"time":"18:00","name":"메트로 → 그라시아 거리","place":"Passeig de Gràcia"},{"time":"18:15","name":"까사 밀라 외관","place":"Casa Milà"},{"time":"18:45","name":"그라시아 거리 산책","place":"Passeig de Gràcia"},{"time":"19:00","name":"까사 바트요 외관","place":"Casa Batlló"},{"time":"19:45","name":"저녁","place":"Cervecería Catalana, Barcelona"},{"time":"21:15","name":"식후 야경 산책","map":false},{"time":"22:00","name":"호텔 복귀","map":false}]},{"date":"2026-09-16","city":"bcn","dayNo":3,"items":[{"time":"07:40","name":"몬세라트 & 지로나 투어 출발","end":"18:30","place":"Mandarin Oriental Barcelona","meet":{"where":"만다린 오리엔탈 호텔 앞","time":"07:40"}},{"time":"18:30","name":"투어 종료","map":false},{"time":"19:00","name":"호텔 복귀","map":false},{"time":"19:30","name":"호텔 근처 산책 또는 휴식","map":false},{"time":"20:00","name":"저녁","map":false},{"time":"21:00","name":"휴식","map":false},{"time":"22:00","name":"짐 정리 · 일찍 취침","map":false}]},{"date":"2026-09-17","city":"swi","dayNo":4,"label":"라우터브룬넨","map":"Lauterbrunnen, Switzerland","cash":{"amount":"CHF 90"},"items":[{"time":"02:30","name":"기상","map":false},{"time":"02:45","name":"세면 · 간단 준비","map":false},{"time":"03:00","name":"HCC 몽블랑 체크아웃","map":false},{"time":"03:05","name":"공항 버스 → BCN T1","map":false},{"time":"03:40","name":"BCN 공항 T1 도착","place":"Barcelona Airport Terminal 1"},{"time":"04:00","name":"스위스항공 체크인 · 짐 위탁","map":false},{"time":"04:30","name":"보안 검사 통과","map":false},{"time":"05:00","name":"게이트 도착 · 탑승 대기","map":false},{"time":"06:00","name":"BCN → ZRH","end":"07:40","map":false},{"time":"07:40","name":"취리히 공항 도착","place":"Zurich Airport"},{"time":"07:50","name":"솅겐 입국","map":false},{"time":"08:20","name":"짐 수취","map":false},{"time":"08:40","name":"렌터카 데스크 이동","map":false},{"time":"09:30","name":"렌터카 픽업","place":"Zurich Airport"},{"time":"10:00","name":"취리히 출발 → 툰 호수 방향","map":false},{"time":"11:30","name":"툰 호수","place":"Thunersee"},{"time":"12:15","name":"슈피츠 이동","map":false},{"time":"12:30","name":"슈피츠","place":"Spiez"},{"time":"13:15","name":"인터라켄으로 이동","map":false},{"time":"13:45","name":"인터라켄 도착 · 점심","place":"Interlaken"},{"time":"14:30","name":"Migros / Coop 장보기","place":"Migros Interlaken"},{"time":"15:15","name":"인터라켄 → 라우터브룬넨","map":false},{"time":"15:40","name":"Camping Jungfrau 체크인","place":"Camping Jungfrau, Lauterbrunnen"},{"time":"16:00","name":"텐트 셋업","map":false},{"time":"17:00","name":"Staubbach 폭포 산책","place":"Staubbachfall"},{"time":"17:45","name":"라우터브룬넨 마을 산책","place":"Lauterbrunnen"},{"time":"19:30","name":"캠프 첫 디너","map":false},{"time":"21:00","name":"폭포 야경 · 별빛 감상","map":false},{"time":"22:00","name":"취침","map":false}]},{"date":"2026-09-18","city":"swi","dayNo":5,"label":"융프라우요흐","map":"Lauterbrunnen, Switzerland","items":[{"time":"06:30","name":"기상 · 조식","map":false},{"time":"07:35","name":"라우터브룬넨역 도보 5분","place":"Lauterbrunnen Bahnhof"},{"time":"07:45","name":"라우터브룬넨 → Wengen","map":false},{"time":"08:15","name":"Wengen 도착","place":"Wengen"},{"time":"08:30","name":"Wengen → Kleine Scheidegg","map":false},{"time":"09:15","name":"Kleine Scheidegg 도착","place":"Kleine Scheidegg"},{"time":"09:30","name":"Kleine Scheidegg → 융프라우요흐","map":false},{"time":"10:00","name":"융프라우요흐 도착","place":"Jungfraujoch"},{"time":"10:30","name":"얼음 궁전 · 전망대","map":false},{"time":"12:30","name":"정상 레스토랑 점심","map":false},{"time":"14:00","name":"하산 시작","map":false},{"time":"16:30","name":"라우터브룬넨 복귀","map":false},{"time":"17:30","name":"캠프 휴식","map":false},{"time":"19:30","name":"캠프 디너 또는 마을 식당","map":false},{"time":"21:30","name":"휴식","map":false}]},{"date":"2026-09-19","city":"swi","dayNo":6,"label":"그린델발트","map":"Grindelwald, Switzerland","cash":{"amount":"CHF 28 + €5"},"items":[{"time":"07:30","name":"기상 · 캠프 조식","map":false},{"time":"09:00","name":"캠프 정리 · 체크아웃","map":false},{"time":"09:30","name":"출발 → Trümmelbach Falls","map":false},{"time":"10:00","name":"Trümmelbach 폭포","end":"11:30","place":"Trümmelbachfälle"},{"time":"11:30","name":"그린델발트로 이동","map":false},{"time":"12:00","name":"Camping Eigernordwand 도착","place":"Camping Eigernordwand, Grindelwald"},{"time":"12:30","name":"텐트 셋업","map":false},{"time":"13:30","name":"그린델발트 마을 점심","place":"Grindelwald"},{"time":"15:00","name":"출발 → Iseltwald","map":false},{"time":"15:45","name":"Iseltwald 사랑의 불시착 호숫가","place":"Iseltwald"},{"time":"17:00","name":"Brienzersee 호숫가 산책","place":"Brienzersee"},{"time":"18:30","name":"캠프 복귀","map":false},{"time":"19:30","name":"캠프 디너","map":false},{"time":"21:30","name":"아이거 야경 · 휴식","map":false}]},{"date":"2026-09-20","city":"swi","dayNo":7,"label":"그린델발트","map":"Grindelwald, Switzerland","items":[{"time":"08:00","name":"기상 · 캠프 조식","map":false},{"time":"09:30","name":"그린델발트 마을 산책","place":"Grindelwald"},{"time":"10:30","name":"그린델발트 둘러보기","place":"Eiger"},{"time":"11:30","name":"Männlichen 곤돌라","place":"Männlichen"},{"time":"13:00","name":"마을 점심","map":false},{"time":"14:30","name":"출발 → Giessbach 폭포","map":false},{"time":"15:15","name":"Giessbach 폭포","place":"Giessbachfälle"},{"time":"17:00","name":"브리엔츠 호숫가 산책","place":"Brienz"},{"time":"18:00","name":"캠프 복귀","map":false},{"time":"19:30","name":"마지막 그린델발트 디너","map":false},{"time":"21:30","name":"아이거 야경 · 휴식","map":false},{"time":"22:00","name":"캠프 복귀","map":false}]},{"date":"2026-09-21","city":"swi","dayNo":8,"label":"루가노","map":"Lugano, Switzerland","items":[{"time":"07:30","name":"기상 · 캠프 조식","map":false},{"time":"09:00","name":"캠프 정리 · 체크아웃","map":false},{"time":"10:00","name":"출발 → Lugano","map":false},{"time":"11:30","name":"Andermatt 산악 마을 도착","place":"Andermatt"},{"time":"12:00","name":"Andermatt 점심","map":false},{"time":"13:30","name":"Gotthard 터널 통과","map":false},{"time":"14:30","name":"Bellinzona 도착","place":"Bellinzona"},{"time":"15:00","name":"벨린초나 성","place":"Castelgrande, Bellinzona"},{"time":"16:30","name":"Camping TCS Lugano 체크인","place":"Camping TCS Lugano-Muzzano"},{"time":"17:00","name":"마지막 텐트 셋업","map":false},{"time":"18:00","name":"Lugano 호숫가 산책","place":"Lago di Lugano"},{"time":"19:30","name":"호숫가 디너","map":false},{"time":"22:00","name":"캠프 휴식","map":false}]},{"date":"2026-09-22","city":"vce","dayNo":9,"cash":{"amount":"€12.40"},"items":[{"time":"07:00","name":"기상 · 조식","map":false},{"time":"07:30","name":"텐트 · 캠핑 장비 정리","map":false},{"time":"08:00","name":"Camping TCS Lugano 체크아웃 · 출발","map":false},{"time":"08:15","name":"Lugano역 도착","place":"Lugano Stazione"},{"time":"08:30","name":"렌터카 반납","map":false},{"time":"09:00","name":"짐 들고 Lugano역 이동","map":false},{"time":"10:30","name":"Lugano → Venezia Mestre","end":"14:30","map":false},{"time":"14:30","name":"Venezia Mestre역 도착","place":"Venezia Mestre"},{"time":"14:50","name":"Hotel Plaza Venice 체크인","place":"Hotel Plaza Venice, Mestre"},{"time":"15:30","name":"기차로 본섬 이동","map":false},{"time":"16:00","name":"산타루치아역 도착","place":"Venezia Santa Lucia"},{"time":"16:30","name":"대운하 따라 도보 산책","map":false},{"time":"17:30","name":"리알토 다리","place":"Ponte di Rialto"},{"time":"18:30","name":"산마르코 광장","place":"Piazza San Marco"},{"time":"19:30","name":"저녁","map":false},{"time":"21:00","name":"야간 산마르코 광장","map":false},{"time":"22:00","name":"기차로 메스트레 복귀","map":false},{"time":"22:30","name":"호텔 휴식","map":false}]},{"date":"2026-09-23","city":"vce","dayNo":10,"cash":{"amount":"€130"},"items":[{"time":"07:30","name":"조식","map":false},{"time":"08:00","name":"기차로 본섬 이동","map":false},{"time":"08:15","name":"산타루치아역 도착","place":"Venezia Santa Lucia"},{"time":"08:20","name":"Vaporetto 24시간권 구매","map":false},{"time":"08:40","name":"Fondamente Nove 선착장 이동","place":"Fondamente Nove, Venezia"},{"time":"09:00","name":"Vaporetto Line 12 탑승 → 무라노","map":false},{"time":"09:30","name":"무라노","end":"10:45","place":"Murano, Venezia"},{"time":"10:45","name":"Line 12 → 부라노","map":false},{"time":"11:15","name":"부라노","end":"12:30","place":"Burano, Venezia"},{"time":"12:30","name":"점심","map":false},{"time":"14:00","name":"Line 12 → 본섬 복귀","map":false},{"time":"14:45","name":"본섬 도착","map":false},{"time":"15:00","name":"두칼레 궁전","place":"Palazzo Ducale, Venezia"},{"time":"17:00","name":"살루테 성당","place":"Basilica di Santa Maria della Salute"},{"time":"18:00","name":"곤돌라 일몰 탑승","map":false},{"time":"19:00","name":"저녁","map":false},{"time":"20:30","name":"야경 산책","map":false},{"time":"21:30","name":"기차로 메스트레 복귀","map":false},{"time":"22:00","name":"호텔 휴식","map":false}]},{"date":"2026-09-24","city":"flr","dayNo":11,"cash":{"amount":"€64"},"items":[{"time":"07:00","name":"조식 · 체크아웃","map":false},{"time":"08:15","name":"호텔 체크아웃","map":false},{"time":"08:40","name":"Venezia Mestre → Firenze SMN","end":"10:39","map":false},{"time":"10:39","name":"피렌체 SMN역 도착","place":"Firenze Santa Maria Novella"},{"time":"11:00","name":"Hotel Nella 짐 맡기기","place":"Hotel Nella, Firenze"},{"time":"11:30","name":"점심","place":"Mercato Centrale Firenze"},{"time":"13:00","name":"시뇨리아 광장 + 로지아 데이 란치","place":"Piazza della Signoria, Firenze"},{"time":"13:45","name":"베키오 다리","place":"Ponte Vecchio"},{"time":"14:30","name":"기베르티 패스 현장 구매","place":"Piazza San Giovanni, Firenze"},{"time":"15:10","name":"두오모 성당 내부","place":"Cattedrale di Santa Maria del Fiore"},{"time":"15:45","name":"산타 크로체 성당","place":"Basilica di Santa Croce, Firenze"},{"time":"16:45","name":"두오모 박물관","place":"Museo dell'Opera del Duomo, Firenze"},{"time":"17:00","name":"산타 크로체 먼저 방문","map":false},{"time":"18:15","name":"호텔 체크인 · 짐 풀고 휴식","map":false},{"time":"19:30","name":"저녁","map":false},{"time":"21:00","name":"두오모 야경","map":false},{"time":"21:30","name":"호텔 휴식","map":false}]},{"date":"2026-09-25","city":"flr","dayNo":12,"items":[{"time":"07:30","name":"조식","map":false},{"time":"08:20","name":"시뇨리아 광장 도착","place":"Piazza della Signoria, Firenze"},{"time":"08:30","name":"우피치 미술관 투어","end":"11:30","place":"Galleria degli Uffizi","meet":{"where":"시뇨리아 광장 넵튠 분수대 (청동기마상 옆)","time":"08:30"}},{"time":"11:30","name":"투어 종료","map":false},{"time":"12:00","name":"점심","place":"Mercato Centrale Firenze"},{"time":"13:10","name":"아카데미아로 도보 이동","map":false},{"time":"13:30","name":"아카데미아 미술관","end":"15:00","place":"Galleria dell'Accademia, Firenze"},{"time":"15:00","name":"관람 종료 — 오후 자유","map":false},{"time":"15:15","name":"카페 · 젤라또","place":"Vivoli, Firenze"},{"time":"16:00","name":"자유시간","map":false},{"time":"18:00","name":"베키오 다리 골든아워 산책","place":"Ponte Vecchio"},{"time":"19:00","name":"저녁","map":false},{"time":"21:00","name":"친퀘테레 준비 · 일찍 취침","map":false}]},{"date":"2026-09-26","city":"flr","dayNo":13,"label":"피사 · 친퀘테레","cash":{"amount":"€36.40"},"items":[{"time":"07:00","name":"조식 · 짐 최소화","map":false},{"time":"07:30","name":"피렌체 SMN역 출발 → 피사","place":"Firenze Santa Maria Novella"},{"time":"08:40","name":"피사 센트랄레역 도착","place":"Pisa Centrale"},{"time":"08:50","name":"피사의 사탑 이동","map":false},{"time":"09:10","name":"피사의 사탑 + 두오모 광장","end":"09:50","place":"Torre di Pisa"},{"time":"09:50","name":"피사 센트랄레역 복귀","map":false},{"time":"10:20","name":"피사 → 라스페치아","map":false},{"time":"11:20","name":"친퀘테레 카드 구매","place":"La Spezia Centrale"},{"time":"11:40","name":"마나롤라","end":"14:20","place":"Manarola"},{"time":"13:00","name":"점심","map":false},{"time":"14:20","name":"기차로 베르나차 이동","map":false},{"time":"14:30","name":"베르나차","end":"16:30","place":"Vernazza"},{"time":"16:30","name":"베르나차 항구 오후 빛 사진","map":false},{"time":"17:00","name":"베르나차 → 라스페치아","map":false},{"time":"17:40","name":"라스페치아 → 피렌체 SMN","end":"20:10","map":false},{"time":"20:10","name":"피렌체 도착","map":false},{"time":"20:30","name":"가벼운 저녁","map":false},{"time":"21:30","name":"짐 정리 · 일찍 취침","map":false}]},{"date":"2026-09-27","city":"rom","dayNo":14,"cash":{"amount":"€74 + €6"},"items":[{"time":"06:00","name":"기상 · 조식 · 체크아웃 준비","map":false},{"time":"06:30","name":"Hotel Nella 체크아웃","place":"Hotel Nella, Firenze"},{"time":"06:45","name":"토스카나 투어 미팅","place":"The Mall bus stop, Firenze","meet":{"where":"피렌체 중앙역 옆 더몰 버스 정류장","time":"06:45"}},{"time":"07:00","name":"투어 출발 → 토스카나로","map":false},{"time":"08:30","name":"토스카나 싸이프러스 풍경길","place":"Val d'Orcia"},{"time":"10:00","name":"피엔차","place":"Pienza"},{"time":"11:30","name":"몬테풀치아노 와이너리","place":"Montepulciano"},{"time":"13:30","name":"발도르차 평원 감상","place":"Val d'Orcia"},{"time":"15:00","name":"치비타 디 반뇨레조","place":"Civita di Bagnoregio"},{"time":"17:00","name":"로마로 이동","map":false},{"time":"18:00","name":"로마 테르미니 하차","place":"Roma Termini"},{"time":"18:30","name":"마그니피코 로마 체크인","place":"Hotel Magnifico Roma"},{"time":"19:30","name":"첫 로마 디너","map":false},{"time":"21:00","name":"가벼운 야경 산책 또는 휴식","map":false},{"time":"22:00","name":"호텔","map":false}]},{"date":"2026-09-28","city":"rom","dayNo":15,"cash":{"amount":"€46"},"items":[{"time":"07:30","name":"조식","map":false},{"time":"08:20","name":"호텔 → 지하철 A선 Ottaviano역","place":"Ottaviano Metro Station, Roma"},{"time":"09:00","name":"바티칸 집중 투어","end":"12:30","place":"Musei Vaticani","meet":{"where":"Ottaviano역 OKAIDI 옷가게 앞","time":"08:40 도착"}},{"time":"12:30","name":"투어 종료","place":"Piazza San Pietro"},{"time":"13:00","name":"점심","place":"Borgo Pio, Roma"},{"time":"14:30","name":"산탄젤로 성 외관 + 다리","place":"Castel Sant'Angelo"},{"time":"15:30","name":"테베레 강변 산책","place":"Lungotevere Castello, Roma"},{"time":"16:30","name":"산 루이지 데이 프란체시","end":"17:15","place":"San Luigi dei Francesi"},{"time":"17:15","name":"판테온 외관","place":"Pantheon, Roma"},{"time":"18:00","name":"나보나 광장","place":"Piazza Navona"},{"time":"18:40","name":"캄포 데 피오리","place":"Campo de' Fiori"},{"time":"19:30","name":"디너","map":false},{"time":"21:00","name":"트레비 분수 야경","place":"Fontana di Trevi"},{"time":"21:40","name":"스페인 광장 야경","place":"Piazza di Spagna"},{"time":"22:30","name":"호텔 복귀","map":false}]},{"date":"2026-09-29","city":"rom","dayNo":16,"cash":{"amount":"€76"},"items":[{"time":"08:00","name":"조식","map":false},{"time":"08:50","name":"콜로세움 투어 미팅","place":"Colosseo","meet":{"where":"콜로세움 인포 포인트 (Piazza del Colosseo 1)","time":"08:50"}},{"time":"09:00","name":"콜로세움 투어","end":"11:00","place":"Colosseo"},{"time":"11:00","name":"포로 로마노","place":"Foro Romano"},{"time":"12:30","name":"팔라티노 언덕","place":"Palatino, Roma"},{"time":"13:15","name":"캄피돌리오 광장","place":"Piazza del Campidoglio"},{"time":"14:00","name":"점심","place":"Monti, Roma"},{"time":"14:45","name":"산 피에트로 인 빈콜리","place":"San Pietro in Vincoli"},{"time":"15:30","name":"판테온","place":"Pantheon, Roma"},{"time":"16:00","name":"보르게세로 이동","map":false},{"time":"17:00","name":"보르게세 미술관","end":"19:00","place":"Galleria Borghese"},{"time":"19:00","name":"보르게세 종료","map":false},{"time":"19:15","name":"빌라 보르게세 공원 산책","place":"Villa Borghese"},{"time":"20:00","name":"마지막 로마 디너","map":false},{"time":"22:00","name":"호텔","map":false}]},{"date":"2026-09-30","city":"prg","dayNo":17,"cash":{"amount":"CZK 현금"},"items":[{"time":"07:30","name":"조식","map":false},{"time":"08:30","name":"짐 정리 · 마지막 점검","map":false},{"time":"09:30","name":"호텔 체크아웃","map":false},{"time":"09:45","name":"도보 8분 → 테르미니역","place":"Roma Termini"},{"time":"10:00","name":"Leonardo Express","end":"10:35","map":false},{"time":"10:35","name":"FCO 공항 T3 도착","place":"Rome Fiumicino Airport Terminal 3"},{"time":"10:40","name":"위즈에어 체크인 · 수하물 위탁 마감","map":false},{"time":"11:15","name":"보안검사 통과","map":false},{"time":"11:40","name":"게이트 도착","map":false},{"time":"12:40","name":"FCO → PRG","end":"14:35","map":false},{"time":"14:35","name":"프라하 Václav Havel 공항 T2 도착","place":"Václav Havel Airport Prague"},{"time":"15:00","name":"입국 · 짐 찾기","map":false},{"time":"15:30","name":"Bolt / 택시 → 구시가","map":false},{"time":"16:15","name":"Golden Angel Suites 체크인","place":"Golden Angel Suites, Praha"},{"time":"17:00","name":"짐 풀고 잠시 휴식","map":false},{"time":"17:30","name":"구시가 광장 첫 산책","place":"Staroměstské náměstí, Praha"},{"time":"18:30","name":"카를교 방향 산책","place":"Karlův most"},{"time":"19:30","name":"첫 디너","place":"Lokál Dlouhááá, Praha"},{"time":"21:00","name":"카를교 야경","place":"Karlův most"},{"time":"22:00","name":"구시가 광장 야경","map":false},{"time":"22:30","name":"호텔","map":false}]},{"date":"2026-10-01","city":"prg","dayNo":18,"items":[{"time":"08:00","name":"조식","map":false},{"time":"08:45","name":"트램 22번 또는 도보 → 프라하성","map":false},{"time":"09:15","name":"프라하성 (Circuit B)","end":"12:00","place":"Pražský hrad"},{"time":"12:00","name":"성 내려오며 말라스트라나 지구","place":"Malá Strana"},{"time":"13:00","name":"점심","map":false},{"time":"14:30","name":"카를교 건너기","place":"Karlův most"},{"time":"15:00","name":"구시가 광장 + 천문시계","place":"Pražský orloj"},{"time":"15:30","name":"오후 자유 (약 3시간)","map":false},{"time":"19:00","name":"디너","place":"Lokál Dlouhááá, Praha"},{"time":"21:00","name":"야경 산책","map":false},{"time":"22:30","name":"호텔","map":false}]},{"date":"2026-10-02","city":"prg","dayNo":19,"label":"체스키 크룸로프","map":"Český Krumlov, Czechia","items":[{"time":"06:30","name":"기상 · 가벼운 조식","map":false},{"time":"07:30","name":"호텔 출발 → 버스 터미널","place":"Florenc bus terminal, Praha"},{"time":"08:00","name":"프라하 → 체스키 크룸로프","end":"11:00","map":false},{"time":"11:00","name":"체스키 크룸로프 도착","place":"Český Krumlov"},{"time":"11:30","name":"마을 산책 시작","place":"Český Krumlov"},{"time":"12:30","name":"점심","place":"Krčma v Šatlavské"},{"time":"14:00","name":"체스키 크룸로프 성","place":"Státní hrad a zámek Český Krumlov"},{"time":"16:30","name":"마을 골목 산책 + 카페 + 사진","map":false},{"time":"18:00","name":"프라하 행 버스","end":"21:00","map":false},{"time":"21:00","name":"프라하 도착","map":false},{"time":"21:30","name":"가벼운 야식 또는 마트 간식","map":false},{"time":"22:30","name":"호텔","map":false}]},{"date":"2026-10-03","city":"prg","dayNo":20,"cash":{"amount":"CZK 관광세"},"items":[{"time":"08:00","name":"조식","map":false},{"time":"09:00","name":"마지막 오전 산책","place":"Prašná brána, Praha"},{"time":"11:00","name":"마지막 쇼핑","map":false},{"time":"12:00","name":"마지막 점심","place":"U Modré Kachničky, Praha"},{"time":"14:00","name":"호텔에서 짐 찾기","map":false},{"time":"15:00","name":"카페에서 휴식","map":false},{"time":"15:30","name":"Bolt / 택시 → 공항","place":"Václav Havel Airport Prague"},{"time":"16:15","name":"공항 도착 · 체크인 · 면세점","map":false},{"time":"19:05","name":"PRG → 서울 출발","map":false},{"time":"22:00","name":"비행 중","map":false}]},{"date":"2026-10-04","city":"sel","dayNo":21,"items":[{"time":"13:20","name":"인천공항 도착","place":"Incheon International Airport"},{"time":"14:30","name":"입국 · 짐 찾기","map":false},{"time":"15:00","name":"공항 외부 · 신혼여행 완료","map":false}]}]}</script>
 
 <script>
 /* ===========================================================
@@ -556,6 +685,49 @@ mql.addEventListener('change', () => { if(!storedTheme()) applyTheme(systemTheme
 applyTheme(storedTheme() || systemTheme(), false);
 
 /* -----------------------------------------------------------
+   시간대 — 비행·시차 전환 때 "지금 어느 시간대 기준인지" 알려줍니다
+   ----------------------------------------------------------- */
+const TZ_ABBR = {
+  'Asia/Seoul':'KST', 'Asia/Tokyo':'JST',
+  'Europe/Madrid':'CE', 'Europe/Rome':'CE', 'Europe/Prague':'CE',
+  'Europe/Zurich':'CE', 'Europe/Paris':'CE', 'Europe/Berlin':'CE',
+  'Europe/Vienna':'CE', 'Europe/Amsterdam':'CE', 'Europe/Brussels':'CE',
+  'Europe/London':'B',
+};
+
+function tzName(){
+  try{ return Intl.DateTimeFormat().resolvedOptions().timeZone || ''; }
+  catch(e){ return ''; }
+}
+
+/* 서머타임 중인지 — 1월/7월 오프셋과 비교 */
+function isDST(d){
+  const y = d.getFullYear();
+  const jan = new Date(y, 0, 1).getTimezoneOffset();
+  const jul = new Date(y, 6, 1).getTimezoneOffset();
+  return d.getTimezoneOffset() < Math.max(jan, jul);
+}
+
+function tzAbbr(){
+  const d = new Date();
+  const zone = tzName();
+  const base = TZ_ABBR[zone];
+  // CE → CET/CEST, B → GMT/BST 처럼 서머타임에 따라 갈립니다
+  if(base === 'CE') return isDST(d) ? 'CEST' : 'CET';
+  if(base === 'B')  return isDST(d) ? 'BST'  : 'GMT';
+  if(base) return base;
+
+  // 모르는 지역이면 브라우저가 주는 약어, 그것도 없으면 UTC 오프셋
+  try{
+    const s = new Intl.DateTimeFormat('en-US', { timeZoneName:'short' })
+      .formatToParts(d).find(p => p.type === 'timeZoneName').value;
+    if(s && !/^(GMT|UTC)[+-]?/.test(s)) return s;
+  }catch(e){}
+  const off = -d.getTimezoneOffset() / 60;
+  return 'UTC' + (off >= 0 ? '+' : '') + (Number.isInteger(off) ? off : off.toFixed(1));
+}
+
+/* -----------------------------------------------------------
    날짜 유틸 (로컬 기준 — toISOString 은 UTC라 하루 밀릴 수 있음)
    ----------------------------------------------------------- */
 const pad = n => String(n).padStart(2,'0');
@@ -579,22 +751,75 @@ function daysBetween(a, b){ // 날짜 단위 차이 (b - a)
 /* -----------------------------------------------------------
    데이터 로딩 (fetch → localStorage 캐시 폴백)
    ----------------------------------------------------------- */
-async function loadData(){
-  let fresh = null;
-  try{
-    const res = await fetch('data.json', { cache: 'no-cache' });
-    if(res.ok) fresh = await res.json();
-  }catch(e){ /* 오프라인 */ }
+const LOAD_TIMEOUT = 5000;
 
-  if(fresh){
-    try{ localStorage.setItem(LS_DATA, JSON.stringify(fresh)); }catch(e){}
-    return { data: fresh, cached: false };
+/* 응답이 영영 안 오는 경우가 최악이라 반드시 시간을 끊습니다.
+   (이게 없어서 화면이 "불러오는 중"에서 멈추는 문제가 있었습니다)
+
+   abort 만으로는 부족합니다 — signal 을 무시하는 구현이면 그대로 매달리므로
+   race 로 확실히 끊고, abort 는 연결을 정리하는 용도로만 씁니다. */
+function fetchWithTimeout(url, ms){
+  const ac = new AbortController();
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => {
+      try{ ac.abort(); }catch(e){}
+      const err = new Error('timeout');
+      err.name = 'TimeoutError';
+      reject(err);
+    }, ms);
+  });
+  const req = fetch(url, { cache: 'no-cache', signal: ac.signal });
+  return Promise.race([req, timeout]).finally(() => clearTimeout(timer));
+}
+
+/* 형태가 깨진 데이터를 렌더에 넘기면 조용히 죽으므로 여기서 거릅니다 */
+function validData(j){
+  return !!(j && j.trip && j.trip.start && j.trip.end
+    && Array.isArray(j.cities) && j.cities.length
+    && Array.isArray(j.days)   && j.days.length
+    && j.days.every(d => d.date && Array.isArray(d.items) && d.items.length));
+}
+
+function readInlineFallback(){
+  const el = document.getElementById('fallback-data');
+  if(!el) return null;
+  try{
+    const j = JSON.parse(el.textContent);
+    return validData(j) ? j : null;
+  }catch(e){ return null; }
+}
+
+/* 네트워크 → localStorage 캐시 → 인라인 백업 순으로 시도합니다.
+   반환: { data, source: 'network'|'cache'|'inline'|null, error } */
+async function loadData(){
+  let error = null;
+
+  try{
+    const res = await fetchWithTimeout('./data.json', LOAD_TIMEOUT);
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const j = await res.json();
+    if(!validData(j)) throw new Error('데이터 형식이 올바르지 않습니다');
+    try{ localStorage.setItem(LS_DATA, JSON.stringify(j)); }catch(e){}
+    return { data: j, source: 'network', error: null };
+  }catch(e){
+    error = (e.name === 'TimeoutError' || e.name === 'AbortError')
+      ? `응답 없음 (${LOAD_TIMEOUT / 1000}초 초과)`
+      : (e.message || String(e));
   }
+
   try{
     const raw = localStorage.getItem(LS_DATA);
-    if(raw) return { data: JSON.parse(raw), cached: true };
+    if(raw){
+      const j = JSON.parse(raw);
+      if(validData(j)) return { data: j, source: 'cache', error };
+    }
   }catch(e){}
-  return { data: null, cached: false };
+
+  const inline = readInlineFallback();
+  if(inline) return { data: inline, source: 'inline', error };
+
+  return { data: null, source: null, error };
 }
 
 /* -----------------------------------------------------------
@@ -716,7 +941,7 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>'
 /* -----------------------------------------------------------
    상태
    ----------------------------------------------------------- */
-let TRIP = null, CITIES = [], DAYS = [], TOTAL_DAYS = 0, IS_CACHED = false;
+let TRIP = null, CITIES = [], DAYS = [], TOTAL_DAYS = 0, DATA_SOURCE = null;
 let countdownTarget = null;
 
 const cityById = id => CITIES.find(c => c.id === id) || CITIES[0];
@@ -800,16 +1025,34 @@ function itemHTML(it, city, cls, day, next){
   const mv = next && next.move
     ? `<div class="mv">${ARROW}${esc(next.move)}</div>` : '';
 
-  const refs = (it.refs || []).map(r =>
-    `<button type="button" class="ref" data-copy="${esc(r.value)}">
-       ${r.label ? `<span class="lb">${esc(r.label)}</span>` : ''}<span>${esc(r.value)}</span>${CP}
-     </button>`).join('');
+  const refs = (it.refs || []).map(r => {
+    const lb = r.label ? `<span class="lb">${esc(r.label)}</span>` : '';
+    // 값 없이 안내만 (예: "메일 확인") — 복사할 게 없으므로 버튼이 아닌 표시용
+    if(!r.value){
+      return `<span class="ref note-only">${lb}<span>${esc(r.note || '확인 필요')}</span></span>`;
+    }
+    // mask:true — 화면엔 뒤 4자리만, 복사는 원본. 자릿수도 드러내지 않습니다
+    const shown = r.mask
+      ? `<span class="masked">${'•'.repeat(6)}${esc(String(r.value).slice(-4))}</span>`
+      : `<span>${esc(r.value)}</span>`;
+    const aria = r.mask
+      ? `${r.label || '값'} 복사 (가려진 값)`
+      : `${r.label || '값'} ${r.value} 복사`;
+    return `<button type="button" class="ref" data-copy="${esc(r.value)}" aria-label="${esc(aria)}">
+       ${lb}${shown}${CP}
+     </button>`;
+  }).join('');
 
   const prep = (it.prep || []).length
     ? `<div class="prep">${CK}<span class="tags">${it.prep.map(p => `<i>${esc(p)}</i>`).join('')}</span></div>`
     : '';
 
+  // 흐리게 처리한 지난 일정도 스크린리더가 알 수 있게
+  const srState = cls === 'past' ? '<span class="sr-only">지난 일정. </span>'
+                : cls === 'live' ? '<span class="sr-only">진행 중. </span>' : '';
+
   return `<li class="${cls}">
+    ${srState}
     <div class="tl-t">${esc(time)}</div>
     <div class="tl-n">${name}</div>
     ${meet}
@@ -834,6 +1077,7 @@ function render(){
   const isToday = day.date === today();
   const browsing = !isToday;        // 오늘이 아닌 날을 넘겨보는 중
   const rel = relLabel(day.date);
+  const finished = ph === 'post' && !viewDate;   // 여행 종료 요약 화면
 
   activeCity = (ph === 'pre' && !viewDate) ? CITIES[0] : city;
   paintCityColor();
@@ -848,6 +1092,9 @@ function render(){
 
   /* ---- 헤더 ---- */
   $('#clock').textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  const tzEl = $('#tz');
+  tzEl.textContent = tzAbbr();
+  tzEl.title = tzName();
   $('#landmark').innerHTML = ICONS[headCity.icon] || '';
   // 스위스처럼 한 노드 안에서 거점이 바뀌는 날은 day.label 로 실제 지명을 보여줍니다
   $('#city-name').textContent = (ph !== 'pre' && day.label) ? day.label : headCity.name;
@@ -855,7 +1102,11 @@ function render(){
 
   const dLeft = daysBetween(today(), TRIP.start);
 
-  if(ph === 'pre' && !viewDate){
+  if(finished){
+    $('#ey-date').textContent = '여행 완료';
+    $('#day-count').textContent = `${TOTAL_DAYS}일 완주`;
+    $('#left').textContent = TRIP.end.replace(/-/g, '.');
+  }else if(ph === 'pre' && !viewDate){
     $('#ey-date').textContent = `${fmtDate(TRIP.start)} 출발`;
     $('#day-count').textContent = dLeft === 0 ? '오늘 출발' : `D-${dLeft}`;
     $('#left').textContent = `${TOTAL_DAYS}일간의 여정`;
@@ -874,8 +1125,10 @@ function render(){
     $('#left').textContent = leftDays > 0 ? `${leftDays}일 남음` : '마지막 날';
   }
 
-  /* ---- 여정 라인 ---- */
-  const hereIdx = (ph === 'pre' && !viewDate) ? -1 : CITIES.findIndex(c => c.id === city.id);
+  /* ---- 여정 라인 (완주하면 전부 done) ---- */
+  const hereIdx = finished
+    ? CITIES.length
+    : ((ph === 'pre' && !viewDate) ? -1 : CITIES.findIndex(c => c.id === city.id));
   const track = $('#j-track');
   track.innerHTML = '';
   CITIES.forEach((c,i) => {
@@ -904,7 +1157,7 @@ function render(){
   /* ---- 칩 (현금이 맨 앞) ---- */
   const strip = $('#strip');
   strip.innerHTML = '';
-  if(day.cash){
+  if(!finished && day.cash){
     const el = document.createElement('span');
     el.className = 'chip cash';
     el.innerHTML = `${COIN}<span class="amt">${esc(day.cash.amount)}</span>` +
@@ -912,7 +1165,7 @@ function render(){
     if(day.cash.for) el.title = day.cash.for;
     strip.appendChild(el);
   }
-  (day.chips || []).forEach(c => {
+  (finished ? [] : (day.chips || [])).forEach(c => {
     const el = document.createElement('span');
     el.className = 'chip' + (c.warn ? ' warn' : '');
     el.textContent = c.t;
@@ -931,11 +1184,26 @@ function render(){
     if(liveIdx === -1 && nextIdx === -1) liveIdx = day.items.length - 1;
   }
 
+  /* ---- 여행 완료 요약 ---- */
+  $('#finale').hidden = !finished;
+  $('#now-card').hidden = finished;
+  if(finished){
+    const visited = CITIES.filter(c => !c.home).length;
+    $('#fin-title').textContent = `${TOTAL_DAYS}일의 여정이 끝났습니다`;
+    $('#fin-sub').textContent =
+      `${fmtDate(TRIP.start)} – ${fmtDate(TRIP.end)} · ${TRIP.couple}`;
+    $('#fin-days').textContent   = TOTAL_DAYS;
+    $('#fin-cities').textContent = visited;
+    $('#fin-items').textContent  = DAYS.reduce((n,d) => n + d.items.length, 0);
+  }
+
   /* ---- NOW 카드 ---- */
   const card = $('#now-card');
   const hasFirstDay = DAYS[0].date === TRIP.start;
 
-  if(ph === 'pre' && !viewDate){
+  if(finished){
+    countdownTarget = null;
+  }else if(ph === 'pre' && !viewDate){
     card.classList.add('countdown');
     countdownTarget = parseDate(TRIP.start, hasFirstDay ? DAYS[0].items[0].time : '00:00');
     $('#nc-tag-label').textContent = '출발까지';
@@ -994,7 +1262,9 @@ function render(){
   }
 
   /* ---- 타임라인 ---- */
-  $('#sec-today').hidden = false;
+  $('#sec-today').hidden = finished;
+  $('#tl').setAttribute('aria-label',
+    isToday ? '오늘 일정' : `${fmtDate(day.date)} 일정`);
   $('#head-today').textContent = (ph === 'pre' && !viewDate)
     ? (hasFirstDay ? '첫날 일정' : `${fmtDate(day.date)} · 미리보기`)
     : (isToday ? '오늘' : (rel ? `${rel} 일정` : fmtDate(day.date)));
@@ -1007,7 +1277,7 @@ function render(){
 
   /* ---- 이후 날들 — 탭하면 그 날로 이동 ---- */
   const up = $('#upcoming');
-  const rest = DAYS.filter(d => d.date > day.date);
+  const rest = finished ? [] : DAYS.filter(d => d.date > day.date);
   $('#sec-upcoming').hidden = rest.length === 0;
   $('#head-upcoming').textContent = `이후 ${rest.length}일`;
   up.innerHTML = rest.map(d => {
@@ -1034,10 +1304,10 @@ function render(){
 
   /* ---- 푸터 ---- */
   $('#footer').textContent = `${TRIP.couple} · ${TRIP.start.slice(0,4)}`;
-  if(IS_CACHED){
+  if(DATA_SOURCE && DATA_SOURCE !== 'network'){
     const note = document.createElement('div');
     note.className = 'offline-note';
-    note.textContent = '오프라인 · 저장된 일정';
+    note.textContent = DATA_SOURCE === 'cache' ? '오프라인 · 저장된 일정' : '백업 일정';
     $('#footer').appendChild(note);
   }
 }
@@ -1063,13 +1333,14 @@ function tickCountdown(){
    ----------------------------------------------------------- */
 document.addEventListener('click', async (e) => {
   const ref = e.target.closest('.ref');
-  if(ref){
+  if(ref && ref.dataset.copy){
     const val = ref.dataset.copy;
     const ok = await copyText(val);
     if(ok){
       ref.classList.add('copied');
       setTimeout(() => ref.classList.remove('copied'), 1400);
-      toast(`복사됨 · ${val}`);
+      // 가려진 값은 토스트에도 노출하지 않습니다
+      toast(ref.querySelector('.masked') ? '복사됨' : `복사됨 · ${val}`);
     }else{
       toast('복사에 실패했어요');
     }
@@ -1124,42 +1395,139 @@ document.addEventListener('touchend', (e) => {
 }, { passive: true });
 
 /* -----------------------------------------------------------
+   오늘로 이동 (플로팅 버튼)
+   ----------------------------------------------------------- */
+const fab = $('#to-today');
+
+function updateFab(){
+  if(!DAYS.length){ fab.classList.remove('show'); return; }
+  // 다른 날을 보고 있으면 항상 노출, 오늘이면 카드가 화면 밖일 때만
+  if(viewDate){ fab.classList.add('show'); return; }
+  const card = $('#finale').hidden ? $('#now-card') : $('#finale');
+  const r = card.getBoundingClientRect();
+  const offscreen = r.bottom < 0 || r.top > window.innerHeight;
+  fab.classList.toggle('show', offscreen);
+}
+
+fab.addEventListener('click', () => {
+  if(viewDate){
+    goToday();
+  }else{
+    const card = $('#finale').hidden ? $('#now-card') : $('#finale');
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+
+let fabTick = false;
+window.addEventListener('scroll', () => {
+  if(fabTick) return;
+  fabTick = true;
+  requestAnimationFrame(() => { updateFab(); fabTick = false; });
+}, { passive: true });
+
+/* -----------------------------------------------------------
    부팅
    ----------------------------------------------------------- */
-(async function boot(){
-  const { data, cached } = await loadData();
+let booting = false;
+
+function showError(err){
+  $('#errbox').hidden = false;
+  $('#src-note').hidden = true;
+  $('#now-card').hidden = true;
+  $('#sec-today').hidden = true;
+  $('#sec-upcoming').hidden = true;
+  $('#finale').hidden = true;
+  $('#strip').innerHTML = '';
+  $('#ey-date').textContent = '불러오기 실패';
+  $('#err-msg').textContent = navigator.onLine
+    ? '네트워크는 연결되어 있지만 일정 파일을 읽지 못했습니다.'
+    : '오프라인 상태입니다. 연결되면 자동으로 최신 일정을 받아옵니다.';
+  $('#err-why').textContent = err ? `원인: ${err}` : '';
+}
+
+async function boot(){
+  if(booting) return;
+  booting = true;
+  $('#err-retry').disabled = true;
+  $('#err-retry').textContent = '불러오는 중…';
+
+  let res;
+  try{
+    res = await loadData();
+  }catch(e){
+    res = { data: null, source: null, error: e.message || String(e) };
+  }
+
+  $('#err-retry').disabled = false;
+  $('#err-retry').textContent = '다시 시도';
+  booting = false;
+
+  const { data, source, error } = res;
 
   if(!data){
-    $('#state').hidden = false;
-    $('#state').textContent = '일정을 불러오지 못했습니다. 온라인 상태에서 한 번 열어주세요.';
-    $('#now-card').hidden = true;
+    // 이미 보여주던 일정이 있으면 화면을 지우지 않습니다.
+    // 여행 중에 정보를 빼앗기는 게 최악이라, 알림만 띄우고 그대로 둡니다.
+    if(DAYS.length){
+      $('#src-note').hidden = false;
+      $('#src-text').textContent = `최신 일정을 받지 못했습니다 (${error}). 이전 데이터를 보고 있습니다.`;
+    }else{
+      showError(error);
+    }
     return;
   }
 
-  TRIP   = data.trip;
-  CITIES = data.cities || [];
-  DAYS   = (data.days || []).slice().sort((a,b) => a.date < b.date ? -1 : 1);
-  TOTAL_DAYS = daysBetween(TRIP.start, TRIP.end) + 1;
-  IS_CACHED = cached;
+  try{
+    TRIP   = data.trip;
+    CITIES = data.cities;
+    DAYS   = data.days.slice().sort((a,b) => a.date < b.date ? -1 : 1);
+    TOTAL_DAYS = daysBetween(TRIP.start, TRIP.end) + 1;
+    DATA_SOURCE = source;
 
-  if(!DAYS.length){
-    $('#state').hidden = false;
-    $('#state').textContent = '등록된 일정이 없습니다.';
-    return;
-  }
-
-  render();
-  setInterval(render, 60000);
-  setInterval(() => { if(countdownTarget) tickCountdown(); }, 1000);
-
-  // 백그라운드/탭 복귀 시 즉시 갱신. 날이 바뀌었으면 오늘로 되돌립니다
-  let lastToday = today();
-  document.addEventListener('visibilitychange', () => {
-    if(document.hidden) return;
-    if(today() !== lastToday){ lastToday = today(); viewDate = null; }
+    $('#errbox').hidden = true;
     render();
-  });
-})();
+  }catch(e){
+    // 데이터는 왔는데 그리다 죽는 경우 — 빈 화면 대신 원인을 보여줍니다
+    showError(`화면을 그리지 못했습니다 (${e.message})`);
+    return;
+  }
+
+  // 네트워크가 아닌 출처면 알려주고 다시 받을 기회를 줍니다
+  $('#src-note').hidden = source === 'network';
+  if(source !== 'network'){
+    $('#src-text').textContent = source === 'cache'
+      ? '저장해 둔 일정을 보고 있습니다.'
+      : '앱에 내장된 백업 일정입니다. 최신이 아닐 수 있습니다.';
+  }
+  updateFab();
+}
+
+$('#err-retry').addEventListener('click', boot);
+$('#src-retry').addEventListener('click', boot);
+$('#err-reload').addEventListener('click', () => location.reload());
+$('#fin-review').addEventListener('click', () => {
+  viewDate = DAYS[0].date;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+boot();
+
+/* 1분마다 갱신 — 자정을 넘기면 날짜가 바뀌므로 보던 날도 오늘로 되돌립니다 */
+let lastToday = today();
+function tick(){
+  if(!DAYS.length) return;
+  if(today() !== lastToday){ lastToday = today(); viewDate = null; }
+  render();
+  updateFab();
+}
+setInterval(tick, 60000);
+setInterval(() => { if(countdownTarget) tickCountdown(); }, 1000);
+
+// 백그라운드에 오래 있다 돌아오면 1분을 기다리지 않고 바로 맞춥니다
+document.addEventListener('visibilitychange', () => { if(!document.hidden) tick(); });
+
+// 다시 온라인이 되면 조용히 최신 일정으로 교체
+window.addEventListener('online', () => { if(DATA_SOURCE !== 'network') boot(); });
 
 /* -----------------------------------------------------------
    서비스 워커
