@@ -34,6 +34,7 @@ def slim(src: dict) -> dict:
             o = {"time": it["time"], "name": it["name"]}
             if it.get("end"):   o["end"]   = it["end"]
             if it.get("place"): o["place"] = it["place"]
+            if it.get("move"):  o["move"]  = it["move"]   # 길 잃었을 때 제일 필요한 정보
             if it.get("map") is False: o["map"] = False
             if it.get("meet"):  o["meet"]  = {"where": it["meet"]["where"],
                                               **({"time": it["meet"]["time"]} if it["meet"].get("time") else {})}
