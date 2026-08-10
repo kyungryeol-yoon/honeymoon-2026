@@ -28,6 +28,10 @@ def slim(src: dict) -> dict:
     # 현지어 프리셋은 남깁니다 — 말이 안 통하는 상황은 오프라인일 때 더 자주 옵니다
     if src.get("phrases"):
         out["phrases"] = src["phrases"]
+    # 긴급 연락처도 남깁니다. tel: 은 네트워크가 없어도 걸리므로
+    # 모든 게 무너진 상황에서 이 화면이 마지막으로 쓸모 있는 부분입니다
+    if src.get("contacts"):
+        out["contacts"] = src["contacts"]
     for d in src["days"]:
         day = {"date": d["date"], "city": d["city"], "dayNo": d["dayNo"]}
         if d.get("label"): day["label"] = d["label"]
