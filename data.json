@@ -14,7 +14,8 @@
       "color": "#D4744A",
       "colorLight": "#B85A32",
       "icon": "sagrada",
-      "map": "Barcelona, Spain"
+      "map": "Barcelona, Spain",
+      "lang": "es"
     },
     {
       "id": "swi",
@@ -24,7 +25,8 @@
       "color": "#5B94C4",
       "colorLight": "#3C74A6",
       "icon": "alps",
-      "map": "Switzerland"
+      "map": "Switzerland",
+      "lang": "de"
     },
     {
       "id": "vce",
@@ -34,7 +36,8 @@
       "color": "#8AA05A",
       "colorLight": "#677F3C",
       "icon": "gondola",
-      "map": "Venezia, Italy"
+      "map": "Venezia, Italy",
+      "lang": "it"
     },
     {
       "id": "flr",
@@ -44,7 +47,8 @@
       "color": "#8AA05A",
       "colorLight": "#677F3C",
       "icon": "duomo",
-      "map": "Firenze, Italy"
+      "map": "Firenze, Italy",
+      "lang": "it"
     },
     {
       "id": "rom",
@@ -54,7 +58,8 @@
       "color": "#8AA05A",
       "colorLight": "#677F3C",
       "icon": "colosseo",
-      "map": "Roma, Italy"
+      "map": "Roma, Italy",
+      "lang": "it"
     },
     {
       "id": "prg",
@@ -64,7 +69,8 @@
       "color": "#B0576B",
       "colorLight": "#963E53",
       "icon": "charles",
-      "map": "Praha, Czechia"
+      "map": "Praha, Czechia",
+      "lang": "cs"
     },
     {
       "id": "sel",
@@ -85,10 +91,17 @@
       "dayNo": 1,
       "chips": [
         {
+          "t": "이 날 시각 = 현지 CEST (01:20 ICN 출발만 KST)"
+        },
+        {
           "t": "도착일 = 가볍게"
         },
         {
           "t": "고딕지구 소매치기 주의",
+          "warn": true
+        },
+        {
+          "t": "EES 자동화 입국심사 대기 최대 90분",
           "warn": true
         }
       ],
@@ -96,7 +109,8 @@
         {
           "time": "14:40",
           "name": "BCN 공항 도착",
-          "place": "Barcelona El Prat Airport"
+          "place": "Barcelona El Prat Airport",
+          "desc": "이 날 표기 시각은 모두 현지(CEST) 기준 — 01:20 ICN 출발만 KST 기준 (CEST = KST −7시간)"
         },
         {
           "time": "15:00",
@@ -613,6 +627,24 @@
       ],
       "items": [
         {
+          "time": "06:00",
+          "name": "융프라우 진행 여부 판단",
+          "desc": "정상 웹캠·날씨를 보고 오늘 올라갈지 결정 — 흐리면 마을·폭포로 돌립니다",
+          "map": false,
+          "prep": [
+            "GO = 정상 시야 확보 · 구름이 정상 아래",
+            "NO = 정상 화이트아웃 · 강풍/강설 운행중단",
+            "취소·변경은 07:35 출발 전에",
+            "애매하면 07:35 직전 웹캠 재확인"
+          ],
+          "links": [
+            {
+              "label": "융프라우 웹캠",
+              "url": "https://www.jungfrau.ch/en-gb/webcams/"
+            }
+          ]
+        },
+        {
           "time": "06:30",
           "name": "기상 · 조식",
           "desc": "캠프",
@@ -752,7 +784,7 @@
           "end": "11:30",
           "place": "Trümmelbachfälle",
           "prep": [
-            "CHF 14/인 현장"
+            "CHF 18/인 현장"
           ],
           "move": "차로 10분"
         },
@@ -827,7 +859,7 @@
         }
       ],
       "cash": {
-        "amount": "CHF 28 + €5",
+        "amount": "CHF 36 + €5",
         "for": "Trümmelbach 입장 · Iseltwald 부두",
         "note": "현장"
       }
@@ -1280,13 +1312,14 @@
           "map": false
         },
         {
-          "time": "15:00",
+          "time": "15:30",
           "name": "두칼레 궁전",
           "desc": "탄식의 다리 · 황금계단",
           "place": "Palazzo Ducale, Venezia",
           "prep": [
-            "€30/인 = €60",
-            "사전 예약"
+            "온라인 30일 전 €30/인",
+            "당일 현장 €35/인",
+            "사전 예약 권장"
           ]
         },
         {
@@ -1344,6 +1377,17 @@
         {
           "t": "기베르티 패스 현장 구매",
           "warn": true
+        },
+        {
+          "t": "기베르티 = 산타 레파라타 시간슬롯 지정 필수",
+          "warn": true
+        },
+        {
+          "t": "배낭·중대형 가방 보관 의무 · 미이행 시 입장 거부",
+          "warn": true
+        },
+        {
+          "t": "보관소 Piazza Duomo 38/r · 07:30~20:15"
         },
         {
           "t": "복장규정 어깨·무릎"
@@ -1414,44 +1458,24 @@
           "move": "도보 10분 (추정)"
         },
         {
-          "time": "13:45",
-          "name": "베키오 다리",
-          "desc": "아르노 강변 산책",
-          "place": "Ponte Vecchio",
-          "move": "도보 5분 (추정)"
-        },
-        {
-          "time": "14:30",
+          "time": "13:30",
           "name": "기베르티 패스 현장 구매",
-          "desc": "두오모 박물관 + 세례당 + 크립트 + 성당 옆문입장",
+          "desc": "두오모 박물관 + 세례당 + 크립트 + 산타 레파라타",
           "place": "Piazza San Giovanni, Firenze",
           "prep": [
             "€15/인 = €30",
             "세례당 맞은편 매표소",
+            "산타 레파라타 시간슬롯 지정 필수",
             "줄 20~30분",
             "패스 유효 3일"
           ],
           "move": "도보 8분 (추정)"
         },
         {
-          "time": "15:10",
-          "name": "두오모 성당 내부",
-          "desc": "패스 소지자 옆문 · 짧은 줄",
-          "place": "Cattedrale di Santa Maria del Fiore",
-          "prep": [
-            "어깨·무릎 가리기"
-          ],
-          "move": "도보 2분 (추정)"
-        },
-        {
-          "time": "15:45",
-          "name": "산타 크로체 성당",
-          "desc": "미켈란젤로 · 갈릴레오 · 마키아벨리 무덤",
-          "place": "Basilica di Santa Croce, Firenze",
-          "prep": [
-            "€8/인 현장",
-            "입장 마감 17:00"
-          ],
+          "time": "13:45",
+          "name": "베키오 다리",
+          "desc": "아르노 강변 산책",
+          "place": "Ponte Vecchio",
           "move": "도보 10분 (추정)"
         },
         {
@@ -1464,13 +1488,7 @@
             "시간슬롯 불필요",
             "~19시 개관"
           ],
-          "move": "성당 뒤 별도 건물 · 도보 2분"
-        },
-        {
-          "time": "17:00",
-          "name": "산타 크로체 먼저 방문",
-          "desc": "입장 마감 17:00 → 순서 조정",
-          "map": false
+          "move": "도보 12분 (추정)"
         },
         {
           "time": "18:15",
@@ -1496,8 +1514,8 @@
         }
       ],
       "cash": {
-        "amount": "€64",
-        "for": "기베르티 €30 + 산타크로체 €16 + 관광세 €18",
+        "amount": "€48",
+        "for": "기베르티 €30 + 관광세 €18",
         "note": "현장구매"
       }
     },
@@ -1728,21 +1746,22 @@
           "time": "14:30",
           "name": "베르나차",
           "desc": "가장 예쁜 항구 마을 · 중앙 광장 · 방파제 · 골목 산책",
-          "end": "16:30",
+          "end": "16:20",
           "place": "Vernazza",
           "move": "기차 10분"
         },
         {
-          "time": "16:30",
+          "time": "16:20",
           "name": "베르나차 항구 오후 빛 사진",
           "desc": "컨디션 좋으면 · 아니면 바로 복귀",
           "map": false
         },
         {
-          "time": "17:00",
+          "time": "16:30",
           "name": "베르나차 → 라스페치아",
           "map": false,
-          "move": "기차 25분"
+          "move": "기차 25분",
+          "desc": "16:30 기차"
         },
         {
           "time": "17:40",
@@ -1927,6 +1946,10 @@
         },
         {
           "t": "복장 규정 어깨·무릎"
+        },
+        {
+          "t": "트레비 €2 카드 전용 (현금 불가)",
+          "warn": true
         }
       ],
       "items": [
@@ -2044,12 +2067,14 @@
           "map": false
         },
         {
-          "time": "21:00",
+          "time": "20:30",
           "name": "트레비 분수 야경",
           "desc": "동전 던지기 · 밤 조명이 가장 예쁨",
           "place": "Fontana di Trevi",
           "prep": [
-            "€2/인 (동전구역)"
+            "€2/인 (동전구역)",
+            "카드 전용 · 현금 불가",
+            "마지막 입장 21:00"
           ],
           "move": "도보 15분 (추정)"
         },
@@ -2145,14 +2170,14 @@
           "move": "도보 10분 (추정)"
         },
         {
-          "time": "14:00",
+          "time": "13:30",
           "name": "점심",
           "desc": "몬티",
           "place": "Monti, Roma",
           "move": "도보 10분 (추정)"
         },
         {
-          "time": "14:45",
+          "time": "14:10",
           "name": "산 피에트로 인 빈콜리",
           "desc": "미켈란젤로 모세상 · 콜로세움 근처",
           "place": "San Pietro in Vincoli",
@@ -2162,15 +2187,17 @@
           "move": "도보 10분 (추정)"
         },
         {
-          "time": "15:30",
+          "time": "14:45",
           "name": "판테온",
           "desc": "내부 입장",
           "place": "Pantheon, Roma",
           "prep": [
-            "€5/인",
-            "사전 예약 권장"
+            "€7/인 (2026.7.1 인상)",
+            "14:45~15:15 시간슬롯",
+            "예약 시간 엄수"
           ],
-          "move": "도보 20분 (추정)"
+          "move": "도보 20분 (추정)",
+          "end": "15:15"
         },
         {
           "time": "16:00",
@@ -2298,9 +2325,12 @@
         },
         {
           "time": "10:35",
-          "name": "FCO 공항 T3 도착",
-          "place": "Rome Fiumicino Airport Terminal 3",
-          "move": "레오나르도 익스프레스 32분"
+          "name": "FCO 공항 T1 도착",
+          "place": "Rome Fiumicino Airport Terminal 1",
+          "move": "레오나르도 익스프레스 32분",
+          "prep": [
+            "위즈에어 = T1 (T3 아님)"
+          ]
         },
         {
           "time": "10:40",
@@ -2573,7 +2603,9 @@
           "desc": "체코 두 번째 큰 성 · 성 정원 · 망토 다리 · 채색된 탑 전망",
           "place": "Státní hrad a zámek Český Krumlov",
           "prep": [
-            "입장 25,000원",
+            "박물관 + 탑 280 CZK/인",
+            "Route 1 가이드투어 300 CZK/인",
+            "안뜰·정원·망토다리는 무료",
             "내부 = 가이드 투어 의무",
             "고소공포증이면 정원·망토다리만"
           ],
@@ -2734,5 +2766,107 @@
         }
       ]
     }
-  ]
+  ],
+  "phrases": {
+    "es": {
+      "name": "스페인어",
+      "lines": [
+        {
+          "ko": "예약했습니다",
+          "x": "Tengo una reserva.",
+          "r": "뗑고 우나 레세르바"
+        },
+        {
+          "ko": "카드 결제 되나요?",
+          "x": "¿Puedo pagar con tarjeta?",
+          "r": "뿌에도 빠가르 꼰 따르헤따"
+        },
+        {
+          "ko": "현지 통화로 결제해주세요",
+          "x": "En euros, por favor. Sin conversión.",
+          "r": "엔 에우로스 뽀르 파보르 · 신 꼰베르시온"
+        },
+        {
+          "ko": "현금만 되나요?",
+          "x": "¿Solo efectivo?",
+          "r": "쏠로 에펙띠보"
+        }
+      ]
+    },
+    "de": {
+      "name": "독일어",
+      "lines": [
+        {
+          "ko": "예약했습니다",
+          "x": "Ich habe eine Reservierung.",
+          "r": "이히 하베 아이네 레저비어룽"
+        },
+        {
+          "ko": "카드 결제 되나요?",
+          "x": "Kann ich mit Karte zahlen?",
+          "r": "칸 이히 밋 카르테 찰렌"
+        },
+        {
+          "ko": "현지 통화로 결제해주세요",
+          "x": "In Franken bitte, ohne Umrechnung.",
+          "r": "인 프랑켄 비테 · 오네 움레히눙"
+        },
+        {
+          "ko": "현금만 되나요?",
+          "x": "Nur Bargeld?",
+          "r": "누어 바르겔트"
+        }
+      ]
+    },
+    "it": {
+      "name": "이탈리아어",
+      "lines": [
+        {
+          "ko": "예약했습니다",
+          "x": "Ho una prenotazione.",
+          "r": "오 우나 프레노타치오네"
+        },
+        {
+          "ko": "카드 결제 되나요?",
+          "x": "Posso pagare con la carta?",
+          "r": "뽀쏘 빠가레 꼰 라 까르따"
+        },
+        {
+          "ko": "현지 통화로 결제해주세요",
+          "x": "In euro, per favore. Senza conversione.",
+          "r": "인 에우로 뻬르 파보레 · 센차 콘베르시오네"
+        },
+        {
+          "ko": "현금만 되나요?",
+          "x": "Solo contanti?",
+          "r": "쏠로 꼰딴띠"
+        }
+      ]
+    },
+    "cs": {
+      "name": "체코어",
+      "lines": [
+        {
+          "ko": "예약했습니다",
+          "x": "Mám rezervaci.",
+          "r": "맘 레제르바치"
+        },
+        {
+          "ko": "카드 결제 되나요?",
+          "x": "Můžu platit kartou?",
+          "r": "무주 플라티트 카르토우"
+        },
+        {
+          "ko": "현지 통화로 결제해주세요",
+          "x": "V korunách, prosím. Bez převodu.",
+          "r": "브 코루나흐 프로심 · 베즈 프제보두"
+        },
+        {
+          "ko": "현금만 되나요?",
+          "x": "Jenom hotovost?",
+          "r": "예놈 호토보스트"
+        }
+      ]
+    }
+  }
 }
