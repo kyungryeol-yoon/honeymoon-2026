@@ -19,11 +19,15 @@ def slim(src: dict) -> dict:
         "trip": src["trip"],
         "cities": [
             {k: v for k, v in c.items() if k in
-             ("id", "name", "short", "flag", "color", "colorLight", "icon", "map", "home")}
+             ("id", "name", "short", "flag", "color", "colorLight", "icon", "map", "home",
+              "lang")}
             for c in src["cities"]
         ],
         "days": [],
     }
+    # 현지어 프리셋은 남깁니다 — 말이 안 통하는 상황은 오프라인일 때 더 자주 옵니다
+    if src.get("phrases"):
+        out["phrases"] = src["phrases"]
     for d in src["days"]:
         day = {"date": d["date"], "city": d["city"], "dayNo": d["dayNo"]}
         if d.get("label"): day["label"] = d["label"]
