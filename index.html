@@ -271,6 +271,9 @@ body{
 }
 .nc-next .t{font-family:var(--f-mono);font-size:11.5px;color:var(--paper-faint);flex:0 0 auto}
 .nc-next[hidden]{display:none}
+/* 내일 첫 일정이 이른 새벽이면 자기 전에 확실히 보이도록 */
+.nc-next.early{color:var(--now);font-weight:500}
+.nc-next.early .t{color:var(--now);font-weight:600}
 
 /* D-day 카운트다운 */
 .now-card.countdown .nc-title{
@@ -1351,6 +1354,8 @@ function render(){
 
   /* ---- 현재 / 다음 판별 ---- */
   let liveIdx = -1, nextIdx = -1;
+  // 첫 일정 시작 전인가 — 이때 "지금"이라고 하면 거짓말이 됩니다
+  let beforeStart = false;
   if(isToday && ph === 'live'){
     day.items.forEach((it,i) => {
       const s = toMin(it.time);
@@ -1359,6 +1364,9 @@ function render(){
       if(nextIdx === -1 && s > nowMin) nextIdx = i;
     });
     if(liveIdx === -1 && nextIdx === -1) liveIdx = day.items.length - 1;
+    beforeStart = nowMin < toMin(day.items[0].time);
+    // 시작 전에는 첫 일정이 "지금"이자 "다음"으로 겹치므로 다음은 두 번째 일정으로
+    if(beforeStart && nextIdx === 0) nextIdx = day.items.length > 1 ? 1 : -1;
   }
 
   /* ---- 여행 완료 요약 ---- */
@@ -1377,6 +1385,7 @@ function render(){
 
   /* ---- NOW 카드 ---- */
   const card = $('#now-card');
+  $('#nc-next').classList.remove('early');
   const hasFirstDay = DAYS[0].date === TRIP.start;
 
   if(finished){
@@ -1422,7 +1431,8 @@ function render(){
   }else{
     card.classList.remove('countdown');
     countdownTarget = null;
-    $('#nc-tag-label').textContent = ph === 'post' ? '여행 종료' : '지금';
+    $('#nc-tag-label').textContent =
+      ph === 'post' ? '여행 종료' : (beforeStart ? '곧 시작' : '지금');
 
     const live = day.items[liveIdx] || day.items[0];
     $('#now-title').textContent = live.name;
@@ -1433,9 +1443,24 @@ function render(){
     if(nxt){
       $('#next-time').textContent = nxt.time;
       $('#next-name').textContent = nxt.desc ? `${nxt.name} · ${nxt.desc}` : nxt.name;
-    }else{
+    }else if(ph === 'post'){
       $('#next-time').textContent = '';
-      $('#next-name').textContent = ph === 'post' ? '모든 일정 완료' : '오늘 일정 끝';
+      $('#next-name').textContent = '모든 일정 완료';
+    }else{
+      /* 오늘이 끝났으면 내일 첫 일정을 보여줍니다.
+         자기 전 마지막으로 보는 화면인데 "내일 몇 시에 일어나야 하는지"가
+         없으면 곤란합니다 — 9/17 은 02:30 기상, 9/27 은 06:45 투어 미팅입니다. */
+      const tmr = DAYS[DAYS.findIndex(d => d.date === day.date) + 1];
+      if(isToday && tmr){
+        const first = tmr.items[0];
+        $('#next-time').textContent = `내일 ${first.time}`;
+        $('#next-name').textContent = first.desc ? `${first.name} · ${first.desc}` : first.name;
+        // 이른 시각이면 눈에 띄게
+        $('#nc-next').classList.toggle('early', toMin(first.time) < 7 * 60);
+      }else{
+        $('#next-time').textContent = '';
+        $('#next-name').textContent = '오늘 일정 끝';
+      }
     }
   }
 
