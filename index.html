@@ -171,6 +171,22 @@ body{
   display:flex;align-items:flex-end;
 }
 .landmark svg{height:100%;width:auto;overflow:visible}
+
+/* 날짜를 넘기면 랜드마크와 도시명이 진행 방향으로 교체됩니다 */
+.landmark.in-fwd svg,.city-name.in-fwd{animation:slide-fwd .42s cubic-bezier(.2,.8,.25,1) both}
+.landmark.in-back svg,.city-name.in-back{animation:slide-back .42s cubic-bezier(.2,.8,.25,1) both}
+.city-name.in-fwd,.city-name.in-back{animation-delay:60ms}
+@keyframes slide-fwd{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+@keyframes slide-back{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
+
+/* 앱을 열 때 헤더가 한 번 올라옵니다 (짧게) */
+.hero.boot .landmark,.hero.boot .city-name,.hero.boot .city-sub,.hero.boot .journey{
+  animation:hero-in .5s cubic-bezier(.2,.8,.3,1) both;
+}
+.hero.boot .city-name{animation-delay:60ms}
+.hero.boot .city-sub{animation-delay:110ms}
+.hero.boot .journey{animation-delay:155ms}
+@keyframes hero-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .lm-stroke{fill:none;stroke:var(--now);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .lm-fill{fill:var(--now);opacity:var(--fill-op)}
 .lm-dim{fill:none;stroke:var(--now);stroke-width:1.2;opacity:.45}
@@ -221,6 +237,11 @@ body{
   width:13px;height:13px;
   background:var(--now);border-color:var(--now);
   box-shadow:0 0 0 4px color-mix(in srgb,var(--now) 22%,transparent);
+  animation:j-halo 3.2s ease-in-out infinite;
+}
+@keyframes j-halo{
+  0%,100%{box-shadow:0 0 0 4px color-mix(in srgb,var(--now) 22%,transparent)}
+  50%    {box-shadow:0 0 0 8px color-mix(in srgb,var(--now)  7%,transparent)}
 }
 .j-label{
   font-family:var(--f-mono);
@@ -352,6 +373,19 @@ section{margin-top:34px}
 .tl::before{content:"";position:absolute;left:4px;top:8px;bottom:8px;width:1px;background:var(--line)}
 
 .tl li{position:relative;padding:0 0 20px}
+
+/* 날짜를 넘겼을 때만 일정이 차례로 올라옵니다.
+   1분마다 도는 자동 갱신에서는 재생되지 않게 .enter 를 그때만 붙입니다 */
+.tl.enter li{animation:tl-in .4s cubic-bezier(.2,.8,.3,1) both}
+.tl.enter li:nth-child(1){animation-delay:0ms}
+.tl.enter li:nth-child(2){animation-delay:34ms}
+.tl.enter li:nth-child(3){animation-delay:68ms}
+.tl.enter li:nth-child(4){animation-delay:100ms}
+.tl.enter li:nth-child(5){animation-delay:128ms}
+.tl.enter li:nth-child(6){animation-delay:152ms}
+.tl.enter li:nth-child(7){animation-delay:172ms}
+.tl.enter li:nth-child(n+8){animation-delay:188ms}
+@keyframes tl-in{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
 .tl li::before{
   content:"";position:absolute;left:-22px;top:6px;
   width:9px;height:9px;border-radius:50%;
@@ -369,6 +403,20 @@ section{margin-top:34px}
 .tl li.live .tl-t::after{content:" · 지금";font-weight:600;letter-spacing:.08em}
 .tl-n{font-size:15px;margin-top:2px;font-weight:450}
 .tl li.live .tl-n{font-weight:600}
+
+/* ---------- 하이라이트 (그날의 명장면) ---------- */
+.tl li.star .tl-n{font-size:16.5px;font-weight:600;letter-spacing:-.012em}
+.tl li.star::before{background:var(--now);border-color:var(--now);opacity:.5}
+.tl li.star.live::before{opacity:1}
+.tl li.star.past::before{opacity:.5}
+.star-mark{
+  display:inline-block;width:11px;height:11px;margin-right:6px;
+  color:var(--now);vertical-align:-1px;
+}
+.star-mark svg{width:100%;height:100%;display:block}
+/* 날이 바뀔 때만 살짝 피어납니다 */
+.tl.enter li.star .star-mark{animation:bloom .5s cubic-bezier(.2,.9,.3,1.3) both;animation-delay:inherit}
+@keyframes bloom{from{opacity:0;transform:scale(.3) rotate(-40deg)}to{opacity:1;transform:none}}
 .tl-d{font-size:12.5px;color:var(--paper-faint);margin-top:3px;line-height:1.5}
 
 /* 장소명 → 구글맵 딥링크 */
@@ -510,6 +558,17 @@ section{margin-top:34px}
 .up-date{font-family:var(--f-mono);font-size:11px;color:var(--paper-faint);flex:0 0 46px;letter-spacing:.04em}
 .up-city{font-size:14px;flex:1}
 .up-bar{width:3px;height:26px;border-radius:2px;background:var(--c,var(--line));flex:0 0 auto}
+/* 색 막대 대신 그날 도시의 랜드마크 (이미 그려둔 것을 재사용) */
+.up-ico{
+  width:30px;height:24px;flex:0 0 auto;
+  display:flex;align-items:flex-end;justify-content:center;
+  color:var(--c,var(--line));opacity:.85;
+}
+.up-ico svg{height:100%;width:auto;overflow:visible}
+.up-ico .lm-stroke{stroke:currentColor;stroke-width:2.6}
+.up-ico .lm-dim{display:none}
+.up-ico .lm-fill{fill:currentColor;opacity:.16}
+.up-row:hover .up-ico{opacity:1}
 .up-arrow{color:var(--paper-faint);font-size:15px}
 .up-row:active .up-arrow{color:var(--now)}
 .up-cash{
@@ -591,6 +650,44 @@ footer{
 }
 #to-today.show{opacity:1;transform:none;pointer-events:auto}
 #to-today svg{width:13px;height:13px}
+
+/* ---------- 출발 전 · 만나러 가는 곳 ----------
+   9/14 까지 35일 동안은 이 화면이 앱의 거의 전부라, 카운트다운만 두면
+   허전합니다. 갈 도시들을 랜드마크로 늘어놓고 탭하면 그 도시로 갑니다. */
+.preview-cities{margin:22px 0 0}
+.pc-head{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--paper-faint);margin-bottom:12px;
+  display:flex;align-items:center;gap:10px;
+}
+.pc-head::after{content:"";flex:1;height:1px;background:var(--line)}
+/* 6개를 한 줄로 놓으면 폰에서 도시명이 잘려서 3열 2행으로 */
+.pc-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pc-city{
+  min-width:0;
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+  padding:14px 6px 11px;border-radius:12px;
+  background:none;border:1px solid var(--line);
+  color:inherit;font:inherit;cursor:pointer;
+  transition:border-color .18s,transform .18s;
+}
+.pc-city:hover{border-color:color-mix(in srgb,var(--c) 55%,var(--line));transform:translateY(-2px)}
+.pc-city:active{transform:translateY(0) scale(.97)}
+.pc-ico{height:34px;display:flex;align-items:flex-end;color:var(--c)}
+.pc-ico svg{height:100%;width:auto;overflow:visible}
+.pc-ico .lm-stroke{stroke:currentColor;stroke-width:2.4}
+.pc-ico .lm-dim{display:none}
+.pc-ico .lm-fill{fill:currentColor;opacity:.15}
+.pc-name{font-size:11.5px;color:var(--paper-dim);white-space:nowrap}
+.preview-cities[hidden]{display:none}
+/* 순서대로 하나씩 나타납니다 */
+.pc-row.enter .pc-city{animation:pc-in .45s cubic-bezier(.2,.8,.3,1) both}
+.pc-row.enter .pc-city:nth-child(2){animation-delay:55ms}
+.pc-row.enter .pc-city:nth-child(3){animation-delay:110ms}
+.pc-row.enter .pc-city:nth-child(4){animation-delay:165ms}
+.pc-row.enter .pc-city:nth-child(5){animation-delay:220ms}
+.pc-row.enter .pc-city:nth-child(6){animation-delay:275ms}
+@keyframes pc-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* ---------- 여행 완료 ---------- */
 .finale{
@@ -733,6 +830,12 @@ footer{
   </div>
 
   <div class="strip" id="strip"></div>
+
+  <!-- 출발 전에만 — 만나러 가는 도시들 -->
+  <div class="preview-cities" id="preview-cities" hidden>
+    <div class="pc-head">만나러 가는 곳</div>
+    <div class="pc-row" id="pc-row"></div>
+  </div>
 
   <div class="netnote" id="netnote" hidden></div>
 
@@ -1044,6 +1147,7 @@ const CP  = `<svg class="cp" viewBox="0 0 24 24" fill="none" stroke="currentColo
 const CK  = `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>`;
 const ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16"/><path d="M6 14l6 6 6-6"/></svg>`;
 const CHEV  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`;
+const STAR  = `<span class="star-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5l2.4 6.9 6.9 2.4-6.9 2.4L12 22.5l-2.4-6.9L2.7 13.2l6.9-2.4z"/></svg></span>`;
 const COIN  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.6-.9-1.7-1.5-3-1.5-2 0-3.5 1.8-3.5 4s1.5 4 3.5 4c1.3 0 2.4-.6 3-1.5"/><path d="M7.5 11.5h5M7.5 13.5h5"/></svg>`;
 const EXT   = `<svg class="ex" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>`;
 const SPEAK = `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H4l2.2-2.6A8 8 0 1 1 21 12z"/></svg>`;
@@ -1106,6 +1210,10 @@ let countdownTarget = null;
 let scrolledDate = null;   // "지금" 일정으로 자동 스크롤을 한 날 (하루 한 번만)
 let showPast = false;      // 지난 일정을 펼쳐 뒀는지
 let showPastFor = null;    // 어느 날에 대해 펼쳤는지 (날이 바뀌면 다시 접힘)
+let navDir = 0;            // 날짜를 앞뒤 어느 쪽으로 넘겼는지 (전환 방향)
+let renderedDate = null;   // 마지막으로 그린 날 — 1분마다 도는 갱신에선 애니메이션을 재생하지 않습니다
+let booted = false;        // 앱을 처음 연 순간인지
+let foldToggled = false;   // 방금 지난 일정을 접거나 폈는지
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
 const cityById = id => CITIES.find(c => c.id === id) || CITIES[0];
@@ -1146,12 +1254,22 @@ function stepDay(delta){
   const i = DAYS.findIndex(d => d.date === currentDay().date);
   const next = DAYS[i + delta];
   if(!next) return;
+  navDir = delta;
   viewDate = next.date;
   render();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function goToday(){
+  const cur = currentDay().date;
+  navDir = cur > today() ? -1 : 1;
   viewDate = null;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+/* 특정 날로 점프할 때도 방향을 맞춰줍니다 */
+function jumpTo(date){
+  navDir = date > currentDay().date ? 1 : -1;
+  viewDate = date;
   render();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1224,10 +1342,11 @@ function itemHTML(it, city, cls, day, next){
   const srState = cls === 'past' ? '<span class="sr-only">지난 일정. </span>'
                 : cls === 'live' ? '<span class="sr-only">진행 중. </span>' : '';
 
-  return `<li class="${cls}">
+  return `<li class="${cls}${it.star ? ' star' : ''}">
     ${srState}
+    ${it.star ? '<span class="sr-only">하이라이트. </span>' : ''}
     <div class="tl-t">${esc(time)}</div>
-    <div class="tl-n">${name}</div>
+    <div class="tl-n">${it.star ? STAR : ''}${name}</div>
     ${meet}
     ${it.desc ? `<div class="tl-d">${esc(it.desc)}</div>` : ''}
     ${prep}
@@ -1272,12 +1391,34 @@ function render(){
   $('#day-next').disabled = di >= DAYS.length - 1;
   $('#today-pill').hidden = !(browsing && ph === 'live');
 
+  /* 날이 실제로 바뀐 렌더에서만 전환 애니메이션을 재생합니다.
+     1분마다 도는 자동 갱신에서 매번 재생되면 성가십니다. */
+  const dayChanged = renderedDate !== null && renderedDate !== day.date;
+  const firstPaint = renderedDate === null;
+  renderedDate = day.date;
+
   /* ---- 헤더 ---- */
   $('#clock').textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
   const tzEl = $('#tz');
   tzEl.textContent = tzAbbr();
   tzEl.title = tzName();
   $('#landmark').innerHTML = ICONS[headCity.icon] || '';
+
+  // 랜드마크·도시명을 넘긴 방향으로 들여보냅니다
+  const lm = $('#landmark'), cn = $('#city-name');
+  [lm, cn].forEach(el => el.classList.remove('in-fwd', 'in-back'));
+  if(dayChanged){
+    const dir = navDir < 0 ? 'in-back' : 'in-fwd';
+    void lm.offsetWidth;                       // 애니메이션 재시작
+    lm.classList.add(dir); cn.classList.add(dir);
+  }
+  // 앱을 처음 연 순간에만 헤더가 한 번 올라옵니다
+  const hero = document.querySelector('.hero');
+  if(firstPaint && !booted){
+    booted = true;
+    hero.classList.add('boot');
+    setTimeout(() => hero.classList.remove('boot'), 900);
+  }
   // 스위스처럼 한 노드 안에서 거점이 바뀌는 날은 day.label 로 실제 지명을 보여줍니다
   $('#city-name').textContent = (ph !== 'pre' && day.label) ? day.label : headCity.name;
   $('#ey-flag').textContent = headCity.flag;
@@ -1509,7 +1650,8 @@ function render(){
   }
   const fromIdx = (foldable && !showPast) ? liveIdx : 0;
 
-  $('#tl').innerHTML = day.items
+  const tlEl = $('#tl');
+  tlEl.innerHTML = day.items
     .map((it,i) => [it,i])
     .filter(([,i]) => i >= fromIdx)
     .map(([it,i]) => itemHTML(
@@ -1517,6 +1659,14 @@ function render(){
       i === liveIdx ? 'live' : (liveIdx > -1 && i < liveIdx ? 'past' : ''),
       day, day.items[i+1]))
     .join('');
+
+  // 날을 넘겼거나 접기를 토글했을 때만 일정이 차례로 올라옵니다
+  tlEl.classList.remove('enter');
+  if(dayChanged || foldToggled){
+    void tlEl.offsetWidth;
+    tlEl.classList.add('enter');
+  }
+  foldToggled = false;
 
   /* 하루 15~29개라 오후에 열면 항상 손으로 내려야 했습니다.
      그 날에 처음 들어올 때 한 번만 "지금" 일정으로 옮겨줍니다 —
@@ -1556,13 +1706,31 @@ function render(){
       || d.items[0].name;
     const r = relLabel(d.date);
     return `<button class="up-row" type="button" data-date="${d.date}">
-        <span class="up-bar" style="--c:${cityColor(c)}"></span>
+        <span class="up-ico" style="--c:${cityColor(c)}" aria-hidden="true">${ICONS[c.icon] || ''}</span>
         <span class="up-date">${r || md}</span>
         <span class="up-city">${esc(c.name)} · ${esc(label)}</span>
         ${d.cash ? `<span class="up-cash" style="--c:${cityColor(c)}">${esc(d.cash.amount)}</span>` : ''}
         <span class="up-arrow">›</span>
       </button>`;
   }).join('');
+
+  /* ---- 출발 전 · 만나러 가는 곳 ---- */
+  const showPreview = preHead;
+  $('#preview-cities').hidden = !showPreview;
+  if(showPreview){
+    const row = $('#pc-row');
+    row.innerHTML = CITIES.filter(c => !c.home).map(c =>
+      `<button class="pc-city" type="button" data-city="${c.id}" style="--c:${cityColor(c)}"
+               aria-label="${esc(c.name)} 일정 보기">
+         <span class="pc-ico" aria-hidden="true">${ICONS[c.icon] || ''}</span>
+         <span class="pc-name">${esc(c.name)}</span>
+       </button>`).join('');
+    if(firstPaint){
+      void row.offsetWidth;
+      row.classList.add('enter');
+      setTimeout(() => row.classList.remove('enter'), 1200);
+    }
+  }
 
   /* ---- 푸터 ---- */
   $('#footer').textContent = `${TRIP.couple} · ${TRIP.start.slice(0,4)}`;
@@ -1726,21 +1894,12 @@ document.addEventListener('click', async (e) => {
   }
 
   const row = e.target.closest('.up-row');
-  if(row){
-    viewDate = row.dataset.date;
-    render();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    return;
-  }
+  if(row){ jumpTo(row.dataset.date); return; }
 
-  const node = e.target.closest('.j-node');
+  const node = e.target.closest('.j-node, .pc-city');
   if(node){
     const first = DAYS.find(d => d.city === node.dataset.city);
-    if(first){
-      viewDate = first.date;
-      render();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    if(first) jumpTo(first.date);
   }
 });
 
@@ -1752,6 +1911,7 @@ document.addEventListener('click', async (e) => {
 $('#past-fold').addEventListener('click', () => {
   const before = $('#tl li.live')?.getBoundingClientRect().top ?? null;
   showPast = !showPast;
+  foldToggled = true;
   render();
   const after = $('#tl li.live')?.getBoundingClientRect().top ?? null;
   if(before !== null && after !== null) window.scrollBy(0, after - before);
