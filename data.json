@@ -89,6 +89,10 @@
       "date": "2026-09-14",
       "city": "bcn",
       "dayNo": 1,
+      "stay": {
+        "name": "HCC 몽블랑",
+        "place": "HCC Montblanc, Barcelona"
+      },
       "chips": [
         {
           "t": "이 날 시각 = 현지 CEST (01:20 ICN 출발만 KST)"
@@ -178,6 +182,10 @@
       "date": "2026-09-15",
       "city": "bcn",
       "dayNo": 2,
+      "stay": {
+        "name": "HCC 몽블랑",
+        "place": "HCC Montblanc, Barcelona"
+      },
       "chips": [
         {
           "t": "여권 필수 (실명제)",
@@ -319,6 +327,10 @@
       "date": "2026-09-16",
       "city": "bcn",
       "dayNo": 3,
+      "stay": {
+        "name": "HCC 몽블랑",
+        "place": "HCC Montblanc, Barcelona"
+      },
       "chips": [
         {
           "t": "07:40 픽업 엄수",
@@ -387,6 +399,10 @@
       "date": "2026-09-17",
       "city": "swi",
       "dayNo": 4,
+      "stay": {
+        "name": "Camping Jungfrau",
+        "place": "Camping Jungfrau, Lauterbrunnen"
+      },
       "label": "라우터브룬넨",
       "map": "Lauterbrunnen, Switzerland",
       "chips": [
@@ -614,6 +630,10 @@
       "date": "2026-09-18",
       "city": "swi",
       "dayNo": 5,
+      "stay": {
+        "name": "Camping Jungfrau",
+        "place": "Camping Jungfrau, Lauterbrunnen"
+      },
       "label": "융프라우요흐",
       "map": "Lauterbrunnen, Switzerland",
       "chips": [
@@ -748,6 +768,10 @@
       "date": "2026-09-19",
       "city": "swi",
       "dayNo": 6,
+      "stay": {
+        "name": "Camping Eigernordwand",
+        "place": "Camping Eigernordwand, Grindelwald"
+      },
       "label": "그린델발트",
       "map": "Grindelwald, Switzerland",
       "chips": [
@@ -868,6 +892,10 @@
       "date": "2026-09-20",
       "city": "swi",
       "dayNo": 7,
+      "stay": {
+        "name": "Camping Eigernordwand",
+        "place": "Camping Eigernordwand, Grindelwald"
+      },
       "label": "그린델발트",
       "map": "Grindelwald, Switzerland",
       "chips": [
@@ -962,6 +990,10 @@
       "date": "2026-09-21",
       "city": "swi",
       "dayNo": 8,
+      "stay": {
+        "name": "Camping TCS Lugano",
+        "place": "Camping TCS Lugano-Muzzano"
+      },
       "label": "루가노",
       "map": "Lugano, Switzerland",
       "chips": [
@@ -1071,6 +1103,10 @@
       "date": "2026-09-22",
       "city": "vce",
       "dayNo": 9,
+      "stay": {
+        "name": "Hotel Plaza Venice",
+        "place": "Hotel Plaza Venice, Mestre"
+      },
       "chips": [
         {
           "t": "렌터카 09:30 반납 엄수",
@@ -1227,6 +1263,10 @@
       "date": "2026-09-23",
       "city": "vce",
       "dayNo": 10,
+      "stay": {
+        "name": "Hotel Plaza Venice",
+        "place": "Hotel Plaza Venice, Mestre"
+      },
       "chips": [
         {
           "t": "Vaporetto 24시간권 €25/인",
@@ -1373,6 +1413,10 @@
       "date": "2026-09-24",
       "city": "flr",
       "dayNo": 11,
+      "stay": {
+        "name": "Hotel Nella",
+        "place": "Hotel Nella, Firenze"
+      },
       "chips": [
         {
           "t": "기베르티 패스 현장 구매",
@@ -1523,6 +1567,10 @@
       "date": "2026-09-25",
       "city": "flr",
       "dayNo": 12,
+      "stay": {
+        "name": "Hotel Nella",
+        "place": "Hotel Nella, Firenze"
+      },
       "chips": [
         {
           "t": "우피치 08:30 미팅",
@@ -1650,6 +1698,10 @@
       "date": "2026-09-26",
       "city": "flr",
       "dayNo": 13,
+      "stay": {
+        "name": "Hotel Nella",
+        "place": "Hotel Nella, Firenze"
+      },
       "label": "피사 · 친퀘테레",
       "chips": [
         {
@@ -1800,6 +1852,10 @@
       "date": "2026-09-27",
       "city": "rom",
       "dayNo": 14,
+      "stay": {
+        "name": "마그니피코 로마",
+        "place": "Hotel Magnifico Roma"
+      },
       "chips": [
         {
           "t": "06:45 더몰 버스 정류장",
@@ -1940,6 +1996,10 @@
       "date": "2026-09-28",
       "city": "rom",
       "dayNo": 15,
+      "stay": {
+        "name": "마그니피코 로마",
+        "place": "Hotel Magnifico Roma"
+      },
       "chips": [
         {
           "t": "여권 지참"
@@ -2104,6 +2164,10 @@
       "date": "2026-09-29",
       "city": "rom",
       "dayNo": 16,
+      "stay": {
+        "name": "마그니피코 로마",
+        "place": "Hotel Magnifico Roma"
+      },
       "chips": [
         {
           "t": "보르게세 17:00 엄수",
@@ -2265,6 +2329,11 @@
       "date": "2026-09-30",
       "city": "prg",
       "dayNo": 17,
+      "stay": {
+        "name": "Golden Angel Suites",
+        "place": "Golden Angel Suites, Praha",
+        "addr": "Celetná 588/29, Praha"
+      },
       "chips": [
         {
           "t": "전날 온라인 체크인 필수",
@@ -2450,6 +2519,11 @@
       "date": "2026-10-01",
       "city": "prg",
       "dayNo": 18,
+      "stay": {
+        "name": "Golden Angel Suites",
+        "place": "Golden Angel Suites, Praha",
+        "addr": "Celetná 588/29, Praha"
+      },
       "chips": [
         {
           "t": "프라하성 오전 = 인파 적음"
@@ -2542,6 +2616,11 @@
       "date": "2026-10-02",
       "city": "prg",
       "dayNo": 19,
+      "stay": {
+        "name": "Golden Angel Suites",
+        "place": "Golden Angel Suites, Praha",
+        "addr": "Celetná 588/29, Praha"
+      },
       "label": "체스키 크룸로프",
       "map": "Český Krumlov, Czechia",
       "chips": [

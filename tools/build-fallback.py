@@ -33,6 +33,8 @@ def slim(src: dict) -> dict:
         if d.get("label"): day["label"] = d["label"]
         if d.get("map"):   day["map"]   = d["map"]
         if d.get("cash"):  day["cash"]  = {"amount": d["cash"]["amount"]}
+        # 숙소는 남깁니다 — 길 잃고 오프라인일 때 제일 급한 한 줄입니다
+        if d.get("stay"):  day["stay"]  = d["stay"]
         items = []
         for it in d["items"]:
             o = {"time": it["time"], "name": it["name"]}
