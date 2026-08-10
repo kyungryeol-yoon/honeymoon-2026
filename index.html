@@ -1339,11 +1339,16 @@ function render(){
     node.innerHTML = `<span class="j-dot"></span><span class="j-label">${esc(c.short)}</span>`;
     track.appendChild(node);
   });
-  // 귀국일에는 "Seoul → 서울 → Seoul" 이 되지 않도록
+  /* 위 여정 라인이 이미 전체 경로를 보여주므로, 이 줄은 "직전에 있던 곳 → 지금 →
+     다음 목적지"로 현재 위치를 알려주는 데 씁니다. 양옆이 늘 Seoul 이면 매일
+     같은 문장이라 알려주는 게 없습니다. */
   const preHead = ph === 'pre' && !viewDate;
-  $('#j-route').innerHTML = (!preHead && city.home)
-    ? `Seoul → <b>${esc(city.name)}</b> · 완주`
-    : `Seoul → <b>${esc(preHead ? CITIES[0].name : city.name)}</b> → Seoul`;
+  const curIdx  = preHead ? 0 : Math.max(0, CITIES.findIndex(c => c.id === city.id));
+  const prevName = curIdx > 0 ? CITIES[curIdx - 1].name : 'Seoul';
+  const nextName = curIdx < CITIES.length - 1 ? CITIES[curIdx + 1].name : null;
+  $('#j-route').innerHTML = nextName
+    ? `${esc(prevName)} → <b>${esc(CITIES[curIdx].name)}</b> → ${esc(nextName)}`
+    : `${esc(prevName)} → <b>${esc(CITIES[curIdx].name)}</b> · 완주`;
   $('#j-prog').textContent = preHead ? 0 : (ph === 'post' && !viewDate ? TOTAL_DAYS : day.dayNo);
   $('#j-total').textContent = TOTAL_DAYS;
 
