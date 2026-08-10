@@ -95,7 +95,12 @@
       },
       "chips": [
         {
-          "t": "이 날 시각 = 현지 CEST (01:20 ICN 출발만 KST)"
+          "t": "총 20시간 20분 · 도하 환승 3:15",
+          "warn": true
+        },
+        {
+          "t": "시각 = ICN 01:20 KST / DOH GMT+3 / BCN CEST",
+          "warn": true
         },
         {
           "t": "도착일 = 가볍게"
@@ -111,10 +116,50 @@
       ],
       "items": [
         {
+          "time": "01:20",
+          "name": "ICN → DOH",
+          "desc": "카타르항공 A350 · 10시간 · 시각은 KST",
+          "end": "05:20",
+          "map": false,
+          "prep": [
+            "휴대 7kg (50×37×25)",
+            "위탁 25kg",
+            "위탁 추가 마감 9/13 01:20 KST"
+          ],
+          "refs": [
+            {
+              "label": "편명",
+              "value": "QR859"
+            }
+          ]
+        },
+        {
+          "time": "05:20",
+          "name": "도하 하마드 공항 도착",
+          "desc": "현지시각 (GMT+3) · 환승 3시간 15분",
+          "place": "Hamad International Airport",
+          "prep": [
+            "수하물 수취·재수속 불필요"
+          ]
+        },
+        {
+          "time": "08:35",
+          "name": "DOH → BCN",
+          "desc": "카타르항공 787-9 · 7시간 5분 · 도하 시각 출발",
+          "end": "14:40",
+          "map": false,
+          "refs": [
+            {
+              "label": "편명",
+              "value": "QR145"
+            }
+          ]
+        },
+        {
           "time": "14:40",
           "name": "BCN 공항 도착",
           "place": "Barcelona El Prat Airport",
-          "desc": "이 날 표기 시각은 모두 현지(CEST) 기준 — 01:20 ICN 출발만 KST 기준 (CEST = KST −7시간)"
+          "desc": "현지 CEST 기준 · 총 여정 20시간 20분"
         },
         {
           "time": "15:00",
@@ -460,7 +505,8 @@
           "desc": "23kg 확인",
           "map": false,
           "prep": [
-            "위탁 23kg 포함"
+            "휴대 8kg (55×40×23)",
+            "위탁 23kg (별도 구매분)"
           ]
         },
         {
@@ -2370,7 +2416,8 @@
           "warn": true
         },
         {
-          "t": "백팩 40×30×20"
+          "t": "휴대 수하물 무료 없음",
+          "warn": true
         },
         {
           "t": "CZK 환전"
@@ -2388,7 +2435,8 @@
           "name": "짐 정리 · 마지막 점검",
           "map": false,
           "prep": [
-            "백팩 40×30×20cm 이내",
+            "개인소지품 1개 10kg (40×30×20)",
+            "휴대 수하물 무료 없음",
             "위탁 20kg/인 (빈 캐리어 5~6kg)"
           ]
         },
@@ -2420,11 +2468,12 @@
         },
         {
           "time": "10:35",
-          "name": "FCO 공항 T1 도착",
-          "place": "Rome Fiumicino Airport Terminal 1",
+          "name": "FCO 공항 T3 도착",
+          "place": "Rome Fiumicino Airport Terminal 3",
           "move": "레오나르도 익스프레스 32분",
           "prep": [
-            "위즈에어 = T1 (T3 아님)"
+            "예약 화면 = T3",
+            "전광판으로 당일 재확인"
           ]
         },
         {
@@ -2434,7 +2483,8 @@
           "map": false,
           "prep": [
             "한국 여권 = 카운터 스탬프 필요",
-            "위탁 추가 구매 마감 10:40"
+            "휴대 수하물 무료 없음",
+            "위탁 추가 마감 9/29 19:40 KST"
           ]
         },
         {
@@ -2754,6 +2804,10 @@
       "dayNo": 20,
       "chips": [
         {
+          "t": "출발 T1 · 도착 때와 다른 터미널",
+          "warn": true
+        },
+        {
           "t": "체크아웃 10:00 · 짐 보관",
           "warn": true
         },
@@ -2820,13 +2874,19 @@
         },
         {
           "time": "16:15",
-          "name": "공항 도착 · 체크인 · 면세점",
-          "map": false
+          "name": "공항 T1 도착 · 체크인 · 면세점",
+          "map": false,
+          "place": "Václav Havel Airport Prague Terminal 1",
+          "prep": [
+            "출발은 T1 (도착 때 T2와 다름)",
+            "휴대 10kg (3변 합 115cm)",
+            "위탁 23kg"
+          ]
         },
         {
           "time": "19:05",
           "name": "PRG → 서울 출발",
-          "desc": "대한항공 · 발권완료",
+          "desc": "대한항공 787-10 · 11시간 15분 · 익일 13:20 ICN T2 도착",
           "map": false,
           "refs": [
             {
