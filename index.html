@@ -265,6 +265,21 @@ body{
 
 .nc-title{font-size:19px;font-weight:600;margin:9px 0 3px;letter-spacing:-.01em}
 .nc-time{font-family:var(--f-mono);font-size:12px;color:var(--paper-dim)}
+.nc-time .rest{color:var(--paper-faint)}
+
+/* 지난 일정 접기 — 밤에 열면 하루의 절반 이상이 이미 끝난 일정입니다 */
+.past-fold{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  width:100%;margin:0 0 16px;padding:9px 12px;
+  background:none;border:1px dashed var(--line);border-radius:10px;
+  color:var(--paper-faint);font:inherit;font-size:12px;cursor:pointer;
+  transition:color .15s,border-color .15s;
+}
+.past-fold:hover{color:var(--now);border-color:color-mix(in srgb,var(--now) 40%,var(--line))}
+.past-fold:active{transform:scale(.99)}
+.past-fold svg{width:12px;height:12px;flex:0 0 auto;transition:transform .2s ease}
+.past-fold[aria-expanded="true"] svg{transform:rotate(180deg)}
+.past-fold[hidden]{display:none}
 .nc-next{
   margin-top:14px;padding-top:13px;border-top:1px solid var(--line);
   display:flex;align-items:baseline;gap:9px;font-size:13.5px;color:var(--paper-dim);
@@ -724,6 +739,7 @@ footer{
   <!-- ============ 오늘 ============ -->
   <section id="sec-today" hidden>
     <div class="sec-head" id="head-today">오늘</div>
+    <button class="past-fold" id="past-fold" type="button" aria-expanded="false" hidden></button>
     <ul class="tl" id="tl" aria-label="오늘 일정"></ul>
   </section>
 
@@ -1027,6 +1043,7 @@ const PIN = `<svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentCol
 const CP  = `<svg class="cp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>`;
 const CK  = `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>`;
 const ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16"/><path d="M6 14l6 6 6-6"/></svg>`;
+const CHEV  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`;
 const COIN  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.6-.9-1.7-1.5-3-1.5-2 0-3.5 1.8-3.5 4s1.5 4 3.5 4c1.3 0 2.4-.6 3-1.5"/><path d="M7.5 11.5h5M7.5 13.5h5"/></svg>`;
 const EXT   = `<svg class="ex" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>`;
 const SPEAK = `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H4l2.2-2.6A8 8 0 1 1 21 12z"/></svg>`;
@@ -1087,6 +1104,8 @@ let PHRASES = {};   // 현지어 프리셋 — 없어도 화면은 그대로 돕
 let CONTACTS = {};  // 긴급 연락처 (cities[].flag 국가코드로 찾습니다)
 let countdownTarget = null;
 let scrolledDate = null;   // "지금" 일정으로 자동 스크롤을 한 날 (하루 한 번만)
+let showPast = false;      // 지난 일정을 펼쳐 뒀는지
+let showPastFor = null;    // 어느 날에 대해 펼쳤는지 (날이 바뀌면 다시 접힘)
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
 const cityById = id => CITIES.find(c => c.id === id) || CITIES[0];
@@ -1436,7 +1455,14 @@ function render(){
 
     const live = day.items[liveIdx] || day.items[0];
     $('#now-title').textContent = live.name;
-    $('#now-time').textContent  = live.end ? `${live.time} – ${live.end}` : live.time;
+
+    // 시각 옆에 남은 일정 — 밤에 페이스를 가늠할 수 있게
+    const timeTxt = live.end ? `${live.time} – ${live.end}` : live.time;
+    const restN = (isToday && ph === 'live' && liveIdx > -1)
+      ? day.items.length - 1 - liveIdx : 0;
+    $('#now-time').innerHTML = restN > 0
+      ? `${esc(timeTxt)} <span class="rest">· 남은 일정 ${restN}개 · 마지막 ${esc(day.items[day.items.length-1].time)}</span>`
+      : esc(timeTxt);
 
     const nxt = day.items[nextIdx];
     $('#nc-next').hidden = false;
@@ -1471,8 +1497,22 @@ function render(){
   $('#head-today').textContent = (ph === 'pre' && !viewDate)
     ? (hasFirstDay ? '첫날 일정' : `${fmtDate(day.date)} · 미리보기`)
     : (isToday ? '오늘' : (rel ? `${rel} 일정` : fmtDate(day.date)));
+  /* 지난 일정 접기 — 9/26 밤이면 18개 중 17개가 이미 끝난 일정이라
+     화면 위쪽 2천 픽셀이 죽은 정보가 됩니다. 날이 바뀌면 다시 접힙니다. */
+  const foldable = isToday && ph === 'live' && liveIdx > 0;
+  if(showPastFor !== day.date){ showPastFor = day.date; showPast = false; }
+  const fold = $('#past-fold');
+  fold.hidden = !foldable;
+  if(foldable){
+    fold.setAttribute('aria-expanded', String(showPast));
+    fold.innerHTML = CHEV + (showPast ? '지난 일정 접기' : `지난 일정 ${liveIdx}개 보기`);
+  }
+  const fromIdx = (foldable && !showPast) ? liveIdx : 0;
+
   $('#tl').innerHTML = day.items
-    .map((it,i) => itemHTML(
+    .map((it,i) => [it,i])
+    .filter(([,i]) => i >= fromIdx)
+    .map(([it,i]) => itemHTML(
       it, city,
       i === liveIdx ? 'live' : (liveIdx > -1 && i < liveIdx ? 'past' : ''),
       day, day.items[i+1]))
@@ -1707,6 +1747,16 @@ document.addEventListener('click', async (e) => {
 /* -----------------------------------------------------------
    날짜 이동 — 버튼 / 스와이프 / 좌우 방향키
    ----------------------------------------------------------- */
+/* 접기/펼치기 — 위쪽에 항목이 생겼다 사라지므로,
+   보고 있던 "지금" 일정이 화면에서 튀지 않게 스크롤을 보정합니다 */
+$('#past-fold').addEventListener('click', () => {
+  const before = $('#tl li.live')?.getBoundingClientRect().top ?? null;
+  showPast = !showPast;
+  render();
+  const after = $('#tl li.live')?.getBoundingClientRect().top ?? null;
+  if(before !== null && after !== null) window.scrollBy(0, after - before);
+});
+
 $('#day-prev').addEventListener('click', () => stepDay(-1));
 $('#day-next').addEventListener('click', () => stepDay(1));
 $('#today-pill').addEventListener('click', goToday);
