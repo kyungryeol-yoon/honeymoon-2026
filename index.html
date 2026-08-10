@@ -993,14 +993,7 @@ async function loadData(){
    랜드마크 아이콘 (SVG)
    ----------------------------------------------------------- */
 const ICONS = {
-  sagrada:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
-    <path d="M18 88V44c0-9 4-16 8-22 4 6 8 13 8 22v44"/>
-    <path d="M42 88V36c0-11 5-19 10-26 5 7 10 15 10 26v52"/>
-    <path d="M70 88V44c0-9 4-16 8-22 4 6 8 13 8 22v44"/>
-    <path d="M94 88V52c0-7 3-12 6-17 3 5 6 10 6 17v36"/>
-    <path d="M8 88h104"/></g>
-    <g class="lm-dim"><path d="M26 30v-8M52 14v-9M78 30v-8"/></g>
-  </svg>`,
+  sagrada:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke"><path d="M20 82V50c0-8 3.5-14 7-19 3.5 5 7 11 7 19v32"/><path d="M42 82V42c0-10 4.5-17 9-24 4.5 7 9 14 9 24v40"/><path d="M68 82V47c0-9 4-15 8-21 4 6 8 12 8 21v35"/><path d="M92 82V56c0-6 2.5-11 5-15 2.5 4 5 9 5 15v26"/><path d="M8 82h104"/></g><g class="lm-dim"><path d="M27 31v-7M51 18v-8M76 26v-7M97 41v-5"/><path d="M24 27h6M48 14h6M73 22h6"/></g></svg>`,
 
   alps:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
     <path d="M6 82L38 26l18 30 12-18 30 44z"/>
@@ -1009,22 +1002,9 @@ const ICONS = {
     <g class="lm-dim"><path d="M76 82l8-13 8 13"/></g>
   </svg>`,
 
-  gondola:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
-    <path d="M10 62c14 8 26 10 46 10s34-3 50-11"/>
-    <path d="M14 60c-4-6-2-9 4-9h76c7 0 9 4 5 10"/>
-    <path d="M18 51V34M18 34l10 5"/>
-    <path d="M100 51c6-6 10-9 14-9"/></g>
-    <g class="lm-dim"><path d="M8 78c10 4 22 6 44 6s38-2 52-7"/></g>
-  </svg>`,
+  gondola:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke"><path d="M24 28c-9 24-4 44 36 44 26 0 42-10 46-26"/><path d="M24 28c3 14 10 24 30 24 22 0 40-4 52-6"/></g><g class="lm-dim"><path d="M10 80c14 5 28 7 52 7s38-2 52-7"/><path d="M14 88c14 4 26 5 48 5s34-1 46-5"/></g></svg>`,
 
-  duomo:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
-    <path d="M32 88V56c0-16 12-26 28-26s28 10 28 26v32"/>
-    <path d="M60 30V18"/><path d="M54 18h12"/>
-    <path d="M22 88V60h10M98 88V60H88"/>
-    <path d="M14 88h92"/></g>
-    <path class="lm-fill" d="M32 88V56c0-16 12-26 28-26s28 10 28 26v32z"/>
-    <g class="lm-dim"><path d="M46 88V72c0-7 6-11 14-11s14 4 14 11v16"/></g>
-  </svg>`,
+  duomo:`<svg viewBox="0 0 120 90" aria-hidden="true"><path class="lm-fill" d="M30 66c0-24 9-38 21-38s21 14 21 38v16H30z"/><g class="lm-stroke"><path d="M30 66c0-24 9-38 21-38s21 14 21 38"/><path d="M44 28h14l-7-9z"/><path d="M51 19v-6"/><path d="M30 66v16M72 66v16"/><path d="M30 72h42"/><path d="M87 82V36h12v46"/><path d="M85 36h16"/><path d="M10 82h100"/></g><g class="lm-dim"><path d="M40 65c1-20 5-32 11-36M62 65c-1-20-5-32-11-36"/><path d="M93 46v8M93 62v8"/></g></svg>`,
 
   colosseo:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
     <path d="M16 82V38c0-12 20-20 44-20s44 8 44 20v44"/>
@@ -1035,22 +1015,9 @@ const ICONS = {
     <path class="lm-fill" d="M16 82V38c0-12 20-20 44-20s44 8 44 20v44z"/>
   </svg>`,
 
-  namsan:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
-    <path d="M8 82h104"/>
-    <path d="M14 82c12-13 28-19 46-19s34 6 46 19"/>
-    <path d="M60 63V38"/><path d="M53 38h14"/><path d="M50 31h20"/>
-    <path d="M53 31l3-7h8l3 7"/><path d="M60 24V8"/></g>
-    <path class="lm-fill" d="M14 82c12-13 28-19 46-19s34 6 46 19z"/>
-  </svg>`,
+  namsan:`<svg viewBox="0 0 120 90" aria-hidden="true"><path class="lm-fill" d="M14 82c12-13 28-19 46-19s34 6 46 19z"/><g class="lm-stroke"><path d="M8 82h104"/><path d="M14 82c12-13 28-19 46-19s34 6 46 19"/><path d="M60 63V40"/><path d="M53 40h14"/><path d="M50 33h20"/><path d="M53 33l3-7h8l3 7"/><path d="M60 26V12"/></g><g class="lm-dim"><path d="M56 27h8"/></g></svg>`,
 
-  charles:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke">
-    <path d="M6 66h108"/>
-    <path d="M20 66c0-9 7-15 15-15s15 6 15 15"/>
-    <path d="M70 66c0-9 7-15 15-15s15 6 15 15"/>
-    <path d="M54 66V26c0-6 3-10 6-13 3 3 6 7 6 13v40"/>
-    <path d="M60 13V6"/></g>
-    <g class="lm-dim"><path d="M6 78h108M14 66v12M106 66v12"/></g>
-  </svg>`,
+  charles:`<svg viewBox="0 0 120 90" aria-hidden="true"><g class="lm-stroke"><path d="M6 64h108"/><path d="M40 64c0-11 8-18 17-18s17 7 17 18"/><path d="M78 64c0-11 8-18 17-18s17 7 17 18"/><path d="M10 64V26h22v38"/><path d="M8 26l13-17 13 17"/><path d="M21 9V3"/><path d="M10 26v-7M32 26v-7"/></g><g class="lm-dim"><path d="M6 76h108"/><path d="M6 82h108"/><path d="M46 64V50M64 64V50M86 64V50M104 64V50"/></g></svg>`,
 };
 
 const PIN = `<svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg>`;
