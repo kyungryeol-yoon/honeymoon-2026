@@ -353,7 +353,8 @@
           "desc": "약 24시간 이동 + 시차 · 7시간 = 무리하지 말 것",
           "map": false
         }
-      ]
+      ],
+      "mixedTz": true
     },
     {
       "date": "2026-09-15",
@@ -3354,6 +3355,51 @@
           "ko": "현금만 되나요?",
           "x": "Jenom hotovost?",
           "r": "예놈 호토보스트"
+        }
+      ]
+    },
+    "en": {
+      "name": "영어",
+      "lines": [
+        {
+          "ko": "예약했습니다 (이름 ○○)",
+          "x": "I have a reservation under Yoon."
+        },
+        {
+          "ko": "짐 좀 맡길 수 있을까요?",
+          "x": "Could I leave my luggage here, please?"
+        },
+        {
+          "ko": "이거 어떻게 가나요?",
+          "x": "How do I get to this place?"
+        },
+        {
+          "ko": "몇 시에 닫나요?",
+          "x": "What time do you close?"
+        },
+        {
+          "ko": "사진 좀 찍어주시겠어요?",
+          "x": "Could you take a photo of us, please?"
+        },
+        {
+          "ko": "두 명이요",
+          "x": "A table for two, please."
+        },
+        {
+          "ko": "채식 메뉴 있나요?",
+          "x": "Do you have any vegetarian dishes?"
+        },
+        {
+          "ko": "계산서 주세요",
+          "x": "Could we have the bill, please?"
+        },
+        {
+          "ko": "이 기차 ○○ 가나요?",
+          "x": "Does this train go to ...?"
+        },
+        {
+          "ko": "도와주세요 / 경찰을 불러주세요",
+          "x": "I need help. Please call the police."
         }
       ]
     }
