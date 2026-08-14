@@ -305,11 +305,16 @@ body{
 }
 
 .j-meta{
-  display:flex;justify-content:space-between;align-items:baseline;
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
   margin-top:14px;
   font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;
   color:var(--paper-faint);
 }
+#j-route{min-width:0}
+/* 나라는 도시보다 한 단계 뒤로 물려 "나라 도시" 가 한 덩어리로 읽히게 */
+.ctry{opacity:.6;letter-spacing:.04em;margin-right:1px}
+#j-prog,#j-total{white-space:nowrap}
+.j-meta > span:last-child{flex:0 0 auto}
 .j-meta b{color:var(--paper-dim);font-weight:500}
 
 /* ---------- NOW 카드 ---------- */
@@ -1574,11 +1579,17 @@ function render(){
      같은 문장이라 알려주는 게 없습니다. */
   const preHead = (ph === 'pre' && !viewDate) || atOrigin;
   const curIdx  = preHead ? 0 : Math.max(0, CITIES.findIndex(c => c.id === city.id));
-  const prevName = curIdx > 0 ? CITIES[curIdx - 1].name : 'Seoul';
-  const nextName = curIdx < CITIES.length - 1 ? CITIES[curIdx + 1].name : null;
-  $('#j-route').innerHTML = nextName
-    ? `${esc(prevName)} → <b>${esc(CITIES[curIdx].name)}</b> → ${esc(nextName)}`
-    : `${esc(prevName)} → <b>${esc(CITIES[curIdx].name)}</b> · 완주`;
+  // 나라 + 도시. 스위스처럼 도시명 자리에 나라 이름이 들어간 곳은 한 번만 씁니다
+  const where = c => !c ? '' :
+    (c.country && c.country !== c.name
+      ? `<span class="ctry">${esc(c.country)}</span> ${esc(c.name)}`
+      : esc(c.name));
+  const home = CITIES.find(x => x.home);
+  const prevC = curIdx > 0 ? CITIES[curIdx - 1] : home;
+  const nextC = curIdx < CITIES.length - 1 ? CITIES[curIdx + 1] : null;
+  $('#j-route').innerHTML = nextC
+    ? `${where(prevC)} → <b>${where(CITIES[curIdx])}</b> → ${where(nextC)}`
+    : `${where(prevC)} → <b>${where(CITIES[curIdx])}</b> · 완주`;
   // 9/13 은 아직 한국이지만 여행 1일차는 맞으므로 진행도는 dayNo 를 씁니다
   $('#j-prog').textContent = (ph === 'pre' && !viewDate) ? 0
     : (ph === 'post' && !viewDate ? TOTAL_DAYS : day.dayNo);

@@ -15,7 +15,8 @@
       "colorLight": "#B85A32",
       "icon": "sagrada",
       "map": "Barcelona, Spain",
-      "lang": "es"
+      "lang": "es",
+      "country": "스페인"
     },
     {
       "id": "swi",
@@ -26,7 +27,8 @@
       "colorLight": "#3C74A6",
       "icon": "alps",
       "map": "Switzerland",
-      "lang": "de"
+      "lang": "de",
+      "country": "스위스"
     },
     {
       "id": "vce",
@@ -37,7 +39,8 @@
       "colorLight": "#677F3C",
       "icon": "gondola",
       "map": "Venezia, Italy",
-      "lang": "it"
+      "lang": "it",
+      "country": "이탈리아"
     },
     {
       "id": "flr",
@@ -48,7 +51,8 @@
       "colorLight": "#677F3C",
       "icon": "duomo",
       "map": "Firenze, Italy",
-      "lang": "it"
+      "lang": "it",
+      "country": "이탈리아"
     },
     {
       "id": "rom",
@@ -59,7 +63,8 @@
       "colorLight": "#677F3C",
       "icon": "colosseo",
       "map": "Roma, Italy",
-      "lang": "it"
+      "lang": "it",
+      "country": "이탈리아"
     },
     {
       "id": "prg",
@@ -70,7 +75,8 @@
       "colorLight": "#963E53",
       "icon": "charles",
       "map": "Praha, Czechia",
-      "lang": "cs"
+      "lang": "cs",
+      "country": "체코"
     },
     {
       "id": "sel",
@@ -81,7 +87,8 @@
       "colorLight": "#7D5E8E",
       "icon": "namsan",
       "map": "Seoul, South Korea",
-      "home": true
+      "home": true,
+      "country": "한국"
     }
   ],
   "days": [
