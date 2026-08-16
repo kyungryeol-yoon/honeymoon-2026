@@ -1037,6 +1037,16 @@ footer{
     </div>
   </section>
 
+  <!-- ============ 기념품 (그날 도시에서 살 것) ============ -->
+  <section id="sec-gift" hidden>
+    <button class="sec-head sec-fold" id="head-gift" type="button" aria-expanded="false"
+            aria-controls="gift-body">기념품</button>
+    <div id="gift-body" hidden>
+      <div class="food" id="gift"></div>
+      <div class="phr-lang" id="gift-note"></div>
+    </div>
+  </section>
+
   <!-- ============ 한마디 (현지어 · 영어) ============ -->
   <section id="sec-phrases" hidden>
     <button class="sec-head sec-fold" id="head-phrases" type="button" aria-expanded="false"
@@ -1434,6 +1444,7 @@ let TRIP = null, CITIES = [], DAYS = [], TOTAL_DAYS = 0, DATA_SOURCE = null;
 let PHRASES = {};   // 현지어 프리셋 — 없어도 화면은 그대로 돕니다
 let CONTACTS = {};  // 긴급 연락처 (cities[].flag 국가코드로 찾습니다)
 let FOOD = {};      // 먹을 곳 (cities[].id 로 찾습니다)
+let GIFT = {};      // 기념품 (cities[].id 로 찾습니다)
 let countdownTarget = null;
 let scrolledDate = null;   // "지금" 일정으로 자동 스크롤을 한 날 (하루 한 번만)
 let showPast = false;      // 지난 일정을 펼쳐 뒀는지
@@ -1456,6 +1467,7 @@ function resetSigs(){ for(const k in _sig) delete _sig[k]; }
 let booted = false;        // 앱을 처음 연 순간인지
 let foldToggled = false;   // 방금 지난 일정을 접거나 폈는지
 let showFood = false;      // 먹을 곳을 펼쳐 뒀는지 (목록이 길어 평소엔 접어둡니다)
+let showGift = false;      // 기념품을 펼쳐 뒀는지
 let showPhrases = false;   // 한마디를 펼쳐 뒀는지 (14줄이라 평소엔 접어둡니다)
 let showSOS = false;       // 긴급 연락처를 펼쳐 뒀는지 (급할 때 열면 되므로 접어둠)
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -2123,6 +2135,7 @@ function render(){
      영어가 막히는 자리에서 화면을 그대로 보여주면 되게 만든 것입니다.
      탭하면 현지어 문장이 복사됩니다. */
   renderFood(finished ? null : city);
+  renderGift(finished ? null : city);
   renderPhrases(finished ? null : city);
   renderSOS(finished ? null : city);
   paintNet();
@@ -2290,15 +2303,24 @@ function renderPhrases(city){
 }
 
 /* -----------------------------------------------------------
-   먹을 곳 — 그날 도시의 필수 음식과 추천 식당.
-   (cities[].id → food[id]. 없는 도시(서울)는 영역이 통째로 숨습니다)
+   먹을 곳 · 기념품 — 그날 도시의 참고 목록.
+   (cities[].id → food[id] / gift[id]. 없는 도시(서울)는 통째로 숨습니다)
 
-   식당 줄은 구글맵 검색으로 보냅니다. 검색어는 "이름, 지역" 인데
-   지역은 그룹의 area 를 먼저 씁니다 — 스위스처럼 한 도시 안에
+   가게 줄은 구글맵 검색으로 보냅니다. 검색어는 "이름, 지역" 인데
+   지역은 항목·그룹의 area 를 먼저 씁니다 — 스위스처럼 한 도시 안에
    라우터브룬넨·그린델발트·루가노가 섞여 있으면 도시명만으론 엉뚱한 곳이 나옵니다.
    ----------------------------------------------------------- */
-function eatRow(x, area){
-  const q = area ? `${x.n}, ${area}` : x.n;
+function refChips(list){
+  return `<div class="eat-list">${list.map(x =>
+    `<span class="eat-i">${x.star ? STAR : ''}<b>${esc(x.n)}</b>${
+      x.d ? ` · ${esc(x.d)}` : ''}</span>`).join('')}</div>`;
+}
+
+function refRow(x, area){
+  const where = x.area || area;
+  // 표시 이름이 "Casa Batlló 굿즈샵" 처럼 한국어가 섞이면 지도에서 안 잡힙니다.
+  // 그럴 때만 q 에 실제로 찍히는 이름을 따로 적습니다.
+  const q = `${x.q || x.n}${where ? `, ${where}` : ''}`;
   return `<a class="eat-row" href="${esc(mapHref(q))}" target="_blank" rel="noopener"
       aria-label="${esc(x.n)} 지도에서 보기">
     ${PIN}
@@ -2310,41 +2332,67 @@ function eatRow(x, area){
   </a>`;
 }
 
-function renderFood(city){
-  const sec = $('#sec-food');
-  const pack = city ? FOOD[city.id] : null;
-  const spots = (pack && pack.spots) || [];
-  const eat   = (pack && pack.eat)   || [];
-  if(!spots.length && !eat.length){ sec.hidden = true; return; }
+function refTips(tips, label){
+  return tips.length
+    ? `<div class="phr-sub">${esc(label)}</div>
+       <div class="eat-tips">${tips.map(t =>
+         `<span class="eat-tip">${esc(t)}</span>`).join('')}</div>`
+    : '';
+}
+
+/* 접힌 참고 섹션 하나를 통째로 그립니다 (먹을 곳 · 기념품이 같은 틀을 씁니다).
+   opts.chips  — 칩으로 보여줄 그룹들 [{g, list}]
+   opts.rows   — 지도로 보내는 그룹들 [{g, list, area}]
+   opts.count  — 헤더 오른쪽 숫자로 셀 대상 ('chips' | 'rows') */
+function renderRef(o){
+  const sec = $(`#sec-${o.key}`), head = $(`#head-${o.key}`);
+  const chips = o.chips || [], rows = o.rows || [], tips = o.tips || [];
+  const n = g => g.reduce((t, x) => t + (x.list || []).length, 0);
+  if(!chips.length && !rows.length){ sec.hidden = true; return; }
 
   sec.hidden = false;
-  const n = spots.reduce((t, g) => t + (g.list || []).length, 0);
-  const head = $('#head-food');
-  head.innerHTML = `${CHEV}<span>먹을 곳 · ${esc(pack.name || city.name)}</span>` +
-    `<span class="cnt">${n}</span>`;
-  head.setAttribute('aria-expanded', String(showFood));
-  $('#food-body').hidden = !showFood;
+  head.innerHTML = `${CHEV}<span>${esc(o.title)}</span>` +
+    `<span class="cnt">${n(o.count === 'rows' ? rows : chips)}</span>`;
+  head.setAttribute('aria-expanded', String(o.open));
+  $(`#${o.key}-body`).hidden = !o.open;
 
   // 도시가 그대로면 백 줄 가까운 목록을 다시 만들 이유가 없습니다
-  if(changed('food', city.id)){
-    const eatHTML = eat.length
-      ? `<div class="phr-sub">꼭 먹어볼 것</div>
-         <div class="eat-list">${eat.map(x =>
-           `<span class="eat-i">${x.star ? STAR : ''}<b>${esc(x.n)}</b>${
-             x.d ? ` · ${esc(x.d)}` : ''}</span>`).join('')}</div>`
-      : '';
-    const spotHTML = spots.map(g => `
-      <div class="phr-sub">${esc(g.g)}</div>
-      ${(g.list || []).map(x => eatRow(x, g.area || (city && city.map))).join('')}`).join('');
-    const tips = (pack.tips || []);
-    const tipHTML = tips.length
-      ? `<div class="phr-sub">알아두면 좋은 것</div>
-         <div class="eat-tips">${tips.map(t =>
-           `<span class="eat-tip">${esc(t)}</span>`).join('')}</div>`
-      : '';
-    $('#food').innerHTML = eatHTML + spotHTML + tipHTML;
-    $('#food-note').textContent = '탭하면 지도에서 열립니다 · 예약은 각자 확인하세요';
+  if(changed(o.key, o.sig)){
+    $(`#${o.key}`).innerHTML =
+      chips.map(g => (g.g ? `<div class="phr-sub">${esc(g.g)}</div>` : '')
+                     + refChips(g.list || [])).join('') +
+      rows.map(g => (g.g ? `<div class="phr-sub">${esc(g.g)}</div>` : '')
+                    + (g.list || []).map(x => refRow(x, g.area || o.area)).join('')).join('') +
+      refTips(tips, o.tipLabel || '알아두면 좋은 것');
+    $(`#${o.key}-note`).textContent = o.note;
   }
+}
+
+function renderFood(city){
+  const pack = city ? FOOD[city.id] : null;
+  renderRef({
+    key: 'food', open: showFood, sig: (city && city.id) || '-',
+    title: `먹을 곳 · ${(pack && pack.name) || (city && city.name) || ''}`,
+    area: city && city.map, count: 'rows',
+    chips: (pack && pack.eat || []).length ? [{ g: '꼭 먹어볼 것', list: pack.eat }] : [],
+    rows: (pack && pack.spots) || [],
+    tips: (pack && pack.tips) || [],
+    note: '탭하면 지도에서 열립니다 · 예약은 각자 확인하세요'
+  });
+}
+
+function renderGift(city){
+  const pack = city ? GIFT[city.id] : null;
+  renderRef({
+    key: 'gift', open: showGift, sig: (city && city.id) || '-',
+    title: `기념품 · ${(pack && pack.name) || (city && city.name) || ''}`,
+    area: city && city.map, count: 'chips',
+    chips: (pack && pack.buy) || [],
+    rows: (pack && pack.spots || []).length ? [{ g: '사는 곳', list: pack.spots }] : [],
+    tips: (pack && pack.tips) || [],
+    tipLabel: '사기 전에',
+    note: '탭하면 지도에서 열립니다 · 무게는 위탁 한도와 같이 보세요'
+  });
 }
 
 /* -----------------------------------------------------------
@@ -2481,6 +2529,11 @@ $('#head-food').addEventListener('click', () => {
   showFood = !showFood;
   $('#head-food').setAttribute('aria-expanded', String(showFood));
   $('#food-body').hidden = !showFood;
+});
+$('#head-gift').addEventListener('click', () => {
+  showGift = !showGift;
+  $('#head-gift').setAttribute('aria-expanded', String(showGift));
+  $('#gift-body').hidden = !showGift;
 });
 $('#head-sos').addEventListener('click', () => {
   showSOS = !showSOS;
@@ -2686,6 +2739,7 @@ async function boot(){
     PHRASES  = data.phrases  || {};
     CONTACTS = data.contacts || {};
     FOOD     = data.food     || {};
+    GIFT     = data.gift     || {};
     TOTAL_DAYS = daysBetween(TRIP.start, TRIP.end) + 1;
     DATA_SOURCE = source;
 
