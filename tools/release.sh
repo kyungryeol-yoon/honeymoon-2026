@@ -26,6 +26,17 @@ for day in d['days']:
     assert day['city'] in ids, f"{day['date']} 알 수 없는 도시: {day['city']}"
     times = [i['time'] for i in day['items']]
     assert times == sorted(times), f"{day['date']} 일정이 시간순이 아님"
+    # 선택 가능한 일정
+    opts = day.get('options') or []
+    assert sum(1 for o in opts if o.get('recommended')) <= 1, \
+        f"{day['date']} 추천 옵션이 둘 이상"
+    ids = [o['id'] for o in opts]
+    assert len(ids) == len(set(ids)), f"{day['date']} 옵션 id 중복"
+    for o in opts:
+        assert o.get('label') and o.get('items'), f"{day['date']}/{o.get('id')} label·items 필요"
+        mt = sorted(day['items'] + o['items'], key=lambda i: i['time'])
+        mts = [i['time'] for i in mt]
+        assert mts == sorted(mts), f"{day['date']}/{o['id']} 병합 후 시간 역순"
 print(f"   OK — {len(d['days'])}일 / {sum(len(x['items']) for x in d['days'])}개 일정")
 PY
 

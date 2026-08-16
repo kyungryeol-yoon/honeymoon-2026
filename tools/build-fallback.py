@@ -39,17 +39,30 @@ def slim(src: dict) -> dict:
         if d.get("cash"):  day["cash"]  = {"amount": d["cash"]["amount"]}
         # 숙소는 남깁니다 — 길 잃고 오프라인일 때 제일 급한 한 줄입니다
         if d.get("stay"):  day["stay"]  = d["stay"]
-        items = []
-        for it in d["items"]:
-            o = {"time": it["time"], "name": it["name"]}
-            if it.get("end"):   o["end"]   = it["end"]
-            if it.get("place"): o["place"] = it["place"]
-            if it.get("move"):  o["move"]  = it["move"]   # 길 잃었을 때 제일 필요한 정보
-            if it.get("map") is False: o["map"] = False
-            if it.get("meet"):  o["meet"]  = {"where": it["meet"]["where"],
-                                              **({"time": it["meet"]["time"]} if it["meet"].get("time") else {})}
-            items.append(o)
-        day["items"] = items
+        def slim_items(src_items):
+            got = []
+            for it in src_items:
+                o = {"time": it["time"], "name": it["name"]}
+                if it.get("end"):   o["end"]   = it["end"]
+                if it.get("place"): o["place"] = it["place"]
+                if it.get("move"):  o["move"]  = it["move"]   # 길 잃었을 때 제일 필요한 정보
+                if it.get("map") is False: o["map"] = False
+                if it.get("star"):  o["star"]  = True
+                if it.get("meet"):  o["meet"]  = {"where": it["meet"]["where"],
+                                                  **({"time": it["meet"]["time"]} if it["meet"].get("time") else {})}
+                got.append(o)
+            return got
+
+        day["items"] = slim_items(d["items"])
+        # 선택 가능한 일정 — 오프라인에서도 고를 수 있어야 합니다
+        if d.get("options"):
+            day["options"] = [{
+                "id": o["id"], "label": o["label"],
+                **({"summary": o["summary"]} if o.get("summary") else {}),
+                **({"recommended": True} if o.get("recommended") else {}),
+                **({"cash": {"amount": o["cash"]["amount"]}} if o.get("cash") else {}),
+                "items": slim_items(o["items"]),
+            } for o in d["options"]]
         out["days"].append(day)
     return out
 
