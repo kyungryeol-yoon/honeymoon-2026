@@ -791,26 +791,6 @@
           "map": false
         },
         {
-          "time": "12:00",
-          "name": "툰 호수",
-          "place": "Thunersee",
-          "star": true,
-          "desc": "호숫가 산책 · 사진 · 밀리면 여기부터 생략 가능"
-        },
-        {
-          "time": "12:45",
-          "name": "슈피츠(Spiez) 이동",
-          "desc": "(차 20분)",
-          "map": false
-        },
-        {
-          "time": "13:00",
-          "name": "슈피츠 — 성 외관 + 호수 파노라마",
-          "desc": "(30분)",
-          "place": "Spiez",
-          "move": "차로 20분"
-        },
-        {
           "time": "13:45",
           "name": "인터라켄 도착 · 점심",
           "desc": "(차 25분)",
@@ -880,6 +860,97 @@
             "게이트 22:00~"
           ]
         }
+      ],
+      "options": [
+        {
+          "id": "thun",
+          "label": "툰 호수 · 슈피츠",
+          "recommended": true,
+          "summary": "호숫가 성 + 파노라마 · 가장 짧은 경로",
+          "items": [
+            {
+              "time": "12:00",
+              "name": "툰 호수",
+              "place": "Thunersee",
+              "star": true,
+              "desc": "호숫가 산책 · 사진 · 밀리면 여기부터 생략 가능"
+            },
+            {
+              "time": "12:45",
+              "name": "슈피츠(Spiez) 이동",
+              "desc": "(차 20분)",
+              "map": false
+            },
+            {
+              "time": "13:00",
+              "name": "슈피츠 — 성 외관 + 호수 파노라마",
+              "desc": "(30분)",
+              "place": "Spiez",
+              "move": "차로 20분"
+            }
+          ]
+        },
+        {
+          "id": "aare",
+          "label": "아레 협곡",
+          "summary": "마이링겐 · 1.4km 협곡 데크길 · 실내형이라 비와도 OK",
+          "cash": {
+            "amount": "CHF 20",
+            "for": "입장 2인",
+            "note": "현장"
+          },
+          "items": [
+            {
+              "time": "11:45",
+              "name": "마이링겐 방향 이동",
+              "desc": "취리히에서 약 1시간 15분",
+              "map": false,
+              "move": "렌터카 1시간 15분 (추정)"
+            },
+            {
+              "time": "12:15",
+              "name": "Aareschlucht 아레 협곡",
+              "desc": "절벽 사이 데크길 왕복 약 1시간",
+              "place": "Aareschlucht",
+              "end": "13:15",
+              "prep": [
+                "CHF 10/인 현장",
+                "비 와도 관람 가능",
+                "바닥 미끄러움"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "blausee",
+          "label": "Blausee",
+          "summary": "에메랄드 호수 · 송어 양식장 · 짧게 들르기 좋음",
+          "cash": {
+            "amount": "CHF 18",
+            "for": "입장 2인",
+            "note": "현장"
+          },
+          "items": [
+            {
+              "time": "11:45",
+              "name": "Blausee 방향 이동",
+              "desc": "칸더슈텍 근처",
+              "map": false,
+              "move": "렌터카 1시간 20분 (추정)"
+            },
+            {
+              "time": "12:20",
+              "name": "Blausee 블라우제",
+              "desc": "투명한 청록빛 호수 · 산책로 30분",
+              "place": "Blausee",
+              "end": "13:20",
+              "prep": [
+                "CHF 9/인 현장",
+                "주차 별도"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -926,91 +997,6 @@
           "map": false
         },
         {
-          "time": "07:35",
-          "name": "라우터브룬넨역 도보 5분",
-          "desc": "(캠프에서)",
-          "place": "Lauterbrunnen Bahnhof",
-          "move": "캠프 도보 5분",
-          "prep": [
-            "티켓시간보다 30분 일찍 출발할 수 있음"
-          ]
-        },
-        {
-          "time": "07:45",
-          "name": "라우터브룬넨 → Wengen",
-          "map": false,
-          "prep": [
-            "e티켓 + 여권 함께",
-            "굿모닝 티켓 = 이른 3편"
-          ]
-        },
-        {
-          "time": "08:15",
-          "name": "Wengen 도착",
-          "desc": "(차 없는 마을)",
-          "place": "Wengen"
-        },
-        {
-          "time": "08:30",
-          "name": "Wengen → Kleine Scheidegg",
-          "desc": "이 구간 = 초원 위 빨간 기차 사진 명소 (3~5분)",
-          "map": false
-        },
-        {
-          "time": "09:15",
-          "name": "Kleine Scheidegg 도착",
-          "desc": "(2,061m) · 아이거 북벽 정면 조망",
-          "place": "Kleine Scheidegg",
-          "move": "산악열차 20분 (추정)"
-        },
-        {
-          "time": "09:30",
-          "name": "Kleine Scheidegg → 융프라우요흐",
-          "desc": "(7km 터널) · 터널 30분 = 경치 안 보임",
-          "map": false
-        },
-        {
-          "time": "10:00",
-          "name": "융프라우요흐 도착",
-          "desc": "(3,463m) ★ 톱 오브 유럽",
-          "place": "Jungfraujoch",
-          "move": "융프라우 철도 35분 (추정)",
-          "prep": [
-            "방한복 (정상 영하)"
-          ],
-          "star": true
-        },
-        {
-          "time": "10:30",
-          "name": "얼음 궁전 · 전망대",
-          "desc": "(Ice Palace) + 실내 전망대 · 스핑크스 야외 데크 X (고소공포) · 고산 = 천천히 움직이기, 두통 시 하산",
-          "map": false
-        },
-        {
-          "time": "12:00",
-          "name": "정상 레스토랑 점심",
-          "desc": "(또는 도시락)",
-          "map": false
-        },
-        {
-          "time": "13:30",
-          "name": "하산 시작",
-          "desc": "굿모닝 티켓 = 하산 시간 제한 (정오~13시대 확인)",
-          "map": false,
-          "prep": [
-            "하산시간 제한 확인"
-          ]
-        },
-        {
-          "time": "16:00",
-          "name": "라우터브룬넨 복귀"
-        },
-        {
-          "time": "16:30",
-          "name": "라우터브룬넨 복귀",
-          "map": false
-        },
-        {
           "time": "18:30",
           "name": "마을 산책 또는 폭포 재방문"
         },
@@ -1023,6 +1009,146 @@
           "time": "21:30",
           "name": "휴식",
           "map": false
+        }
+      ],
+      "options": [
+        {
+          "id": "jungfrau",
+          "label": "융프라우 진행",
+          "recommended": true,
+          "summary": "톱 오브 유럽 3,454m · 날씨 좋을 때만",
+          "cash": {
+            "amount": "CHF 420",
+            "for": "산악열차 2인",
+            "note": "날씨 확인 후"
+          },
+          "items": [
+            {
+              "time": "07:35",
+              "name": "라우터브룬넨역 도보 5분",
+              "desc": "(캠프에서)",
+              "place": "Lauterbrunnen Bahnhof",
+              "move": "캠프 도보 5분",
+              "prep": [
+                "티켓시간보다 30분 일찍 출발할 수 있음"
+              ]
+            },
+            {
+              "time": "07:45",
+              "name": "라우터브룬넨 → Wengen",
+              "map": false,
+              "prep": [
+                "e티켓 + 여권 함께",
+                "굿모닝 티켓 = 이른 3편"
+              ]
+            },
+            {
+              "time": "08:15",
+              "name": "Wengen 도착",
+              "desc": "(차 없는 마을)",
+              "place": "Wengen"
+            },
+            {
+              "time": "08:30",
+              "name": "Wengen → Kleine Scheidegg",
+              "desc": "이 구간 = 초원 위 빨간 기차 사진 명소 (3~5분)",
+              "map": false
+            },
+            {
+              "time": "09:15",
+              "name": "Kleine Scheidegg 도착",
+              "desc": "(2,061m) · 아이거 북벽 정면 조망",
+              "place": "Kleine Scheidegg",
+              "move": "산악열차 20분 (추정)"
+            },
+            {
+              "time": "09:30",
+              "name": "Kleine Scheidegg → 융프라우요흐",
+              "desc": "(7km 터널) · 터널 30분 = 경치 안 보임",
+              "map": false
+            },
+            {
+              "time": "10:00",
+              "name": "융프라우요흐 도착",
+              "desc": "(3,463m) ★ 톱 오브 유럽",
+              "place": "Jungfraujoch",
+              "move": "융프라우 철도 35분 (추정)",
+              "prep": [
+                "방한복 (정상 영하)"
+              ],
+              "star": true
+            },
+            {
+              "time": "10:30",
+              "name": "얼음 궁전 · 전망대",
+              "desc": "(Ice Palace) + 실내 전망대 · 스핑크스 야외 데크 X (고소공포) · 고산 = 천천히 움직이기, 두통 시 하산",
+              "map": false
+            },
+            {
+              "time": "12:00",
+              "name": "정상 레스토랑 점심",
+              "desc": "(또는 도시락)",
+              "map": false
+            },
+            {
+              "time": "13:30",
+              "name": "하산 시작",
+              "desc": "굿모닝 티켓 = 하산 시간 제한 (정오~13시대 확인)",
+              "map": false,
+              "prep": [
+                "하산시간 제한 확인"
+              ]
+            },
+            {
+              "time": "16:00",
+              "name": "라우터브룬넨 복귀"
+            },
+            {
+              "time": "16:30",
+              "name": "라우터브룬넨 복귀",
+              "map": false
+            }
+          ]
+        },
+        {
+          "id": "valley",
+          "label": "취소 · 계곡 저지대",
+          "summary": "뮈렌 · 폭포 · 마을 · 흐리면 정상은 아무것도 안 보임",
+          "items": [
+            {
+              "time": "09:00",
+              "name": "라우터브룬넨역 → 뮈렌",
+              "desc": "케이블카 + 산악열차",
+              "place": "Lauterbrunnen Bahnhof",
+              "move": "도보 5분"
+            },
+            {
+              "time": "09:45",
+              "name": "뮈렌 마을",
+              "desc": "차 없는 절벽 마을 · 아이거 정면 조망",
+              "place": "Mürren",
+              "end": "11:30",
+              "prep": [
+                "흐리면 조망 없음"
+              ]
+            },
+            {
+              "time": "12:00",
+              "name": "라우터브룬넨 복귀 · 점심",
+              "map": false
+            },
+            {
+              "time": "13:30",
+              "name": "Staubbach 폭포",
+              "desc": "뒤편 전망대까지 도보",
+              "place": "Staubbachfall"
+            },
+            {
+              "time": "15:00",
+              "name": "계곡 산책 또는 캠프 휴식",
+              "map": false
+            }
+          ]
         }
       ]
     },
@@ -1109,17 +1235,6 @@
           ]
         },
         {
-          "time": "16:00",
-          "name": "다음 캠핑장 도착 판단 시점",
-          "desc": "늦어지면 일정 조정"
-        },
-        {
-          "time": "16:30",
-          "name": "Brienzersee 호숫가 산책",
-          "desc": "(에메랄드빛)",
-          "place": "Brienzersee"
-        },
-        {
           "time": "18:00",
           "name": "캠프 복귀"
         },
@@ -1142,6 +1257,104 @@
         {
           "time": "22:00",
           "name": "취침"
+        }
+      ],
+      "options": [
+        {
+          "id": "iseltwald",
+          "label": "Iseltwald",
+          "recommended": true,
+          "summary": "사랑의 불시착 호숫가 + 브리엔츠 호수",
+          "cash": {
+            "amount": "€5",
+            "for": "부두 사진",
+            "note": "현장"
+          },
+          "items": [
+            {
+              "time": "14:30",
+              "name": "출발 → Iseltwald",
+              "desc": "차로 35분",
+              "map": false,
+              "move": "렌터카 35분"
+            },
+            {
+              "time": "15:10",
+              "name": "Iseltwald 사랑의 불시착 호숫가",
+              "place": "Iseltwald",
+              "star": true,
+              "prep": [
+                "부두 사진 €5 현장"
+              ]
+            },
+            {
+              "time": "16:00",
+              "name": "다음 캠핑장 도착 판단 시점",
+              "desc": "늦어지면 일정 조정"
+            },
+            {
+              "time": "16:30",
+              "name": "Brienzersee 호숫가 산책",
+              "desc": "(에메랄드빛)",
+              "place": "Brienzersee"
+            }
+          ]
+        },
+        {
+          "id": "rosenlaui",
+          "label": "Rosenlaui 협곡",
+          "summary": "빙하가 깎은 협곡 · 사람 적음 · 산길 운전",
+          "cash": {
+            "amount": "CHF 20",
+            "for": "입장 2인",
+            "note": "현장"
+          },
+          "items": [
+            {
+              "time": "14:30",
+              "name": "출발 → Rosenlaui",
+              "desc": "산길 · 좁은 구간 있음",
+              "map": false,
+              "move": "렌터카 50분 (추정)"
+            },
+            {
+              "time": "15:20",
+              "name": "Rosenlaui 빙하 협곡",
+              "desc": "계단·데크 왕복 약 1시간",
+              "place": "Rosenlauischlucht",
+              "end": "16:30",
+              "prep": [
+                "CHF 10/인 현장",
+                "미끄러운 계단",
+                "방수 겉옷"
+              ]
+            },
+            {
+              "time": "17:30",
+              "name": "캠프 복귀",
+              "map": false,
+              "move": "렌터카 50분 (추정)"
+            }
+          ]
+        },
+        {
+          "id": "rest",
+          "label": "캠프 휴식",
+          "summary": "아이거 북벽 보며 쉬기 · 이동 없음",
+          "items": [
+            {
+              "time": "14:30",
+              "name": "캠프에서 휴식",
+              "desc": "아이거 북벽 정면 · 빨래·정비",
+              "map": false
+            },
+            {
+              "time": "16:30",
+              "name": "그린델발트 마을 가볍게",
+              "place": "Grindelwald",
+              "move": "도보 10분 (오르막)"
+            }
+          ]
         }
       ]
     },
@@ -1172,49 +1385,6 @@
           "map": false
         },
         {
-          "time": "09:30",
-          "name": "그린델발트 마을 산책",
-          "desc": "(캠프 도보 10분, 오르막) · 아이거 북벽 정면 조망 · 마을 중심가 · 기념품 상점",
-          "place": "Grindelwald"
-        },
-        {
-          "time": "10:30",
-          "name": "그린델발트 둘러보기",
-          "desc": "(선택) CHF 60/2인 · 그린델발트 터미널 → Männlichen (해발 2,225m) · 비교적 부드러운 곤돌라 (밀폐형)",
-          "place": "Eiger",
-          "move": "도보 (마을 내)"
-        },
-        {
-          "time": "13:00",
-          "name": "마을 점심",
-          "desc": "(일요일 = 식당은 영업)",
-          "map": false
-        },
-        {
-          "time": "14:30",
-          "name": "출발 → Giessbach 폭포",
-          "desc": "(차로 약 40분, 브리엔츠 호수)",
-          "map": false
-        },
-        {
-          "time": "15:15",
-          "name": "Giessbach 폭포",
-          "desc": "14단 폭포 + 클래식 그랜드호텔 + 숲길 · 푸니쿨라 CHF 12/인 (선택, 완만)",
-          "place": "Giessbachfälle",
-          "move": "차로 약 40분",
-          "prep": [
-            "폭포 무료",
-            "푸니쿨라 CHF 12/인 (선택)"
-          ],
-          "star": true
-        },
-        {
-          "time": "17:00",
-          "name": "브리엔츠 호숫가 산책",
-          "desc": "(에메랄드빛)",
-          "place": "Brienz"
-        },
-        {
           "time": "18:00",
           "name": "캠프 복귀",
           "map": false
@@ -1235,6 +1405,159 @@
           "name": "캠프 복귀",
           "desc": "First 케이블카 ❌ (절벽길 = 고소공포 제외) · 내일 루가노 이동 = 오늘 밤 짐 일부 정리",
           "map": false
+        }
+      ],
+      "options": [
+        {
+          "id": "oeschinensee",
+          "label": "Oeschinensee",
+          "recommended": true,
+          "summary": "곤돌라 + 호수 산책 · 왕복 2시간 40분 운전",
+          "cash": {
+            "amount": "CHF 56",
+            "for": "곤돌라 왕복 2인",
+            "note": "현장"
+          },
+          "items": [
+            {
+              "time": "09:00",
+              "name": "출발 → 칸더슈텍",
+              "desc": "왕복 2시간 40분 운전",
+              "map": false,
+              "move": "렌터카 1시간 20분 (추정)"
+            },
+            {
+              "time": "10:30",
+              "name": "Oeschinensee 곤돌라",
+              "desc": "정상역까지 8분",
+              "place": "Oeschinensee Gondelbahn",
+              "prep": [
+                "CHF 28/인 왕복",
+                "카드 가능"
+              ]
+            },
+            {
+              "time": "11:00",
+              "name": "Oeschinensee 호수",
+              "desc": "빙하 호수 · 호숫가 산책로 평탄",
+              "place": "Oeschinensee",
+              "end": "14:00",
+              "star": true,
+              "prep": [
+                "산책 왕복 1시간",
+                "정상 레스토랑 있음"
+              ]
+            },
+            {
+              "time": "14:30",
+              "name": "칸더슈텍 출발 → 그린델발트",
+              "map": false,
+              "move": "렌터카 1시간 20분 (추정)"
+            }
+          ]
+        },
+        {
+          "id": "giessbach",
+          "label": "Giessbach + 묀리헨",
+          "summary": "14단 폭포 + 곤돌라 전망 · 마을에서 가까움",
+          "cash": {
+            "amount": "CHF 84",
+            "for": "묀리헨 CHF 60 + 푸니쿨라 CHF 24",
+            "note": "둘 다 선택"
+          },
+          "items": [
+            {
+              "time": "09:30",
+              "name": "그린델발트 마을 산책",
+              "desc": "(캠프 도보 10분, 오르막) · 아이거 북벽 정면 조망 · 마을 중심가 · 기념품 상점",
+              "place": "Grindelwald"
+            },
+            {
+              "time": "10:30",
+              "name": "그린델발트 둘러보기",
+              "desc": "(선택) CHF 60/2인 · 그린델발트 터미널 → Männlichen (해발 2,225m) · 비교적 부드러운 곤돌라 (밀폐형)",
+              "place": "Eiger",
+              "move": "도보 (마을 내)"
+            },
+            {
+              "time": "11:30",
+              "name": "Männlichen 곤돌라",
+              "desc": "해발 2,225m · 비교적 부드러움",
+              "place": "Männlichen",
+              "prep": [
+                "CHF 60 / 2인",
+                "고소공포증이면 패스"
+              ]
+            },
+            {
+              "time": "13:00",
+              "name": "마을 점심",
+              "desc": "(일요일 = 식당은 영업)",
+              "map": false
+            },
+            {
+              "time": "14:30",
+              "name": "출발 → Giessbach 폭포",
+              "desc": "(차로 약 40분, 브리엔츠 호수)",
+              "map": false
+            },
+            {
+              "time": "15:15",
+              "name": "Giessbach 폭포",
+              "desc": "14단 폭포 + 클래식 그랜드호텔 + 숲길 · 푸니쿨라 CHF 12/인 (선택, 완만)",
+              "place": "Giessbachfälle",
+              "move": "차로 약 40분",
+              "prep": [
+                "폭포 무료",
+                "푸니쿨라 CHF 12/인 (선택)"
+              ],
+              "star": true
+            },
+            {
+              "time": "17:00",
+              "name": "브리엔츠 호숫가 산책",
+              "desc": "(에메랄드빛)",
+              "place": "Brienz"
+            }
+          ]
+        },
+        {
+          "id": "rest",
+          "label": "캠프 휴식",
+          "summary": "이동 없이 마을과 캠프만 · 일요일이라 마트는 휴무",
+          "items": [
+            {
+              "time": "09:30",
+              "name": "그린델발트 마을 산책",
+              "desc": "(캠프 도보 10분, 오르막) · 아이거 북벽 정면 조망 · 마을 중심가 · 기념품 상점",
+              "place": "Grindelwald"
+            },
+            {
+              "time": "10:30",
+              "name": "그린델발트 둘러보기",
+              "desc": "(선택) CHF 60/2인 · 그린델발트 터미널 → Männlichen (해발 2,225m) · 비교적 부드러운 곤돌라 (밀폐형)",
+              "place": "Eiger",
+              "move": "도보 (마을 내)"
+            },
+            {
+              "time": "13:00",
+              "name": "마을 점심",
+              "desc": "(일요일 = 식당은 영업)",
+              "map": false
+            },
+            {
+              "time": "15:00",
+              "name": "캠프에서 휴식",
+              "desc": "아이거 북벽 정면 · 낮잠·정비",
+              "map": false
+            },
+            {
+              "time": "17:00",
+              "name": "마을 한 바퀴 더",
+              "place": "Grindelwald",
+              "move": "도보 10분"
+            }
+          ]
         }
       ]
     },
@@ -1293,41 +1616,6 @@
           "place": "Andermatt"
         },
         {
-          "time": "13:00",
-          "name": "출발 → Gotthard 터널"
-        },
-        {
-          "time": "13:30",
-          "name": "Gotthard 터널 통과",
-          "desc": "(17km) · 평균속도 단속 (입 · 출구 시간 측정) — 규정 속도 엄수 · 터널 내 차간거리 50m · 성수기 정체 가능 (대기 시 여유)",
-          "map": false,
-          "prep": [
-            "평균 속도 단속 주의"
-          ]
-        },
-        {
-          "time": "14:30",
-          "name": "Bellinzona 도착",
-          "desc": "(이탈리아어권 진입)",
-          "place": "Bellinzona",
-          "move": "렌터카 · Gotthard 경유 1시간 20분 (추정)"
-        },
-        {
-          "time": "15:00",
-          "name": "벨린초나 성",
-          "desc": "(UNESCO 세계유산, 30분) · 3개 성 중 Castelgrande 접근 용이 · 외관 · 성벽 산책 (내부 입장 선택)",
-          "place": "Castelgrande, Bellinzona",
-          "move": "도보 10분 (추정)",
-          "prep": [
-            "무료~소액"
-          ]
-        },
-        {
-          "time": "16:00",
-          "name": "루가노 이동",
-          "desc": "(차로 30분)"
-        },
-        {
           "time": "16:30",
           "name": "Camping TCS Lugano 체크인",
           "desc": "예약완료 · Premium lake pitch (호수뷰)",
@@ -1371,6 +1659,89 @@
           "name": "캠프 휴식",
           "desc": "내일",
           "map": false
+        }
+      ],
+      "options": [
+        {
+          "id": "gotthard",
+          "label": "Gotthard 터널",
+          "recommended": true,
+          "summary": "가장 빠름 · 벨린초나 성 경유 · 평균속도 단속",
+          "items": [
+            {
+              "time": "13:00",
+              "name": "출발 → Gotthard 터널"
+            },
+            {
+              "time": "13:30",
+              "name": "Gotthard 터널 통과",
+              "desc": "(17km) · 평균속도 단속 (입 · 출구 시간 측정) — 규정 속도 엄수 · 터널 내 차간거리 50m · 성수기 정체 가능 (대기 시 여유)",
+              "map": false,
+              "prep": [
+                "평균 속도 단속 주의"
+              ]
+            },
+            {
+              "time": "14:30",
+              "name": "Bellinzona 도착",
+              "desc": "(이탈리아어권 진입)",
+              "place": "Bellinzona",
+              "move": "렌터카 · Gotthard 경유 1시간 20분 (추정)"
+            },
+            {
+              "time": "15:00",
+              "name": "벨린초나 성",
+              "desc": "(UNESCO 세계유산, 30분) · 3개 성 중 Castelgrande 접근 용이 · 외관 · 성벽 산책 (내부 입장 선택)",
+              "place": "Castelgrande, Bellinzona",
+              "move": "도보 10분 (추정)",
+              "prep": [
+                "무료~소액"
+              ]
+            },
+            {
+              "time": "16:00",
+              "name": "루가노 이동",
+              "desc": "(차로 30분)"
+            }
+          ]
+        },
+        {
+          "id": "passes",
+          "label": "Furka · Grimsel 고갯길",
+          "summary": "알프스 파노라마 · 2시간 더 걸리고 벨린초나는 생략",
+          "items": [
+            {
+              "time": "12:30",
+              "name": "출발 → Furka 고개",
+              "desc": "007 골드핑거 촬영지 구간",
+              "map": false,
+              "move": "렌터카 40분 (추정)"
+            },
+            {
+              "time": "13:15",
+              "name": "Furka 고개 전망대",
+              "desc": "해발 2,429m · 론 빙하 조망",
+              "place": "Furkapass",
+              "star": true,
+              "prep": [
+                "9월 말 이후 통제 가능",
+                "출발 전 도로 상태 확인"
+              ]
+            },
+            {
+              "time": "14:15",
+              "name": "Grimsel 고개",
+              "desc": "댐 호수 · 헤어핀 도로",
+              "place": "Grimselpass"
+            },
+            {
+              "time": "15:15",
+              "name": "남하 → 루가노",
+              "desc": "다시 Gotthard 경유",
+              "map": false,
+              "move": "렌터카 2시간 (추정)"
+            }
+          ]
         }
       ]
     },
@@ -1655,13 +2026,6 @@
           ]
         },
         {
-          "time": "17:45",
-          "name": "살루테 성당",
-          "desc": "(무료) 또는 운하변 스프리츠",
-          "place": "Basilica di Santa Maria della Salute",
-          "move": "Vaporetto 1정거장 또는 도보 15분"
-        },
-        {
           "time": "18:30",
           "name": "곤돌라 40분",
           "desc": "(선택) €90/척결정 필요 · 9월 말 일몰",
@@ -1698,6 +2062,95 @@
           "time": "22:00",
           "name": "호텔 휴식",
           "map": false
+        }
+      ],
+      "options": [
+        {
+          "id": "frari",
+          "label": "프라리 성당",
+          "recommended": true,
+          "summary": "티치아노 '성모 승천' · 사람 적고 조용함",
+          "cash": {
+            "amount": "€10",
+            "for": "입장 2인",
+            "note": "현장"
+          },
+          "items": [
+            {
+              "time": "17:30",
+              "name": "프라리 성당으로 이동",
+              "map": false,
+              "move": "Vaporetto 또는 도보 15분"
+            },
+            {
+              "time": "17:45",
+              "name": "산타 마리아 글로리오사 데이 프라리",
+              "desc": "티치아노 '성모 승천' 제단화",
+              "place": "Basilica dei Frari, Venezia",
+              "star": true,
+              "prep": [
+                "€5/인",
+                "어깨·무릎 가리기",
+                "입장 마감 17:30 확인"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "accademia",
+          "label": "아카데미아 미술관",
+          "summary": "베네치아 회화 총집합 · 벨리니 · 조르조네 · 티치아노",
+          "cash": {
+            "amount": "€30",
+            "for": "입장 2인",
+            "note": "사전 예약 권장"
+          },
+          "items": [
+            {
+              "time": "17:30",
+              "name": "아카데미아로 이동",
+              "map": false,
+              "move": "Vaporetto 1정거장"
+            },
+            {
+              "time": "17:45",
+              "name": "Gallerie dell'Accademia",
+              "desc": "조르조네 폭풍우 · 벨리니 · 티치아노",
+              "place": "Gallerie dell'Accademia, Venezia",
+              "end": "19:00",
+              "prep": [
+                "€15/인",
+                "월요일 오후 휴관 주의"
+              ]
+            },
+            {
+              "time": "17:45",
+              "name": "살루테 성당",
+              "desc": "(무료) 또는 운하변 스프리츠",
+              "place": "Basilica di Santa Maria della Salute",
+              "move": "Vaporetto 1정거장 또는 도보 15분"
+            }
+          ]
+        },
+        {
+          "id": "rest",
+          "label": "그냥 쉬기",
+          "summary": "운하변 스프리츠 한 잔 · 무라노·부라노로 이미 많이 걸음",
+          "items": [
+            {
+              "time": "17:45",
+              "name": "살루테 성당",
+              "desc": "(무료) 또는 운하변 스프리츠",
+              "place": "Basilica di Santa Maria della Salute",
+              "move": "Vaporetto 1정거장 또는 도보 15분"
+            },
+            {
+              "time": "18:00",
+              "name": "운하변에서 스프리츠",
+              "desc": "아페롤 스프리츠 · 치케티",
+              "map": false
+            }
+          ]
         }
       ]
     },
