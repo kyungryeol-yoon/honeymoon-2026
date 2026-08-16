@@ -43,6 +43,10 @@ def slim(src: dict) -> dict:
             got = []
             for it in src_items:
                 o = {"time": it["time"], "name": it["name"]}
+                # 종류·예약 상태는 짧고, 오프라인에서 제일 급한 질문이
+                # "이거 예약했던가?" 라서 백업에도 넣습니다
+                if it.get("kind"):   o["kind"]   = it["kind"]
+                if it.get("booked"): o["booked"] = it["booked"]
                 if it.get("end"):   o["end"]   = it["end"]
                 if it.get("place"): o["place"] = it["place"]
                 if it.get("move"):  o["move"]  = it["move"]   # 길 잃었을 때 제일 필요한 정보
