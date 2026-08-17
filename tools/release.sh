@@ -37,7 +37,32 @@ for day in d['days']:
         mt = sorted(day['items'] + o['items'], key=lambda i: i['time'])
         mts = [i['time'] for i in mt]
         assert mts == sorted(mts), f"{day['date']}/{o['id']} 병합 후 시간 역순"
-print(f"   OK — {len(d['days'])}일 / {sum(len(x['items']) for x in d['days'])}개 일정")
+
+# 먹을 곳 · 기념품 — 도시 id 로 찾으므로 오타가 나면 그 도시만 조용히 사라집니다
+ids = {c['id'] for c in d['cities']}
+n_eat = n_buy = 0
+for key, groups in (('food', ('spots',)), ('gift', ('buy',))):
+    for cid, pack in (d.get(key) or {}).items():
+        assert cid in ids, f"{key}: 알 수 없는 도시 {cid}"
+        assert pack.get('name'), f"{key}/{cid} name 없음"
+        # 칩 목록 (food.eat 는 평평, gift.buy 는 그룹)
+        flat = pack.get('eat') or []
+        for g in pack.get('buy') or []:
+            flat += g.get('list') or []
+        for x in flat:
+            assert x.get('n'), f"{key}/{cid} 이름 없는 항목"
+        # 지도로 보내는 줄
+        rows = []
+        for g in pack.get('spots') or []:
+            rows += (g.get('list') or []) if isinstance(g, dict) and 'list' in g else [g]
+        for x in rows:
+            assert x.get('n'), f"{key}/{cid} 이름 없는 장소"
+            q = x.get('q') or x['n']
+            assert not any('가' <= ch <= '힣' for ch in q), \
+                f"{key}/{cid} 지도 검색어에 한글: {q!r} → q 에 현지 표기를 적으세요"
+        n_eat += len(flat); n_buy += len(rows)
+print(f"   OK — {len(d['days'])}일 / {sum(len(x['items']) for x in d['days'])}개 일정"
+      f" / 먹을거리·물건 {n_eat} · 장소 {n_buy}")
 PY
 
 echo "2) 민감정보 검사"

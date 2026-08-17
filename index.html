@@ -1570,10 +1570,25 @@ function goToday(){
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 /* 특정 날로 점프할 때도 방향을 맞춰줍니다 */
-function jumpTo(date){
+/* target 을 주면 그 자리로, 아니면 맨 위로 갑니다.
+   render() 가 섹션을 채우고 hidden 을 풀어준 다음에 위치를 재야 하므로
+   반드시 render() 뒤에 잽니다. */
+function jumpTo(date, target){
   navDir = date > currentDay().date ? 1 : -1;
   viewDate = date;
   render();
+  const el = target ? $(target) : null;
+  if(el && !el.hidden){
+    scrolledDate = date;               // 자동 스크롤이 도로 끌어당기지 않게
+    /* 두 가지를 지켜야 이 스크롤이 실제로 도착합니다.
+       1) rAF 는 이릅니다 — 콜백이 새 레이아웃 확정 전에 돌아 섹션의 옛 위치로
+          갑니다 (이중 rAF 도 마찬가지). 작업 경계를 한 번 넘겨야 합니다.
+       2) behavior:'smooth' 는 날이 바뀌며 화면이 통째로 다시 그려지는 중에
+          취소됩니다. 검색 결과를 눌렀으면 바로 그 자리여야 하니 즉시 이동합니다. */
+    setTimeout(() => el.scrollIntoView({ block: 'start', behavior: 'auto' }), 0);
+    return;
+  }
+  if(pendingFocus) return;             // 일정 검색은 render() 가 그 줄로 데려갑니다
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -2110,10 +2125,8 @@ function render(){
     const el = tlEl.querySelector(`li[data-time="${t}"]`);
     if(el){
       el.classList.add('found');
-      requestAnimationFrame(() => el.scrollIntoView({
-        block: 'center',
-        behavior: reduceMotion.matches ? 'auto' : 'smooth',
-      }));
+      // 타이밍·behavior 둘 다 jumpTo 와 같은 이유로 이렇게 둡니다 (그쪽 주석 참고)
+      setTimeout(() => el.scrollIntoView({ block: 'center', behavior: 'auto' }), 0);
       scrolledDate = day.date;          // 자동 스크롤이 도로 끌어당기지 않게
       setTimeout(() => el.classList.remove('found'), 2600);
     }
@@ -2321,7 +2334,7 @@ function refRow(x, area){
   // 표시 이름이 "Casa Batlló 굿즈샵" 처럼 한국어가 섞이면 지도에서 안 잡힙니다.
   // 그럴 때만 q 에 실제로 찍히는 이름을 따로 적습니다.
   const q = `${x.q || x.n}${where ? `, ${where}` : ''}`;
-  return `<a class="eat-row" href="${esc(mapHref(q))}" target="_blank" rel="noopener"
+  return `<a class="eat-row" href="${esc(mapHref(q))}" target="_blank" rel="noopener noreferrer"
       aria-label="${esc(x.n)} 지도에서 보기">
     ${PIN}
     <span class="eat-b">
@@ -2572,6 +2585,25 @@ function findHits(q){
       if(hits.length >= 60) return hits;
     }
   }
+  /* 먹을 곳 · 기념품도 훑습니다 — "그 카르보나라 집 이름이 뭐였지" 가
+     "판테온 언제 가지" 와 똑같은 상황이라서. 일정에 딸린 게 아니라
+     도시에 딸린 정보라 시각 대신 도시로 돌려줍니다. */
+  for(const c of CITIES){
+    for(const [key, pack] of [['food', FOOD[c.id]], ['gift', GIFT[c.id]]]){
+      if(!pack) continue;
+      const flat = [];
+      for(const g of pack.spots || [])
+        for(const x of (g && g.list) || [g]) if(x && x.n) flat.push([x, g && g.g]);
+      for(const g of pack.buy || [])
+        for(const x of g.list || []) flat.push([x, g.g]);
+      for(const x of pack.eat || []) flat.push([x, '꼭 먹어볼 것']);
+      for(const [x, group] of flat){
+        const hay = [x.n, x.d, x.a, group].filter(Boolean).join(' ').toLowerCase();
+        if(hay.includes(s)) hits.push({ ref: key, c, x, group });
+        if(hits.length >= 60) return hits;
+      }
+    }
+  }
   return hits;
 }
 
@@ -2584,7 +2616,7 @@ function mark(text, q){
 
 function renderFind(q){
   if(!q.trim()){
-    findList.innerHTML = `<div class="find-empty">일정·장소·준비물에서 찾습니다</div>`;
+    findList.innerHTML = `<div class="find-empty">일정 · 장소 · 준비물 · 식당 · 기념품에서 찾습니다</div>`;
     return;
   }
   const hits = findHits(q);
@@ -2592,7 +2624,20 @@ function renderFind(q){
     findList.innerHTML = `<div class="find-empty">“${esc(q)}” 결과가 없습니다</div>`;
     return;
   }
-  findList.innerHTML = hits.map(({ d, it }) => {
+  findList.innerHTML = hits.map(h => {
+    if(h.ref){
+      // 도시에 딸린 정보 — 시각 자리에 '먹을 곳' / '기념품' 을 씁니다
+      const sub = [h.x.d, h.x.a].filter(Boolean).join(' · ');
+      return `<button class="find-row" type="button"
+                      data-ref="${esc(h.ref)}" data-city="${esc(h.c.id)}"
+                      style="--c:${cityColor(h.c)}">
+        <span class="find-d">${esc(h.c.short || h.c.name)}</span>
+        <span class="find-t">${h.ref === 'food' ? '먹을 곳' : '기념품'}</span>
+        <span class="find-n">${mark(h.x.n, q)}
+          ${sub ? `<span class="find-sub">${esc(sub.slice(0, 46))}</span>` : ''}</span>
+      </button>`;
+    }
+    const { d, it } = h;
     const c = cityById(d.city);
     const rel = relLabel(d.date);
     const md = d.date.slice(5).replace('-', '/');
@@ -2618,6 +2663,14 @@ findList.addEventListener('click', (e) => {
   const row = e.target.closest('.find-row');
   if(!row) return;
   closeFind();
+  /* 먹을 곳 · 기념품 — 그 도시의 첫날로 가서 해당 섹션을 펼쳐 보여줍니다 */
+  if(row.dataset.ref){
+    const key = row.dataset.ref;
+    if(key === 'food') showFood = true; else showGift = true;
+    const day = DAYS.find(d => d.city === row.dataset.city);
+    if(day) jumpTo(day.date, `#sec-${key}`); else render();
+    return;
+  }
   pendingFocus = { date: row.dataset.date, time: row.dataset.time };
   // 지난 일정이 접혀 있으면 못 찾으므로 그 날은 펼쳐둡니다
   showPast = true; showPastFor = row.dataset.date;
