@@ -490,10 +490,14 @@ section{margin-top:34px}
   font-size:13.5px;line-height:1;text-align:center;
   /* 컬러 이모지는 다크 모드에서 과하게 튑니다 */
   opacity:.9;
+  /* 장식이라 선택에서 뺍니다 — 식당 이름을 길게 눌러 복사할 때
+     "🍴Roscioli" 가 아니라 "Roscioli" 가 나와야 지도에 그대로 붙습니다 */
+  user-select:none;-webkit-user-select:none;
 }
 .tl li.past .kind{opacity:.5}
 /* 예약 완료 — 시각 옆, 작게 */
-.bk{margin-left:7px;font-size:9.5px;vertical-align:1px;opacity:.85}
+.bk{margin-left:7px;font-size:9.5px;vertical-align:1px;opacity:.85;
+  user-select:none;-webkit-user-select:none}
 .tl li.past .bk{opacity:.45}
 .tl li.live .tl-n{font-weight:600}
 
@@ -1374,17 +1378,22 @@ const KIND = {
 /* 예약 상태 — 시트의 ✅발권완료 / ✅예약완료 등 */
 const BOOKED = { 발권: '발권 완료', 예약: '예약 완료', 온라인: '온라인 체크인', 상시: '상시 운행' };
 
+/* 보이는 표식과 읽어주는 말을 나눠 둡니다.
+   sr-only 를 이름 안에 두면 길게 눌러 복사할 때 "🍴식사.조식" 처럼 딸려옵니다.
+   그래서 읽어줄 말은 항목 맨 앞(하이라이트 표기 옆)에 모읍니다. */
 function kindMark(it){
   const k = KIND[it.kind];
-  if(!k) return '';
-  return `<span class="kind" aria-hidden="true">${k[0]}</span>`
-       + `<span class="sr-only">${esc(k[1])}. </span>`;
+  return k ? `<span class="kind" aria-hidden="true">${k[0]}</span>` : '';
 }
 function bookedMark(it){
   if(!it.booked) return '';
   const label = BOOKED[it.booked] || it.booked;
-  return `<span class="bk" title="${esc(label)}"><span aria-hidden="true">✅</span>`
-       + `<span class="sr-only">${esc(label)}. </span></span>`;
+  return `<span class="bk" title="${esc(label)}" aria-hidden="true">✅</span>`;
+}
+function srLabels(it){
+  const k = KIND[it.kind];
+  return (k ? `<span class="sr-only">${esc(k[1])}. </span>` : '')
+       + (it.booked ? `<span class="sr-only">${esc(BOOKED[it.booked] || it.booked)}. </span>` : '');
 }
 const EXT   = `<svg class="ex" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>`;
 const SPEAK = `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H4l2.2-2.6A8 8 0 1 1 21 12z"/></svg>`;
@@ -1580,11 +1589,12 @@ function jumpTo(date, target){
   const el = target ? $(target) : null;
   if(el && !el.hidden){
     scrolledDate = date;               // 자동 스크롤이 도로 끌어당기지 않게
-    /* 두 가지를 지켜야 이 스크롤이 실제로 도착합니다.
-       1) rAF 는 이릅니다 — 콜백이 새 레이아웃 확정 전에 돌아 섹션의 옛 위치로
-          갑니다 (이중 rAF 도 마찬가지). 작업 경계를 한 번 넘겨야 합니다.
-       2) behavior:'smooth' 는 날이 바뀌며 화면이 통째로 다시 그려지는 중에
-          취소됩니다. 검색 결과를 눌렀으면 바로 그 자리여야 하니 즉시 이동합니다. */
+    /* rAF 로는 도착하지 못합니다 — 콜백이 새 레이아웃 확정 전에 돌아
+       직전 화면 기준의 옛 위치로 스크롤합니다 (이중 rAF 도 마찬가지).
+       작업 경계를 한 번 넘겨야 합니다.
+
+       거리가 멀고(수천 px) 사용자가 특정 결과를 콕 집은 상황이라 즉시 이동합니다.
+       화면 안에서 살짝 옮기는 스크롤(FAB · 옵션 카드)은 smooth 그대로 둡니다. */
     setTimeout(() => el.scrollIntoView({ block: 'start', behavior: 'auto' }), 0);
     return;
   }
@@ -1682,7 +1692,7 @@ function itemHTML(it, city, cls, day, next){
 
   return `<li class="${cls}${it.star ? ' star' : ''}" data-time="${esc(it.time)}">
     ${srState}
-    ${it.star ? '<span class="sr-only">하이라이트. </span>' : ''}
+    ${it.star ? '<span class="sr-only">하이라이트. </span>' : ''}${srLabels(it)}
     <div class="tl-t">${esc(time)}${tzTag}${kst}${bookedMark(it)}</div>
     <div class="tl-n">${it.star ? STAR : ''}${kindMark(it)}${name}</div>
     ${meet}
@@ -2138,10 +2148,8 @@ function render(){
   if(liveIdx > 0 && scrolledDate !== day.date){
     scrolledDate = day.date;
     const live = $('#tl').children[liveIdx];
-    if(live) requestAnimationFrame(() => live.scrollIntoView({
-      block: 'center',
-      behavior: reduceMotion.matches ? 'auto' : 'smooth',
-    }));
+    // 타이밍은 jumpTo 와 같은 이유 — rAF 는 새 레이아웃 확정 전이라 옛 위치로 갑니다
+    if(live) setTimeout(() => live.scrollIntoView({ block: 'center', behavior: 'auto' }), 0);
   }
 
   /* ---- 한마디 — 그날 도시의 언어만 ----
