@@ -62,6 +62,22 @@ for key, groups in (('food', ('spots',)), ('gift', ('buy',))):
                 f"{key}/{cid} 지도 검색어에 한글: {q!r} → q 에 현지 표기를 적으세요"
         n_eat += len(flat); n_buy += len(rows)
 
+# 지도 링크 — "취침, Barcelona, Spain" 처럼 검색해봐야 안 나오는 링크 막기.
+# place 가 없으면 이름이 그대로 검색어가 되므로, 이름이 동작이면 map:false 여야 합니다.
+import re as _re
+ACT = _re.compile(r'기상|조식|취침|휴식|점심|저녁|디너|간식|준비|정리|출발|이동|복귀'
+                  r'|체크아웃|짐|세면|충전|알람|판단|확인|하산|승차|하차|탑승|대기'
+                  r'|구매|인출|환급|검사|심사|셋업|철수|퇴장|입장')
+dead = []
+for day in d['days']:
+    for it in day['items'] + [i for o in (day.get('options') or []) for i in o['items']]:
+        if it.get('map') is False or it.get('place'):
+            continue
+        if ACT.search(it['name']):
+            dead.append(f"{day['date']} {it['time']} {it['name']!r}")
+assert not dead, ("지도로 보내봐야 안 나오는 링크 — place 를 적거나 map:false 를 붙이세요:\n  "
+                  + "\n  ".join(dead[:10]))
+
 # 식사 항목의 음식 카드 — 가리키는 도시에 값이 적힌 메뉴가 없으면 배지만 뜨고 빕니다
 menus = {cid: [x for x in (p.get('eat') or []) if x.get('price')]
          for cid, p in (d.get('food') or {}).items()}
@@ -107,6 +123,12 @@ for m in set(re.findall(r'[\w.+-]+@[\w.-]+\.\w+', raw)):
 # 색상 코드(#RRGGBB)를 뺀 긴 숫자열 = 예약번호일 가능성
 for m in set(re.findall(r'(?<!#)\b\d{8,}\b', raw)):
     hits.append(f"8자리 이상 숫자: {m}")
+
+# 항공·열차 예약코드(PNR)는 영문+숫자 5~8자라 위 숫자 규칙을 그냥 통과합니다.
+# 실제로 PNR 2건이 이 검사를 뚫고 배포된 적이 있어 라벨 기준으로 따로 봅니다.
+for label in ('PNR', '예약번호', '주문번호', '확인번호', '예약코드', 'Booking', 'Reference'):
+    for m in re.finditer(label + r'\s*[:：]?\s*([A-Z0-9]{5,12})\b', raw):
+        hits.append(f"{label} 노출: {m.group(1)}  → 값을 빼고 '메일에서 확인' 으로 두세요")
 
 if hits:
     print("   경고 — 저장소가 public 입니다:")
