@@ -517,6 +517,58 @@ section{margin-top:34px}
 .opt-gap .g-t{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em}
 .opt-gap .g-n{display:block;margin-top:3px;font-size:14px}
 
+/* ---------- 식사 항목의 음식 카드 ----------
+   "지금 이 끼니에 뭘 먹지" 를 위아래 일정과 같이 보려고 그 자리에 폅니다.
+   높이는 고정 — 메뉴를 넘길 때 아래 일정이 밀리면 시간 비교가 안 됩니다. */
+.food-tog{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;margin-left:6px;vertical-align:-4px;
+  border:1px solid var(--line);border-radius:7px;
+  background:var(--ink-2);cursor:pointer;font-size:11px;line-height:1;
+  user-select:none;-webkit-user-select:none;
+}
+.food-tog[aria-expanded="true"]{border-color:var(--now);background:var(--ink)}
+.food-card{
+  margin-top:9px;border:1px solid var(--line);border-radius:12px;
+  background:var(--ink-2);overflow:hidden;
+}
+.fc-win{overflow:hidden;height:118px}          /* ← 고정 높이 */
+.fc-track{display:flex;height:100%;transition:transform .26s cubic-bezier(.2,.8,.3,1)}
+.fc-track.drag{transition:none}
+.fc-item{
+  flex:0 0 100%;min-width:0;padding:11px 13px;
+  display:flex;flex-direction:column;gap:3px;
+}
+.fc-top{display:flex;align-items:baseline;gap:8px}
+.fc-n{font-size:14.5px;font-weight:600;letter-spacing:-.01em;flex:1 1 auto;min-width:0}
+.fc-p{
+  flex:0 0 auto;font-family:var(--f-mono);font-size:11px;
+  color:var(--now);letter-spacing:.02em;
+}
+.fc-d{font-size:12px;color:var(--paper-dim);line-height:1.45}
+.fc-w{font-size:11.5px;color:var(--paper);line-height:1.4}
+.fc-t{font-size:11px;color:var(--paper-faint);line-height:1.4}
+/* 길이가 제각각이라 넘치면 자릅니다 — 높이가 흔들리면 안 되므로 */
+.fc-d,.fc-w,.fc-t{
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
+}
+.fc-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:7px 13px 9px;border-top:1px solid var(--line);
+}
+.fc-dots{display:flex;gap:5px;flex:1 1 auto;flex-wrap:wrap}
+.fc-dot{
+  width:6px;height:6px;padding:0;border:0;border-radius:50%;
+  background:var(--paper-faint);opacity:.4;cursor:pointer;
+}
+.fc-dot.on{opacity:1;background:var(--now)}
+.fc-cnt{font-family:var(--f-mono);font-size:10.5px;color:var(--paper-faint);flex:1 1 auto}
+.fc-note{
+  flex:0 0 auto;max-width:62%;text-align:right;
+  font-size:10px;color:var(--paper-faint);line-height:1.35;
+}
+@media (prefers-reduced-motion: reduce){ .fc-track{transition:none} }
+
 /* ---------- 하이라이트 (그날의 명장면) ---------- */
 .tl li.star .tl-n{font-size:16.5px;font-weight:600;letter-spacing:-.012em}
 .tl li.star::before{background:var(--now);border-color:var(--now);opacity:.5}
@@ -1694,14 +1746,88 @@ function itemHTML(it, city, cls, day, next){
     ${srState}
     ${it.star ? '<span class="sr-only">하이라이트. </span>' : ''}${srLabels(it)}
     <div class="tl-t">${esc(time)}${tzTag}${kst}${bookedMark(it)}</div>
-    <div class="tl-n">${it.star ? STAR : ''}${kindMark(it)}${name}</div>
+    <div class="tl-n">${it.star ? STAR : ''}${kindMark(it)}${name}${foodToggle(it, day)}</div>
     ${meet}
     ${it.desc ? `<div class="tl-d">${esc(it.desc)}</div>` : ''}
     ${prep}
     ${refs ? `<div class="refs">${refs}</div>` : ''}
     ${links ? `<div class="exts">${links}</div>` : ''}
     ${mv}
+    ${foodCard(it, day)}
   </li>`;
+}
+
+/* -----------------------------------------------------------
+   식사 항목의 음식 카드
+
+   items[].food 가 true 면 그날 도시, 문자열이면 그 도시 id 의 음식을 씁니다
+   (이동일에 다음 도시 것을 미리 보는 용도).
+   플래그가 없는 항목은 아래 함수들이 빈 문자열을 돌려주므로
+   기존 렌더 경로와 완전히 동일합니다.
+   ----------------------------------------------------------- */
+let foodOpen = null;   // 열려 있는 항목 키 (한 번에 하나) — 날이 바뀌면 닫힙니다
+let foodIdx  = 0;      // 그 카드에서 지금 보고 있는 메뉴
+
+/* 카드에는 값·장소까지 적힌 것만 올립니다.
+   접힌 "먹을 곳" 칩 목록은 eat 전체를 그대로 쓰므로 정보를 잃지 않습니다 —
+   한 줄짜리 항목까지 카드로 넘기면 빈 카드를 여러 장 넘기게 됩니다. */
+const foodMenus = pack => (pack.eat || []).filter(x => x.price);
+
+function foodPack(it, day){
+  if(!it.food) return null;
+  const id = typeof it.food === 'string' ? it.food : (day && day.city);
+  const pack = id && FOOD[id];
+  return (pack && foodMenus(pack).length) ? pack : null;
+}
+const foodKey = (it, day) => `${day.date}|${it.time}|${it.name}`;
+
+function foodToggle(it, day){
+  if(!foodPack(it, day)) return '';
+  const open = foodOpen === foodKey(it, day);
+  return `<button class="food-tog" type="button" data-food="${esc(foodKey(it, day))}"
+    aria-expanded="${open}" aria-label="${open ? '음식 추천 닫기' : '이 도시 음식 추천 보기'}"
+    ><span aria-hidden="true">🍽</span></button>`;
+}
+
+function foodCard(it, day){
+  const pack = foodPack(it, day);
+  if(!pack || foodOpen !== foodKey(it, day)) return '';
+  const list = foodMenus(pack);
+  const many = list.length > 8;         // 점이 너무 빽빽하면 숫자로
+  return `<div class="food-card" role="group" aria-label="${esc(pack.name || '')} 음식 추천">
+    <div class="fc-win"><div class="fc-track">${list.map(x => `
+      <article class="fc-item">
+        <div class="fc-top">
+          <span class="fc-n">${x.star ? STAR : ''}${esc(x.n)}</span>
+          ${x.price ? `<span class="fc-p">${esc(x.price)}</span>` : ''}
+        </div>
+        ${x.d && x.d !== '—' ? `<span class="fc-d">${esc(x.d)}</span>` : ''}
+        ${x.where ? `<span class="fc-w">${esc(x.where)}</span>` : ''}
+        ${x.note ? `<span class="fc-t">${esc(x.note)}</span>` : ''}
+      </article>`).join('')}</div></div>
+    <div class="fc-bar">
+      ${many
+        ? `<span class="fc-cnt" data-fc-cnt>1 / ${list.length}</span>`
+        : `<div class="fc-dots">${list.map((x, i) =>
+            `<button class="fc-dot${i ? '' : ' on'}" type="button" data-fc-go="${i}"
+               aria-label="${esc(x.n)}"></button>`).join('')}</div>`}
+      ${pack.cardNote ? `<span class="fc-note">${esc(pack.cardNote)}</span>` : ''}
+    </div>
+  </div>`;
+}
+
+/* 카드 안에서만 쓰는 상태 갱신 — 여기서 render() 를 부르면 DOM 이 새로 만들어져
+   전환 애니메이션이 죽습니다. 그래서 transform 만 직접 건드립니다. */
+function foodShow(card, i, animate){
+  const track = card.querySelector('.fc-track');
+  const n = track.children.length;
+  foodIdx = Math.max(0, Math.min(n - 1, i));
+  track.classList.toggle('drag', !animate);
+  track.style.transform = `translateX(${-foodIdx * 100}%)`;
+  if(!animate) requestAnimationFrame(() => track.classList.remove('drag'));
+  card.querySelectorAll('.fc-dot').forEach((d, j) => d.classList.toggle('on', j === foodIdx));
+  const cnt = card.querySelector('[data-fc-cnt]');
+  if(cnt) cnt.textContent = `${foodIdx + 1} / ${n}`;
 }
 
 /* -----------------------------------------------------------
@@ -1765,6 +1891,7 @@ function render(){
     const dir = navDir < 0 ? 'in-back' : 'in-fwd';
     void lm.offsetWidth;                       // 애니메이션 재시작
     lm.classList.add(dir); cn.classList.add(dir);
+    foodOpen = null; foodIdx = 0;              // 음식 카드는 날을 넘기면 닫습니다
   }
   // 앱을 처음 연 순간에만 헤더가 한 번 올라옵니다
   const hero = document.querySelector('.hero');
@@ -2092,7 +2219,8 @@ function render(){
 
   const tlEl = $('#tl');
   // 날·진행중항목·접힘·시간대·테마가 그대로면 다시 만들지 않습니다
-  const tlSig = [day.date, liveIdx, fromIdx, KST_OFF, currentTheme(), optRev].join('|');
+  const tlSig = [day.date, liveIdx, fromIdx, KST_OFF, currentTheme(), optRev,
+                 foodOpen || '-'].join('|');
   const tlRebuilt = changed('tl', tlSig);
   if(tlRebuilt){
     const rows = day.items
@@ -2118,6 +2246,9 @@ function render(){
       }
     }
     tlEl.innerHTML = rows.map(r => r[1]).join('');
+    // 타임라인을 다시 만들면 카드도 새 DOM 이라 보던 메뉴로 되돌려 놓습니다
+    const card = tlEl.querySelector('.food-card');
+    if(card) foodShow(card, foodIdx, false);
   }
 
   // 날을 넘겼거나 접기를 토글했을 때만 일정이 차례로 올라옵니다
@@ -2496,6 +2627,22 @@ document.addEventListener('click', async (e) => {
     render();
     return;
   }
+  // 음식 카드 열기·닫기 (한 번에 하나만)
+  const ftog = e.target.closest('[data-food]');
+  if(ftog){
+    const key = ftog.dataset.food;
+    foodOpen = (foodOpen === key) ? null : key;
+    foodIdx = 0;
+    render();
+    return;
+  }
+  // 점을 눌러 메뉴 이동 (마우스·키보드에는 스와이프가 없습니다)
+  const dot = e.target.closest('[data-fc-go]');
+  if(dot){
+    foodShow(dot.closest('.food-card'), +dot.dataset.fcGo, true);
+    return;
+  }
+
   // 타임라인의 빈자리 → 선택 카드로 데려갑니다
   if(e.target.closest('[data-gotoopts]')){
     const box = $('#opts');
@@ -2696,15 +2843,53 @@ document.addEventListener('keydown', (e) => {
 });
 
 let tx = 0, ty = 0, tracking = false;
+/* 카드 안에서 시작한 제스처는 날짜를 넘기지 않습니다.
+   카드가 그 제스처를 가져가고, 날짜 스와이프는 아예 추적을 끕니다. */
+let fcCard = null, fcAxis = 0;     // axis: 0 미정 · 1 가로(카드) · -1 세로(스크롤)
+
 document.addEventListener('touchstart', (e) => {
   if(e.touches.length !== 1) return;
-  tx = e.touches[0].clientX; ty = e.touches[0].clientY; tracking = true;
+  tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+  fcCard = e.target.closest('.food-card');
+  fcAxis = 0;
+  tracking = !fcCard;              // 카드 위에서 시작했으면 날짜 스와이프는 포기
 }, { passive: true });
+
+document.addEventListener('touchmove', (e) => {
+  if(!fcCard || e.touches.length !== 1) return;
+  const dx = e.touches[0].clientX - tx, dy = e.touches[0].clientY - ty;
+  if(!fcAxis){
+    // 가로가 세로보다 확실히 클 때만 카드 스와이프로 판정 — 아니면 세로 스크롤에 양보
+    if(Math.abs(dx) > Math.abs(dy) * 1.5 && Math.abs(dx) > 30) fcAxis = 1;
+    else if(Math.abs(dy) > 12) fcAxis = -1;
+    return;
+  }
+  if(fcAxis !== 1) return;
+  e.preventDefault();                                  // 세로 스크롤·화면 당김 방지
+  const track = fcCard.querySelector('.fc-track');
+  const n = track.children.length;
+  let px = dx;
+  // 양 끝에서는 저항을 줘서 "끝" 이라는 느낌만 남깁니다
+  if((foodIdx === 0 && dx > 0) || (foodIdx === n - 1 && dx < 0)) px = dx * 0.28;
+  track.classList.add('drag');
+  track.style.transform = `translateX(calc(${-foodIdx * 100}% + ${px}px))`;
+}, { passive: false });
+
 document.addEventListener('touchend', (e) => {
-  if(!tracking) return;
-  tracking = false;
   const t = e.changedTouches[0];
   const dx = t.clientX - tx, dy = t.clientY - ty;
+
+  if(fcCard){
+    if(fcAxis === 1){
+      const w = fcCard.clientWidth || 1;
+      const step = (Math.abs(dx) > w * 0.22 || Math.abs(dx) > 60) ? (dx < 0 ? 1 : -1) : 0;
+      foodShow(fcCard, foodIdx + step, true);          // 못 미치면 제자리로 돌아옵니다
+    }
+    fcCard = null; fcAxis = 0;
+    return;
+  }
+  if(!tracking) return;
+  tracking = false;
   // 세로 스크롤과 헷갈리지 않게 가로가 확실히 클 때만
   if(Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.8) return;
   stepDay(dx < 0 ? 1 : -1);

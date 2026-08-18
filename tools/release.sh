@@ -61,8 +61,23 @@ for key, groups in (('food', ('spots',)), ('gift', ('buy',))):
             assert not any('가' <= ch <= '힣' for ch in q), \
                 f"{key}/{cid} 지도 검색어에 한글: {q!r} → q 에 현지 표기를 적으세요"
         n_eat += len(flat); n_buy += len(rows)
+
+# 식사 항목의 음식 카드 — 가리키는 도시에 값이 적힌 메뉴가 없으면 배지만 뜨고 빕니다
+menus = {cid: [x for x in (p.get('eat') or []) if x.get('price')]
+         for cid, p in (d.get('food') or {}).items()}
+n_card = 0
+for day in d['days']:
+    for it in day['items'] + [i for o in (day.get('options') or []) for i in o['items']]:
+        f = it.get('food')
+        if not f:
+            continue
+        cid = f if isinstance(f, str) else day['city']
+        assert cid in ids, f"{day['date']} {it['time']} food 가 가리키는 도시 없음: {cid}"
+        assert menus.get(cid), \
+            f"{day['date']} {it['time']} food: {cid} — 값이 적힌 메뉴가 없습니다"
+        n_card += 1
 print(f"   OK — {len(d['days'])}일 / {sum(len(x['items']) for x in d['days'])}개 일정"
-      f" / 먹을거리·물건 {n_eat} · 장소 {n_buy}")
+      f" / 먹을거리·물건 {n_eat} · 장소 {n_buy} · 음식카드 {n_card}")
 PY
 
 echo "2) 민감정보 검사"
