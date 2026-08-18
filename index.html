@@ -520,14 +520,25 @@ section{margin-top:34px}
 /* ---------- 식사 항목의 음식 카드 ----------
    "지금 이 끼니에 뭘 먹지" 를 위아래 일정과 같이 보려고 그 자리에 폅니다.
    높이는 고정 — 메뉴를 넘길 때 아래 일정이 밀리면 시간 비교가 안 됩니다. */
+/* button 은 UA 기본 색(검정)을 씁니다 — color 를 안 주면 어두운 배경에서
+   글자가 사라집니다. 배경색도 마찬가지로 명시해야 합니다. */
 .food-tog{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:22px;height:22px;margin-left:6px;vertical-align:-4px;
-  border:1px solid var(--line);border-radius:7px;
-  background:var(--ink-2);cursor:pointer;font-size:11px;line-height:1;
+  display:inline-flex;align-items:center;gap:4px;
+  margin-left:7px;vertical-align:1px;
+  padding:2px 8px 2px 6px;
+  border:1px solid var(--city, var(--line));border-radius:100px;
+  background:color-mix(in srgb, var(--city, var(--line)) 14%, transparent);
+  color:var(--paper);cursor:pointer;
+  font:inherit;font-size:10.5px;letter-spacing:.02em;line-height:1.6;
   user-select:none;-webkit-user-select:none;
 }
-.food-tog[aria-expanded="true"]{border-color:var(--now);background:var(--ink)}
+.food-tog .fk{font-size:11px;line-height:1}
+.food-tog:hover,.food-tog:focus-visible{
+  background:color-mix(in srgb, var(--city, var(--line)) 26%, transparent);
+}
+.food-tog[aria-expanded="true"]{
+  background:color-mix(in srgb, var(--city, var(--line)) 30%, transparent);
+}
 .food-card{
   margin-top:9px;border:1px solid var(--line);border-radius:12px;
   background:var(--ink-2);overflow:hidden;
@@ -1782,11 +1793,16 @@ function foodPack(it, day){
 const foodKey = (it, day) => `${day.date}|${it.time}|${it.name}`;
 
 function foodToggle(it, day){
-  if(!foodPack(it, day)) return '';
+  const pack = foodPack(it, day);
+  if(!pack) return '';
   const open = foodOpen === foodKey(it, day);
+  const n = foodMenus(pack).length;
+  /* 🍽(U+1F37D) 는 변이 선택자가 없으면 텍스트 표현(흑백)으로 그려집니다.
+     ️를 붙여 컬러 이모지로 고정합니다. */
   return `<button class="food-tog" type="button" data-food="${esc(foodKey(it, day))}"
-    aria-expanded="${open}" aria-label="${open ? '음식 추천 닫기' : '이 도시 음식 추천 보기'}"
-    ><span aria-hidden="true">🍽</span></button>`;
+    aria-expanded="${open}" aria-label="${open ? '음식 추천 닫기' : `${pack.name || ''} 음식 ${n}가지 보기`}"
+    ><span class="fk" aria-hidden="true">🍽️</span><span aria-hidden="true">${
+      open ? '닫기' : `뭐 먹지 · ${n}`}</span></button>`;
 }
 
 function foodCard(it, day){
