@@ -158,6 +158,7 @@
      "time": "18:20",
      "name": "가벼운 저녁",
      "kind": "meal",
+     "say": true,
      "desc": "(기내식 있으니 간단히)",
      "map": false
     },
@@ -379,6 +380,7 @@
      "time": "17:15",
      "name": "HCC 몽블랑 체크인, 짐 풀기",
      "kind": "stay",
+     "say": true,
      "place": "HCC Montblanc, Barcelona",
      "prep": [
       "도시세 €46.20 현장",
@@ -421,6 +423,7 @@
      "name": "첫 디너",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "빠 암 토마켓 / 하몽 / 파타타스 브라바스",
      "map": false,
      "tz": 120,
@@ -539,6 +542,7 @@
      "name": "늦은 점심",
      "kind": "meal",
      "food": true,
+     "say": true,
      "map": false
     },
     {
@@ -561,6 +565,7 @@
      "name": "디너",
      "kind": "meal",
      "food": true,
+     "say": true,
      "map": false
     },
     {
@@ -709,6 +714,7 @@
      "name": "몬세라트 점심 €50",
      "kind": "meal",
      "food": true,
+     "say": true,
      "map": false
     },
     {
@@ -740,6 +746,7 @@
      "name": "마지막 바르셀로나 디너",
      "kind": "meal",
      "food": true,
+     "say": true,
      "map": false
     },
     {
@@ -921,6 +928,7 @@
      "name": "인터라켄 점심",
      "kind": "meal",
      "food": true,
+     "say": true,
      "map": false
     },
     {
@@ -946,6 +954,7 @@
      "name": "Camping Jungfrau 체크인",
      "kind": "stay",
      "booked": "예약",
+     "say": true,
      "desc": "예약완료 · 체크인 15:00",
      "place": "Camping Jungfrau, Lauterbrunnen",
      "move": "차로 25분",
@@ -1073,6 +1082,7 @@
        "name": "마이링겐 점심",
        "kind": "meal",
        "food": true,
+       "say": true,
        "map": false
       },
       {
@@ -1322,6 +1332,7 @@
        "name": "라우터브룬넨 마을 점심",
        "kind": "meal",
        "food": true,
+       "say": true,
        "map": false
       },
       {
@@ -1422,6 +1433,7 @@
      "time": "11:00",
      "name": "Eigernordwand 현장 체크인",
      "kind": "stay",
+     "say": true,
      "desc": "울타리(fence) 쪽 = 아이거 북벽 정면 뷰",
      "place": "Camping Eigernordwand, Grindelwald",
      "move": "차로 25분",
@@ -1444,6 +1456,7 @@
      "name": "그린델발트 마을 점심",
      "kind": "meal",
      "food": true,
+     "say": true,
      "place": "Grindelwald",
      "move": "도보 10분 (오르막)"
     }
@@ -1553,6 +1566,7 @@
        "time": "18:30",
        "name": "마트 보충 쇼핑",
        "kind": "shop",
+       "say": true,
        "desc": "빵·계란·치즈·소시지·과일·물·와인 · 가스 카트리지 잔량 확인",
        "map": false,
        "star": true
@@ -1612,6 +1626,7 @@
      "name": "마지막 그린델발트 디너",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "스위스 5박 중 유일한 제대로 된 외식 · 라클렛·퐁뒤·뢰스티 추천: C and M / Memory Restaurant / Restaurant Glacier CHF 70~110 (2인)",
      "map": false,
      "star": true
@@ -1682,6 +1697,7 @@
        "name": "호숫가 산장 레스토랑 점심",
        "kind": "meal",
        "food": true,
+       "say": true,
        "map": false
       },
       {
@@ -1738,6 +1754,7 @@
        "name": "마을 점심",
        "kind": "meal",
        "food": true,
+       "say": true,
        "desc": "(일요일 = 식당은 영업)",
        "map": false
       },
@@ -1856,6 +1873,7 @@
      "name": "Camping TCS Lugano-Muzzano 체크인",
      "kind": "stay",
      "booked": "예약",
+     "say": true,
      "desc": "Muzzano 체크인 ✅예약완료 · Premium lake pitch (호수뷰)",
      "place": "Camping TCS Lugano-Muzzano",
      "move": "렌터카 35분 (추정)",
@@ -1889,6 +1907,7 @@
      "name": "호숫가 디너",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "티치노 요리: 폴렌타 / 메를롯 와인 · 스위스 마지막 밤",
      "map": false
     },
@@ -1934,6 +1953,7 @@
        "name": "Andermatt 점심",
        "kind": "meal",
        "food": true,
+       "say": true,
        "map": false
       },
       {
@@ -2004,6 +2024,7 @@
        "name": "Andermatt 점심",
        "kind": "meal",
        "food": true,
+       "say": true,
        "map": false
       },
       {
@@ -2151,6 +2172,7 @@
      "time": "14:50",
      "name": "Hotel Plaza Venice 체크인",
      "kind": "stay",
+     "say": true,
      "desc": "(역 도보 1분), 짐 풀기 관광세 €12.40 현장 현금",
      "place": "Hotel Plaza Venice, Mestre",
      "move": "메스트레역 도보 1분",
@@ -2210,6 +2232,7 @@
      "name": "저녁",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "치케티 = 베네치아 타파스 / 스프리츠",
      "map": false
     },
@@ -2342,6 +2365,7 @@
      "name": "디너",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "먹물 리조또 / 사르데 인 사오르 / 바칼라 만테카토",
      "map": false
     },
@@ -2437,6 +2461,7 @@
        "time": "15:45",
        "name": "리알토 시장 구경",
        "kind": "walk",
+       "gift": true,
        "place": "Mercato di Rialto, Venezia"
       },
       {
@@ -2444,6 +2469,7 @@
        "name": "치케티 바 순례",
        "kind": "meal",
        "food": true,
+       "say": true,
        "desc": "Cantina Do Mori (1462년, 가장 오래된 바카로) · All'Arco / Osteria al Bacareto · 스프리츠 + 치케티",
        "map": false
       },
@@ -2560,6 +2586,7 @@
      "time": "11:40",
      "name": "기베르티 패스 현장 구매 €15/인 = €30",
      "kind": "shop",
+     "say": true,
      "desc": "매표소: Piazza San Giovanni 7 (세례당 맞은편) · 월~토 08:00~ 19:15 포함: 두오모 박물관 + 세례당 + 산타 레파라타 크립트",
      "place": "Piazza San Giovanni, Firenze",
      "prep": [
@@ -2580,6 +2607,7 @@
      "name": "점심",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "2층 푸드코트 / 트러플 파스타·람프레도토",
      "place": "Mercato Centrale Firenze"
     },
@@ -2642,6 +2670,7 @@
      "time": "19:15",
      "name": "호텔 체크인",
      "kind": "stay",
+     "say": true,
      "map": false
     },
     {
@@ -2649,6 +2678,7 @@
      "name": "저녁 — 비스테카 알라 피오렌티나",
      "kind": "meal",
      "food": true,
+     "say": true,
      "map": false,
      "star": true
     },
@@ -2784,6 +2814,7 @@
      "name": "젤라또",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "(Gelateria dei Neri / Vivoli)",
      "place": "Vivoli, Firenze"
     },
@@ -2791,6 +2822,7 @@
      "time": "15:45",
      "name": "선택 [A] 산 로렌초 시장 · 가죽 공방 구경",
      "kind": "walk",
+     "gift": true,
      "place": "Mercato di San Lorenzo, Firenze",
      "prep": [
       "내일 07:00 출발 친퀘테레 당일치기",
@@ -2809,6 +2841,7 @@
      "name": "저녁",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "파파르델레 알 친기알레 / 리볼리타 / 크로스티니",
      "map": false
     },
@@ -2851,6 +2884,7 @@
        "name": "점심",
        "kind": "meal",
        "food": true,
+       "say": true,
        "desc": "트러플 파스타 / 람프레도토 / 피렌체 스테이크 샌드위치",
        "place": "Mercato Centrale Firenze",
        "move": "도보 12분 (추정)"
@@ -2898,6 +2932,7 @@
        "name": "간단히 요기",
        "kind": "meal",
        "food": true,
+       "say": true,
        "map": false
       },
       {
@@ -2959,6 +2994,7 @@
      "time": "06:50",
      "name": "SMN역 자판기에서 표 구매 €9.80/인 = €19.6",
      "kind": "train",
+     "say": true,
      "desc": "Firenze S.M.Novella → Pisa S. Rossore · 지역열차 = 좌석예약 없음, 아무 자리",
      "place": "Firenze Santa Maria Novella"
     },
@@ -3032,6 +3068,7 @@
      "time": "10:50",
      "name": "친퀘테레 카드 구매 €18.20/인 = €36.4",
      "kind": "shop",
+     "say": true,
      "desc": "역 안 국립공원 안내센터 또는 자동판매기 · 다섯 마을 + 레반토 구간 열차 무제한 · 비아 델 아모레 + 유료 하이킹 트레일 포함 하루 2회 이상 타면 개별표보다 이득 (오늘 3~4회 탑승)",
      "map": false,
      "star": true
@@ -3060,6 +3097,7 @@
      "name": "마나롤라 점심",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "트로피에 알 페스토 / 프리토 미스토 / 안초비",
      "map": false
     },
@@ -3106,6 +3144,7 @@
      "time": "17:20",
      "name": "피렌체행 표 구매 €9.80/인 = €19.6",
      "kind": "shop",
+     "say": true,
      "map": false
     },
     {
@@ -3125,6 +3164,7 @@
      "name": "호텔 근처 저녁",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "(호텔 근처, 간단히)",
      "map": false
     },
@@ -3313,6 +3353,7 @@
      "time": "18:30",
      "name": "체크인, 짐 풀기 관광세 현장 현금",
      "kind": "stay",
+     "say": true,
      "map": false
     },
     {
@@ -3320,6 +3361,7 @@
      "name": "첫 로마 디너",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "카르보나라 / 카초 에 페페 (로마 파스타)",
      "map": false
     },
@@ -3426,6 +3468,7 @@
      "name": "점심",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "카치오 에 페페 / 로마식 피자",
      "place": "Borgo Pio, Roma",
      "move": "도보 5분 (추정)"
@@ -3499,6 +3542,7 @@
      "name": "디너",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "카르보나라 / 카초 에 페페",
      "map": false
     },
@@ -3635,6 +3679,7 @@
      "name": "점심",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "투어 후 체력 회복 · 몬티 = 콜로세움 북쪽 골목 동네",
      "map": false,
      "star": true
@@ -3699,6 +3744,7 @@
      "name": "마지막 로마 디너",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "아마트리치아나 / 그리치아 / 트리파",
      "map": false,
      "prep": [
@@ -3710,6 +3756,7 @@
      "time": "21:30",
      "name": "(선택) 마지막 야경 or 쇼핑",
      "kind": "walk",
+     "gift": true,
      "desc": "선택",
      "map": false
     },
@@ -3892,6 +3939,7 @@
      "time": "16:15",
      "name": "체크인 · 짐 풀기",
      "kind": "stay",
+     "say": true,
      "map": false
     },
     {
@@ -3925,6 +3973,7 @@
      "name": "첫 프라하 디너",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "콜레노(족발) / 굴라시 / 스비치코바 · 필스너 우르켈 (0.5L 약 60~80 CZK) 900~1,300 CZK (2인)",
      "place": "Lokál Dlouhááá, Praha",
      "star": true
@@ -4000,6 +4049,7 @@
      "time": "09:00",
      "name": "매표소에서 메인 서킷(Circuit B) 구매",
      "kind": "shop",
+     "say": true,
      "desc": "매표소 3곳: 2번 안뜰(회화관 옆) / 3번 안뜰(대성당 앞) / 황금소로 입구",
      "map": false,
      "star": true
@@ -4050,6 +4100,7 @@
      "name": "점심",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "(말라스트라나, 여유롭게)",
      "map": false
     },
@@ -4101,6 +4152,7 @@
      "name": "디너",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "콜레노(족발) / 굴라시 / 스비치코바 · 필스너 우르켈 / 코젤 900~1,300 CZK (2인)",
      "place": "Lokál Dlouhááá, Praha",
      "move": "도보 5분 (추정)"
@@ -4214,6 +4266,7 @@
      "name": "점심",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "(전통 보헤미안) 추천: Krčma v Šatlavské (중세 분위기 그릴) Hospoda Na Louži (가성비) Eggenberg 양조장",
      "place": "Krčma v Šatlavské",
      "move": "도보 5분 (추정)"
@@ -4240,6 +4293,7 @@
      "time": "16:00",
      "name": "마을 골목 산책 · 카페 · 기념품",
      "kind": "meal",
+     "gift": true,
      "desc": "트르들로(회오리빵) 80~100 CZK · 현금 흥정 가능한 소상점 피노키오 촬영지 등 소규모 명소 €1 수준",
      "place": "Český Krumlov"
     },
@@ -4352,6 +4406,8 @@
      "time": "10:15",
      "name": "마지막 쇼핑",
      "kind": "shop",
+     "gift": true,
+     "say": true,
      "desc": "보헤미안 가넷 (어머니) · Granát Turnov 공식매장 (구시가) · 실버 세팅 목걸이·팔찌 1,200~3,500 CZK · 보헤미안 크리스털 찻잔 (장모님) · Moser · Preciosa 공식매장 · Manufaktura 맥주 화장품 (와이프 절친) · 마",
      "map": false,
      "prep": [
@@ -4366,6 +4422,7 @@
      "name": "점심",
      "kind": "meal",
      "food": true,
+     "say": true,
      "desc": "못 먹어본 체코 음식 (콜레노·굴라시·스비치코바) 900~1,300 CZK (2인)",
      "map": false
     },
@@ -4384,6 +4441,7 @@
      "time": "15:00",
      "name": "세금 환급 준비",
      "kind": "shop",
+     "say": true,
      "desc": "가넷·크리스털 2,000 CZK 이상 구매분 · Tax Free 서류 + 영수증 + 여권 챙기기",
      "map": false
     },
@@ -4426,6 +4484,7 @@
      "time": "16:30",
      "name": "세금 환급",
      "kind": "shop",
+     "say": true,
      "map": false
     },
     {
@@ -4527,6 +4586,21 @@
      "ko": "현금만 되나요?",
      "x": "¿Solo efectivo?",
      "r": "쏠로 에펙띠보"
+    },
+    {
+     "ko": "이거 주세요",
+     "x": "Esto, por favor.",
+     "r": "에스또 뽀르 파보르"
+    },
+    {
+     "ko": "계산서 주세요",
+     "x": "La cuenta, por favor.",
+     "r": "라 꾸엔따 뽀르 파보르"
+    },
+    {
+     "ko": "화장실 어디예요?",
+     "x": "¿Dónde está el baño?",
+     "r": "돈데 에스따 엘 바뇨"
     }
    ]
   },
@@ -4552,6 +4626,21 @@
      "ko": "현금만 되나요?",
      "x": "Nur Bargeld?",
      "r": "누어 바르겔트"
+    },
+    {
+     "ko": "이거 주세요",
+     "x": "Das hier, bitte.",
+     "r": "다스 히어 비테"
+    },
+    {
+     "ko": "계산서 주세요",
+     "x": "Die Rechnung, bitte.",
+     "r": "디 레히눙 비테"
+    },
+    {
+     "ko": "화장실 어디예요?",
+     "x": "Wo ist die Toilette?",
+     "r": "보 이스트 디 토일레테"
     }
    ]
   },
@@ -4577,6 +4666,21 @@
      "ko": "현금만 되나요?",
      "x": "Solo contanti?",
      "r": "쏠로 꼰딴띠"
+    },
+    {
+     "ko": "이거 주세요",
+     "x": "Questo, per favore.",
+     "r": "꾸에스또 뻬르 파보레"
+    },
+    {
+     "ko": "계산서 주세요",
+     "x": "Il conto, per favore.",
+     "r": "일 꼰또 뻬르 파보레"
+    },
+    {
+     "ko": "서서 마실게요",
+     "x": "Al banco, per favore.",
+     "r": "알 방코 뻬르 파보레"
     }
    ]
   },
@@ -4602,6 +4706,21 @@
      "ko": "현금만 되나요?",
      "x": "Jenom hotovost?",
      "r": "예놈 호토보스트"
+    },
+    {
+     "ko": "이거 주세요",
+     "x": "Tohle, prosím.",
+     "r": "토흘레 프로심"
+    },
+    {
+     "ko": "계산서 주세요",
+     "x": "Účet, prosím.",
+     "r": "우체트 프로심"
+    },
+    {
+     "ko": "화장실 어디예요?",
+     "x": "Kde je toaleta?",
+     "r": "그데 예 토알레타"
     }
    ]
   },
