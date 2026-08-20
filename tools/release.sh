@@ -11,6 +11,17 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+# ./tools/release.sh | head -3 처럼 출력을 잘라 보면 SIGPIPE 로 중간에 죽어
+# 3·4단계(백업 갱신·버전 증가)가 조용히 건너뛰어집니다. 실제로 그렇게 배포돼
+# 폰에 옛 화면이 뜬 적이 있습니다.
+# → 출력이 파이프면 버퍼에 모았다가 마지막에 한 번에 내보냅니다.
+if [ -z "${RELEASE_BUFFERED:-}" ] && [ ! -t 1 ]; then
+  buf=$(mktemp)
+  RELEASE_BUFFERED=1 "$0" "$@" >"$buf" 2>&1; st=$?
+  cat "$buf"; rm -f "$buf"
+  exit $st
+fi
+
 echo "1) data.json 검사"
 python3 - <<'PY'
 import json, sys
