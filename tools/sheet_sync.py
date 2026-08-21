@@ -19,7 +19,7 @@ import json, re, sys, difflib, unicodedata, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / 'tools'))
-from sheet_parse import load, parse_day, mm, MOJI, trim_name   # noqa: E402
+from sheet_parse import load, parse_day, mm, MOJI, trim_name, SEP  # noqa: E402
 
 # 앱에서만 관리하는 필드 — 시트에는 없으므로 반드시 이어받아야 합니다
 CARRY = ('place', 'map', 'move', 'prep', 'refs', 'tz', 'tzl', 'endTz', 'meet',
@@ -62,19 +62,22 @@ JUNK = re.compile('[⭐★✅❌⏱✨⛽⛲⛪⛰⛴✈🍽🍴🏛🎫🚆🛍
 
 def clean(s):
     s = MOJI.sub('', s).replace('\\', '')
-    s = JUNK.sub('', s)
+    s = JUNK.sub('', s).replace(SEP, ' ')
     return re.sub(r'\s+', ' ', s).strip(' ·-')
 
 
 
 def split_notes(raw):
-    body = clean(raw)
+    """시트의 항목 경계(SEP)와 글머리 표시로 설명·주의를 나눕니다.
+       경계를 살리지 않으면 설명이 통째로 한 문장이 되어 화면에서 안 읽힙니다."""
+    body = MOJI.sub('', raw).replace('\\', '')
     out_d, out_w = [], []
-    for chunk in re.findall(r'[-⚠※☐⛔💡][^-⚠※☐⛔💡]*', body):
-        mark, text = chunk[0], clean(chunk[1:])
-        if not text:
-            continue
-        (out_w if mark in '⚠※⛔' else out_d).append(text)
+    for piece in body.split(SEP)[1:]:            # 첫 조각은 이름
+        for chunk in re.split(r'(?=[-⚠※☐⛔💡])', piece):
+            text = clean(chunk.lstrip('-⚠※☐⛔💡 '))
+            if not text:
+                continue
+            (out_w if chunk[:1] in '⚠※⛔' else out_d).append(text)
     return out_d, out_w
 
 

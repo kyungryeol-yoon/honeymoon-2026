@@ -15,8 +15,20 @@ import json, re, sys
 DATE_CELL = re.compile(r'^\d{1,2}/\d{1,2} \(')
 
 
+# 시트는 한 칸 안에서 줄바꿈 대신 **공백 여러 칸**으로 항목을 나눕니다.
+#   "⚠️ 재입장 불가        도마뱀 분수 (엘 드락)        물결 벤치"
+# 예전엔 \s+ → ' ' 로 뭉개서 이 경계를 잃었고, 그 결과 설명이 통째로 한 문장이
+# 되고 이름에까지 딸려 들어갔습니다. 뭉개기 전에 경계를 기호로 바꿔 둡니다.
+SEP = '\x1f'
+
+
+def squash(s):
+    s = re.sub(r'[ \t ]{2,}', SEP, s)      # 2칸 이상 = 항목 경계
+    return re.sub(r'[ \t]+', ' ', s).strip()
+
+
 def load(path):
-    """{날짜: {loc, sched, note}}"""
+    """{날짜: {loc, sched, note}} — sched 안의 \\x1f 는 항목 경계입니다."""
     content = json.load(open(path, encoding='utf-8'))['fileContent']
     out = {}
     for row in content.split('\n'):
@@ -28,8 +40,8 @@ def load(path):
         m, dd = re.match(r'^(\d{1,2})/(\d{1,2})', cells[2]).groups()
         out[f"2026-{int(m):02d}-{int(dd):02d}"] = {
             'loc':   re.sub(r'\s+', ' ', cells[1]).replace('\\-', '-').strip(),
-            'sched': re.sub(r'\s+', ' ', cells[3]),
-            'note':  re.sub(r'\s+', ' ', cells[5]),
+            'sched': squash(cells[3]),
+            'note':  squash(cells[5]),
         }
     return out
 
@@ -78,10 +90,12 @@ def blocks(sched):
 # ── 한 구간 → 일정 항목들 ────────────────────────────────
 TIME = re.compile(r'(?<![0-9:])(\d{1,2}:\d{2})\s+')
 # 인코딩이 깨져 들어오는 이모지 잔해.
+# · (U+00B7) 은 설명 구분자라 반드시 제외 — 같이 지워서 설명 76개가
+# 통째로 한 문장이 된 적이 있습니다.
 # 🍽(F0 9F 8D BD) 같은 4바이트 이모지가 라틴-1 로 잘못 읽히면 "ð½" 이 되고,
 # 앞의 ð 가 셀 분리 과정에서 떨어져 나가면 "½" "´" "¨" 만 남습니다.
 MOJI = re.compile('[�ð][-ÿ̀-ͯ]*'
-                  '|(?<![0-9A-Za-z])[¡-¿×÷ßÿ](?![0-9A-Za-z])')
+                  '|(?<![0-9A-Za-z])[¡-¶¸-¿×÷ßÿ](?![0-9A-Za-z])')
 # 이름 앞에 붙는 장식 — 종류는 kind 가 대신 그리므로 이름에서 뺍니다
 LEAD = re.compile(r'^[\s·\-—️✈⛪⛴⛰⛲⛽🍽🍴🏛🎫🚆🛍🏨🚗🚌🚕🛥🚡🖼📷🛏💒🚶🛒⭐★⏱✅❌✨]+')
 
@@ -99,14 +113,15 @@ TRAIL = re.compile(r'[\s·\-—/,(]+$')
 
 
 def items_of(text):
-    parts = TIME.split(text)
+    parts = TIME.split(text.replace(SEP, SEP + ' '))
     got = []
     for i in range(1, len(parts), 2):
         t = parts[i]
         body = (parts[i + 1] if i + 1 < len(parts) else '').strip(' ·-')
         if not body:
             continue
-        head = NAME_END.split(body, maxsplit=1)[0]
+        head = body.split(SEP, 1)[0]          # 첫 경계까지가 이름 후보
+        head = NAME_END.split(head, maxsplit=1)[0]
         head = re.sub(r'\s*✅.*$', '', head)
         head = MOJI.sub('', head)
         head = LEAD.sub('', head)
