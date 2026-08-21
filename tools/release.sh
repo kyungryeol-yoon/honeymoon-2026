@@ -17,7 +17,10 @@ cd "$(dirname "$0")/.."
 # → 출력이 파이프면 버퍼에 모았다가 마지막에 한 번에 내보냅니다.
 if [ -z "${RELEASE_BUFFERED:-}" ] && [ ! -t 1 ]; then
   buf=$(mktemp)
-  RELEASE_BUFFERED=1 "$0" "$@" >"$buf" 2>&1; st=$?
+  set +e                      # 실패해도 버퍼를 내보내야 하므로 잠시 끕니다
+  RELEASE_BUFFERED=1 "$0" "$@" >"$buf" 2>&1
+  st=$?
+  set -e
   cat "$buf"; rm -f "$buf"
   exit $st
 fi
