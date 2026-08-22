@@ -2102,13 +2102,22 @@ function render(){
         seg.className = 'j-seg ' + (i <= hereIdx ? 'done' : 'pending');
         track.appendChild(seg);
       }
-      // 도시 노드를 눌러 그 도시 첫날로 이동 (맨 앞 서울은 여행 첫날로)
+      /* 도시 노드를 눌러 그 도시로 이동. 서울은 양 끝에 두 번 나오므로
+         맨 뒤 노드는 **마지막** 서울 날(귀국일)로 보내야 합니다 —
+         첫날로 보내면 도착지를 눌렀는데 출발지가 열립니다. */
+      const last = i === NODES.length - 1;
+      const mine = DAYS.filter(d => d.city === c.id);
+      const to = (last ? mine[mine.length - 1] : mine[0]) || DAYS[0];
       const node = document.createElement('button');
       node.type = 'button';
       node.className = 'j-node ' + (i < hereIdx ? 'done' : i === hereIdx ? 'here' : '');
-      node.dataset.city = c.id;
-      if(i === 0) node.dataset.first = '1';
-      node.setAttribute('aria-label', i === 0 ? '여행 첫날로 이동' : `${c.name}로 이동`);
+      node.dataset.date = to.date;
+      node.setAttribute('aria-label',
+        i === 0 ? '출발 · 여행 첫날로 이동'
+        : last && mine.length > 1 ? '도착 · 귀국일로 이동'
+        : `${c.name}로 이동`);
+      node.title = (i === 0 ? '출발 — ' : last && mine.length > 1 ? '도착 — ' : '')
+        + fmtDate(to.date);
       node.innerHTML = `<span class="j-dot"></span><span class="j-label">${esc(c.short)}</span>`;
       track.appendChild(node);
     });
@@ -2883,11 +2892,10 @@ document.addEventListener('click', async (e) => {
 
   const node = e.target.closest('.j-node, .pc-city');
   if(node){
-    // 여정선 맨 앞 서울은 출발지라 "여행 첫날"로 보냅니다
-    const first = node.dataset.first
-      ? DAYS[0]
-      : DAYS.find(d => d.city === node.dataset.city);
-    if(first) jumpTo(first.date);
+    // 여정선은 갈 날짜를 이미 들고 있습니다 (서울이 양 끝에 두 번 나오므로)
+    const to = node.dataset.date
+      || (DAYS.find(d => d.city === node.dataset.city) || {}).date;
+    if(to) jumpTo(to);
   }
 });
 
