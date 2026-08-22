@@ -85,6 +85,42 @@ def norm(s):
     return re.sub(r'[\s·\-—()\[\]]+', '', unicodedata.normalize('NFKC', s)).lower()
 
 
+def same(s):
+    """구분기호·공백 차이를 무시한 비교용 열쇠. 시트는 같은 말을
+       ' · ' 유무만 다르게 두 번 적는 일이 잦습니다."""
+    return re.sub(r'[\s·→=\-—]+', '', s)
+
+
+def cut(s, n):
+    """n 자에서 자르되 토큰 한가운데를 끊지 않습니다.
+       그냥 [:180] 으로 자르면 설명이 '… 성 베드로 대성당 3.' 처럼 끝납니다."""
+    if len(s) <= n:
+        return s
+    head = s[:n]
+    return (head.rsplit(' · ', 1)[0] if ' · ' in head else head.rsplit(' ', 1)[0]).rstrip(' ·,/(=')
+
+
+CHIP_MAX = 34      # 이보다 길면 칩이 두 줄로 흘러 안 읽힙니다
+
+
+def chips(warn, desc, have):
+    """주의 문구 → 칩. 설명에 이미 있는 말과 자기들끼리 겹치는 말을 걷어냅니다."""
+    out = list(have)
+    for w in warn:
+        w = w.strip()
+        if len(w) < 5:                       # '3박' '여권' '무료' — 혼자서는 뜻이 없습니다
+            continue
+        if desc and same(w) in same(desc):   # 바로 위 설명에 이미 있는 말
+            continue
+        hit = next((y for y in out if same(w) in same(y) or same(y) in same(w)), None)
+        if hit is None:
+            out.append(w)
+        else:                                # 겹치면 긴 쪽, 단 너무 길어졌으면 짧은 쪽
+            pick = min(w, hit, key=len) if max(len(w), len(hit)) > CHIP_MAX else max(w, hit, key=len)
+            out[out.index(hit)] = pick
+    return out[:5]
+
+
 def sim(a, b):
     return difflib.SequenceMatcher(None, norm(a), norm(b)).ratio()
 
@@ -94,7 +130,7 @@ def build(src, pool, used, fresh):
     it = {'time': src['time']}
     desc, warn = split_notes(src['raw'])
     if desc:
-        it['desc'] = ' · '.join(desc)[:180]
+        it['desc'] = cut(' · '.join(desc), 180)
     if '⭐' in src['raw'] or '★' in src['raw']:
         it['star'] = True
 
@@ -123,9 +159,11 @@ def build(src, pool, used, fresh):
         it['name'] = trim_name(sheet_name)[:58]
         fresh.append((src['time'], it['name']))
 
-    if warn:
-        have = it.get('prep') or []
-        it['prep'] = (have + [w[:80] for w in warn if w[:80] not in have])[:5]
+    got = chips(warn, it.get('desc') or '', it.get('prep') or [])
+    if got:
+        it['prep'] = got
+    else:
+        it.pop('prep', None)
     return {k: it[k] for k in ORDER if k in it}
 
 

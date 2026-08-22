@@ -106,6 +106,31 @@ for day in d['days']:
         assert menus.get(cid), \
             f"{day['date']} {it['time']} food: {cid} — 값이 적힌 메뉴가 없습니다"
         n_card += 1
+# 칩·설명 — 시트에서 같은 말이 두 벌로 들어오거나 180자에서 토큰이 잘립니다.
+# 화면에서 같은 문장이 두 번 뜨거나 "… 성 베드로 대성당 3." 으로 끝나 보입니다.
+def _same(s): return _re.sub(r'[\s·→=\-—]+', '', s)
+noisy = []
+for day in d['days']:
+    for it in day['items'] + [i for o in (day.get('options') or []) for i in o['items']]:
+        where = f"{day['date']} {it['time']} {it['name'][:18]}"
+        desc = it.get('desc') or ''
+        ps = it.get('prep') or []
+        for i, a in enumerate(ps):
+            if len(a) < 5:
+                noisy.append(f"{where} · 혼자서는 뜻 없는 칩 {a!r}")
+            if len(a) > 40:
+                noisy.append(f"{where} · 칩이 너무 김 ({len(a)}자) {a[:30]!r}")
+            if desc and _same(a) in _same(desc):
+                noisy.append(f"{where} · 설명에 이미 있는 칩 {a[:26]!r}")
+            for b in ps[i+1:]:
+                if _same(a) in _same(b) or _same(b) in _same(a):
+                    noisy.append(f"{where} · 겹치는 칩 {a[:22]!r} / {b[:22]!r}")
+        if desc and _re.search(r'([·,/(=]\s*$)|(\s\d+\.$)', desc.rstrip()):
+            noisy.append(f"{where} · 설명이 토큰 한가운데서 잘림 …{desc[-24:]!r}")
+assert not noisy, ("설명·칩이 겹치거나 잘렸습니다 (sheet_sync.py 의 chips()/cut() 확인):\n  "
+                   + "\n  ".join(noisy[:12])
+                   + (f"\n  … 외 {len(noisy)-12}건" if len(noisy) > 12 else ""))
+
 print(f"   OK — {len(d['days'])}일 / {sum(len(x['items']) for x in d['days'])}개 일정"
       f" / 먹을거리·물건 {n_eat} · 장소 {n_buy} · 음식카드 {n_card}")
 PY
