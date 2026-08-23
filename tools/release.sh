@@ -52,6 +52,10 @@ for day in d['days']:
         mts = [i['time'] for i in mt]
         assert mts == sorted(mts), f"{day['date']}/{o['id']} 병합 후 시간 역순"
 
+# 시간대 — 한 도시라도 빠지면 그 도시 일정만 조용히 한국시간 환산이 사라집니다
+for c in d['cities']:
+    assert isinstance(c.get('tz'), int), f"cities/{c['id']} tz 없음 (분 단위 UTC 오프셋)"
+
 # 먹을 곳 · 기념품 — 도시 id 로 찾으므로 오타가 나면 그 도시만 조용히 사라집니다
 ids = {c['id'] for c in d['cities']}
 n_eat = n_buy = 0

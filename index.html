@@ -1706,13 +1706,17 @@ function itemHTML(it, city, cls, day, next){
   const time = `${it.time}${it.end ? ' – ' + it.end : ''}`;
 
   /* 시각 옆에 한국 시간.
-     it.tz 가 있으면 그 시각이 어느 공항 시계인지 데이터가 알려주는 것이므로
-     기기 위치와 무관하게 정확히 환산합니다 (9/14 처럼 하루에 시계가 세 번 바뀌는 날).
-     없으면 기기 시간대와 서울의 차이로 환산하고, 한국에 있으면 숨깁니다. */
+     data.json 의 시각은 언제나 **현지 시각**이므로, 환산 기준은 폰이 어디
+     있느냐가 아니라 그 날의 도시입니다. 예전엔 기기 시간대(KST_OFF)로 쟀는데
+     출발 전 서울에서 보면 차이가 0이라 환산이 통째로 사라졌습니다 —
+     "9/23 저녁 6시 45분" 은 보이는데 "한국은 새벽 1시 45분" 은 안 보였습니다.
+     로밍이 안 잡혀 폰 시계가 안 바뀐 순간에도 같은 문제가 났습니다.
+     항목의 tz 는 도시보다 우선합니다 (9/14 처럼 하루에 시계가 세 번 바뀌는 날). */
   let kst = '';
   const hasTz = it.tz != null;
-  const shift = hasTz ? (540 - it.tz) : KST_OFF;      // 이 시각에 더할 분
-  const endShift = hasTz ? (540 - (it.endTz != null ? it.endTz : it.tz)) : KST_OFF;
+  const off = hasTz ? it.tz : (city && city.tz != null ? city.tz : 540);
+  const shift = 540 - off;                            // 이 시각에 더할 분
+  const endShift = 540 - (it.endTz != null ? it.endTz : off);
   /* 출발지와 도착지 시계가 다른 비행편은 시작 시각이 이미 KST 라도 표시해야 합니다.
      "01:20 – 05:20" 만 보면 새벽 5시 도착으로 읽히지만 실제로는 11:20 KST 입니다. */
   if(shift || endShift){

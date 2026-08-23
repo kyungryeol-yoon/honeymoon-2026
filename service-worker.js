@@ -6,7 +6,7 @@
    배포 시 VERSION 만 올리면 캐시가 통째로 교체됩니다.
    =========================================================== */
 
-const VERSION = 'v71';
+const VERSION = 'v72';
 const CACHE   = `honeymoon-2026-${VERSION}`;
 
 const SHELL = [
