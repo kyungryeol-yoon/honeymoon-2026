@@ -1576,6 +1576,9 @@ let showFood = false;      // 먹을 곳을 펼쳐 뒀는지 (목록이 길어 �
 let showGift = false;      // 기념품을 펼쳐 뒀는지
 let showPhrases = false;   // 한마디를 펼쳐 뒀는지 (14줄이라 평소엔 접어둡니다)
 let showSOS = false;       // 긴급 연락처를 펼쳐 뒀는지 (급할 때 열면 되므로 접어둠)
+/* 검색으로 연 섹션은 날이 바뀌어도 그 한 번만 유지합니다 —
+   "그 카르보나라 집" 을 찾아 눌렀는데 도착하자마자 닫히면 안 되니까요. */
+let keepSection = null;
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
 const cityById = id => CITIES.find(c => c.id === id) || CITIES[0];
@@ -2056,7 +2059,15 @@ function render(){
     void lm.offsetWidth;                       // 애니메이션 재시작
     lm.classList.add(dir); cn.classList.add(dir);
     foodOpen = null; foodIdx = 0;              // 음식 카드는 날을 넘기면 닫습니다
+    /* 참고 섹션(한마디·긴급 연락처·먹을 곳·기념품)도 다시 접습니다.
+       펼친 채로 날을 넘기면 다음 날 화면이 목록에 덮여 정작 일정이 안 보입니다.
+       기본은 닫힘, 필요할 때 그 날 그 자리에서 여는 것들입니다. */
+    if(keepSection !== 'phrases') showPhrases = false;
+    if(keepSection !== 'sos')     showSOS     = false;
+    if(keepSection !== 'food')    showFood    = false;
+    if(keepSection !== 'gift')    showGift    = false;
   }
+  keepSection = null;                          // 한 번만 유효
   // 앱을 처음 연 순간에만 헤더가 한 번 올라옵니다
   const hero = document.querySelector('.hero');
   if(firstPaint && !booted){
@@ -3070,6 +3081,7 @@ findList.addEventListener('click', (e) => {
   if(row.dataset.ref){
     const key = row.dataset.ref;
     if(key === 'food') showFood = true; else showGift = true;
+    keepSection = key;   // 날이 바뀌어도 이번 한 번은 닫지 않습니다
     const day = DAYS.find(d => d.city === row.dataset.city);
     if(day) jumpTo(day.date, `#sec-${key}`); else render();
     return;
