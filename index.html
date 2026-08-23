@@ -48,7 +48,12 @@
   --ink-3:#252B3D;
   --paper:#F2EFE8;
   --paper-dim:#A8AABA;
-  --paper-faint:#5A6076;
+  /* 글자용 — 예전 값(#5A6076)은 배경 대비 2.9:1 이라 한낮 폰에서 안 읽혔습니다.
+     이건 본문 5.28:1 · 카드 위 4.76:1 (WCAG AA 4.5:1) */
+  --paper-faint:#828A9F;
+  /* 점·점선 전용. 글자와 요구 대비가 달라(비문자 3:1) 나눠 뒀습니다 —
+     같이 밝히면 지난 일정·완주 구간이 현재보다 튑니다. 예전 --paper-faint 값. */
+  --hairline:#5A6076;
   --line:#2E3448;
   --hush:#2E3448;
   --glow:.16;
@@ -64,7 +69,8 @@
   --ink-3:#F2EEE5;
   --paper:#1A1F2E;
   --paper-dim:#4A5164;
-  --paper-faint:#767C8E;
+  --paper-faint:#686E80;   /* 본문 4.67:1 · 카드 위 5.08:1 (was #767C8E, 3.82:1) */
+  --hairline:#767C8E;
   --line:#E0DCD3;
   --hush:#C9C4B8;
   --glow:.13;
@@ -280,7 +286,7 @@ body{
   background:var(--ink);border:1.5px solid var(--line);
   transition:all .3s;
 }
-.j-node.done .j-dot{background:var(--paper-faint);border-color:var(--paper-faint)}
+.j-node.done .j-dot{background:var(--hairline);border-color:var(--hairline)}
 .j-node.here .j-dot{
   width:13px;height:13px;
   background:var(--now);border-color:var(--now);
@@ -298,7 +304,7 @@ body{
 }
 .j-node.here .j-label{color:var(--now)}
 .j-seg{flex:1 1 auto;height:1.5px;background:var(--line);margin:0 3px;margin-bottom:22px;border-radius:2px}
-.j-seg.done{background:var(--paper-faint)}
+.j-seg.done{background:var(--hairline)}
 .j-seg.pending{
   background:repeating-linear-gradient(90deg,var(--line) 0 4px,transparent 4px 8px);
   height:1.5px;
@@ -475,17 +481,21 @@ section{margin-top:34px}
   background:var(--ink);border:1.5px solid var(--line);
 }
 .tl li.past{opacity:.42}
-.tl li.past::before{background:var(--paper-faint);border-color:var(--paper-faint)}
+.tl li.past::before{background:var(--hairline);border-color:var(--hairline)}
 .tl li.live::before{
   background:var(--now);border-color:var(--now);
   box-shadow:0 0 0 4px color-mix(in srgb,var(--now) 20%,transparent);
 }
-.tl-t{font-family:var(--f-mono);font-size:11.5px;color:var(--paper-faint);letter-spacing:.04em}
+.tl-t{font-family:var(--f-mono);font-size:11.5px;color:var(--paper-dim);letter-spacing:.04em}
 .tl li.live .tl-t{color:var(--now)}
 /* 색만으로 현재/지난 일정을 구분하지 않도록 글자도 함께 */
 .tl li.live .tl-t::after{content:" · 지금";font-weight:600;letter-spacing:.08em}
 /* 현지 시각 옆 한국 시간 — 참고값이라 한 단계 흐리게 */
-.kst{margin-left:8px;opacity:.55;font-size:10.5px;letter-spacing:.02em}
+/* 위계는 불투명도가 아니라 토큰으로 — opacity 를 곱하면 실효 대비가
+   1.72:1 까지 떨어져 배경과 구분이 안 됐습니다. */
+.kst{margin-left:8px;color:var(--paper-faint);font-size:10.5px;letter-spacing:.02em}
+/* .kst 에 색을 직접 주면 아래 .tl li.live 의 도시 색 상속이 끊깁니다 */
+.tl li.live .kst{color:var(--now)}
 .kst sup{font-size:8px;vertical-align:super;margin-left:1px}
 /* 그 시각이 어느 공항 시계인지 (하루에 시계가 바뀌는 날에만) */
 .tzl{
@@ -518,7 +528,7 @@ section{margin-top:34px}
    9/20 처럼 공통이 4개뿐인 날은 이게 없으면 아침~저녁이 통째로 비어 보입니다. */
 .tl li.gap{padding-bottom:20px}
 .tl li.gap::before{
-  background:transparent;border-style:dashed;border-color:var(--paper-faint);
+  background:transparent;border-style:dashed;border-color:var(--hairline);
 }
 .opt-gap{
   display:block;width:100%;text-align:left;
@@ -583,7 +593,7 @@ section{margin-top:34px}
 .fc-dots{display:flex;gap:5px;flex:1 1 auto;flex-wrap:wrap}
 .fc-dot{
   width:6px;height:6px;padding:0;border:0;border-radius:50%;
-  background:var(--paper-faint);opacity:.4;cursor:pointer;
+  background:var(--hairline);opacity:.4;cursor:pointer;
 }
 .fc-dot.on{opacity:1;background:var(--now)}
 .fc-cnt{font-family:var(--f-mono);font-size:10.5px;color:var(--paper-faint);flex:1 1 auto}
@@ -599,7 +609,7 @@ section{margin-top:34px}
 
 /* 빈 시간 — 일정이 아니라 여백이라 점을 비우고 한 단계 흐리게 */
 .tl li.gap-row{padding-bottom:20px}
-.tl li.gap-row::before{background:transparent;border-style:dotted;border-color:var(--paper-faint)}
+.tl li.gap-row::before{background:transparent;border-style:dotted;border-color:var(--hairline)}
 .gap-tog{opacity:.75}
 .gap-tog:hover,.gap-tog[aria-expanded="true"]{opacity:1}
 
@@ -621,7 +631,7 @@ section{margin-top:34px}
 /* 장소명 → 구글맵 딥링크 */
 .map-link{
   color:inherit;text-decoration:none;
-  border-bottom:1px dashed color-mix(in srgb,var(--paper-faint) 70%,transparent);
+  border-bottom:1px dashed color-mix(in srgb,var(--hairline) 70%,transparent);
   padding-bottom:1px;
   display:inline-flex;align-items:center;gap:5px;
 }
