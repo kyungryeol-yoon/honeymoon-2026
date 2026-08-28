@@ -1,26 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <rect width="512" height="512" rx="112" ry="112" fill="#12151F"/>
 
-  <!-- 배낭 메고 함께 걷는 두 사람.
-       뒷모습으로 여러 번 그려봤지만 정면과 윤곽이 같아 전부 옷처럼 읽혔습니다.
-       옆모습이면 배낭이 등 뒤로 튀어나와 윤곽만으로 "짊어졌다" 가 읽힙니다.
-       색은 도시 색 그대로 — 바르셀로나 주황, 스위스 파랑. -->
+  <!-- 불 켜진 텐트. 스위스 5박이 전부 캠핑이라 이 여행의 성격에 맞습니다.
+       문을 배경색으로 뚫으면 빈 삼각형(표지판)이 되므로 등불색으로 채웁니다 —
+       안에 두 사람이 있다는 뜻이 되고, 삼각형이라 32px 에서도 안 무너집니다.
+       색은 도시 색 그대로 — 스위스 파랑, 등불은 바르셀로나 주황. -->
 
-  <!-- 발밑의 길 -->
-  <path d="M74 424 C 176 404, 336 404, 438 424"
-        fill="none" stroke="#5A6076" stroke-width="15" stroke-linecap="round"/>
-
-  <defs>
-    <!-- 한 사람: 배낭 · 몸통 · 머리 · 앞으로 뻗은 팔 · 성큼 내딛는 다리 -->
-    <g id="hiker">
-      <rect x="-62" y="-116" width="58" height="96" rx="24"/>
-      <path d="M-33 -116v-16" stroke-width="13" stroke-linecap="round"/>
-      <rect x="-16" y="-120" width="48" height="106" rx="22"/>
-      <circle cx="14" cy="-156" r="31"/>
-      <path d="M24 -102l22 60" stroke-width="21" stroke-linecap="round" fill="none"/>
-      <path d="M6 -18l34 84M2 -18l-30 82" stroke-width="23" stroke-linecap="round" fill="none"/>
-    </g>
-  </defs>
-  <g transform="translate(190 306)" fill="#D4744A" stroke="#D4744A"><use href="#hiker"/></g>
-  <g transform="translate(344 310)" fill="#5B94C4" stroke="#5B94C4"><use href="#hiker"/></g>
+  <circle cx="256" cy="300" r="130" fill="#D4744A" fill-opacity=".10"/>
+  <path d="M256 128 L400 358 L112 358 Z"
+        fill="#5B94C4" stroke="#5B94C4" stroke-width="30" stroke-linejoin="round"/>
+  <path d="M256 212 L316 358 L196 358 Z" fill="#D4744A"/>
+  <path d="M92 384 H420" fill="none" stroke="#5A6076" stroke-width="16" stroke-linecap="round"/>
 </svg>

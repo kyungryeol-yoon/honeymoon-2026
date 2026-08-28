@@ -1,14 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- 16px 에서는 배낭도 다리도 안 남습니다. 큰 아이콘을 줄이는 대신
-       남는 것(두 덩어리 + 길)만 크게 그린 별도 판입니다. -->
+  <!-- 16px 에서는 번짐도 땅선도 안 남습니다. 큰 아이콘을 줄이는 대신
+       남는 것(텐트 + 불빛)만 크게, 획을 굵혀 그린 별도 판입니다. -->
   <rect width="64" height="64" rx="14" ry="14" fill="#12151F"/>
-  <path d="M11 53h42" fill="none" stroke="#5A6076" stroke-width="3.4" stroke-linecap="round"/>
-  <g fill="#D4744A">
-    <circle cx="21" cy="20" r="7.5"/>
-    <path d="M12 33q0-6 9-6t9 6v14H12z"/>
-  </g>
-  <g fill="#5B94C4">
-    <circle cx="43" cy="20" r="7.5"/>
-    <path d="M34 33q0-6 9-6t9 6v14H34z"/>
-  </g>
+  <path d="M32 13 L53 47 L11 47 Z"
+        fill="#5B94C4" stroke="#5B94C4" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M32 26 L41 47 L23 47 Z" fill="#D4744A"/>
 </svg>
