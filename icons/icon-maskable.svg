@@ -1,16 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <rect width="512" height="512" fill="#12151F"/>
-  <!-- 마스크 안전영역(중앙 80%) 안에 들어오도록 0.66배 축소 -->
+  <!-- 안드로이드 런처가 임의 모양으로 깎으므로 중앙 80% 안전영역 안에 넣습니다 -->
   <g transform="translate(256 256) scale(0.66) translate(-256 -256)">
-    <path d="M90 238 C 160 92, 352 92, 422 238"
-          fill="none" stroke="#F2EFE8" stroke-opacity=".20"
-          stroke-width="6" stroke-linecap="round" stroke-dasharray="2 16"/>
-    <path d="M90 300 H422" fill="none" stroke="#2E3448" stroke-width="7" stroke-linecap="round"/>
-    <path d="M90 300 H311" fill="none" stroke="#5A6076" stroke-width="7" stroke-linecap="round"/>
-    <circle cx="311" cy="300" r="54" fill="#8AA05A" fill-opacity=".16"/>
-    <circle cx="90"  cy="300" r="19" fill="#D4744A"/>
-    <circle cx="201" cy="300" r="19" fill="#5B94C4"/>
-    <circle cx="311" cy="300" r="31" fill="#8AA05A"/>
-    <circle cx="422" cy="300" r="16" fill="#12151F" stroke="#B0576B" stroke-width="7"/>
+    <path d="M74 424 C 176 404, 336 404, 438 424"
+          fill="none" stroke="#5A6076" stroke-width="15" stroke-linecap="round"/>
+    <defs>
+      <g id="hiker-m">
+        <rect x="-62" y="-116" width="58" height="96" rx="24"/>
+        <path d="M-33 -116v-16" stroke-width="13" stroke-linecap="round"/>
+        <rect x="-16" y="-120" width="48" height="106" rx="22"/>
+        <circle cx="14" cy="-156" r="31"/>
+        <path d="M24 -102l22 60" stroke-width="21" stroke-linecap="round" fill="none"/>
+        <path d="M6 -18l34 84M2 -18l-30 82" stroke-width="23" stroke-linecap="round" fill="none"/>
+      </g>
+    </defs>
+    <g transform="translate(190 306)" fill="#D4744A" stroke="#D4744A"><use href="#hiker-m"/></g>
+    <g transform="translate(344 310)" fill="#5B94C4" stroke="#5B94C4"><use href="#hiker-m"/></g>
   </g>
 </svg>
