@@ -18,12 +18,85 @@ import json, re, sys, difflib, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / 'tools'))
-from sheet_sync import norm      # noqa: E402
+from sheet_sync import norm, same, cut      # noqa: E402
 
-# 이름까지 같아야 얹는 것 (엉뚱한 장소로 보내면 안 되는 것)
-STRICT = ('place', 'move', 'links')
-# 시각만 같아도 얹는 것
-LOOSE = ('star',)
+# 이름까지 같아야 얹는 것 — 엉뚱한 항목에 붙으면 사람을 딴 데로 보냅니다
+STRICT = ('place', 'move', 'links', 'meet', 'refs', 'end')
+# 시각만 같아도 안전한 것
+LOOSE = ('star', 'booked', 'kind', 'food', 'say', 'gift')
+
+
+def akin(k1, k2):
+    """같은 말인가. 예약번호는 라벨이 달라도("PNR: 메일에서 확인" /
+       "예약번호는 메일에서 확인") 같은 뜻이라 한 번만 남깁니다."""
+    if k1 in k2 or k2 in k1:
+        return True
+    return k1.endswith('메일에서확인') and k2.endswith('메일에서확인')
+
+
+def head_token(s):
+    m = re.match(r'[A-Za-zÀ-ÿ]{4,}|[가-힣]{2,}', s.strip())
+    return m.group(0).lower() if m else ''
+
+
+def same_by_place(old_it, new_it):
+    """이름 말고 다른 신호로 같은 항목인지 — 첫 낱말이 같거나,
+       옛 place 가 새 이름의 앞머리와 이어지거나."""
+    a, b = head_token(old_it['name']), head_token(new_it['name'])
+    if a and a == b:
+        return True
+    pl = head_token(old_it.get('place') or '')
+    return bool(pl) and bool(b) and (pl.startswith(b) or b.startswith(pl))
+
+
+def merge_desc(a, b):
+    """옛 설명 + 새 설명. 시트가 더 짧게 쓴 경우가 많아("막차" vs
+       "막차 · 8월 말 예매 필수") 새 것만 두면 내용이 깎입니다.
+       겹치는 조각은 **더 긴 쪽**을 남깁니다."""
+    parts = []                              # [(열쇠, 원문)]
+    for src in (b, a):                      # 새 것 먼저 (시트가 기준)
+        for t in (src or '').split(' · '):
+            t = t.strip()
+            k = same(t)
+            if not k:
+                continue
+            hit = next((i for i, (k2, _) in enumerate(parts) if akin(k, k2)), None)
+            if hit is None:
+                parts.append((k, t))
+            elif len(t) > len(parts[hit][1]):
+                parts[hit] = (k, t)
+    return cut(' · '.join(t for _, t in parts), 180)
+
+
+def merge_prep(a, b, desc):
+    """옛 칩 + 새 칩. 옛것이 사람이 다듬은 순서라 앞에 둡니다."""
+    out = []                                # [(열쇠, 원문)]
+    for t in list(a or []) + list(b or []):
+        t = t.strip()
+        k = same(t)
+        if not k or len(t) < 5:
+            continue
+        if desc and k in same(desc):        # 설명에 이미 있는 말
+            continue
+        hit = next((i for i, (k2, _) in enumerate(out) if akin(k, k2)), None)
+        if hit is None:
+            out.append((k, cut(t, 38)))
+        elif len(t) > len(out[hit][1]):
+            out[hit] = (k, cut(t, 38))
+    # 한 번 훑는 것으로는 부족합니다 — 나중에 들어온 긴 조각이 앞의 여러
+    # 조각을 한꺼번에 덮는 경우가 있어(9/28 트레비) 다시 한 번 걷어냅니다.
+    return dedup([t for _, t in out])[:5]
+
+
+def dedup(items):
+    out = []
+    for t in items:
+        k = same(t)
+        if any(akin(k, same(y)) for y in out):
+            out = [y if not akin(k, same(y)) or len(y) >= len(t) else t for y in out]
+            continue
+        out.append(t)
+    return out
 
 ORDER = ('time', 'end', 'name', 'kind', 'booked', 'food', 'gift', 'say', 'desc',
          'place', 'map', 'move', 'meet', 'prep', 'refs', 'star', 'links',
@@ -38,7 +111,8 @@ def main(old_path):
     new = json.loads((ROOT / 'data.json').read_text(encoding='utf-8'))
     old = json.loads(pathlib.Path(old_path).read_text(encoding='utf-8'))
     O = {x['date']: x for x in old['days']}
-    n = dict(place=0, move=0, star=0, chips=0, price=0, skipped=0)
+    n = dict(place=0, move=0, meet=0, refs=0, end=0, star=0, booked=0,
+             desc=0, prep=0, chips=0, price=0, skipped=0)
     skipped = []
 
     for day in new['days']:
@@ -52,6 +126,25 @@ def main(old_path):
             hit = next((j for j, x in enumerate(pool)
                         if j not in used and x['time'] == it['time']
                         and norm(x['name']) == norm(it['name'])), None)
+            # 이름이 정확히 같지 않아도, 한쪽이 다른 쪽에 통째로 들어 있으면
+            # 같은 항목입니다 — 재생성이 이름에서 값을 떼어냈을 뿐입니다.
+            #   옛 "몬세라트 대성당 €9/인 = €18"  새 "몬세라트 대성당"
+            # 반대로 9/19 는 옵션 순서가 달라 "Iseltwald 도착" 과
+            # "Rosenlaui 빙하 협곡" 이 만나는데, 포함 관계가 아니라 안 걸립니다.
+            if hit is None:
+                hit = next((j for j, x in enumerate(pool)
+                            if j not in used and x['time'] == it['time']
+                            and len(norm(it['name'])) >= 2
+                            and (norm(it['name']) in norm(x['name'])
+                                 or norm(x['name']) in norm(it['name']))), None)
+            # 이름이 겹치지 않아도 같은 항목인 경우가 있습니다.
+            # 9/19 옵션 B 는 옛 이름이 "Iseltwald 도착" 으로 **잘못** 적혀
+            # 있었지만 place 는 "Rosenlauischlucht" 로 맞았습니다. 새 이름
+            # "Rosenlaui 빙하 협곡" 과 place 가 이어지므로 같은 항목입니다.
+            if hit is None:
+                hit = next((j for j, x in enumerate(pool)
+                            if j not in used and x['time'] == it['time']
+                            and same_by_place(x, it)), None)
             strict_ok = hit is not None
             if hit is None:
                 hit = next((j for j, x in enumerate(pool)
@@ -65,13 +158,28 @@ def main(old_path):
                     if f in src and f not in it:
                         it[f] = src[f]
                         n[f] = n.get(f, 0) + 1
+                # 설명·칩은 합칩니다 (시트가 더 짧게 쓴 경우가 많습니다)
+                d2 = merge_desc(src.get('desc'), it.get('desc'))
+                if d2:
+                    if d2 != (it.get('desc') or ''):
+                        n['desc'] = n.get('desc', 0) + 1
+                    it['desc'] = d2
+                # 빈 목록이 나오면 **지워야** 합니다 — 설명에 이미 들어간
+                # 말이 칩으로 또 뜨면 화면에서 같은 문장이 두 번 보입니다.
+                p2 = merge_prep(src.get('prep'), it.get('prep'), d2)
+                if p2 != (it.get('prep') or []):
+                    n['prep'] = n.get('prep', 0) + 1
+                if p2:
+                    it['prep'] = p2
+                else:
+                    it.pop('prep', None)
             elif any(f in src for f in STRICT):
                 n['skipped'] += 1
                 skipped.append((day['date'], it['time'], src['name'], it['name']))
             for f in LOOSE:
                 if f in src and f not in it:
                     it[f] = src[f]
-                    n[f] += 1
+                    n[f] = n.get(f, 0) + 1
 
         # 하루 전체에 걸리는 주의 — 항목과 무관하므로 그대로 옮깁니다
         if o.get('chips') and not day.get('chips'):

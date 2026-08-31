@@ -112,11 +112,16 @@ def pack_eat(rows):
     return out
 
 
+# 지도로 보낼 수 없는 줄 — "주의" 섹션이 식당 목록에 섞여 들어오면
+# "팁 = 잔돈 정도" 가 장소가 되어 "CHF 1, Switzerland" 를 검색합니다.
+NOT_A_SPOT = re.compile(r'^\s*(?:팁|주의|참고|가격|예약|영업|현금|카드)\b|[=~]|^\d')
+
+
 def pack_spots(rows):
     """지도로 보내는 줄 — 이름이 한글이면 검색이 안 되므로 q 를 만들어 줍니다."""
     groups, seen = [], set()
     for group, n, sub, d, star in rows:
-        if not n or len(n) > 44 or n in seen:
+        if not n or len(n) > 44 or n in seen or NOT_A_SPOT.search(n):
             continue
         x = {'n': n}
         if has_ko(n):

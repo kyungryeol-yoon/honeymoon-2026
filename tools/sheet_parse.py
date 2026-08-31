@@ -198,7 +198,9 @@ def same_time_fold(items):
 def trim_name(name):
     for sep in (' (', ' — ', ' – '):
         i = name.find(sep)
-        if 0 < i <= 30:
+        # 자르고 남은 쪽이 너무 짧으면 이름 구실을 못 합니다 —
+        # "호텔 — 짐 정리" 를 자르면 "호텔" 만 남아 어느 호텔인지도 모릅니다.
+        if 4 <= i <= 30:
             return name[:i].strip(' ·-')
     # 괄호가 없을 때의 마지막 수단. 예전엔 24자였는데 그러면 멀쩡한 이름이
     # 잘립니다 ("Camping TCS Lugano-Muzzano 체크인" → "Camping TCS").
