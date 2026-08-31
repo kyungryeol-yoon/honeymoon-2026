@@ -17,11 +17,26 @@ icons/              앱 아이콘 (SVG 원본 + PNG)
 
 ## 시트를 다시 읽을 때
 
+**증분** — 앱이 다듬어 온 이름·`place`·`move` 를 지키면서 시트 변경만 반영합니다.
+
 ```
-python3 tools/sheet_sync.py <시트를_받아둔_json>   # 시트 → data.json
+python3 tools/sheet_sync.py <시트를_받아둔_json>   # 시트 → data.json (이전 것을 이어받음)
 python3 tools/enrich.py                            # 새 항목에 종류·지도·칩 채우기
 ./tools/release.sh                                 # 검사 · 백업 · 버전
 ```
+
+**초기화** — 이전 `data.json` 을 아예 안 읽고 시트에서 새로 만듭니다.
+
+```
+python3 tools/sheet_rebuild.py <시트를_받아둔_json>
+python3 tools/enrich.py
+./tools/release.sh
+```
+
+초기화하면 시트에 없는 것이 **사라집니다** — `phrases` 한마디 · `place` 지도
+검색어 대부분 · `move` 이동수단 · `chips` 하루 주의 · `star` 하이라이트 ·
+`food.eat` 의 가격(→ "뭐 먹지" 칩이 통째로 꺼집니다).
+`trip` · `cities` · 날짜↔도시 매핑은 앱 구조라 `sheet_rebuild.py` 안에 있습니다.
 
 **매번 처음부터 다시 파싱합니다.** 이전 결과와의 차이를 쫓지 않습니다 —
 시트 서식이 자주 바뀌어서(글머리 `-` 가 통째로 사라진 적도 있습니다)

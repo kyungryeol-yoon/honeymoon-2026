@@ -49,7 +49,11 @@ RULES = [
 NOT_A_PLACE = re.compile(
     r'기상|취침|휴식|세면|백팩|짐|캐리어|점검|정리|준비|확인|조식|점심|저녁|디너|간식|요기'
     r'|출발|이동|복귀|도착|하산|승차|하차|탑승|퇴장|입장|보안검사|출국심사|입국심사|수하물'
-    r'|면세점|게이트|구매|인출|환급|산책|구경|종료|시작|셋업|철수|체크인|체크아웃|주유|카페$')
+    r'|면세점|게이트|구매|인출|환급|산책|구경|종료|시작|셋업|철수|체크인|체크아웃|주유|대기|카페$'
+    # 눌러도 갈 데가 없는 것들 — 초기화 뒤 지도 검색어를 훑어보고 넣었습니다.
+    # ("ICN → DOH 카타르항공 QR859, Barcelona, Spain" 같은 링크가 생깁니다)
+    r'|미팅|모임|야경|별빛|합창단|조망|^선택$|^\(선택\)'
+    r'|→.*\b[A-Z]{2}\d{2,4}\b')
 # 위에 걸려도 이름 안에 진짜 지명이 있어 남겨야 하는 것
 KEEP_PLACE = re.compile(
     r'구엘|사그라다|몬세라트|지로나|세례당|두오모|Mercato|판테온|Bellinzona|Furka|Grimsel'
@@ -57,6 +61,32 @@ KEEP_PLACE = re.compile(
     r'|피엔차|나보나|루가노 호수|Trümmelbach|Blausee|Wengen|Oeschinensee')
 
 MEAL_CHIP = re.compile(r'점심|저녁|디너|요기|치케티|젤라또')
+
+# 이름에 장소와 동작이 같이 들어 있는 항목 — "구엘 공원 입장" 을 그대로 검색하면
+# 아무것도 안 나옵니다. 동작 낱말을 떼어 지도 검색어(place)를 만듭니다.
+# (시트 이름은 "버스 출발 → 몬세라트" 처럼 적혀 있어 화살표 뒤가 목적지입니다)
+ACTION_TAIL = re.compile(
+    r'\s*(?:입장|퇴장|도착|출발|이동|복귀|하차|승차|점심|저녁|디너|조식|산책|구경'
+    r'|관람|재입장|집합|미팅|체크인|체크아웃)\s*$')
+ACTION_HEAD = re.compile(r'^\s*(?:버스|기차|열차|택시|도보|차)?\s*(?:출발|이동)\s*(?:→|->)\s*')
+# "점심 — Mercato Centrale" 처럼 동작이 앞에 오는 것
+ACTION_LEAD = re.compile(r'^\s*(?:조식|점심|저녁|디너|간식|산책|구경|관람|휴식|대기|쇼핑)'
+                         r'\s*[—·\-–:]\s*')
+
+
+def derive_place(name):
+    """이름에서 장소만 남깁니다. 못 만들면 None."""
+    s = name.split('→')[-1] if '→' in name else name
+    s = ACTION_LEAD.sub('', ACTION_HEAD.sub('', s))
+    for _ in range(3):                       # "구엘 공원 입장" 처럼 겹칠 수 있습니다
+        t = ACTION_TAIL.sub('', s)
+        if t == s:
+            break
+        s = t
+    s = s.strip(' ·-—()')
+    if len(s) < 2 or not KEEP_PLACE.search(s):
+        return None
+    return s
 
 
 def classify(it):
@@ -77,7 +107,7 @@ def main():
              for c, p in (d.get('food') or {}).items()}
     langs = set(d.get('phrases') or {})
     city_lang = {c['id']: c.get('lang') for c in d['cities']}
-    n = dict(kind=0, map=0, food=0, say=0)
+    n = dict(kind=0, map=0, place=0, food=0, say=0)
 
     for day in d['days']:
         cid = day['city']
@@ -90,9 +120,20 @@ def main():
                         it['kind'] = k
                         n['kind'] += 1
                 if it.get('map') is not False and not it.get('place'):
-                    if NOT_A_PLACE.search(it['name']) and not KEEP_PLACE.search(it['name']):
-                        it['map'] = False
-                        n['map'] += 1
+                    if NOT_A_PLACE.search(it['name']):
+                        if not KEEP_PLACE.search(it['name']):
+                            it['map'] = False
+                            n['map'] += 1
+                        else:
+                            # 장소가 들어 있는 이름 — 동작을 떼어 검색어를 만듭니다.
+                            # 못 떼면 이름이 그대로 검색어가 되므로 지도를 끕니다.
+                            p = derive_place(it['name'])
+                            if p and p != it['name']:
+                                it['place'] = p
+                                n['place'] += 1
+                            else:
+                                it['map'] = False
+                                n['map'] += 1
                 if it.get('kind') == 'meal' and MEAL_CHIP.search(it['name']) \
                         and '캠프' not in it['name']:
                     if not it.get('food') and menus.get(cid):

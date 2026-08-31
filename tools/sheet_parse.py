@@ -167,11 +167,19 @@ FRAGMENT = re.compile(
     r'|매표소|운행 종료|이 구간|무료 입장|재개장)')
 
 
+def unclosed(name):
+    """닫는 괄호로 끝나는데 여는 괄호가 없으면 괄호 안에서 잘려 나온 조각입니다.
+       "짐 완전히 싸기 (내일 새벽 03:00 체크아웃)" 의 03:00 이 항목으로 잡히면
+       이름이 "체크아웃)" 이 됩니다. 낱말을 하나씩 FRAGMENT 에 넣는 것보다
+       이 규칙이 넓게 걸립니다 (실제로 9/16 이 이렇게 시간 역순이 됐습니다)."""
+    return name.rstrip().endswith(')') and '(' not in name
+
+
 def same_time_fold(items):
     """같은 시각이 잇달아 나오거나, 이름이 문장 뒷도막이면 앞 항목에 합칩니다."""
     out = []
     for it in items:
-        frag = FRAGMENT.match(it['name'])
+        frag = FRAGMENT.match(it['name']) or unclosed(it['name'])
         same = out and it['time'] == out[-1]['time'] and (
             len(it['name']) <= 8 or it['name'][0] in '()[')
         if out and (frag or same):
@@ -187,10 +195,13 @@ def trim_name(name):
         i = name.find(sep)
         if 0 < i <= 30:
             return name[:i].strip(' ·-')
-    if len(name) <= 24:
+    # 괄호가 없을 때의 마지막 수단. 예전엔 24자였는데 그러면 멀쩡한 이름이
+    # 잘립니다 ("Camping TCS Lugano-Muzzano 체크인" → "Camping TCS").
+    # 40자면 하드컷 당하는 이름이 0이 되고 다듬은 결과도 가장 잘 맞습니다.
+    if len(name) <= 40:
         return name
-    cut = name[:24].rsplit(' ', 1)[0]
-    return (cut or name[:24]).strip(' ·-')
+    cut = name[:40].rsplit(' ', 1)[0]
+    return (cut or name[:40]).strip(' ·-')
 
 
 def parse_day(sheet, date):
