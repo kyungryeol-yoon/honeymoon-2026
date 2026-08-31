@@ -304,8 +304,9 @@ def build(src, date):
     if full.startswith(name) and len(full) > len(name):
         tail = full[len(name):].strip(' ·—–-()').strip()
 
-    if '⭐' in src['raw'] or '★' in src['raw']:
-        it['star'] = True
+    # 별표는 붙이지 않습니다. 시트의 ⭐ 는 항목 강조가 아니라 본문 주석
+    # 표시라("⭐ 9월 하순 수온 20~22℃") 그대로 옮기면 뜻이 뒤집힙니다.
+    # 예전 data.json 은 441개 중 126개(28%)가 별표라 강조 구실을 못 했습니다.
     b = booked_of(src['raw'])
     if b:
         it['booked'] = b
