@@ -259,8 +259,10 @@ def main(path):
         if new_opts:
             day['options'] = new_opts
 
+        name_bare(day['items'])
         add_end(day['items'])
         for o in new_opts:
+            name_bare(o['items'])
             add_end(o['items'])
 
         lab = label_of(sh[date]['loc'], CITY_NAME[DAY_CITY[date]])
@@ -326,7 +328,9 @@ def build(src, date):
     if m:
         it['meet'] = m
 
-    got = [scrub(x) for x in chips(warn, it.get('desc') or '', [])]
+    # 칩이 40자를 넘으면 두 줄로 흘러 안 읽힙니다 (release.sh 가 막습니다).
+    # 토큰 한가운데서 자르지 않게 cut() 으로 줄입니다.
+    got = [cut(scrub(x), 38) for x in chips(warn, it.get('desc') or '', [])]
     got = [x for x in got if len(x) >= 5]
     if got:
         it['prep'] = got
@@ -337,6 +341,25 @@ def build(src, date):
 # 붙여 두면 "01:20 – 05:20" 처럼 구간으로 보이고, 한국시간도 범위로 환산됩니다.
 RIDE = re.compile(r'(?:→|✈).*\b[A-Z]{2}\d{2,4}\b|Frecciarossa|EC ?\d|RegioJet')
 ARRIVE = re.compile(r'도착$|도착\b')
+
+
+# 시트가 "13:00 출발 → Badestelle Neuhaus / 13:30 도착" 처럼 적으면 뒷 항목
+# 이름이 "도착" 하나뿐이라 화면에서 어디 도착인지 알 수 없습니다.
+# 앞 항목의 화살표 뒤에서 목적지를 빌려옵니다.
+BARE = re.compile(r'^(?:도착|출발|하차|승차)$')
+
+
+def name_bare(items):
+    for i, it in enumerate(items):
+        if i == 0 or not BARE.match(it['name']):
+            continue
+        prev = items[i - 1]['name']
+        if '→' not in prev:
+            continue
+        dest = re.sub(r'^.*→\s*', '', prev).strip(' ·-')
+        dest = re.sub(r'\s*\([^)]*\)\s*$', '', dest).strip()
+        if 2 <= len(dest) <= 34:
+            it['name'] = f"{dest} {it['name']}"
 
 
 def add_end(items):
