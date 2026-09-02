@@ -672,6 +672,14 @@ section{margin-top:34px}
   padding:3px 9px;border-radius:100px;
   background:var(--ink-2);border:1px solid var(--line);color:var(--paper-dim);
 }
+/* 어기면 못 들어가거나 벌금인 것 — 356개 칩이 전부 같은 회색이면
+   "어깨·무릎 가리는 복장 필수" 와 "젤라또 근처" 가 똑같이 보입니다.
+   38개(11%)뿐이라 강조가 작동합니다. 별표는 28%여서 안 됐습니다. */
+.prep i.must{
+  border-color:color-mix(in srgb,var(--now) 55%,var(--line));
+  color:var(--paper);
+}
+.tl li.live .prep i.must{border-color:var(--now)}
 .tl li.live .prep .ic{color:var(--now);opacity:1}
 .tl li.live .prep i{border-color:color-mix(in srgb,var(--now) 32%,var(--line))}
 
@@ -1440,6 +1448,10 @@ const ICONS = {
 
 const PIN = `<svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg>`;
 const CP  = `<svg class="cp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>`;
+/* 지키지 않으면 못 하는 것. 데이터를 고치지 않고 문구로 가릅니다 —
+   prep 은 문자열 목록이라 표시용 필드를 새로 만들면 시트 동기화가 복잡해집니다. */
+const MUST = /금지|필수|거부|불가|엄수|벌금/;
+
 const CK  = `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>`;
 const ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16"/><path d="M6 14l6 6 6-6"/></svg>`;
 const CHEV  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`;
@@ -1781,7 +1793,8 @@ function itemHTML(it, city, cls, day, next){
   }).join('');
 
   const prep = (it.prep || []).length
-    ? `<div class="prep">${CK}<span class="tags">${it.prep.map(p => `<i>${esc(p)}</i>`).join('')}</span></div>`
+    ? `<div class="prep">${CK}<span class="tags">${it.prep.map(p =>
+        `<i class="${MUST.test(p) ? 'must' : ''}">${esc(p)}</i>`).join('')}</span></div>`
     : '';
 
   // 바깥 링크 (웹캠·운행상황 등). http(s) 만 — javascript: 같은 스킴은 버립니다
