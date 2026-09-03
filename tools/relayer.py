@@ -28,12 +28,36 @@ STRICT = ('place', 'move', 'links', 'meet', 'refs', 'end')
 LOOSE = ('booked', 'kind', 'food', 'say', 'gift')
 
 
-def akin(k1, k2):
+# "트램 30 CZK/인" 과 "트램 39 CZK/인" 은 **같은 문장의 옛 값과 새 값**입니다.
+# 그냥 두면 화면에 요금이 두 개 뜹니다 (2026-09 개정에서 프라하 교통비가
+# 24 → 39 CZK 로 올랐는데 옛 값이 나란히 남았습니다).
+# 숫자 앞의 머리말이 같고 양쪽 다 숫자를 가지면 같은 문장으로 봅니다.
+HEAD_NUM = re.compile(r'([^\d]{2,20}?)\s*\d')
+NUM = re.compile(r'\d[\d.,~]*')
+
+
+def head_num(s):
+    m = HEAD_NUM.match(s.strip())
+    return same(m.group(1)) if m else ''
+
+
+def akin(k1, k2, raw1='', raw2=''):
     """같은 말인가. 예약번호는 라벨이 달라도("PNR: 메일에서 확인" /
        "예약번호는 메일에서 확인") 같은 뜻이라 한 번만 남깁니다."""
     if k1 in k2 or k2 in k1:
         return True
-    return k1.endswith('메일에서확인') and k2.endswith('메일에서확인')
+    if k1.endswith('메일에서확인') and k2.endswith('메일에서확인'):
+        return True
+    h1, h2 = head_num(raw1 or k1), head_num(raw2 or k2)
+    if h1 and h1 == h2:
+        return True
+    # 숫자를 뺀 뼈대가 거의 같으면 같은 문장의 다른 판입니다
+    #   "노란 개찰기 시간각인 필수 (벌금 1,000~1,500 CZK)"
+    #   "종이표는 노란 개찰기 각인 필수 (벌금 1,000~1,500 CZK)"
+    b1, b2 = NUM.sub('#', k1), NUM.sub('#', k2)
+    if min(len(b1), len(b2)) < 10:
+        return False
+    return difflib.SequenceMatcher(None, b1, b2).ratio() >= 0.78
 
 
 def head_token(s):
@@ -62,7 +86,7 @@ def merge_desc(a, b):
             k = same(t)
             if not k:
                 continue
-            hit = next((i for i, (k2, _) in enumerate(parts) if akin(k, k2)), None)
+            hit = next((i for i, (k2, t2) in enumerate(parts) if akin(k, k2, t, t2)), None)
             if hit is None:
                 parts.append((k, t))
             elif len(t) > len(parts[hit][1]):
@@ -80,7 +104,7 @@ def merge_prep(a, b, desc):
             continue
         if desc and k in same(desc):        # 설명에 이미 있는 말
             continue
-        hit = next((i for i, (k2, _) in enumerate(out) if akin(k, k2)), None)
+        hit = next((i for i, (k2, t2) in enumerate(out) if akin(k, k2, t, t2)), None)
         if hit is None:
             out.append((k, cut(t, 38)))
         elif len(t) > len(out[hit][1]):
@@ -94,8 +118,8 @@ def dedup(items):
     out = []
     for t in items:
         k = same(t)
-        if any(akin(k, same(y)) for y in out):
-            out = [y if not akin(k, same(y)) or len(y) >= len(t) else t for y in out]
+        if any(akin(k, same(y), t, y) for y in out):
+            out = [y if not akin(k, same(y), t, y) or len(y) >= len(t) else t for y in out]
             continue
         out.append(t)
     return out

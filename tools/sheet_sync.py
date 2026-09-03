@@ -76,7 +76,10 @@ def split_notes(raw):
     body = MOJI.sub('', raw).replace('\\', '')
     out_d, out_w = [], []
     for piece in body.split(SEP)[1:]:            # 첫 조각은 이름
-        for chunk in re.split(r'(?=[-⚠※☐⛔💡])', piece):
+        # '-' 는 글머리표일 때만 경계입니다. 낱말 안의 붙임표까지 자르면
+        # "T-Familiar" 가 "T · Familiar" 로 쪼개집니다 (2026-09 개정에서
+        # 바르셀로나 교통권 이름이 이렇게 망가졌습니다).
+        for chunk in re.split(r'(?=[⚠※☐⛔💡])|(?=(?<!\S)-\s)', piece):
             text = clean(chunk.lstrip('-⚠※☐⛔💡 '))
             if not text:
                 continue
