@@ -34,8 +34,10 @@ OPT_ID = {
     ('2026-09-19', 'A'): ('iseltwald', 'Iseltwald'),
     ('2026-09-19', 'B'): ('rosenlaui', 'Rosenlaui 협곡'),
     ('2026-09-19', 'C'): ('rest', '캠프 휴식'),
-    ('2026-09-20', 'A'): ('oeschinensee', 'Oeschinensee'),
-    ('2026-09-20', 'B'): ('giessbach', 'Giessbach + 묀리헨'),
+    # 2026-09 개정에서 9/20 이 통째로 바뀌었습니다 — Oeschinensee(곤돌라 고도차
+    # 480m)와 묀리헨을 고소공포 때문에 뺐고, 호수 두 곳이 A·B 가 됐습니다.
+    ('2026-09-20', 'A'): ('neuhaus', '노이하우스 · 툰 호수'),
+    ('2026-09-20', 'B'): ('giessbach', 'Iseltwald + Giessbach'),
     ('2026-09-20', 'C'): ('rest', '캠프 휴식'),
     ('2026-09-21', 'A'): ('gotthard', 'Gotthard 터널'),
     ('2026-09-21', 'B'): ('passes', 'Furka · Grimsel 고갯길'),

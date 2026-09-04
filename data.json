@@ -170,8 +170,7 @@
      "time": "19:40",
      "name": "광명역 서편 4번출구 도착",
      "desc": "(여유 50분)",
-     "place": "광명역",
-     "map": false
+     "place": "광명역"
     },
     {
      "time": "20:30",
@@ -184,8 +183,7 @@
      "time": "22:00",
      "name": "인천공항 T1 도착",
      "desc": "(약 1시간 30분)",
-     "place": "Incheon International Airport Terminal 1",
-     "map": false
+     "place": "Incheon International Airport Terminal 1"
     },
     {
      "time": "22:30",
@@ -301,7 +299,6 @@
      "time": "14:40",
      "name": "BCN 엘프라트 공항 T1 도착",
      "place": "Barcelona El Prat Airport",
-     "map": false,
      "tz": 120,
      "tzl": "CEST"
     },
@@ -341,7 +338,6 @@
      "say": true,
      "desc": "도시세 €46.20 현장 현금 · 짐 풀고 휴식",
      "place": "HCC Montblanc, Barcelona",
-     "map": false,
      "tz": 120,
      "tzl": "CEST"
     },
@@ -351,7 +347,6 @@
      "kind": "walk",
      "desc": "호텔 도보 5분 · 고딕지구 골목",
      "place": "La Rambla, Barcelona",
-     "map": false,
      "move": "도보 5분 (추정)",
      "prep": [
       "가방 앞으로"
@@ -657,8 +652,7 @@
      "name": "수도원 · 산 조망",
      "kind": "church",
      "desc": "톱니 모양 기암 절경 · 야외 전망 포인트 (평지)",
-     "place": "Montserrat Monastery, Barcelona",
-     "map": false,
+     "place": "Santa Maria de Montserrat Abbey",
      "prep": [
       "케이블카·푸니쿨라 안 탐 (고소공포)"
      ]
@@ -694,7 +688,6 @@
      "kind": "church",
      "desc": "좋은 자리 확보",
      "place": "Santa Maria de Montserrat Abbey",
-     "map": false,
      "prep": [
       "최소 15분 전 도착"
      ]
@@ -704,7 +697,6 @@
      "name": "에스콜라니아 소년합창단",
      "desc": "월~금 매일 13:00 (9/16 수요일 정상 운영) · Salve와 Virolai · 13세기 창단, 유럽 최고(最古) 소년합창단 · 미포함 시 현장 €11/인 · 15~20분",
      "place": "Santa Maria de Montserrat Abbey",
-     "map": false,
      "prep": [
       "약 15~20분",
       "티켓 필요 — 투어 포함 여부 확인"
@@ -838,7 +830,6 @@
      "time": "03:40",
      "name": "BCN T1 도착",
      "place": "Barcelona Airport Terminal 1",
-     "map": false,
      "move": "공항버스 · 새벽 35분"
     },
     {
@@ -886,8 +877,7 @@
      "name": "취리히 공항 도착",
      "kind": "flight",
      "desc": "솅겐 내부선 = 입국심사 없음 (EES 무관)",
-     "place": "Zurich Airport",
-     "map": false
+     "place": "Zurich Airport"
     },
     {
      "time": "08:00",
@@ -971,7 +961,6 @@
      "say": true,
      "desc": "예약완료 · 체크인 15:00",
      "place": "Camping Jungfrau, Lauterbrunnen",
-     "map": false,
      "move": "차로 25분",
      "prep": [
       "체크인 15:00~ 18:30 = 이것만 사수",
@@ -1046,8 +1035,7 @@
        "name": "툰(Thun) 호숫가 산책·사진",
        "kind": "nature",
        "desc": "30분 · 호숫가 산책 · 사진 · 밀리면 여기부터 생략 가능",
-       "place": "Thunersee",
-       "map": false
+       "place": "Thunersee"
       },
       {
        "time": "12:45",
@@ -1061,7 +1049,6 @@
        "name": "인터라켄 도착",
        "desc": "주차 CHF 3~5/시간",
        "place": "Interlaken",
-       "map": false,
        "move": "차로 25분"
       }
      ]
@@ -1157,8 +1144,13 @@
      "time": "06:00",
      "name": "기상 — 날씨 확인 후 융프라우 진행 여부 결정",
      "kind": "rest",
-     "desc": "jungfrau.ch 정상 웹캠 확인 (계곡 날씨 아님) · 맑음 → 진행 / 정상 구름 속 → 취소 · 계곡 흐림 + 정상 맑음 = \"Blau über weiss\" → 진행 · 진행 시 즉시 온라인 좌석예약 (당일 매진 가능)",
-     "map": false
+     "booked": "예약",
+     "desc": "jungfrau.ch 정상 웹캠 확인 (계곡 날씨 아님) · 맑음 → 진행 / 정상 구름 속 → 취소 · 계곡 흐림 + 정상 맑음 = \"Blau über weiss\" → 진행 · 좌석예약(CHF 10/인)은 이미 확보 — 매진 걱정 없음 · 진행 시 즉시 온라인 좌석예약 (당일 매진 가능)",
+     "map": false,
+     "prep": [
+      "진행 시 티켓만 역에서 구매하면 됨",
+      "취소 시 좌석예약 CHF 20만 손실 (환불 불가)"
+     ]
     },
     {
      "time": "19:30",
@@ -1198,11 +1190,12 @@
        "time": "07:45",
        "name": "라우터브룬넨역 도보 5분",
        "kind": "walk",
-       "desc": "(캠프에서)",
+       "desc": "티켓 현장 구매 CHF 190~210/인 · (캠프에서)",
        "place": "Lauterbrunnen Bahnhof",
        "move": "캠프 도보 5분",
        "prep": [
-        "티켓시간보다 30분 일찍 출발할 수 있음"
+        "티켓시간보다 30분 일찍 출발할 수 있음",
+        "개찰구는 출발 10분 전까지 통과"
        ]
       },
       {
@@ -1233,7 +1226,8 @@
       {
        "time": "09:30",
        "name": "Kleine Scheidegg 도착",
-       "desc": "2,061m) — 환승 · (7km 터널) · 터널 30분 = 경치 안 보임",
+       "booked": "예약",
+       "desc": "2,061m) — 환승 · 여기서부터 좌석예약 구간 · (7km 터널) · 터널 30분 = 경치 안 보임",
        "map": false
       },
       {
@@ -1251,7 +1245,7 @@
        "time": "10:30",
        "name": "융프라우요흐 도착",
        "kind": "cable",
-       "desc": "(3,463m) 톱 오브 유럽",
+       "desc": "3,454m · (3,463m) 톱 오브 유럽",
        "place": "Wengen",
        "move": "융프라우 철도 35분 (추정)",
        "prep": [
@@ -1297,7 +1291,7 @@
        "time": "13:15",
        "name": "Kleine Scheidegg 하차",
        "kind": "train",
-       "desc": "오늘의 하이라이트 · 해발 2,061m, 아이거·묀히·융프라우 삼봉 정면 · 평지 초원 = 고소공포 무관 · 야외 테라스 레스토랑 (정상보다 저렴·분위기 좋음) · 하산길은 좌석예약 없음 = 원하는 만큼 체류 · 열차 20~30분 간격",
+       "desc": "오늘의 하이라이트 · 해발 2,061m, 아이거·묀히·융프라우 삼봉 정면 · 평지 초원 = 고소공포 무관 · 야외 테라스 레스토랑 (정상보다 저렴·분위기 좋음) · 하산길은 좌석예약 제약 없음 = 원하는 만큼 체류 · 열차 20~30분 간격",
        "map": false
       },
       {
@@ -1323,8 +1317,7 @@
        "name": "마을 산책 or Staubbach 폭포 재방문",
        "kind": "nature",
        "desc": "뒤편 전망대까지 도보",
-       "place": "Staubbachfall",
-       "map": false
+       "place": "Staubbachfall"
       }
      ]
     },
@@ -1337,7 +1330,7 @@
        "time": "09:00",
        "name": "Trümmelbach 폭포",
        "kind": "nature",
-       "desc": "산 안 폭포 10개, 실내형 · CHF 18/인 = CHF 36 / 09:00~ 17:00 고소공포 무관 (동굴 내부형)",
+       "desc": "산 안 폭포 10개, 실내형 · CHF 18/인 = CHF 36 / 09:00~ 17:00 고소공포 무관 (동굴 내부형, 엘리베이터 이동)",
        "place": "Trümmelbachfälle"
       },
       {
@@ -1377,10 +1370,11 @@
        "time": "16:30",
        "name": "인터라켄 경유 · 마트 보충",
        "kind": "shop",
-       "desc": "필요시 · 17:30 캠프 복귀 · [대안 B] Blausee 또는 Aareschlucht 드라이브 · [대안 C] 캠프에서 쉬기 · 13:00 Staubbach 폭포 · 계곡 산책 · 15:00 캠프 휴식 · 빨래",
+       "desc": "필요시 · 17:30 캠프 복귀 · [대안 B] Blausee 드라이브 · [대안 C] 캠프에서 쉬기 · 13:00 Staubbach 폭포 · 계곡 산책 · 15:00 캠프 휴식 · 빨래 · [대안 B] Blausee 또는 Aareschlucht 드라이브",
        "map": false,
        "prep": [
-        "9/17에 안 갔다면 여기서 소화"
+        "9/17에 안 갔다면 여기서 소화",
+        "평지 산책, 고소공포 무관"
        ]
       },
       {
@@ -1463,7 +1457,6 @@
      "say": true,
      "desc": "선착순 · 2박 CHF 90~110 현장 결제 (AMEX 불가) · 울타리(fence) 쪽 = 아이거 북벽 정면 뷰 · 오전 도착이면 바로 이동 가능",
      "place": "Camping Eigernordwand, Grindelwald",
-     "map": false,
      "move": "차로 25분",
      "prep": [
       "여름철 예약 불가 = 선착순",
@@ -1486,7 +1479,6 @@
      "food": true,
      "say": true,
      "place": "Grindelwald",
-     "map": false,
      "move": "도보 10분 (오르막)"
     }
    ],
@@ -1524,7 +1516,6 @@
        "kind": "nature",
        "desc": "에메랄드빛 · 이른 저녁 해질녘 만이 특히 아름다움 · 17:45 캠프 복귀 · [옵션 A-2] 노이하우스 (툰 호수) — 물이 조금 따뜻 · 14:30 출발 → Badestelle Neuhaus (차 40~45분) · 15:15 도착 · 주차 유료 / 무료 구역(Schülerbad) 입장 무료",
        "place": "Brienzersee",
-       "map": false,
        "prep": [
         "수온 15~18℃"
        ]
@@ -1693,69 +1684,43 @@
    ],
    "options": [
     {
-     "id": "oeschinensee",
-     "label": "Oeschinensee",
+     "id": "neuhaus",
+     "label": "노이하우스 · 툰 호수",
      "recommended": true,
-     "summary": "Oeschinensee — 알프스 호수 절경",
+     "summary": "노이하우스 (툰 호수) — 물놀이·피크닉",
      "items": [
       {
-       "time": "08:30",
-       "name": "출발 → 캔더슈텍(Kandersteg)",
+       "time": "10:00",
+       "name": "출발 → Badestelle Neuhaus",
        "kind": "car",
-       "desc": "차 1시간 20분",
+       "desc": "차 40~45분",
        "map": false
-      },
-      {
-       "time": "10:20",
-       "name": "곤돌라 상부역 → 호수까지 도보 20~30분",
-       "kind": "cable",
-       "desc": "완만",
-       "place": "Oeschinensee"
       },
       {
        "time": "10:45",
-       "name": "Oeschinensee 도착",
+       "name": "Badestelle Neuhaus 도착",
        "kind": "nature",
-       "desc": "3,000m급 봉우리에 둘러싸인 에메랄드 호수 · 호숫가 평지 산책 = 고소공포 무관",
-       "place": "Oeschinensee",
-       "prep": [
-        "산책 왕복 1시간",
-        "정상 레스토랑 있음",
-        "수온 10~14℃ — 수영 부적합, 사진·산책용"
-       ]
-      },
-      {
-       "time": "12:30",
-       "name": "호숫가 산장 레스토랑 점심",
-       "kind": "meal",
-       "food": true,
-       "say": true,
-       "map": false
-      },
-      {
-       "time": "14:00",
-       "name": "하산 (도보 25분 오르막 or 곤돌라)",
-       "kind": "cable",
-       "map": false
-      },
-      {
-       "time": "15:30",
-       "name": "그린델발트 복귀",
-       "kind": "nature",
-       "desc": "(캠프 도보 10분, 오르막) · 아이거 북벽 정면 조망 · 마을 중심가 · 기념품 상점",
-       "place": "Grindelwald",
-       "map": false
-      },
-      {
-       "time": "16:00",
-       "name": "캠프 휴식 · 빨래",
-       "kind": "rest",
-       "desc": "토큰 리셉션 · [옵션 A-2] 노이하우스 (툰 호수) — 물놀이·피크닉 · 10:00 출발 → Badestelle Neuhaus (차 40~45분) · 10:45 도착 · 주차 유료 / 무료 구역(Schülerbad) 입장 무료 · Swimming Steps — 주차장 왼쪽 배구 네트 근처",
-       "map": false,
+       "desc": "주차 유료 (동전 또는 카드) · 무료 구역(Schülerbad) 입장 무료 · Swimming Steps — 주차장 왼쪽 배구 네트 근처 · 호수로 바로 내려가는 계단 + 부유 플랫폼 · Kiffersinseli — 주차장 오른쪽 델타, 바비큐 자리 · 넓은 잔디밭 · 그늘 나무 · 니젠 봉우리 정면 · 화장실",
+       "place": "Neuhaus Swimming Steps",
        "prep": [
         "수온 15~18℃ — 발 담그기·피크닉 수준",
         "일요일이라 현지인 많을 수 있음"
        ]
+      },
+      {
+       "time": "12:30",
+       "name": "호숫가 피크닉",
+       "kind": "meal",
+       "food": true,
+       "say": true,
+       "desc": "전날 사둔 재료",
+       "map": false
+      },
+      {
+       "time": "14:00",
+       "name": "인터라켄 산책 or 아레강변",
+       "kind": "cable",
+       "map": false
       },
       {
        "time": "16:00",
@@ -1766,41 +1731,51 @@
        "prep": [
         "수온 14~17℃"
        ]
-      },
-      {
-       "time": "16:30",
-       "name": "캠프 복귀",
-       "kind": "stay",
-       "map": false
       }
      ]
     },
     {
      "id": "giessbach",
-     "label": "Giessbach + 묀리헨",
-     "summary": "묀리헨 곤돌라 + 마을",
+     "label": "Iseltwald + Giessbach",
+     "summary": "Iseltwald + Giessbach (브리엔츠 호수)",
      "items": [
       {
-       "time": "09:30",
-       "name": "그린델발트 마을 산책",
-       "kind": "walk",
-       "desc": "도보 10분, 오르막 · 17:00 운행 종료",
-       "place": "Grindelwald",
+       "time": "10:00",
+       "name": "출발 → Iseltwald",
+       "kind": "car",
+       "desc": "차 35분",
        "map": false
       },
       {
-       "time": "13:00",
-       "name": "마을 점심",
-       "kind": "meal",
-       "food": true,
-       "say": true,
-       "desc": "(일요일 = 식당은 영업)",
-       "map": false
+       "time": "10:45",
+       "name": "Strandbad Iseltwald",
+       "desc": "입장 무료 · 주차 CHF 0.50/시간 (19:00~ 07:00 무료) · 탈의실 · 샤워 · 비스트로 · 잔디밭 · 물 위 뗏목까지 헤엄쳐 갈 수 있음 · 사랑의 불시착 피아노 부두 €5/인 (선택)",
+       "place": "Strandbad Iseltwald",
+       "prep": [
+        "차량 마을 진입 불가, 진입로 주차장 이용",
+        "수온 14~17℃ (빙하수, 툰보다 차가움)"
+       ]
       },
       {
-       "time": "15:00",
-       "name": "캠프 휴식 · 아이거 조망",
+       "time": "12:30",
+       "name": "호숫가 피크닉 또는 마을 식당",
        "kind": "nature",
+       "map": false
+      },
+      {
+       "time": "14:00",
+       "name": "Giessbach 폭포",
+       "kind": "rest",
+       "desc": "차 15분 · 14단 폭포 + 클래식 그랜드호텔 + 숲길 · 도보 전망대 (평지 산책로, 고소공포 무관) · 푸니쿨라 CHF 12/인 — 선택, 완만하나 경사 궤도 · ❓ 9월 푸니쿨라 운영 여부 현장 확인",
+       "place": "Giessbachfälle",
+       "prep": [
+        "케이블 궤도라 부담되면 도보로 우회 가능"
+       ]
+      },
+      {
+       "time": "16:30",
+       "name": "캠프 복귀",
+       "kind": "stay",
        "map": false
       }
      ]
@@ -1814,8 +1789,7 @@
        "time": "09:30",
        "name": "그린델발트 마을 · 카페",
        "kind": "meal",
-       "place": "Grindelwald",
-       "map": false
+       "place": "Grindelwald"
       },
       {
        "time": "11:00",
@@ -1835,7 +1809,8 @@
        "kind": "walk",
        "map": false,
        "prep": [
-        "스위스 5박 중 유일한 완전 휴식 옵션"
+        "스위스 5박 중 유일한 완전 휴식 옵션",
+        "어제 융프라우 다녀왔으면 이쪽 권장"
        ]
       }
      ]
@@ -1890,7 +1865,6 @@
      "say": true,
      "desc": "Premium lake pitch (호수뷰) / 전기·주차 포함",
      "place": "Camping TCS Lugano-Muzzano",
-     "map": false,
      "move": "렌터카 35분 (추정)",
      "prep": [
       "전기·주차 1대 포함"
@@ -2142,7 +2116,6 @@
      "name": "Lugano역 도착",
      "desc": "(차로 10~15분)",
      "place": "Lugano Stazione",
-     "map": false,
      "move": "차로 10~15분"
     },
     {
@@ -2207,8 +2180,7 @@
      "name": "Venezia Mestre역 도착",
      "kind": "train",
      "desc": "(이탈리아 진입)",
-     "place": "Venezia Mestre",
-     "map": false
+     "place": "Venezia Mestre"
     },
     {
      "time": "14:50",
@@ -2217,7 +2189,6 @@
      "say": true,
      "desc": "역 도보 1분), 짐 풀기 · 관광세 €12.40 현장 현금",
      "place": "Hotel Plaza Venice, Mestre",
-     "map": false,
      "move": "메스트레역 도보 1분",
      "prep": [
       "역 반대쪽/높은 층 요청"
@@ -2236,8 +2207,7 @@
      "name": "산타루치아역 도착",
      "kind": "boat",
      "desc": "본섬 첫인상 · Vaporetto 24시간권은 내일 구매 (오늘은 도보)",
-     "place": "Venezia Santa Lucia",
-     "map": false
+     "place": "Venezia Santa Lucia"
     },
     {
      "time": "16:30",
@@ -2347,7 +2317,6 @@
      "kind": "boat",
      "desc": "유리공방 시연 관람 (무료 or 소액) · 유리 박물관 외관 · 운하 산책",
      "place": "Murano, Venezia",
-     "map": false,
      "prep": [
       "유리 제품은 직매장에서만 (호객 주의)",
       "체류 75분이라 여유 없음 — 공방 + 운하 한 바퀴"
@@ -2366,8 +2335,7 @@
      "name": "부라노 도착",
      "kind": "boat",
      "desc": "B 선착장 · 컬러풀 어부 마을 · 레이스 공방 · 기울어진 종탑 · 사진 명소 다수",
-     "place": "Burano, Venezia",
-     "map": false
+     "place": "Burano, Venezia"
     },
     {
      "time": "12:30",
@@ -2394,24 +2362,21 @@
      "time": "14:45",
      "name": "Fondamente Nove 도착",
      "kind": "boat",
-     "place": "Fondamente Nove, Venezia",
-     "map": false
+     "place": "Fondamente Nove, Venezia"
     },
     {
      "time": "15:15",
      "name": "산마르코 광장 도보 도착",
      "kind": "walk",
      "desc": "25~30분",
-     "place": "Piazza San Marco, Venezia",
-     "map": false
+     "place": "Piazza San Marco, Venezia"
     },
     {
      "time": "18:30",
      "name": "Vaporetto 1번선 대운하 야경 크루즈",
      "kind": "walk",
      "desc": "24시간권 포함 = 추가비용 0 · 산타루치아 ↔ 산마르코, 대운하 전 구간 · 곤돌라 대안으로 충분 · [선택] 곤돌라 — 컨디션·기분 보고 결정 · 주간 08~19시 €90 / 야간 19시 이후 €110 · 최대 5명, 2인이면 1인당 €45 · 정찰제, 흥정 불가 · 수면 바로 위 = 고소공포 무관 · 신혼여행 기념",
-     "place": "Canal Grande, Venezia",
-     "map": false
+     "place": "Canal Grande, Venezia"
     },
     {
      "time": "19:30",
@@ -2471,8 +2436,7 @@
        "time": "17:30",
        "name": "리알토 방향 산책",
        "kind": "walk",
-       "place": "Ponte di Rialto, Venezia",
-       "map": false
+       "place": "Ponte di Rialto, Venezia"
       }
      ]
     },
@@ -2497,8 +2461,7 @@
        "time": "17:45",
        "name": "도르소두로 운하변 산책",
        "kind": "walk",
-       "place": "Dorsoduro, Venezia",
-       "map": false
+       "place": "Dorsoduro, Venezia"
       }
      ]
     },
@@ -2512,8 +2475,7 @@
        "name": "리알토 시장 구경",
        "kind": "walk",
        "gift": true,
-       "place": "Mercato di Rialto, Venezia",
-       "map": false
+       "place": "Mercato di Rialto, Venezia"
       },
       {
        "time": "16:30",
@@ -2592,8 +2554,7 @@
      "time": "10:39",
      "name": "피렌체 SMN역 도착",
      "kind": "train",
-     "place": "Firenze Santa Maria Novella",
-     "map": false
+     "place": "Firenze Santa Maria Novella"
     },
     {
      "time": "11:00",
@@ -2601,7 +2562,6 @@
      "kind": "church",
      "desc": "도보 6~7분 · 캐리어·배낭 모두 두고 최소한만 소지 · 두오모 박물관 짐 보관소 이용 안 해도 됨",
      "place": "Hotel Nella, Firenze",
-     "map": false,
      "move": "SMN역 도보 6~7분",
      "prep": [
       "관광세 €18 현장",
@@ -2622,7 +2582,6 @@
      "say": true,
      "desc": "Piazza San Giovanni 7 · €15/인 = €30 · 크립트가 16:00에 닫으므로 12:15~12:45로 잡을 것 · 포함: 두오모 박물관 · 세례당 · 산타 레파라타",
      "place": "Piazza San Giovanni, Firenze",
-     "map": false,
      "prep": [
       "대성당 내부는 무료 = 이 패스와 무관",
       "산타 레파라타 시간슬롯 지정 필수"
@@ -2729,8 +2688,7 @@
      "name": "두오모 야경",
      "kind": "church",
      "desc": "호텔 도보 10분",
-     "place": "Cattedrale di Santa Maria del Fiore, Firenze",
-     "map": false
+     "place": "Cattedrale di Santa Maria del Fiore, Firenze"
     },
     {
      "time": "22:00",
@@ -2800,7 +2758,6 @@
      "kind": "walk",
      "desc": "미팅: 넵튠 분수 앞 (청동기마상 옆)",
      "place": "Piazza della Signoria, Firenze",
-     "map": false,
      "move": "호텔에서 도보 15분",
      "prep": [
       "어제 위치 확인 완료"
@@ -2814,7 +2771,6 @@
      "booked": "예약",
      "desc": "마이리얼트립 / 패스트트랙 입장 · 입장권 €29/인 = €58 가이드에게 현금 전달 · 3.5mm 유선 이어폰 지참 (수신기 €3/인 절약) · 주요 작품: · 보티첼리 '비너스의 탄생' · '봄(프리마베라)' · 다빈치 '수태고지' · '동방박사의 경배' · 미켈란젤로 '도니 톤도' (유일한 판넬화) · 티치아노 '우",
      "place": "Galleria degli Uffizi",
-     "map": false,
      "meet": {
       "time": "08:30",
       "where": "시뇨리아 광장 넵튠 분수대 (청동기마상 옆)",
@@ -2840,7 +2796,6 @@
      "kind": "museum",
      "desc": "30분 여유 · Via Ricasoli 58 (매표소는 105번지 맞은편) · 바우처 교환 + 보안검색 15~20분",
      "place": "Galleria dell'Accademia, Firenze",
-     "map": false,
      "move": "도보 15~18분",
      "prep": [
       "우선입장 라인",
@@ -2856,7 +2811,6 @@
      "booked": "예약",
      "desc": "마이리얼트립 EXP-메일에서 확인-메일에서 확인 · 미켈란젤로 '다비드' 원본 (5.17m, 1504) · 26세에 카라라 대리석 단일 블록으로 조각 · 트리부나 돔 아래 단독 전시 · '죄수들(프리지오니)' 4점 — 미완성 연작 · 대리석에서 빠져나오려는 형상",
      "place": "Galleria dell'Accademia, Firenze",
-     "map": false,
      "prep": [
       "관람 45분~1시간 30분"
      ]
@@ -2920,7 +2874,11 @@
      "name": "\"the mall bus stop\" 답사",
      "kind": "tour",
      "desc": "→ 모레(9/27) 토스카나 투어 미팅 장소 · → 호텔에서 도보 거리 확인, 구글맵 핀 저장 06:15 알람 2개 / 취침",
-     "map": false
+     "map": false,
+     "meet": {
+      "time": "21:30",
+      "where": "→ 호텔에서 도보 거리 확인, 구글맵 핀 저장 06:15 알람 2개 / 취침"
+     }
     }
    ],
    "options": [
@@ -2945,7 +2903,6 @@
        "say": true,
        "desc": "트러플 파스타 / 람프레도토 / 스테이크 샌드위치",
        "place": "Mercato Centrale Firenze",
-       "map": false,
        "move": "도보 12분 (추정)"
       },
       {
@@ -2963,8 +2920,7 @@
       {
        "time": "13:00",
        "name": "아카데미아 도착",
-       "place": "Galleria dell'Accademia, Firenze",
-       "map": false
+       "place": "Galleria dell'Accademia, Firenze"
       }
      ]
     },
@@ -2984,8 +2940,7 @@
        "time": "12:15",
        "name": "우피치 퇴장",
        "kind": "museum",
-       "place": "Galleria degli Uffizi, Firenze",
-       "map": false
+       "place": "Galleria degli Uffizi, Firenze"
       },
       {
        "time": "12:20",
@@ -3001,14 +2956,12 @@
        "name": "아카데미아 이동",
        "kind": "walk",
        "desc": "도보 15~18분",
-       "place": "Galleria dell'Accademia, Firenze",
-       "map": false
+       "place": "Galleria dell'Accademia, Firenze"
       },
       {
        "time": "13:00",
        "name": "아카데미아 도착",
        "place": "Galleria dell'Accademia, Firenze",
-       "map": false,
        "prep": [
         "우피치는 하이라이트만 2~3시간, 전체는 3~4시간",
         "재입장 불가 → 나오기 전에 다 볼 것"
@@ -3052,8 +3005,7 @@
      "name": "호텔 출발 → SMN역",
      "kind": "train",
      "desc": "도보 6~7분",
-     "place": "Firenze Santa Maria Novella",
-     "map": false
+     "place": "Firenze Santa Maria Novella"
     },
     {
      "time": "06:50",
@@ -3062,7 +3014,6 @@
      "say": true,
      "desc": "Firenze S.M.Novella → Pisa S. Rossore · 지역열차 = 좌석예약 없음, 아무 자리 · 앱으로 사면 자동 개찰 (각인 불필요)",
      "place": "Firenze Santa Maria Novella",
-     "map": false,
      "prep": [
       "종이표면 승강장 녹색 각인기에서 개찰 필수 (벌금 €50+)"
      ]
@@ -3078,8 +3029,7 @@
      "name": "Pisa Centrale 도착 — 같은 역 환승",
      "kind": "train",
      "desc": "대기 9분",
-     "place": "Pisa Centrale",
-     "map": false
+     "place": "Pisa Centrale"
     },
     {
      "time": "08:00",
@@ -3092,7 +3042,6 @@
      "name": "Pisa S. Rossore 도착",
      "kind": "train",
      "place": "Pisa San Rossore",
-     "map": false,
      "prep": [
       "첸트랄레는 사탑까지 2.3km, 산 로소레는 도보 10분"
      ]
@@ -3102,8 +3051,7 @@
      "name": "캄포 데이 미라콜리 도착",
      "kind": "walk",
      "desc": "도보 10분",
-     "place": "Piazza dei Miracoli, Pisa",
-     "map": false
+     "place": "Piazza dei Miracoli, Pisa"
     },
     {
      "time": "08:20",
@@ -3141,8 +3089,7 @@
      "name": "La Spezia Centrale 도착",
      "kind": "train",
      "desc": "약 1시간 20분",
-     "place": "La Spezia Centrale",
-     "map": false
+     "place": "La Spezia Centrale"
     },
     {
      "time": "10:50",
@@ -3198,7 +3145,6 @@
      "kind": "walk",
      "desc": "가장 예쁜 마을 · 천연 항구 · 광장 · 도리아 성 아래 해안 산책 (성 등반은 선택) · 파스텔 집들과 항구 조합",
      "place": "Vernazza",
-     "map": false,
      "move": "기차 10분"
     },
     {
@@ -3218,8 +3164,7 @@
      "time": "17:10",
      "name": "La Spezia Centrale 도착",
      "kind": "train",
-     "place": "La Spezia Centrale",
-     "map": false
+     "place": "La Spezia Centrale"
     },
     {
      "time": "17:20",
@@ -3265,7 +3210,11 @@
      "name": "\"the mall bus stop\" 답사 필수",
      "kind": "tour",
      "desc": "→ 내일(9/27) 06:45 토스카나 투어 미팅 장소 · → 호텔에서 도보 거리 확인, 구글맵 핀 저장",
-     "place": "The Mall Firenze bus stop"
+     "place": "The Mall Firenze bus stop",
+     "meet": {
+      "time": "21:30",
+      "where": "→ 호텔에서 도보 거리 확인, 구글맵 핀 저장"
+     }
     },
     {
      "time": "22:00",
@@ -3328,7 +3277,6 @@
      "kind": "stay",
      "desc": "조기 체크아웃 가능 · 관광세 €18.00 미납 시 정산",
      "place": "Hotel Nella, Firenze",
-     "map": false,
      "prep": [
       "캐리어 2개 OK",
       "백팩 = 몸에 지니기 (귀중품)"
@@ -3339,8 +3287,7 @@
      "name": "도보 이동 → the mall bus stop",
      "kind": "walk",
      "desc": "도보 7분 · 어제 밤 답사한 위치로 직행",
-     "place": "The Mall Firenze bus stop",
-     "map": false
+     "place": "The Mall Firenze bus stop"
     },
     {
      "time": "06:45",
@@ -3349,7 +3296,6 @@
      "booked": "예약",
      "desc": "3.5mm 이어폰 지참 (수신기 €3/인 절약)",
      "place": "The Mall bus stop, Firenze",
-     "map": false,
      "move": "도보 7분 (추정)",
      "meet": {
       "time": "06:45",
@@ -3427,8 +3373,7 @@
      "name": "로마 테르미니 하차",
      "kind": "train",
      "desc": "(Hotel Canada 앞)",
-     "place": "Roma Termini",
-     "map": false
+     "place": "Roma Termini"
     },
     {
      "time": "18:15",
@@ -3500,7 +3445,6 @@
      "kind": "car",
      "desc": "도보 3분 · → 메트로 A선 → Ottaviano역 · Tap & Go — 개찰구에 카드·폰 태그 (€1.50/인)",
      "place": "Ottaviano Metro Station, Roma",
-     "map": false,
      "prep": [
       "전날 카톡으로 확정시각",
       "개찰구 → 왼쪽 첫 출구 → 오른쪽 계단",
@@ -3544,7 +3488,6 @@
      "kind": "tour",
      "desc": "(성 베드로 광장)",
      "place": "Piazza San Pietro",
-     "map": false,
      "move": "도보 (성 베드로 광장으로)"
     },
     {
@@ -3554,7 +3497,6 @@
      "food": true,
      "say": true,
      "desc": "카초 에 페페 / 로마식 피자",
-     "place": "Borgo Pio, Roma",
      "map": false,
      "move": "도보 5분 (추정)"
     },
@@ -3584,7 +3526,6 @@
      "kind": "walk",
      "desc": "(도보 20분)",
      "place": "Lungotevere Castello, Roma",
-     "map": false,
      "move": "도보 (강변 따라)"
     },
     {
@@ -3600,8 +3541,7 @@
      "name": "(선택) 성 이냐시오 성당",
      "kind": "church",
      "desc": "도보 5분, 무료 · 안드레아 포초 천장 눈속임 프레스코",
-     "place": "Chiesa di Sant'Ignazio, Roma",
-     "map": false
+     "place": "Chiesa di Sant'Ignazio, Roma"
     },
     {
      "time": "17:15",
@@ -3645,7 +3585,6 @@
      "kind": "walk",
      "desc": "도보 10분 · €2/인 = €4 · 2026.2.2부터 유료화 (분수 앞 구역) · 입구 Via della Stamperia → 출구 Via dei Crociferi · 동전 던지기 (오른손 → 왼쪽 어깨 너머) · 22:00 이후는 무료 개방",
      "place": "Fontana di Trevi",
-     "map": false,
      "move": "도보 15분 (추정)",
      "prep": [
       "€2/인 (동전구역)",
@@ -3659,7 +3598,6 @@
      "kind": "walk",
      "desc": "도보 10분, 계단 조명 · (계단 조명) · 계단에 앉기 금지 (벌금)",
      "place": "Piazza di Spagna",
-     "map": false,
      "move": "도보 10분 (추정)",
      "prep": [
       "계단 앉기 금지",
@@ -3724,7 +3662,6 @@
      "booked": "예약",
      "desc": "콜로세움 인포 포인트 (Piazza del Colosseo 1) · 현장 현금 €76 (통합권 €35/인 + 수신기 €3/인) · 3.5mm 이어폰 지참 = €6 절약",
      "place": "Colosseo",
-     "map": false,
      "meet": {
       "time": "08:50",
       "where": "콜로세움 인포 포인트 (Piazza del Colosseo 1)",
@@ -3743,7 +3680,6 @@
      "kind": "tour",
      "desc": "패스트트랙 · 포로 로마노 바로 입장 (줄 안 섬) · 팔라티노 언덕 (로마 발상지, 황제 궁전 터) · 티투스 개선문 · 세베로 개선문 · 안토니우스·베스타·시저 신전 · 포로 로마노 중심 광장 · 전망대 · 콜로세움 내부 관람",
      "place": "Colosseo",
-     "map": false,
      "prep": [
       "현금 €76 (통합권 €35×2 + 수신기 €3×2)",
       "카드 불가",
@@ -3756,8 +3692,7 @@
      "name": "투어 종료",
      "kind": "tour",
      "desc": "12:00~",
-     "place": "Palatino, Roma",
-     "map": false
+     "place": "Palatino, Roma"
     },
     {
      "time": "12:45",
@@ -3796,8 +3731,7 @@
      "name": "몬티 골목 산책 or 카페",
      "kind": "meal",
      "desc": "여유",
-     "place": "Monti, Roma",
-     "map": false
+     "place": "Monti, Roma"
     },
     {
      "time": "16:15",
@@ -3938,7 +3872,6 @@
      "kind": "walk",
      "desc": "트립닷컴 예약화면 = T3 · 일부 자료 = 위즈에어는 T1 · → 공항 전광판이 최종 기준 · → T1이면 레오나르도 익스프레스 역에서 도보 추가",
      "place": "Rome Fiumicino Airport Terminal 3",
-     "map": false,
      "move": "레오나르도 익스프레스 32분",
      "prep": [
       "전광판으로 당일 재확인",
@@ -3995,7 +3928,6 @@
      "time": "14:35",
      "name": "프라하 바츨라프 하벨 공항 T2 도착",
      "place": "Václav Havel Airport Prague",
-     "map": false,
      "prep": [
       "솅겐 내부선 = 입국심사 없음"
      ]
@@ -4023,7 +3955,6 @@
      "name": "Golden Angel Suites 도착",
      "desc": "Celetná 588/29, Praha 1 · → 도착 전 메일 확인 필수 · 관광세 현장 현금 (약 300 CZK)",
      "place": "Golden Angel Suites, Praha",
-     "map": false,
      "move": "Bolt/택시 30~40분",
      "prep": [
       "프런트 없음 = 이메일 출입코드",
@@ -4068,8 +3999,7 @@
      "food": true,
      "say": true,
      "desc": "콜레노(족발) / 굴라시 / 스비치코바 · 필스너 우르켈 (0.5L 약 60~80 CZK) · 900~1,300 CZK (2인)",
-     "place": "Lokál Dlouhááá, Praha",
-     "map": false
+     "place": "Lokál Dlouhááá, Praha"
     },
     {
      "time": "20:00",
@@ -4151,7 +4081,6 @@
      "booked": "예약",
      "desc": "450 CZK/인 = 900 CZK · 매표소 3곳: 2번 안뜰(회화관 옆) / 3번 안뜰(대성당 앞) / · 황금소로 입구 · 3번 안뜰 매표소가 동선상 편함 · 보안검색대 철거됨 — 입출입 대기줄 없음 · 09:00 개장 직후가 가장 짧음 · 티켓 2일 연속 유효 (각 건물 1회 입장)",
      "place": "Pražský hrad",
-     "map": false,
      "prep": [
       "매표소 줄은 10시부터 길어짐 (성수기 30~45분)",
       "개별 건물 티켓 없음 — 메인 서킷만 판매"
@@ -4258,7 +4187,6 @@
        "kind": "walk",
        "desc": "[옵션 B] 미러 채플 콘서트 (클레멘티눔 내) · 저녁 시간대 클래식 (모차르트·비발디·드보르작) · 실내악단 연주, 약 1시간 · 요금·시간 현장 또는 온라인 확인 · 고소공포 무관 → 와이프분께 적합한 대안",
        "place": "Pražský orloj",
-       "map": false,
        "move": "도보 10분 (추정)",
        "prep": [
         "계단 등반 없음, 앉아서 감상"
@@ -4276,8 +4204,7 @@
        "name": "카를로바 거리 산책",
        "kind": "walk",
        "desc": "구시가 방향 · 클레멘티눔 외관 · 크리조브니츠케 광장 · 카를교 뒤로 프라하성이 보이는 · 프라하에서 가장 아름다운 광장",
-       "place": "Klementinum, Praha",
-       "map": false
+       "place": "Klementinum, Praha"
       },
       {
        "time": "16:30",
@@ -4307,7 +4234,6 @@
        "say": true,
        "desc": "콜레노(족발) / 굴라시 / 스비치코바 · 필스너 우르켈 / 코젤 · 900~1,300 CZK (2인)",
        "place": "Lokál Dlouhááá, Praha",
-       "map": false,
        "move": "도보 5분 (추정)"
       },
       {
@@ -4315,8 +4241,7 @@
        "name": "카를교 야경",
        "kind": "ruins",
        "desc": "21시 이후 인파 줄고 조명 예쁨 · 프라하성 라이트업 조망",
-       "place": "Karlův most",
-       "map": false
+       "place": "Karlův most"
       },
       {
        "time": "21:30",
@@ -4373,7 +4298,6 @@
      "name": "호텔 출발",
      "kind": "train",
      "desc": "초행 여유 · → 도보 5분 → Náměstí Republiky역 (B선) · 지하철 39 CZK/인 (30분권, 2026.1 인상)",
-     "place": "Florenc bus terminal, Praha",
      "map": false,
      "prep": [
       "전날 지하철 경로·승강장 확인",
@@ -4405,7 +4329,7 @@
      "kind": "train",
      "booked": "예약",
      "desc": "RegioJet, 2h40m · 티켓번호 메일에서 확인 / 좌석 11, 12 · 무료 SmartGuide 앱 2개 (체스키·프라하) · 티켓번호 / 좌석 11, 12",
-     "place": "Státní hrad a zámek Český Krumlov",
+     "map": false,
      "move": "도보 5분 (추정)",
      "prep": [
       "왕복 60,000원"
@@ -4416,8 +4340,7 @@
      "name": "체스키 크룸로프 AN 도착",
      "kind": "walk",
      "desc": "→ 마을 중심까지 도보 15분 · 체류 약 7시간 (10:40~17:45)",
-     "place": "Český Krumlov AN",
-     "map": false
+     "place": "Český Krumlov AN"
     },
     {
      "time": "11:00",
@@ -4434,7 +4357,6 @@
      "say": true,
      "desc": "추천: Krčma v Šatlavské (중세 분위기 그릴) · Hospoda Na Louži (가성비) · Eggenberg 양조장 레스토랑 · 700~1,000 CZK (2인)",
      "place": "Krčma v Šatlavské",
-     "map": false,
      "move": "도보 5분 (추정)"
     },
     {
@@ -4461,8 +4383,7 @@
      "kind": "meal",
      "gift": true,
      "desc": "트르들로(회오리빵) 80~100 CZK · 현금 흥정 가능한 소상점 · 피노키오 촬영지 등 소규모 명소 €1 수준",
-     "place": "Český Krumlov",
-     "map": false
+     "place": "Český Krumlov"
     },
     {
      "time": "17:00",
@@ -4476,8 +4397,7 @@
      "name": "Špičák 정류장으로 이동",
      "kind": "walk",
      "desc": "(성 뒤, 도보 5분)",
-     "place": "Špičák, Český Krumlov",
-     "map": false
+     "place": "Špičák, Český Krumlov"
     },
     {
      "time": "18:05",
@@ -4600,7 +4520,6 @@
      "kind": "walk",
      "desc": "자유 · 카를교 · 구시가 광장 다시 한 번 · 또는 카페에서 여유 (Café Louvre · Grand Café Orient)",
      "place": "Prašná brána, Praha",
-     "map": false,
      "prep": [
       "프라하성 티켓 2일 유효 = 10/1~10/2, 오늘은 만료"
      ]
@@ -4643,7 +4562,6 @@
      "kind": "flight",
      "desc": "대한항공 카운터 · 세금 환급(Tax Free) = 체크인 전 세관 도장 · CZK 2,000 이상 구매 시 가능",
      "place": "Václav Havel Airport Prague Terminal 1",
-     "map": false,
      "prep": [
       "출발은 T1 (도착 때 T2와 다름)",
       "휴대 10kg (3변 합 115cm)",
@@ -4745,7 +4663,6 @@
      "name": "ICN 인천공항 도착",
      "kind": "flight",
      "place": "Incheon International Airport",
-     "map": false,
      "tz": 540,
      "tzl": "KST"
     },
@@ -6457,7 +6374,10 @@
        "n": "필스너 우르켈 굿즈·맥주잔"
       },
       {
-       "n": "코젤"
+       "n": "코젤 굿즈"
+      },
+      {
+       "n": "베헤로프카 (Bechero"
       }
      ]
     }

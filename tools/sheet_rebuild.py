@@ -2,8 +2,13 @@
 """구글 시트만 보고 data.json 을 **처음부터** 다시 만듭니다.
 
   python3 tools/sheet_rebuild.py <시트를_받아둔_json>
+  python3 tools/relayer.py <직전_data.json>   # 앱 전용 층 되얹기 (enrich 보다 먼저!)
   python3 tools/enrich.py
   ./tools/release.sh
+
+  ※ 순서가 중요합니다. enrich 를 먼저 돌리면 derive_place 가 만든 검색어가
+    자리를 차지해, relayer 가 사람이 고쳐 둔 place 를 못 얹습니다
+    (실제로 "카를교 방향" 같은 값이 되살아났습니다).
 
 sheet_sync.py 와 다른 점: 이전 data.json 을 **전혀 읽지 않습니다.**
 sheet_sync 는 매칭된 항목의 이름·place·move 를 앱에서 이어받는데(CARRY),
