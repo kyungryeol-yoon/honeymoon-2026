@@ -949,6 +949,7 @@
      "name": "Badestelle Neuhaus",
      "kind": "train",
      "desc": "툰 호수 동쪽 끝 · 주차 유료 / 무료 구역(Schülerbad)은 입장 무료 · Swimming Steps — 주차장 왼쪽 배구 네트 근처 · 호수로 바로 내려가는 계단 + 부유 플랫폼 · 넓은 잔디밭 · 그늘 나무 · 니젠 봉우리 정면 · 화장실·탈의실·샤워 있음",
+     "place": "Neuhaus Swimming Steps",
      "prep": [
       "9월 하순 수온 15~18℃ — 발만 담그는 정도",
       "유료 리도(CHF 3.50)는 시즌 종료 가능",
@@ -960,7 +961,7 @@
      "time": "15:45",
      "name": "라우터브룬넨 이동",
      "desc": "(차 25분)",
-     "map": false
+     "place": "Neuhaus Swimming Steps"
     },
     {
      "time": "16:15",
@@ -1251,8 +1252,7 @@
        "name": "융프라우요흐 도착",
        "kind": "cable",
        "desc": "(3,463m) 톱 오브 유럽",
-       "place": "Jungfraujoch",
-       "map": false,
+       "place": "Wengen",
        "move": "융프라우 철도 35분 (추정)",
        "prep": [
         "방한복 (정상 영하)"
@@ -1344,7 +1344,8 @@
        "time": "10:30",
        "name": "Wengen 마을",
        "kind": "train",
-       "desc": "기차 15분, 차 없는 마을 산책"
+       "desc": "기차 15분, 차 없는 마을 산책",
+       "place": "Wengen"
       },
       {
        "time": "12:00",
@@ -1360,14 +1361,14 @@
        "name": "출발 → Badestelle Neuhaus",
        "kind": "car",
        "desc": "차 25~30분",
-       "place": "Badestelle Neuhaus"
+       "place": "Neuhaus Swimming Steps"
       },
       {
        "time": "13:30",
        "name": "Badestelle Neuhaus 도착",
        "kind": "train",
        "desc": "주차 유료 / 무료 구역(Schülerbad) 입장 무료 · Swimming Steps — 주차장 왼쪽 배구 네트 근처 · 호수로 바로 내려가는 계단 + 부유 플랫폼 · 넓은 잔디밭 · 그늘 나무 · 니젠 봉우리 정면 · 화장실·탈의실·샤워 있음 · Kiffersinseli — 주차장 오른쪽 델타, 바비큐 자리",
-       "place": "Badestelle Neuhaus",
+       "place": "Neuhaus Swimming Steps",
        "prep": [
         "9월 하순 수온 15~18℃"
        ]
@@ -1994,7 +1995,7 @@
        "name": "Gotthard 터널 통과",
        "kind": "car",
        "desc": "(17km) · 평균속도 단속 (입 · 출구 시간 측정) — 규정 속도 엄수 · 터널 내 차간거리 50m · 성수기 정체 가능 (대기 시 여유)",
-       "place": "Gotthard Road Tunnel",
+       "map": false,
        "prep": [
         "평균 속도 단속 주의",
         "정체 가능 (1시간 이상 대기 시 벨린초나 생략)"
@@ -2012,7 +2013,7 @@
        "name": "Bellinzona 성",
        "kind": "ruins",
        "desc": "UNESCO, 30분 · Castelgrande 성벽·외관 무료",
-       "place": "Castelgrande, Bellinzona"
+       "place": "Castelgrande Bellinzona castello"
       },
       {
        "time": "16:00",
@@ -2071,7 +2072,7 @@
        "time": "15:00",
        "name": "Bellinzona",
        "desc": "차 1시간",
-       "place": "Castelgrande, Bellinzona"
+       "place": "Castelgrande Bellinzona castello"
       },
       {
        "time": "16:00",
@@ -2260,7 +2261,7 @@
      "name": "산마르코 광장",
      "kind": "walk",
      "desc": "외관·파사드 · (대성당 · 두칼레 궁전 외관)",
-     "place": "Piazza San Marco",
+     "place": "Piazza San Marco, Venezia",
      "move": "도보 12분 (추정)"
     },
     {
@@ -2641,7 +2642,7 @@
      "food": true,
      "say": true,
      "desc": "도보 5분 · 람프레도토 (Da Nerbone, 1층, 08:00~ 15:00 일요일 휴무) · 트러플 파스타 · 스키아차타",
-     "place": "Mercato Centrale",
+     "place": "Mercato Centrale Firenze",
      "prep": [
       "12~14시 혼잡 → 1층 노점이 줄 짧음"
      ]
@@ -2934,7 +2935,7 @@
        "name": "Mercato Centrale 이동",
        "kind": "walk",
        "desc": "도보 12분",
-       "place": "Mercato Centrale"
+       "place": "Mercato Centrale Firenze"
       },
       {
        "time": "11:50",
@@ -3372,7 +3373,7 @@
      "name": "발도르차 평원 · 싸이프러스 풍경길",
      "kind": "nature",
      "desc": "르네상스 화가들이 사랑한 인생샷 명소 · 사이프러스 줄지은 언덕길",
-     "place": "Val d'Orcia",
+     "place": "San Quirico d'Orcia",
      "move": "투어 차량 1시간 30분 (추정)"
     },
     {
@@ -3399,7 +3400,7 @@
      "name": "발도르차 평원 감상",
      "kind": "nature",
      "desc": "(사진 타임)",
-     "place": "Val d'Orcia",
+     "place": "San Quirico d'Orcia",
      "move": "투어 차량 30분 (추정)"
     },
     {
@@ -3433,7 +3434,7 @@
      "time": "18:15",
      "name": "도보 8분 → 마그니피코 로마",
      "kind": "walk",
-     "place": "Hotel Magnifico Roma"
+     "place": "Magnifico Rome Hotel"
     },
     {
      "time": "18:30",
@@ -3464,7 +3465,8 @@
     },
     {
      "time": "22:00",
-     "name": "호텔"
+     "name": "호텔",
+     "map": false
     }
    ],
    "stay": {
