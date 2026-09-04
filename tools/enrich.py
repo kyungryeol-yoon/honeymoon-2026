@@ -53,7 +53,15 @@ NOT_A_PLACE = re.compile(
     # 눌러도 갈 데가 없는 것들 — 초기화 뒤 지도 검색어를 훑어보고 넣었습니다.
     # ("ICN → DOH 카타르항공 QR859, Barcelona, Spain" 같은 링크가 생깁니다)
     r'|미팅|모임|야경|별빛|합창단|조망|^선택$|^\(선택\)'
-    r'|→.*\b[A-Z]{2}\d{2,4}\b')
+    r'|→.*\b[A-Z]{2}\d{2,4}\b'
+    # 눌러도 갈 데가 없는 것들 (2026-09 전수 점검에서 22개 발견)
+    # "공항 외부, 신혼여행 완료" 를 검색하면 당연히 아무것도 안 나옵니다.
+    r'|완료|순례|쉬기|답사|경유|승선|통과|호출|반납|정거장|보충'
+    r'|사진$|쇼핑$|기차$|버스$|배$')
+
+# 이동 자체가 일정인 항목 — "A → B" 는 장소가 아니라 구간입니다.
+# 목적지를 알고 싶으면 다음 항목(도착)에 링크가 있습니다.
+LEG = re.compile(r'→|->')
 # 위에 걸려도 이름 안에 진짜 지명이 있어 남겨야 하는 것
 KEEP_PLACE = re.compile(
     r'구엘|사그라다|몬세라트|지로나|세례당|두오모|Mercato|판테온|Bellinzona|Furka|Grimsel'
@@ -119,6 +127,11 @@ def main():
                     if k:
                         it['kind'] = k
                         n['kind'] += 1
+                if it.get('map') is not False and not it.get('place') \
+                        and LEG.search(it['name']) \
+                        and it.get('kind') in ('train', 'bus', 'boat', 'flight', 'car', 'taxi'):
+                    it['map'] = False          # 구간이지 장소가 아님
+                    n['map'] += 1
                 if it.get('map') is not False and not it.get('place'):
                     if NOT_A_PLACE.search(it['name']):
                         if not KEEP_PLACE.search(it['name']):

@@ -85,14 +85,25 @@ for key, groups in (('food', ('spots',)), ('gift', ('buy',))):
 import re as _re
 ACT = _re.compile(r'기상|조식|취침|휴식|점심|저녁|디너|간식|준비|정리|출발|이동|복귀'
                   r'|체크아웃|짐|세면|충전|알람|판단|확인|하산|승차|하차|탑승|대기'
-                  r'|구매|인출|환급|검사|심사|셋업|철수|퇴장|입장')
+                  r'|구매|인출|환급|검사|심사|셋업|철수|퇴장|입장'
+                  r'|완료|순례|쉬기|답사|경유|승선|통과|호출|반납|정거장|보충')
+# 검색어로 쓸 수 없는 place — 두 곳을 이어 붙였거나 문장 조각인 것.
+# ("몬세라트 + 지로나 투어", "디너 (나보나·판테온 근처 트라토리아")
+BAD_PLACE = _re.compile(r'[+·]|\(|"|방향$|야경$|근처')
 dead = []
 for day in d['days']:
     for it in day['items'] + [i for o in (day.get('options') or []) for i in o['items']]:
-        if it.get('map') is False or it.get('place'):
+        if it.get('place'):
+            if BAD_PLACE.search(it['place']):
+                dead.append(f"{day['date']} {it['time']} place={it['place']!r} — 검색어로 못 씁니다")
+            continue
+        if it.get('map') is False:
             continue
         if ACT.search(it['name']):
             dead.append(f"{day['date']} {it['time']} {it['name']!r}")
+        # "A → B" 는 구간이지 장소가 아닙니다
+        if '→' in it['name'] and it.get('kind') in ('train','bus','boat','flight','car','taxi'):
+            dead.append(f"{day['date']} {it['time']} {it['name']!r} — 구간이지 장소가 아닙니다")
 assert not dead, ("지도로 보내봐야 안 나오는 링크 — place 를 적거나 map:false 를 붙이세요:\n  "
                   + "\n  ".join(dead[:10]))
 

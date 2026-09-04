@@ -623,7 +623,7 @@
      "kind": "tour",
      "booked": "예약",
      "desc": "현금 €44 확인 (성당 €18 + 검은성모 €26) · 3.5mm 유선 이어폰 2개",
-     "place": "몬세라트 + 지로나 투어",
+     "map": false,
      "meet": {
       "time": "07:40",
       "where": "만다린 오리엔탈 호텔 앞",
@@ -829,6 +829,7 @@
      "kind": "bus",
      "booked": "상시",
      "desc": "새벽 · 24시간 운행 / 심야 20분 간격 · Aerobús 24시간 운행 · 심야 01:05~05:35 는 20분 간격",
+     "map": false,
      "prep": [
       "02:50까지 정류장 도착 권장"
      ]
@@ -1051,7 +1052,8 @@
        "time": "12:45",
        "name": "슈피츠(Spiez) 성 외관 + 호수 파노라마",
        "kind": "ruins",
-       "desc": "30분 · (차 20분)"
+       "desc": "30분 · (차 20분)",
+       "place": "Schloss Spiez"
       },
       {
        "time": "13:45",
@@ -1207,6 +1209,7 @@
        "name": "라우터브룬넨 → Wengen 톱니바퀴 기차",
        "kind": "train",
        "desc": "예매 시 라우터브룬넨 출발 시각 별도 확인",
+       "map": false,
        "prep": [
         "e티켓 + 여권 함께",
         "굿모닝 티켓 = 이른 3편",
@@ -1223,7 +1226,8 @@
        "time": "08:45",
        "name": "Wengen → Kleine Scheidegg",
        "kind": "train",
-       "desc": "초원 위 빨간 기차 사진 명소"
+       "desc": "초원 위 빨간 기차 사진 명소",
+       "map": false
       },
       {
        "time": "09:30",
@@ -1258,7 +1262,8 @@
        "time": "10:40",
        "name": "얼음 궁전",
        "kind": "ruins",
-       "desc": "Ice Palace) — 실내, 30분 · (Ice Palace) + 실내 전망대 · 스핑크스 야외 데크 X (고소공포) · 고산 = 천천히 움직이기, 두통 시 하산"
+       "desc": "Ice Palace) — 실내, 30분 · (Ice Palace) + 실내 전망대 · 스핑크스 야외 데크 X (고소공포) · 고산 = 천천히 움직이기, 두통 시 하산",
+       "place": "Jungfraujoch"
       },
       {
        "time": "11:20",
@@ -1372,6 +1377,7 @@
        "name": "인터라켄 경유 · 마트 보충",
        "kind": "shop",
        "desc": "필요시 · 17:30 캠프 복귀 · [대안 B] Blausee 또는 Aareschlucht 드라이브 · [대안 C] 캠프에서 쉬기 · 13:00 Staubbach 폭포 · 계곡 산책 · 15:00 캠프 휴식 · 빨래",
+       "map": false,
        "prep": [
         "9/17에 안 갔다면 여기서 소화"
        ]
@@ -1437,7 +1443,8 @@
      "time": "09:15",
      "name": "Trümmelbach Falls",
      "kind": "nature",
-     "desc": "차 10분 · CHF 18/인 = CHF 36 / 소요 1시간 · 산 안쪽 폭포 10개, 엘리베이터 이동 · 고소공포 무관 (동굴 내부형)"
+     "desc": "차 10분 · CHF 18/인 = CHF 36 / 소요 1시간 · 산 안쪽 폭포 10개, 엘리베이터 이동 · 고소공포 무관 (동굴 내부형)",
+     "place": "Trümmelbachfälle, Lauterbrunnen"
     },
     {
      "time": "10:45",
@@ -1594,6 +1601,7 @@
        "kind": "shop",
        "say": true,
        "desc": "Coop 그린델발트 · 일·월 아침까지 먹을 것 오늘 다 사둘 것 · 빵·계란·치즈·소시지·과일·물·와인 · 가스 카트리지 잔량 확인",
+       "map": false,
        "prep": [
         "내일(9/20) 일요일 = 스위스 마트 전면 휴무",
         "Migros는 주류 미판매 → Coop 또는 Denner"
@@ -1986,6 +1994,7 @@
        "name": "Gotthard 터널 통과",
        "kind": "car",
        "desc": "(17km) · 평균속도 단속 (입 · 출구 시간 측정) — 규정 속도 엄수 · 터널 내 차간거리 50m · 성수기 정체 가능 (대기 시 여유)",
+       "place": "Gotthard Road Tunnel",
        "prep": [
         "평균 속도 단속 주의",
         "정체 가능 (1시간 이상 대기 시 벨린초나 생략)"
@@ -2036,7 +2045,8 @@
        "time": "11:00",
        "name": "Furka Pass",
        "kind": "car",
-       "desc": "007 골드핑거 촬영지 · Rhône 빙하 전망 (Belvédère) · 빙하 얼음동굴 CHF 9/인 = CHF 18 (선택) · 주차 무료"
+       "desc": "007 골드핑거 촬영지 · Rhône 빙하 전망 (Belvédère) · 빙하 얼음동굴 CHF 9/인 = CHF 18 (선택) · 주차 무료",
+       "place": "Furka Pass"
       },
       {
        "time": "12:00",
@@ -2052,6 +2062,7 @@
        "name": "San Gottardo Pass",
        "kind": "car",
        "desc": "구 고갯길, Tremola 石畳",
+       "place": "San Gottardo Pass",
        "prep": [
         "커브 다수, 운전 집중 필요"
        ]
@@ -2138,6 +2149,7 @@
      "name": "Hertz 렌터카 반납",
      "kind": "car",
      "desc": "차량 360도 영상 촬영 (외관·연료계·휠·앞유리) · 연료 채움 확인 / 점검표 이상없음 서명 · 보증금 해제 확인",
+     "place": "Hertz Lugano Stazione",
      "prep": [
       "360도 영상 (외관·연료·휠·앞유리)",
       "점검표 서명",
@@ -2174,6 +2186,7 @@
      "kind": "train",
      "booked": "예약",
      "desc": "1등석 Smart, 8호차 21·22번 (마주봄 + 짐칸 옆) · 예약번호는 메일에서 확인 · 식당칸·바 있음 · 가르다 호수 · 베로나 경치 (창가)",
+     "map": false,
      "prep": [
       "QR 티켓 폰 저장",
       "종착역 = Venezia Mestre",
@@ -2323,7 +2336,8 @@
      "time": "09:00",
      "name": "Line 12 승선",
      "kind": "boat",
-     "desc": "Fondamente Nove 방면"
+     "desc": "Fondamente Nove 방면",
+     "map": false
     },
     {
      "time": "09:45",
@@ -2506,12 +2520,14 @@
        "kind": "meal",
        "food": true,
        "say": true,
-       "desc": "Cantina Do Mori (1462년, 가장 오래된 바카로) · All'Arco / Osteria al Bacareto / Vino Vero · 스프리츠 + 치케티"
+       "desc": "Cantina Do Mori (1462년, 가장 오래된 바카로) · All'Arco / Osteria al Bacareto / Vino Vero · 스프리츠 + 치케티",
+       "map": false
       },
       {
        "time": "17:30",
        "name": "운하변 카페에서 쉬기",
        "kind": "meal",
+       "map": false,
        "prep": [
         "스위스 5박 직후 = 체력 회복이 나을 수 있음"
        ]
@@ -2559,6 +2575,7 @@
      "kind": "train",
      "booked": "예약",
      "desc": "Frecciarossa 9409 / 2호차 17A·17B / 예약번호는 메일에서 확인",
+     "map": false,
      "prep": [
       "환불·변경 불가",
       "QR 티켓 폰 저장"
@@ -2888,7 +2905,7 @@
      "name": "두오모·시뇨리아 야경 산책",
      "kind": "church",
      "desc": "선택",
-     "place": "두오모·시뇨리아 야경"
+     "place": "Piazza della Signoria, Firenze"
     },
     {
      "time": "21:00",
@@ -2902,10 +2919,7 @@
      "name": "\"the mall bus stop\" 답사",
      "kind": "tour",
      "desc": "→ 모레(9/27) 토스카나 투어 미팅 장소 · → 호텔에서 도보 거리 확인, 구글맵 핀 저장 06:15 알람 2개 / 취침",
-     "meet": {
-      "time": "21:30",
-      "where": "→ 호텔에서 도보 거리 확인, 구글맵 핀 저장 06:15 알람 2개 / 취침"
-     }
+     "map": false
     }
    ],
    "options": [
@@ -3189,7 +3203,8 @@
     {
      "time": "16:20",
      "name": "항구 오후 빛 사진",
-     "kind": "photo"
+     "kind": "photo",
+     "map": false
     },
     {
      "time": "16:40",
@@ -3249,11 +3264,7 @@
      "name": "\"the mall bus stop\" 답사 필수",
      "kind": "tour",
      "desc": "→ 내일(9/27) 06:45 토스카나 투어 미팅 장소 · → 호텔에서 도보 거리 확인, 구글맵 핀 저장",
-     "place": "The Mall Firenze bus stop",
-     "meet": {
-      "time": "21:30",
-      "where": "→ 호텔에서 도보 거리 확인, 구글맵 핀 저장"
-     }
+     "place": "The Mall Firenze bus stop"
     },
     {
      "time": "22:00",
@@ -3621,7 +3632,7 @@
      "food": true,
      "say": true,
      "desc": "카르보나라 / 카초 에 페페",
-     "place": "디너 (나보나·판테온 근처 트라토리아",
+     "place": "Piazza Navona, Roma",
      "prep": [
       "카르보나라에 크림 없음"
      ]
@@ -3970,6 +3981,7 @@
      "kind": "flight",
      "booked": "예약",
      "desc": "에어버스 A321neo, 1시간 55분",
+     "map": false,
      "refs": [
       {
        "label": "편명",
@@ -3997,6 +4009,7 @@
      "name": "Bolt 호출 → 구시가",
      "kind": "taxi",
      "desc": "600~800 CZK (앱 결제, 현금 불필요) · 한국에서 미리 설치·카드 등록 완료",
+     "map": false,
      "prep": [
       "약 40,000원",
       "구시가 골목 차량제한 = 화약탑 쪽 하차",
@@ -4043,7 +4056,7 @@
      "name": "카를교 방향 산책",
      "kind": "ruins",
      "desc": "도보 10분 · 첫인상, 야경은 10/1에 제대로",
-     "place": "카를교 방향",
+     "place": "Karlův most, Praha",
      "move": "도보 10분"
     },
     {
@@ -4370,7 +4383,8 @@
      "time": "07:25",
      "name": "지하철 B선 5정거장",
      "kind": "train",
-     "desc": "(약 8분) → Anděl역"
+     "desc": "(약 8분) → Anděl역",
+     "map": false
     },
     {
      "time": "07:40",
@@ -4452,7 +4466,8 @@
      "time": "17:00",
      "name": "오후 빛 사진",
      "kind": "photo",
-     "desc": "(강변 파스텔 집 황금빛)"
+     "desc": "(강변 파스텔 집 황금빛)",
+     "map": false
     },
     {
      "time": "17:45",
@@ -4559,6 +4574,7 @@
      "gift": true,
      "say": true,
      "desc": "프라하 몰아 사기 · 보헤미안 가넷 (어머니) · Granát Turnov 공식매장 (구시가) · 실버 세팅 목걸이·팔찌 1,200~3,500 CZK · 고액이라 카드 결제 권장 · 보헤미안 크리스털 찻잔 (장모님) · Moser · Preciosa 공식매장 · Manufaktura 맥주 화장품 (와이프 절친)",
+     "map": false,
      "prep": [
       "Golden Angel 근처",
       "스위스 나이프 = 제외 (실사용 안 함)",
@@ -4742,6 +4758,7 @@
     {
      "time": "15:00",
      "name": "공항 외부, 신혼여행 완료",
+     "map": false,
      "tz": 540,
      "tzl": "KST"
     }
