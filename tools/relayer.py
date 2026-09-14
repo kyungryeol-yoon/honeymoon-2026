@@ -21,7 +21,7 @@ sys.path.insert(0, str(ROOT / 'tools'))
 from sheet_sync import norm, same, cut      # noqa: E402
 
 # 이름까지 같아야 얹는 것 — 엉뚱한 항목에 붙으면 사람을 딴 데로 보냅니다
-STRICT = ('place', 'move', 'links', 'meet', 'refs', 'end')
+STRICT = ('place', 'move', 'route', 'links', 'meet', 'refs', 'end')
 # 시각만 같아도 안전한 것
 # star 는 일부러 뺐습니다 — 예전 데이터가 28% 에 별표를 달아 강조가
 # 아니라 잡음이었습니다 (음식 카드의 강추 별표는 시트에서 따로 옵니다).
@@ -125,7 +125,7 @@ def dedup(items):
     return out
 
 ORDER = ('time', 'end', 'name', 'kind', 'booked', 'food', 'gift', 'say', 'desc',
-         'place', 'map', 'move', 'meet', 'prep', 'refs', 'star', 'links',
+         'place', 'map', 'move', 'route', 'meet', 'prep', 'refs', 'star', 'links',
          'tz', 'tzl', 'endTz')
 
 
@@ -137,7 +137,7 @@ def main(old_path):
     new = json.loads((ROOT / 'data.json').read_text(encoding='utf-8'))
     old = json.loads(pathlib.Path(old_path).read_text(encoding='utf-8'))
     O = {x['date']: x for x in old['days']}
-    n = dict(place=0, move=0, meet=0, refs=0, end=0, star=0, booked=0,
+    n = dict(place=0, move=0, route=0, meet=0, refs=0, end=0, star=0, booked=0,
              desc=0, prep=0, chips=0, price=0, skipped=0)
     skipped = []
 

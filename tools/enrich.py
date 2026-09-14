@@ -166,7 +166,7 @@ def main():
                     it.pop('say')
 
     ORDER = ('time', 'end', 'name', 'kind', 'booked', 'food', 'gift', 'say', 'desc',
-             'place', 'map', 'move', 'meet', 'prep', 'refs', 'star', 'links',
+             'place', 'map', 'move', 'route', 'meet', 'prep', 'refs', 'star', 'links',
              'tz', 'tzl', 'endTz')
     for day in d['days']:
         day['items'] = [{k: it[k] for k in ORDER if k in it} for it in day['items']]

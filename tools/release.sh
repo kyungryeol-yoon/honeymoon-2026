@@ -197,7 +197,17 @@ python3 tools/build-fallback.py | sed 's/^/   /'
 echo "4) service-worker VERSION 증가"
 cur=$(grep -o "const VERSION = 'v[0-9]*'" service-worker.js | grep -o '[0-9]*')
 next=$((cur + 1))
-sed -i '' "s/const VERSION = 'v${cur}';/const VERSION = 'v${next}';/" service-worker.js
+# sed -i 는 맥(BSD)과 리눅스(GNU)의 인자 모양이 서로 달라 한쪽에서 반드시 깨집니다.
+# 여기서 조용히 멈추면 캐시가 교체되지 않아 폰에 옛 화면이 그대로 뜹니다.
+python3 - "$cur" "$next" <<'PY'
+import pathlib, sys
+cur, nxt = sys.argv[1], sys.argv[2]
+p = pathlib.Path('service-worker.js')
+s = p.read_text(encoding='utf-8')
+old = f"const VERSION = 'v{cur}';"
+assert s.count(old) == 1, f"service-worker.js 에서 {old} 를 못 찾았습니다"
+p.write_text(s.replace(old, f"const VERSION = 'v{nxt}';"), encoding='utf-8')
+PY
 echo "   v${cur} → v${next}"
 
 echo

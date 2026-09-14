@@ -50,6 +50,10 @@ def slim(src: dict) -> dict:
                 if it.get("end"):   o["end"]   = it["end"]
                 if it.get("place"): o["place"] = it["place"]
                 if it.get("move"):  o["move"]  = it["move"]   # 길 잃었을 때 제일 필요한 정보
+                # 무엇을 타고 몇 정거장 가서 어디서 내리는지 — 설명·준비물을
+                # 다 빼면서도 이건 남깁니다. 네트워크가 죽는 곳은 대개
+                # 지하철 승강장이고, 거기서 필요한 게 정확히 이 줄입니다.
+                if it.get("route"): o["route"] = it["route"]
                 if it.get("map") is False: o["map"] = False
                 if it.get("star"):  o["star"]  = True
                 if it.get("meet"):  o["meet"]  = {"where": it["meet"]["where"],

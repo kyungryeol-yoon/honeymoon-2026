@@ -22,7 +22,7 @@ sys.path.insert(0, str(ROOT / 'tools'))
 from sheet_parse import load, parse_day, mm, MOJI, trim_name, SEP  # noqa: E402
 
 # 앱에서만 관리하는 필드 — 시트에는 없으므로 반드시 이어받아야 합니다
-CARRY = ('place', 'map', 'move', 'prep', 'refs', 'tz', 'tzl', 'endTz', 'meet',
+CARRY = ('place', 'map', 'move', 'route', 'prep', 'refs', 'tz', 'tzl', 'endTz', 'meet',
          'links', 'end', 'kind', 'booked', 'food', 'gift', 'say')
 
 OPT_ID = {
@@ -54,7 +54,7 @@ RECOMMENDED = {(d, 'A') for d in ('2026-09-17', '2026-09-18', '2026-09-19',
                                   '2026-09-25', '2026-10-01')}
 
 ORDER = ('time', 'end', 'name', 'kind', 'booked', 'food', 'gift', 'say', 'desc',
-         'place', 'map', 'move', 'meet', 'prep', 'refs', 'star', 'links',
+         'place', 'map', 'move', 'route', 'meet', 'prep', 'refs', 'star', 'links',
          'tz', 'tzl', 'endTz')
 
 # 화면에서 kind 이모지·star 표식이 대신하므로 데이터에 둘 이유가 없는 것들.

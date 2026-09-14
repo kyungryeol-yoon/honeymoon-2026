@@ -183,7 +183,25 @@
      "time": "22:00",
      "name": "인천공항 T1 도착",
      "desc": "(약 1시간 30분)",
-     "place": "Incheon International Airport Terminal 1"
+     "place": "Incheon International Airport Terminal 1",
+     "move": "6770 공항버스 · 약 1시간 30분",
+     "route": {
+      "legs": [
+       {
+        "m": "bus",
+        "l": "6770",
+        "f": "광명역 4번출구",
+        "t": "인천공항 T1",
+        "dir": "인천공항 방면",
+        "n": 1,
+        "min": 90,
+        "note": "중간 정차 없음 · T1 먼저 서고 T2 가 종점 — T1 에서 내릴 것"
+       }
+      ],
+      "alt": [
+       "T1 하차 지점 = 1층 8번 게이트 앞"
+      ]
+     }
     },
     {
      "time": "22:30",
@@ -329,7 +347,30 @@
      "desc": "왕복 €12.85/인 = €25.7 · 정류장 자판기 또는 기사에게 직접 구매 · 약 35분",
      "place": "Plaça de Catalunya, Barcelona",
      "tz": 120,
-     "tzl": "CEST"
+     "tzl": "CEST",
+     "move": "공항버스 A1 · 4정거장 · 35분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 5,
+        "note": "T1 도착층 나와서 바로 앞 Aerobús 정류장"
+       },
+       {
+        "m": "bus",
+        "l": "A1 Aerobús",
+        "f": "BCN 공항 T1",
+        "t": "Plaça Catalunya (종점)",
+        "dir": "Plaça Catalunya 방면",
+        "n": 4,
+        "min": 35,
+        "note": "Pl. Espanya · Gran Via · Pl. Universitat 다음이 종점 · 왕복 €12.85/인"
+       }
+      ],
+      "alt": [
+       "A2 는 T2 전용 — T1 에서는 A1 만 탑니다"
+      ]
+     }
     },
     {
      "time": "17:15",
@@ -339,7 +380,17 @@
      "desc": "도시세 €46.20 현장 현금 · 짐 풀고 휴식",
      "place": "HCC Montblanc, Barcelona",
      "tz": 120,
-     "tzl": "CEST"
+     "tzl": "CEST",
+     "move": "카탈루냐 광장에서 도보 10분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 10,
+        "note": "Plaça Catalunya → Via Laietana 61 · 큰길 따라 직진"
+       }
+      ]
+     }
     },
     {
      "time": "18:00",
@@ -446,14 +497,52 @@
      "kind": "nature",
      "desc": "예약완료 (Monumental Zone) · 도마뱀 분수 · 모자이크 벤치 · 시장홀 기둥 · 아침 = 인파 적고 사진 좋음",
      "place": "구엘 공원",
-     "move": "메트로 L3 · 오르막 도보 15분",
+     "move": "메트로 4정거장 (L4→L3) · Lesseps 하차 · 오르막 도보 15~20분",
      "prep": [
       "여권 지참",
       "30분 유예 (~10:00)",
       "QR 티켓 폰 저장",
       "2인 €36",
       "버스 이용 권장 (메트로 L3는 언덕 도보)"
-     ]
+     ],
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 5,
+        "note": "호텔 → Urquinaona역 (Via Laietana 바로 위)"
+       },
+       {
+        "m": "metro",
+        "l": "L4",
+        "f": "Urquinaona",
+        "t": "Passeig de Gràcia",
+        "dir": "Trinitat Nova 방면",
+        "n": 1,
+        "min": 2,
+        "note": "한 정거장 · T-Familiar 태그"
+       },
+       {
+        "m": "metro",
+        "l": "L3",
+        "f": "Passeig de Gràcia",
+        "t": "Lesseps",
+        "dir": "Trinitat Nova 방면",
+        "n": 3,
+        "min": 6,
+        "note": "Diagonal · Fontana 다음이 Lesseps"
+       },
+       {
+        "m": "walk",
+        "min": 18,
+        "note": "Travessera de Dalt 오르막 → 공원 정문 (Carrer d'Olot)"
+       }
+      ],
+      "alt": [
+       "언덕이 부담되면 24번 버스 — Pl. Catalunya 승차 → 'Ctra del Carmel - Parc Güell' 하차 (약 30분) · 공원 옆문 바로 앞이라 오르막이 없습니다",
+       "L3 를 Vallcarca 까지 (4정거장) 타면 Baixada de la Glòria 야외 에스컬레이터로 도보 10~15분"
+      ]
+     }
     },
     {
      "time": "09:30",
@@ -480,7 +569,45 @@
      "name": "구엘 퇴장 → 사그라다 이동",
      "kind": "church",
      "desc": "메트로 20~25분",
-     "place": "사그라다"
+     "place": "사그라다",
+     "move": "메트로 4정거장 (L3→L5) · 20~25분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 12,
+        "note": "공원 정문 → Lesseps역 (내리막)"
+       },
+       {
+        "m": "metro",
+        "l": "L3",
+        "f": "Lesseps",
+        "t": "Diagonal",
+        "dir": "Zona Universitària 방면",
+        "n": 2,
+        "min": 4,
+        "note": "Fontana 다음이 Diagonal"
+       },
+       {
+        "m": "metro",
+        "l": "L5",
+        "f": "Diagonal",
+        "t": "Sagrada Família",
+        "dir": "Vall d'Hebron 방면",
+        "n": 2,
+        "min": 4,
+        "note": "Verdaguer 다음"
+       },
+       {
+        "m": "walk",
+        "min": 5,
+        "note": "역에서 나오면 성당 · 입구는 Carrer de la Marina 쪽"
+       }
+      ],
+      "alt": [
+       "92번 버스 — 공원 앞 Ctra del Carmel 승차 → 사그라다 파밀리아 앞 하차 (환승 없이 20~25분)"
+      ]
+     }
     },
     {
      "time": "12:30",
@@ -830,7 +957,29 @@
      "time": "03:40",
      "name": "BCN T1 도착",
      "place": "Barcelona Airport Terminal 1",
-     "move": "공항버스 · 새벽 35분"
+     "move": "공항버스 A1 · 3정거장 · 새벽 35분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 3,
+        "note": "호텔 → Plaça Catalunya 정류장"
+       },
+       {
+        "m": "bus",
+        "l": "A1 Aerobús",
+        "f": "Plaça Catalunya",
+        "t": "BCN 공항 T1 (종점)",
+        "dir": "T1 방면",
+        "n": 3,
+        "min": 35,
+        "note": "Sepúlveda-Urgell · Pl. Espanya 다음이 T1 · 심야 20분 간격"
+       }
+      ],
+      "alt": [
+       "T2 로 가는 A2 와 정류장이 붙어 있습니다 — 차체의 T1 표시 확인"
+      ]
+     }
     },
     {
      "time": "04:00",
@@ -2200,7 +2349,26 @@
      "kind": "boat",
      "desc": "(Mestre → Santa Lucia, €1.45, 10분)",
      "map": false,
-     "move": "기차 10분 · €1.45"
+     "move": "기차 1정거장 · 10분 · €1.45",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 1,
+        "note": "호텔 → Venezia Mestre역"
+       },
+       {
+        "m": "train",
+        "l": "Regionale",
+        "f": "Venezia Mestre",
+        "t": "Venezia Santa Lucia (종착)",
+        "dir": "Venezia Santa Lucia 방면",
+        "n": 1,
+        "min": 10,
+        "note": "다리 건너 바로 다음 역이 종착 · 종이표는 승강장 각인기에 각인"
+       }
+      ]
+     }
     },
     {
      "time": "16:00",
@@ -2258,7 +2426,27 @@
      "time": "22:00",
      "name": "기차로 메스트레 복귀",
      "kind": "train",
-     "map": false
+     "map": false,
+     "move": "기차 1정거장 · 10분",
+     "route": {
+      "legs": [
+       {
+        "m": "train",
+        "l": "Regionale",
+        "f": "Venezia Santa Lucia",
+        "t": "Venezia Mestre",
+        "dir": "Mestre · Padova 방면",
+        "n": 1,
+        "min": 10,
+        "note": "산타루치아에서 첫 정차역이 메스트레"
+       },
+       {
+        "m": "walk",
+        "min": 1,
+        "note": "역 나와서 호텔"
+       }
+      ]
+     }
     },
     {
      "time": "22:30",
@@ -2301,14 +2489,57 @@
      "place": "Venezia Santa Lucia",
      "prep": [
       "개시 시각 = 첫 탑승 시점 (내일 08:20까지 유효)"
-     ]
+     ],
+     "move": "기차 1정거장 · 10분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 1,
+        "note": "호텔 → Venezia Mestre역"
+       },
+       {
+        "m": "train",
+        "l": "Regionale",
+        "f": "Venezia Mestre",
+        "t": "Venezia Santa Lucia (종착)",
+        "dir": "Venezia Santa Lucia 방면",
+        "n": 1,
+        "min": 10
+       }
+      ]
+     }
     },
     {
      "time": "09:00",
      "name": "Line 12 승선",
      "kind": "boat",
      "desc": "Fondamente Nove 방면",
-     "map": false
+     "map": false,
+     "move": "3번 배 · 무라노 직행 20~25분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 2,
+        "note": "역 나오면 바로 앞 Ferrovia 선착장"
+       },
+       {
+        "m": "boat",
+        "l": "3번",
+        "f": "Ferrovia",
+        "t": "Murano Colonna",
+        "dir": "Murano 방면",
+        "n": 1,
+        "min": 25,
+        "note": "무라노 직행 · 유리공방은 Colonna 쪽에 몰려 있습니다"
+       }
+      ],
+      "alt": [
+       "4.1번 — Ferrovia 승차 → Fondamente Nove 거쳐 Murano Faro 하차 (40~45분)",
+       "12번은 Fondamente Nove · Murano Faro 에서만 출발 — 산타루치아에서는 못 탑니다"
+      ]
+     }
     },
     {
      "time": "09:45",
@@ -2327,7 +2558,27 @@
      "name": "무라노 → 부라노",
      "kind": "boat",
      "desc": "Line 12",
-     "place": "Burano, Venezia"
+     "place": "Burano, Venezia",
+     "move": "12번 배 2정거장 · 35~40분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 10,
+        "note": "Colonna → Faro 선착장 (운하 따라 걸어서)"
+       },
+       {
+        "m": "boat",
+        "l": "12번",
+        "f": "Murano Faro",
+        "t": "Burano",
+        "dir": "Burano · Torcello 방면",
+        "n": 2,
+        "min": 40,
+        "note": "Mazzorbo 다음이 부라노 · 30분 간격"
+       }
+      ]
+     }
     },
     {
      "time": "11:40",
@@ -2353,10 +2604,24 @@
      "kind": "boat",
      "desc": "C 선착장 출발",
      "place": "Fondamente Nove, Venezia",
-     "move": "도보 또는 Vaporetto",
+     "move": "12번 배 3정거장 · 45분",
      "prep": [
       "도착은 B, 출발은 C 선착장 (다름)"
-     ]
+     ],
+     "route": {
+      "legs": [
+       {
+        "m": "boat",
+        "l": "12번",
+        "f": "Burano (C 선착장)",
+        "t": "Fondamente Nove (종점)",
+        "dir": "Fondamente Nove 방면",
+        "n": 3,
+        "min": 45,
+        "note": "Mazzorbo · Murano Faro 거쳐 종점 · 도착은 B, 출발은 C 선착장"
+       }
+      ]
+     }
     },
     {
      "time": "14:45",
@@ -2376,7 +2641,24 @@
      "name": "Vaporetto 1번선 대운하 야경 크루즈",
      "kind": "walk",
      "desc": "24시간권 포함 = 추가비용 0 · 산타루치아 ↔ 산마르코, 대운하 전 구간 · 곤돌라 대안으로 충분 · [선택] 곤돌라 — 컨디션·기분 보고 결정 · 주간 08~19시 €90 / 야간 19시 이후 €110 · 최대 5명, 2인이면 1인당 €45 · 정찰제, 흥정 불가 · 수면 바로 위 = 고소공포 무관 · 신혼여행 기념",
-     "place": "Canal Grande, Venezia"
+     "place": "Canal Grande, Venezia",
+     "route": {
+      "legs": [
+       {
+        "m": "boat",
+        "l": "1번",
+        "f": "San Marco Vallaresso",
+        "t": "Ferrovia",
+        "dir": "Piazzale Roma 방면",
+        "n": 14,
+        "min": 40,
+        "note": "대운하 전 구간 · 리알토 · 아카데미아 다 지납니다 · 24시간권 포함"
+       }
+      ],
+      "alt": [
+       "돌아올 땐 같은 1번을 Lido 방면으로 타면 됩니다"
+      ]
+     }
     },
     {
      "time": "19:30",
@@ -2402,7 +2684,30 @@
      "time": "22:00",
      "name": "산타루치아역 → Mestre 복귀",
      "kind": "train",
-     "map": false
+     "map": false,
+     "move": "배 25분 + 기차 1정거장",
+     "route": {
+      "legs": [
+       {
+        "m": "boat",
+        "l": "2번",
+        "f": "San Marco (Vallaresso)",
+        "t": "Ferrovia",
+        "dir": "Ferrovia · P.le Roma 방면",
+        "min": 27,
+        "note": "1번보다 정차가 적어 빠릅니다 · 24시간권은 내일 08:20 까지"
+       },
+       {
+        "m": "train",
+        "l": "Regionale",
+        "f": "Venezia Santa Lucia",
+        "t": "Venezia Mestre",
+        "dir": "Mestre · Padova 방면",
+        "n": 1,
+        "min": 10
+       }
+      ]
+     }
     },
     {
      "time": "22:30",
@@ -3029,7 +3334,21 @@
      "name": "Pisa Centrale 도착 — 같은 역 환승",
      "kind": "train",
      "desc": "대기 9분",
-     "place": "Pisa Centrale"
+     "place": "Pisa Centrale",
+     "move": "RV 4011 · 약 50분",
+     "route": {
+      "legs": [
+       {
+        "m": "train",
+        "l": "RV 4011",
+        "f": "Firenze S.M.Novella",
+        "t": "Pisa Centrale",
+        "dir": "Pisa 방면",
+        "min": 51,
+        "note": "중간 정차 있음 · 종착이 아닐 수 있으니 역명 확인"
+       }
+      ]
+     }
     },
     {
      "time": "08:00",
@@ -3044,14 +3363,41 @@
      "place": "Pisa San Rossore",
      "prep": [
       "첸트랄레는 사탑까지 2.3km, 산 로소레는 도보 10분"
-     ]
+     ],
+     "move": "지역열차 1정거장 · 5분",
+     "route": {
+      "legs": [
+       {
+        "m": "train",
+        "l": "R 19336",
+        "f": "Pisa Centrale",
+        "t": "Pisa S. Rossore",
+        "n": 1,
+        "min": 5,
+        "note": "바로 다음 역 — 5분이라 놓치기 쉽습니다, 문 앞에서 대기"
+       }
+      ]
+     }
     },
     {
      "time": "08:15",
      "name": "캄포 데이 미라콜리 도착",
      "kind": "walk",
      "desc": "도보 10분",
-     "place": "Piazza dei Miracoli, Pisa"
+     "place": "Piazza dei Miracoli, Pisa",
+     "move": "S. Rossore역에서 도보 10분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 10,
+        "note": "역 → 성벽 문 → 두오모 광장 (400m)"
+       }
+      ],
+      "alt": [
+       "Pisa Centrale 에서 갈 때는 LAM Rossa 버스 → 'Torre 1' 하차 (10~15분) 또는 도보 20~25분"
+      ]
+     }
     },
     {
      "time": "08:20",
@@ -3059,7 +3405,6 @@
      "kind": "church",
      "desc": "기울어진 탑 앞 기념사진 (미는 포즈) · 두오모 파사드 · 세례당 외관 · 잔디밭 전체 뷰",
      "place": "Torre di Pisa",
-     "move": "버스 LAM Rossa 10분 또는 도보 20분",
      "prep": [
       "외부 사진만 (등반 X)",
       "등반 안 함 (고소공포)",
@@ -3108,7 +3453,22 @@
      "name": "리오마조레",
      "kind": "train",
      "desc": "La Spezia에서 9분) — 첫 마을 · 항구 쪽 절벽 컬러 하우스 · 마리나 전망 (평지) · 골목 산책",
-     "place": "Riomaggiore"
+     "place": "Riomaggiore",
+     "move": "친퀘테레 익스프레스 1정거장 · 9분",
+     "route": {
+      "legs": [
+       {
+        "m": "train",
+        "l": "Cinque Terre Express",
+        "f": "La Spezia Centrale",
+        "t": "Riomaggiore",
+        "dir": "Levanto 방면",
+        "n": 1,
+        "min": 9,
+        "note": "다섯 마을 중 첫 마을 · 카드 개시"
+       }
+      ]
+     }
     },
     {
      "time": "12:00",
@@ -3118,7 +3478,24 @@
      "place": "Manarola",
      "prep": [
       "뷰포인트 = 평탄한 산책로"
-     ]
+     ],
+     "move": "기차 1정거장 · 3분",
+     "route": {
+      "legs": [
+       {
+        "m": "train",
+        "l": "Cinque Terre Express",
+        "f": "Riomaggiore",
+        "t": "Manarola",
+        "dir": "Levanto 방면",
+        "n": 1,
+        "min": 3
+       }
+      ],
+      "alt": [
+       "비아 델 아모레 해안 산책로로 걸어가면 15분 (카드에 포함, 평지)"
+      ]
+     }
     },
     {
      "time": "13:00",
@@ -3145,7 +3522,24 @@
      "kind": "walk",
      "desc": "가장 예쁜 마을 · 천연 항구 · 광장 · 도리아 성 아래 해안 산책 (성 등반은 선택) · 파스텔 집들과 항구 조합",
      "place": "Vernazza",
-     "move": "기차 10분"
+     "move": "기차 2정거장 · 10분",
+     "route": {
+      "legs": [
+       {
+        "m": "train",
+        "l": "Cinque Terre Express",
+        "f": "Manarola",
+        "t": "Vernazza",
+        "dir": "Levanto 방면",
+        "n": 2,
+        "min": 10,
+        "note": "코르닐리아 다음이 베르나차"
+       }
+      ],
+      "alt": [
+       "코르닐리아는 역에서 계단 382개 — 내리지 않습니다"
+      ]
+     }
     },
     {
      "time": "16:20",
@@ -3158,7 +3552,22 @@
      "name": "베르나차 → La Spezia",
      "kind": "train",
      "desc": "카드 사용",
-     "place": "La Spezia Centrale"
+     "place": "La Spezia Centrale",
+     "move": "기차 4정거장 · 20분",
+     "route": {
+      "legs": [
+       {
+        "m": "train",
+        "l": "Cinque Terre Express",
+        "f": "Vernazza",
+        "t": "La Spezia Centrale",
+        "dir": "La Spezia 방면",
+        "n": 4,
+        "min": 20,
+        "note": "코르닐리아 · 마나롤라 · 리오마조레 다음"
+       }
+      ]
+     }
     },
     {
      "time": "17:10",
@@ -3459,7 +3868,32 @@
      "map": false,
      "prep": [
       "Ottaviano역 출구 여러 개"
-     ]
+     ],
+     "move": "메트로 A선 5정거장 · 10분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 3,
+        "note": "호텔 → Repubblica역"
+       },
+       {
+        "m": "metro",
+        "l": "A선",
+        "f": "Repubblica",
+        "t": "Ottaviano",
+        "dir": "Battistini 방면",
+        "n": 5,
+        "min": 10,
+        "note": "Barberini · Spagna · Flaminio · Lepanto 다음 · Tap & Go €1.50/인"
+       },
+       {
+        "m": "walk",
+        "min": 5,
+        "note": "개찰구 → 왼쪽 첫 출구 → 오른쪽 계단 → OKAIDI 간판"
+       }
+      ]
+     }
     },
     {
      "time": "09:00",
@@ -3614,7 +4048,27 @@
       "내일 08:50 콜로세움 투어",
       "로마 소매치기: 테르미니, 메트로 A선, 콜로세움 인근",
       "카페 서서 마시면 €1.5, 앉으면 €4~7"
-     ]
+     ],
+     "move": "메트로 A선 2정거장 · 5분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 3,
+        "note": "스페인 광장 → Spagna역"
+       },
+       {
+        "m": "metro",
+        "l": "A선",
+        "f": "Spagna",
+        "t": "Repubblica",
+        "dir": "Anagnina 방면",
+        "n": 2,
+        "min": 5,
+        "note": "Barberini 다음 · Tap & Go"
+       }
+      ]
+     }
     }
    ],
    "stay": {
@@ -3671,7 +4125,32 @@
       "전날 카톡 미팅안내 확인",
       "최소 4인",
       "전날 카톡으로 확정 미팅시각 확인"
-     ]
+     ],
+     "move": "메트로 B선 2정거장 · 5분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 8,
+        "note": "호텔 → 테르미니역"
+       },
+       {
+        "m": "metro",
+        "l": "B선",
+        "f": "Termini",
+        "t": "Colosseo",
+        "dir": "Laurentina 방면",
+        "n": 2,
+        "min": 5,
+        "note": "Cavour 다음 · Tap & Go €1.50/인"
+       },
+       {
+        "m": "walk",
+        "min": 3,
+        "note": "역에서 나오면 콜로세움 바로 앞 · 인포 포인트"
+       }
+      ]
+     }
     },
     {
      "time": "09:00",
@@ -3753,14 +4232,51 @@
      "booked": "예약",
      "desc": "TicketOne 예약번호는 메일에서 확인 / 좌석 99, 100 · 베르니니 '아폴로와 다프네' · '페르세포네의 납치' · '다비드' · 카라바조 · 카노바 '파올리나'",
      "place": "Galleria Borghese",
-     "move": "메트로/택시 20~25분",
+     "move": "메트로 4정거장 (B→A) + 도보 15분 · 25분",
      "prep": [
       "2시간 슬롯제 · 시간 엄수",
       "큰가방 반입 X (보관소)",
       "놓치면 재입장·환불 X",
       "시간 엄수 (늦으면 입장 불가, 환불 X)",
       "큰 가방 반입 금지 → 보관소"
-     ]
+     ],
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 5,
+        "note": "몬티 → Cavour역"
+       },
+       {
+        "m": "metro",
+        "l": "B선",
+        "f": "Cavour",
+        "t": "Termini",
+        "dir": "Rebibbia · Jonio 방면",
+        "n": 1,
+        "min": 2
+       },
+       {
+        "m": "metro",
+        "l": "A선",
+        "f": "Termini",
+        "t": "Spagna",
+        "dir": "Battistini 방면",
+        "n": 3,
+        "min": 6,
+        "note": "Repubblica · Barberini 다음"
+       },
+       {
+        "m": "walk",
+        "min": 15,
+        "note": "Spagna역 'Villa Borghese' 출구(무빙워크) → 공원 가로질러 미술관"
+       }
+      ],
+      "alt": [
+       "시간이 빠듯하면 택시 15분 (€12~15) — 17:00 슬롯은 늦으면 입장 거부입니다",
+       "910번 버스 — 테르미니 승차 → 'Pinciana/Museo Borghese' 하차, 미술관 코앞"
+      ]
+     }
     },
     {
      "time": "19:00",
@@ -3872,11 +4388,30 @@
      "kind": "walk",
      "desc": "트립닷컴 예약화면 = T3 · 일부 자료 = 위즈에어는 T1 · → 공항 전광판이 최종 기준 · → T1이면 레오나르도 익스프레스 역에서 도보 추가",
      "place": "Rome Fiumicino Airport Terminal 3",
-     "move": "레오나르도 익스프레스 32분",
+     "move": "레오나르도 익스프레스 무정차 32분",
      "prep": [
       "전광판으로 당일 재확인",
       "터미널 확인"
-     ]
+     ],
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 8,
+        "note": "호텔 → 테르미니역 24번 플랫폼 (역 끝이라 멉니다)"
+       },
+       {
+        "m": "train",
+        "l": "Leonardo Express",
+        "f": "Roma Termini",
+        "t": "Fiumicino Aeroporto",
+        "dir": "Fiumicino Aeroporto 방면",
+        "n": 1,
+        "min": 32,
+        "note": "중간 정차 없음 · 15분 간격 · €14/인"
+       }
+      ]
+     }
     },
     {
      "time": "10:20",
@@ -4084,7 +4619,46 @@
      "prep": [
       "매표소 줄은 10시부터 길어짐 (성수기 30~45분)",
       "개별 건물 티켓 없음 — 메인 서킷만 판매"
-     ]
+     ],
+     "move": "메트로 1정거장 + 트램 2정거장 · 25분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 8,
+        "note": "Celetná → Staroměstská역 (A선)"
+       },
+       {
+        "m": "metro",
+        "l": "A선",
+        "f": "Staroměstská",
+        "t": "Malostranská",
+        "dir": "Nemocnice Motol 방면",
+        "n": 1,
+        "min": 2,
+        "note": "강 건너 한 정거장 · 39 CZK 30분권"
+       },
+       {
+        "m": "tram",
+        "l": "22번",
+        "f": "Malostranská",
+        "t": "Pražský hrad",
+        "dir": "Bílá Hora 방면",
+        "n": 2,
+        "min": 5,
+        "note": "Královský letohrádek 다음 · 오렌지 단말기에 카드 태그로도 구매"
+       },
+       {
+        "m": "walk",
+        "min": 5,
+        "note": "하차 후 왼쪽 → 북문 → 2번 안뜰"
+       }
+      ],
+      "alt": [
+       "환승이 싫으면 Národní divadlo 에서 22번을 타고 7정거장 (약 15분)",
+       "2026년 상반기 궤도공사로 Pražský hrad · Královský letohrádek 정류장이 닫힌 적 있음 → 당일 안내 확인, 닫혔으면 대체 정류장 하차"
+      ]
+     }
     },
     {
      "time": "09:15",
@@ -4307,10 +4881,29 @@
     },
     {
      "time": "07:25",
-     "name": "지하철 B선 5정거장",
+     "name": "지하철 B선 4정거장",
      "kind": "train",
-     "desc": "(약 8분) → Anděl역",
-     "map": false
+     "desc": "(약 7분) → Anděl역",
+     "map": false,
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 5,
+        "note": "호텔 → Náměstí Republiky역 (B선)"
+       },
+       {
+        "m": "metro",
+        "l": "B선",
+        "f": "Náměstí Republiky",
+        "t": "Anděl",
+        "dir": "Zličín 방면",
+        "n": 4,
+        "min": 7,
+        "note": "Můstek · Národní třída · Karlovo náměstí 다음 · 컨택리스 불가, 자판기에서 39 CZK"
+       }
+      ]
+     }
     },
     {
      "time": "07:40",
@@ -4321,7 +4914,17 @@
      "prep": [
       "\"Na Knížecí\" 표지 따라가기",
       "매표소 없음 (예약 완료 상태)"
-     ]
+     ],
+     "move": "Anděl역에서 도보 2~3분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 3,
+        "note": "Anděl역 'Na Knížecí' 출구 → 버스터미널 플랫폼 1"
+       }
+      ]
+     }
     },
     {
      "time": "08:00",
@@ -4418,7 +5021,32 @@
      "name": "지하철 B선 → 구시가",
      "kind": "train",
      "desc": "Náměstí Republiky · 39 CZK/인",
-     "place": "Staroměstské náměstí, Praha"
+     "place": "Staroměstské náměstí, Praha",
+     "move": "지하철 B선 4정거장 · 7분",
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 3,
+        "note": "Na Knížecí → Anděl역"
+       },
+       {
+        "m": "metro",
+        "l": "B선",
+        "f": "Anděl",
+        "t": "Náměstí Republiky",
+        "dir": "Černý Most 방면",
+        "n": 4,
+        "min": 7,
+        "note": "Karlovo náměstí · Národní třída · Můstek 다음"
+       },
+       {
+        "m": "walk",
+        "min": 5,
+        "note": "역 → Celetná 숙소"
+       }
+      ]
+     }
     },
     {
      "time": "21:20",
