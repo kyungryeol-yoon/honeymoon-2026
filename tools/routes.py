@@ -70,18 +70,19 @@ ROUTES = {
     W(10, "Plaça Catalunya → Via Laietana 61 · 큰길 따라 직진"),
  ], []),
 
+ # 환승 없이 한 번에 가려고 카탈루냐 광장에서 L3 를 탑니다.
+ # Urquinaona 에서 L4 로 한 정거장 가서 갈아타는 것보다 걷는 거리가 5분 길지만,
+ # 캐리어 없이 아침에 움직이는 길이고 승강장에서 헤맬 일이 없습니다.
  ("2026-09-15", "09:10"): ("구엘 공원 도착",
-                           "메트로 4정거장 (L4→L3) · Lesseps 하차 · 오르막 도보 15~20분", [
-    W(5, "호텔 → Urquinaona역 (Via Laietana 바로 위)"),
-    ride("metro", "L4", "Urquinaona", "Passeig de Gràcia",
-         dir="Trinitat Nova 방면", n=1, min=2, note="한 정거장 · T-Familiar 태그"),
-    ride("metro", "L3", "Passeig de Gràcia", "Lesseps",
-         dir="Trinitat Nova 방면", n=3, min=6, note="Diagonal · Fontana 다음이 Lesseps"),
+                           "카탈루냐 광장에서 L3 4정거장 · Lesseps 하차 · 오르막 도보 15~20분", [
+    W(10, "호텔 → Plaça Catalunya (Via Laietana 따라 · L3 승강장)"),
+    ride("metro", "L3", "Catalunya", "Lesseps", dir="Trinitat Nova 방면", n=4, min=8,
+         note="Passeig de Gràcia · Diagonal · Fontana 다음이 Lesseps · 환승 없음"),
     W(18, "Travessera de Dalt 오르막 → 공원 정문 (Carrer d'Olot)"),
  ], [
-    "언덕이 부담되면 24번 버스 — Pl. Catalunya 승차 → 'Ctra del Carmel - Parc Güell' 하차 "
-    "(약 30분) · 공원 옆문 바로 앞이라 오르막이 없습니다",
-    "L3 를 Vallcarca 까지 (4정거장) 타면 Baixada de la Glòria 야외 에스컬레이터로 도보 10~15분",
+    "언덕이 부담되면 24번 버스 — 같은 Pl. Catalunya 에서 환승 없이 "
+    "'Ctra del Carmel - Parc Güell' 하차 (약 30분) · 공원 옆문 바로 앞",
+    "L3 를 Vallcarca 까지 (5정거장) 타면 Baixada de la Glòria 야외 에스컬레이터로 도보 10~15분",
  ]),
 
  ("2026-09-15", "12:15"): ("구엘 퇴장 → 사그라다 이동",
@@ -261,10 +262,13 @@ ROUTES = {
  ], []),
 }
 
-# 이름이 사실과 어긋나 있던 것 — 정거장 수는 세어서 고칩니다
+# 이름이 사실과 어긋나 있던 것 — 정거장 수는 세어서 고칩니다.
+# (옛 이름, 새 이름) 또는 설명까지 같이 고칠 때 (옛 이름, 새 이름, 옛 설명, 새 설명)
 RENAME = {
  ("2026-10-02", "07:25"): ("지하철 B선 5정거장", "지하철 B선 4정거장",
                            "(약 8분) → Anděl역", "(약 7분) → Anděl역"),
+ # 메트로를 어디서 타는지가 이름에 있어야 합니다 — 카탈루냐 광장까지 걸어갑니다
+ ("2026-09-15", "08:30"): ("호텔 출발 → 메트로", "호텔 출발 → 카탈루냐 광장"),
 }
 # 엉뚱한 데서 온 이동 설명 — 지우는 편이 낫습니다
 DROP_MOVE = {
@@ -288,7 +292,9 @@ def find(days, date, time):
 def apply(data, check=False):
     days, miss, done = data["days"], [], 0
 
-    for (date, time), (old, new, old_desc, new_desc) in RENAME.items():
+    for (date, time), row in RENAME.items():
+        old, new = row[0], row[1]
+        old_desc, new_desc = (row[2], row[3]) if len(row) > 2 else (None, None)
         it = find(days, date, time)
         if not it:
             miss.append(f"{date} {time} — 항목 없음 (이름 정정)")
@@ -296,7 +302,7 @@ def apply(data, check=False):
             miss.append(f"{date} {time} — 이름이 {it['name']!r} 이라 정정 안 함")
         elif not check:
             it["name"] = new
-            if it.get("desc") == old_desc:
+            if old_desc and it.get("desc") == old_desc:
                 it["desc"] = new_desc
 
     for (date, time), name in DROP_MOVE.items():

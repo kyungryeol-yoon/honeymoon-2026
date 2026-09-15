@@ -324,11 +324,8 @@
      "time": "15:00",
      "name": "입국심사",
      "kind": "flight",
-     "desc": "EES 생체등록 · 30~90분 각오",
+     "desc": "심사관이 한 명씩 대면 수속 — 자동화 게이트 아님 · 실제로 아주 오래 걸렸습니다",
      "map": false,
-     "prep": [
-      "2026년 여름 주요 공항 대기 지연 보고"
-     ],
      "tz": 120,
      "tzl": "CEST"
     },
@@ -393,42 +390,26 @@
      }
     },
     {
-     "time": "18:00",
-     "name": "람블라스 거리 산책",
-     "kind": "walk",
-     "desc": "호텔 도보 5분 · 고딕지구 골목",
-     "place": "La Rambla, Barcelona",
-     "move": "도보 5분 (추정)",
-     "prep": [
-      "가방 앞으로"
-     ],
-     "tz": 120,
-     "tzl": "CEST"
-    },
-    {
      "time": "18:45",
      "name": "바르셀로나 대성당",
      "kind": "church",
-     "desc": "선택 · €9~11/인 · 입국심사 지연 시 자동 생략",
+     "desc": "도착일 첫 일정 · 고딕지구 골목",
      "place": "Catedral de Barcelona",
-     "prep": [
-      "관광 입장 마감 17:30~ 18:00 가능성",
-      "입국심사 지연 시 생략",
-      "성당 취향 아니면 안 가도 무방"
-     ],
      "tz": 120,
-     "tzl": "CEST"
+     "tzl": "CEST",
+     "move": "호텔에서 도보 5분"
     },
     {
      "time": "19:30",
-     "name": "첫 스페인 디너",
+     "name": "첫 스페인 디너 — Fa Patxoca",
      "kind": "meal",
      "food": true,
      "say": true,
-     "desc": "타파스 / 하몽 / 클라라",
-     "map": false,
+     "desc": "고딕지구 골목 안 · Carrer dels Mercaders 28",
      "tz": 120,
-     "tzl": "CEST"
+     "tzl": "CEST",
+     "place": "Fa Patxoca, Carrer dels Mercaders 28, Barcelona",
+     "move": "대성당에서 도보 5분"
     },
     {
      "time": "21:00",
@@ -465,7 +446,7 @@
      "warn": true
     },
     {
-     "t": "EES 자동화 입국심사 대기 최대 90분",
+     "t": "입국심사 = 대면 수속 · 예상보다 오래",
      "warn": true
     }
    ]
@@ -483,7 +464,7 @@
     },
     {
      "time": "08:30",
-     "name": "호텔 출발 → 메트로",
+     "name": "호텔 출발 → 카탈루냐 광장",
      "kind": "train",
      "desc": "T-Familiar 8회권 €10~11 (2인 공용)",
      "map": false,
@@ -497,40 +478,30 @@
      "kind": "nature",
      "desc": "예약완료 (Monumental Zone) · 도마뱀 분수 · 모자이크 벤치 · 시장홀 기둥 · 아침 = 인파 적고 사진 좋음",
      "place": "구엘 공원",
-     "move": "메트로 4정거장 (L4→L3) · Lesseps 하차 · 오르막 도보 15~20분",
+     "move": "카탈루냐 광장에서 L3 4정거장 · Lesseps 하차 · 오르막 도보 15~20분",
      "prep": [
       "여권 지참",
       "30분 유예 (~10:00)",
       "QR 티켓 폰 저장",
       "2인 €36",
-      "버스 이용 권장 (메트로 L3는 언덕 도보)"
+      "언덕 싫으면 24번 버스 (환승 없음)"
      ],
      "route": {
       "legs": [
        {
         "m": "walk",
-        "min": 5,
-        "note": "호텔 → Urquinaona역 (Via Laietana 바로 위)"
-       },
-       {
-        "m": "metro",
-        "l": "L4",
-        "f": "Urquinaona",
-        "t": "Passeig de Gràcia",
-        "dir": "Trinitat Nova 방면",
-        "n": 1,
-        "min": 2,
-        "note": "한 정거장 · T-Familiar 태그"
+        "min": 10,
+        "note": "호텔 → Plaça Catalunya (Via Laietana 따라 · L3 승강장)"
        },
        {
         "m": "metro",
         "l": "L3",
-        "f": "Passeig de Gràcia",
+        "f": "Catalunya",
         "t": "Lesseps",
         "dir": "Trinitat Nova 방면",
-        "n": 3,
-        "min": 6,
-        "note": "Diagonal · Fontana 다음이 Lesseps"
+        "n": 4,
+        "min": 8,
+        "note": "Passeig de Gràcia · Diagonal · Fontana 다음이 Lesseps · 환승 없음"
        },
        {
         "m": "walk",
@@ -539,8 +510,8 @@
        }
       ],
       "alt": [
-       "언덕이 부담되면 24번 버스 — Pl. Catalunya 승차 → 'Ctra del Carmel - Parc Güell' 하차 (약 30분) · 공원 옆문 바로 앞이라 오르막이 없습니다",
-       "L3 를 Vallcarca 까지 (4정거장) 타면 Baixada de la Glòria 야외 에스컬레이터로 도보 10~15분"
+       "언덕이 부담되면 24번 버스 — 같은 Pl. Catalunya 에서 환승 없이 'Ctra del Carmel - Parc Güell' 하차 (약 30분) · 공원 옆문 바로 앞",
+       "L3 를 Vallcarca 까지 (5정거장) 타면 Baixada de la Glòria 야외 에스컬레이터로 도보 10~15분"
       ]
      }
     },
@@ -651,7 +622,7 @@
      "time": "16:00",
      "name": "선택",
      "kind": "church",
-     "desc": "[A] 카사 밀라·카사 바트요 외관 (그라시아 거리) · [B] 바르셀로나 대성당 €9~11/인 (9/14에 못 갔으면) · [C] 호텔 휴식 — 내일 07:40 몬세라트 투어",
+     "desc": "[A] 카사 밀라·카사 바트요 외관 (그라시아 거리) · [B] 호텔 휴식 — 내일 07:40 몬세라트 투어 · 대성당은 9/14에 다녀왔습니다",
      "map": false,
      "prep": [
       "이동 시 T-Familiar 잔여 횟수 확인 (8회 한정)"
@@ -682,7 +653,7 @@
      "time": "21:30",
      "name": "내일 준비",
      "kind": "rest",
-     "desc": "현금 €44 (몬세라트 성당 €18 + 검은성모 €26) 별도 봉투 · 3.5mm 이어폰 (투어 수신기 대체) · 06:40 알람",
+     "desc": "현금 €26 (검은 성모 2인, 성당 입장권 포함) 별도 봉투 · 3.5mm 이어폰 (투어 수신기 대체) · 06:40 알람",
      "map": false
     },
     {
@@ -696,7 +667,8 @@
     "name": "HCC 몽블랑"
    },
    "cash": {
-    "amount": "€44"
+    "amount": "€26",
+    "for": "몬세라트 검은 성모 2인 (내일 아침 가이드에게)"
    },
    "chips": [
     {
@@ -709,6 +681,10 @@
     },
     {
      "t": "예약 2건"
+    },
+    {
+     "t": "17시경 카톡 오픈채팅방 링크",
+     "warn": true
     }
    ]
   },
@@ -744,7 +720,7 @@
      "name": "몬세라트 + 지로나 투어 미팅",
      "kind": "tour",
      "booked": "예약",
-     "desc": "현금 €44 확인 (성당 €18 + 검은성모 €26) · 3.5mm 유선 이어폰 2개",
+     "desc": "현금 €26 확인 (검은 성모 2인, 성당 입장권 포함) · 3.5mm 유선 이어폰 2개",
      "map": false,
      "meet": {
       "time": "07:40",
@@ -753,6 +729,7 @@
      },
      "prep": [
       "만다린 오리엔탈 앞 픽업",
+      "전날 17시 카톡 오픈채팅방 링크",
       "소년합창단 평일 13:00",
       "정시 출발, 지각 시 노쇼 처리"
      ]
@@ -768,7 +745,7 @@
      "time": "09:30",
      "name": "몬세라트 도착",
      "kind": "church",
-     "desc": "(해발 720m, 톱니 모양 바위산) · 산악 수도원 외관 · 전경 · 성당 입장 €9/인 (선택, 현금)",
+     "desc": "(해발 720m, 톱니 모양 바위산) · 산악 수도원 외관 · 전경",
      "place": "몬세라트",
      "prep": [
       "시내보다 5~7℃ 낮음 → 겉옷"
@@ -788,19 +765,22 @@
      "time": "10:30",
      "name": "몬세라트 대성당",
      "kind": "church",
-     "desc": "€9/인 = €18 · 로마네스크 건축 · 성모의 성막",
+     "desc": "검은 성모 티켓에 성당 입장권 포함 — 따로 낼 것 없음 · 로마네스크 건축 · 성모의 성막",
      "place": "Santa Maria de Montserrat Abbey"
     },
     {
      "time": "11:15",
      "name": "검은 성모",
      "kind": "church",
-     "desc": "라 모레네타 · €13/인 = €26 · 12세기 로마네스크 조각 · 제단 위 왕좌, 손을 만지는 전통",
+     "desc": "라 모레네타 · 선택3 확정 · €13/인 = €26 (성당 입장권 포함) · 12세기 로마네스크 조각 · 제단 위 왕좌, 손을 만지는 전통",
      "place": "Santa Maria de Montserrat Abbey",
      "prep": [
+      "예약 확정 — 취소·환불 불가",
+      "투어일 아침 유로 현금으로",
       "줄 길 수 있음 (순례객 + 관광객)",
       "플래시 없이 사진 가능"
-     ]
+     ],
+     "booked": "예약"
     },
     {
      "time": "12:15",
@@ -905,7 +885,9 @@
     "name": "HCC 몽블랑"
    },
    "cash": {
-    "amount": "€44"
+    "amount": "€26",
+    "for": "검은 성모 2인 (성당 입장권 포함)",
+    "note": "투어일 아침 가이드에게 유로 현금"
    },
    "chips": [
     {
