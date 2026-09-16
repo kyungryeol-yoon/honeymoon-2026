@@ -1978,11 +1978,13 @@
      "kind": "stay",
      "booked": "예약",
      "say": true,
-     "desc": "Premium lake pitch (호수뷰) / 전기·주차 포함",
+     "desc": "Premium lake pitch (호수뷰) / 전기·주차 포함 · Via alla Foce 14, 6933 Muzzano · 텐트 자리 체크인 13:00부터",
      "place": "Camping TCS Lugano-Muzzano",
      "move": "렌터카 35분 (추정)",
      "prep": [
-      "전기·주차 1대 포함"
+      "전기·주차 1대 포함",
+      "Ticino Ticket 받기 (교통 무료)",
+      "체크아웃 내일 정오까지"
      ]
     },
     {
@@ -1998,12 +2000,26 @@
      "kind": "nature",
      "desc": "스위스에서 유일하게 수영 가능 · 티치노 = 스위스에서 가장 따뜻하고 햇빛 좋은 지역 · 9월 하순 수온 20~22℃ (툰·브리엔츠보다 5~7℃ 높음) · 선택지: · Lido di Lugano — 시내 공식 해변 + 수영장 · Parco Ciani 앞 호숫가 — 공원과 이어져 피크닉 가능",
      "place": "Lago di Lugano",
-     "move": "도보 또는 렌터카 10분 (추정)",
+     "move": "캠핑장 앞이 호숫가 · 시내는 렌터카 15분",
      "prep": [
-      "역 근처 주유소 구글맵 저장",
       "일몰 19:30 전후 → 18:00~19:00이 마지막 기회",
-      "Lido는 9월 하순 시즌 종료 가능 → 공원 쪽이 확실"
-     ]
+      "Lido는 9월 하순 시즌 종료 가능 → 공원 쪽이 확실",
+      "메를롯 마실 거면 차 두고 기차로",
+      "역 근처 주유소 구글맵 저장"
+     ],
+     "route": {
+      "legs": [
+       {
+        "m": "walk",
+        "min": 2,
+        "note": "Premium lake pitch 바로 앞 = Agno 만 호숫가"
+       }
+      ],
+      "alt": [
+       "시내로 나가면 Lido di Lugano · Parco Ciani — 렌터카 15분",
+       "Ticino Ticket (체크인 때 받음) 이면 Agno역 → FLP 종점 Lugano 까지 무료 · 캠핑장에서 역까지 도보 15분 + 기차 약 18분"
+      ]
+     }
     },
     {
      "time": "19:00",
@@ -2179,7 +2195,8 @@
    "map": "루가노, Switzerland",
    "stay": {
     "name": "Camping TCS Lugano-Muzzano",
-    "place": "Camping TCS Lugano-Muzzano"
+    "place": "Camping TCS Lugano-Muzzano",
+    "addr": "Via alla Foce 14, 6933 Muzzano"
    },
    "chips": [
     {
@@ -2188,6 +2205,9 @@
     },
     {
      "t": "성수기 정체"
+    },
+    {
+     "t": "Ticino Ticket = 티치노 교통 무료"
     }
    ]
   },
@@ -2217,7 +2237,8 @@
      "time": "07:30",
      "name": "Camping TCS Lugano 체크아웃 · 출발",
      "kind": "stay",
-     "map": false
+     "map": false,
+     "desc": "텐트 자리 체크아웃은 정오까지 — 07:30 출발은 여유"
     },
     {
      "time": "07:40",
