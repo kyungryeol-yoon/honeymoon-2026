@@ -1978,13 +1978,15 @@
      "kind": "stay",
      "booked": "예약",
      "say": true,
-     "desc": "Premium lake pitch (호수뷰) / 전기·주차 포함 · Via alla Foce 14, 6933 Muzzano · 텐트 자리 체크인 13:00부터",
+     "desc": "Premium lake pitch (호수뷰) / 전기·주차 포함 · Via alla Foce 14, 6933 Muzzano",
      "place": "Camping TCS Lugano-Muzzano",
      "move": "렌터카 35분 (추정)",
      "prep": [
-      "전기·주차 1대 포함",
+      "텐트 자리 체크인 13:00부터",
+      "도착 마감 없음 — 9/17 과 다름",
+      "체크아웃 내일 정오까지",
       "Ticino Ticket 받기 (교통 무료)",
-      "체크아웃 내일 정오까지"
+      "전기·주차 1대 포함"
      ]
     },
     {
