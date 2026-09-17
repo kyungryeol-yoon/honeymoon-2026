@@ -1132,99 +1132,6 @@
      ]
     }
    ],
-   "options": [
-    {
-     "id": "thun",
-     "label": "툰 호수 · 슈피츠",
-     "summary": "툰 호수 루트 — 무난, 시간 짧음",
-     "items": [
-      {
-       "time": "12:00",
-       "name": "툰(Thun) 호숫가 산책·사진",
-       "kind": "nature",
-       "desc": "30분 · 호숫가 산책 · 사진 · 밀리면 여기부터 생략 가능",
-       "place": "Thunersee"
-      },
-      {
-       "time": "12:45",
-       "name": "슈피츠(Spiez) 성 외관 + 호수 파노라마",
-       "kind": "ruins",
-       "desc": "30분 · (차 20분)",
-       "place": "Schloss Spiez"
-      },
-      {
-       "time": "13:45",
-       "name": "인터라켄 도착",
-       "desc": "주차 CHF 3~5/시간",
-       "place": "Interlaken",
-       "move": "차로 25분"
-      }
-     ]
-    },
-    {
-     "id": "aare",
-     "label": "아레 협곡",
-     "summary": "Aareschlucht 루트 고소공포 재검토",
-     "items": [
-      {
-       "time": "11:50",
-       "name": "마이링겐(Meiringen) 도착",
-       "desc": "취리히에서 1h20m",
-       "map": false
-      },
-      {
-       "time": "12:00",
-       "end": "13:15",
-       "name": "Aareschlucht 아레 협곡",
-       "kind": "nature",
-       "desc": "CHF 13/인 = CHF 26 (2026 요금) · 1.4km 목재 보드워크, 편도 30~45분 · 운영 9/21~11/1 08:30~ 17:30 · 후기: \"고소공포가 있다면 맞지 않는다\" · 최대 200m 깊이 협곡 · → 와이프 제외 권장, 입구에서 보고 판단 · 주차 무료",
-       "place": "Aareschlucht",
-       "prep": [
-        "CHF 10/인 현장",
-        "비 와도 관람 가능",
-        "바닥 미끄러움",
-        "강 위 절벽에 매달린 통로 구조",
-        "인파 많고 통로 좁아 교행 불편하다는 평 다수"
-       ]
-      },
-      {
-       "time": "13:30",
-       "name": "마이링겐 점심",
-       "kind": "meal",
-       "food": true,
-       "say": true,
-       "map": false
-      },
-      {
-       "time": "14:30",
-       "name": "인터라켄 도착",
-       "desc": "차 40분",
-       "map": false
-      }
-     ]
-    },
-    {
-     "id": "blausee",
-     "label": "Blausee",
-     "summary": "Blausee 경유 — 짧게 한 곳만",
-     "items": [
-      {
-       "time": "12:30",
-       "name": "Blausee",
-       "kind": "nature",
-       "desc": "캔더슈텍 근처) 에메랄드 소호수 · CHF 12~18/인 추정 · 사설 자연공원, 송어양식장·산책로 · 평지 = 고소공포 무관 · 30~40분",
-       "move": "렌터카 1시간 20분 (추정)"
-      },
-      {
-       "time": "13:30",
-       "name": "인터라켄 도착",
-       "kind": "shop",
-       "desc": "취리히 출발이 11:30 넘으면 전부 생략, 인터라켄 직행 · 졸리면 마트 주차장에서 30분 낮잠",
-       "map": false
-      }
-     ]
-    }
-   ],
    "stay": {
     "name": "Camping Jungfrau",
     "place": "Camping Jungfrau"
@@ -1243,7 +1150,7 @@
      "warn": true
     },
     {
-     "t": "경유 옵션 3개는 시간상 불가"
+     "t": "경유 없이 캠핑장 직행"
     },
     {
      "t": "캠프 게이트 22:00"
