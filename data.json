@@ -1026,7 +1026,11 @@
      "time": "13:45",
      "name": "취리히 출발",
      "desc": "인터라켄까지 약 2시간 · 중간 경유 없이 직행",
-     "map": false
+     "map": false,
+     "prep": [
+      "툰역 Coop 06:00~22:00 · 365일",
+      "A6 툰남~슈피츠 공사 구간"
+     ]
     },
     {
      "time": "15:45",
@@ -1041,12 +1045,13 @@
      "time": "16:15",
      "name": "Migros/Coop 대형마트",
      "kind": "shop",
-     "desc": "식재료 · 빵·라클렛 치즈·소시지·감자·채소·와인·물 · 가스 카트리지 구매 (항공 반입 불가) · 에코백 지참 (봉지 유료) · 라우터브룬넨에도 Coop 있음 → 저녁·아침분만 사도 됨 · [선택] 노이하우스 호숫가 — 마트에서 차 5분",
+     "desc": "식재료 · 빵·라클렛 치즈·소시지·감자·채소·와인·물 · 에코백 지참 (봉지 유료)",
      "place": "Migros Interlaken",
      "prep": [
-      "5일치 식재료",
-      "CHF 80~100",
-      "Migros는 주류 미판매 → 와인은 Coop 또는 Denner"
+      "목요일 19:00 마감 (확인됨)",
+      "5일치 · CHF 80~100",
+      "Migros는 주류 미판매 → 와인은 Coop",
+      "가스는 Interlaken Ost Jumbo 가 확실"
      ]
     },
     {
@@ -1054,6 +1059,16 @@
      "name": "라우터브룬넨 이동",
      "desc": "(차 25분)",
      "place": "Neuhaus Swimming Steps"
+    },
+    {
+     "time": "17:00",
+     "name": "라우터브룬넨 마을 · Coop 보충",
+     "kind": "shop",
+     "desc": "Coop 라우터브룬넨 (역 앞 Bahnhofplatz) · 캠핑장 들어가는 길",
+     "place": "Coop Lauterbrunnen",
+     "prep": [
+      "19:00 전후 마감 — 밤에는 닫힘"
+     ]
     },
     {
      "time": "17:15",
@@ -1090,13 +1105,6 @@
      "kind": "nature",
      "desc": "캠프 도보 5분, 높이 297m",
      "map": false
-    },
-    {
-     "time": "19:30",
-     "name": "라우터브룬넨 마을 · Coop 보충",
-     "kind": "shop",
-     "desc": "필요시",
-     "place": "Lauterbrunnen"
     },
     {
      "time": "20:00",
