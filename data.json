@@ -974,11 +974,19 @@
     },
     {
      "time": "09:40",
-     "end": "11:30",
+     "name": "LX1953 탑승",
+     "kind": "flight",
+     "map": false,
+     "tz": 120,
+     "tzl": "CEST"
+    },
+    {
+     "time": "10:10",
+     "end": "12:00",
      "name": "BCN → ZRH 스위스항공 LX1953",
      "kind": "flight",
      "booked": "발권",
-     "desc": "지연으로 LX1951 → LX1953 변경 (직항 1h50m) · 같은 발권, 좌석만 재배정",
+     "desc": "지연으로 LX1951 → LX1953 변경 · 09:40 탑승 / 10:10 출발",
      "map": false,
      "refs": [
       {
@@ -988,126 +996,114 @@
      ]
     },
     {
-     "time": "11:30",
+     "time": "12:00",
      "name": "취리히 공항 도착",
      "kind": "flight",
      "desc": "솅겐 내부선 = 입국심사 없음 (EES 무관)",
      "place": "Zurich Airport"
     },
     {
-     "time": "11:50",
+     "time": "12:15",
      "name": "짐 수취",
      "kind": "flight",
      "desc": "(28인치 2개)",
      "map": false
     },
     {
-     "time": "12:10",
+     "time": "12:35",
      "name": "렌터카 데스크 이동",
      "kind": "car",
      "desc": "(터미널→렌터카센터 셔틀/도보)",
      "map": false
     },
     {
-     "time": "12:30",
+     "time": "12:50",
      "name": "Hertz 렌터카 픽업",
      "kind": "car",
      "booked": "예약",
-     "desc": "차량 외관 360도 영상 촬영 · 비네트(고속도로 스티커) 부착 확인 · 연료 종류 확인 (Bleifrei 95 / Diesel) · 블루존 주차 디스크 비치 확인 (없으면 요청) · 면책금·연료 정책 확인 / 내비·카플레이 세팅",
+     "desc": "CHF 443.58 현지 결제 · 보증금 홀드 (임차액 + 약 CHF 200) · 차량 외관 360도 영상 · 비네트 부착 · 연료 종류 (Bleifrei 95 / Diesel) · 블루존 주차 디스크 · 내비·카플레이 세팅",
      "place": "Zurich Airport",
      "prep": [
-      "지연 통보 = 메일·앱 (eSIM 통화 불가)",
-      "보증금용 신용카드 (트래블월렛 X)",
-      "픽업 영업소 06:00~23:30",
-      "인수 1~1.5h 예상"
+      "지참 4종: 국제면허증 · 한국면허증 · 여권 · 실물 마스터카드",
+      "직불·체크카드 불가 · 본인 명의만",
+      "인수 ~40분 → 13:30 출발"
      ]
     },
     {
-     "time": "13:45",
-     "name": "취리히 출발",
-     "desc": "인터라켄까지 약 2시간 · 중간 경유 없이 직행",
+     "time": "13:30",
+     "name": "인수 완료 · 취리히 출발",
+     "desc": "인터라켄까지 약 120km · 보통 1시간 50분~2시간",
      "map": false,
      "prep": [
-      "툰역 Coop 06:00~22:00 · 365일",
       "A6 툰남~슈피츠 공사 구간"
      ]
     },
     {
-     "time": "15:45",
-     "name": "인터라켄 점심",
-     "kind": "meal",
-     "food": true,
-     "say": true,
-     "desc": "늦은 점심 — 마트 가기 전에 간단히",
-     "map": false
-    },
-    {
-     "time": "16:15",
-     "name": "Migros/Coop 대형마트",
+     "time": "15:00",
+     "name": "(선택) Coop Bahnhof 인터라켄",
      "kind": "shop",
-     "desc": "식재료 · 빵·라클렛 치즈·소시지·감자·채소·와인·물 · 에코백 지참 (봉지 유료)",
-     "place": "Migros Interlaken",
+     "desc": "가스 카트리지 · 라이터 · 매일 06:00~21:00",
+     "place": "Coop Bahnhof Interlaken West",
      "prep": [
-      "목요일 19:00 마감 (확인됨)",
-      "5일치 · CHF 80~100",
-      "Migros는 주류 미판매 → 와인은 Coop",
-      "가스는 Interlaken Ost Jumbo 가 확실"
+      "가스는 항공 반입 불가 → 여기서",
+      "라우터브룬넨에 없으면 여기가 마지막"
      ]
     },
     {
-     "time": "16:50",
-     "name": "라우터브룬넨 이동",
+     "time": "15:30",
+     "name": "라우터브룬넨 도착",
      "desc": "(차 25분)",
-     "place": "Neuhaus Swimming Steps"
+     "place": "Lauterbrunnen"
+    },
+    {
+     "time": "16:00",
+     "name": "Coop Lauterbrunnen 장보기",
+     "kind": "shop",
+     "desc": "Zuben 473A · 매일 08:00~19:00 (일요일도 영업) · 5일치 식재료 · 에코백 지참",
+     "place": "Coop Lauterbrunnen",
+     "prep": [
+      "빵·라클렛 치즈·소시지·감자·채소·와인·물",
+      "CHF 80~100"
+     ]
     },
     {
      "time": "17:00",
-     "name": "라우터브룬넨 마을 · Coop 보충",
-     "kind": "shop",
-     "desc": "Coop 라우터브룬넨 (역 앞 Bahnhofplatz) · 캠핑장 들어가는 길",
-     "place": "Coop Lauterbrunnen",
-     "prep": [
-      "19:00 전후 마감 — 밤에는 닫힘"
-     ]
-    },
-    {
-     "time": "17:15",
      "name": "Camping Jungfrau 체크인",
      "kind": "stay",
      "booked": "예약",
      "say": true,
-     "desc": "예약완료 · 체크인 15:00~18:30 (15:00 = 여는 시각, 마감은 18:30) · 잔금 CHF 90 현장",
+     "desc": "#640412 · 리셉션 14:30~18:30 · 잔금 CHF 90 현장",
      "place": "Camping Jungfrau, Lauterbrunnen",
      "move": "차로 25분",
      "prep": [
-      "마감 18:30 — 17:15 도착이면 1시간 15분 여유",
-      "리셉션 줄 길 수 있음",
-      "게이트 22:00~07:00 폐쇄"
+      "리셉션 마감 18:30",
+      "게이트 22:00~07:00 폐쇄",
+      "리셉션 줄 길 수 있음"
      ]
     },
     {
-     "time": "17:45",
+     "time": "17:30",
      "name": "텐트 셋업",
      "kind": "stay",
      "desc": "첫 설치, 잔디밭 · 님버스 UL + 이너텐트 2 + 그라운드시트 2 · 팩 박기 (데크 없음, 잔디+흙)",
      "map": false
     },
     {
-     "time": "18:45",
+     "time": "18:30",
      "name": "셋업 완료",
      "kind": "bus",
      "desc": "님버스 UL + 이너텐트 2 + 그라운드시트 · 잔디에 팩 박기",
      "map": false
     },
     {
-     "time": "19:00",
+     "time": "18:45",
      "name": "Staubbach 폭포 산책",
      "kind": "nature",
      "desc": "캠프 도보 5분, 높이 297m",
      "map": false
     },
     {
-     "time": "20:00",
+     "time": "19:30",
      "name": "캠프 첫 디너",
      "kind": "meal",
      "food": true,
@@ -1233,15 +1229,15 @@
    },
    "chips": [
     {
-     "t": "LX1953 09:40 출발 · 11:30 ZRH",
+     "t": "LX1953 10:10 출발 · ZRH 12:00",
      "warn": true
     },
     {
-     "t": "Hertz 지연 통보 = 오늘 최우선",
+     "t": "리셉션 14:30~18:30",
      "warn": true
     },
     {
-     "t": "보증금용 신용카드",
+     "t": "보증금 홀드 = 실물 마스터카드",
      "warn": true
     },
     {
@@ -1250,7 +1246,12 @@
     {
      "t": "캠프 게이트 22:00"
     }
-   ]
+   ],
+   "cash": {
+    "amount": "CHF 90",
+    "for": "Camping Jungfrau 잔금",
+    "note": "현장 결제"
+   }
   },
   {
    "date": "2026-09-18",
