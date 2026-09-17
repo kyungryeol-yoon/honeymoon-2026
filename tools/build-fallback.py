@@ -56,6 +56,9 @@ def slim(src: dict) -> dict:
                 if it.get("route"): o["route"] = it["route"]
                 if it.get("map") is False: o["map"] = False
                 if it.get("star"):  o["star"]  = True
+                # 한마디 카드 — 말이 막히는 자리(렌터카 카운터·입국심사)는
+                # 네트워크도 같이 막히는 자리라 백업에도 남깁니다
+                if it.get("say"):   o["say"]   = it["say"]
                 if it.get("meet"):  o["meet"]  = {"where": it["meet"]["where"],
                                                   **({"time": it["meet"]["time"]} if it["meet"].get("time") else {})}
                 got.append(o)

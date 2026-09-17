@@ -1000,7 +1000,8 @@
      "name": "취리히 공항 도착",
      "kind": "flight",
      "desc": "솅겐 내부선 = 입국심사 없음 (EES 무관)",
-     "place": "Zurich Airport"
+     "place": "Zurich Airport",
+     "say": "border"
     },
     {
      "time": "12:15",
@@ -1029,7 +1030,8 @@
       "재예약이면 루가노 편도 반납 되는지 먼저",
       "보험 풀커버 · 주행거리 무제한 확인",
       "인수 ~40분 → 13:30 출발"
-     ]
+     ],
+     "say": "car"
     },
     {
      "time": "13:30",
@@ -2179,7 +2181,8 @@
       "점검표 서명",
       "표지판 안 보이면 헤매지 말고 바우처 전화번호로 연락",
       "09:30 반납 마감 = 정확히 5일(120시간)"
-     ]
+     ],
+     "say": "car"
     },
     {
      "time": "08:45",
@@ -5130,7 +5133,8 @@
      "map": false,
      "prep": [
       "솅겐 최종 출국 = 21일 체류 기록 확정"
-     ]
+     ],
+     "say": "border"
     },
     {
      "time": "18:00",
@@ -7191,6 +7195,128 @@
     {
      "ko": "도와주세요 / 경찰을 불러주세요",
      "x": "I need help. Please call the police."
+    }
+   ]
+  },
+  "car": {
+   "name": "렌터카 카운터 (영어)",
+   "lines": [
+    {
+     "ko": "비행기가 지연됐습니다. 예약이 아직 살아 있나요?",
+     "x": "My flight was delayed. Is my reservation still valid?"
+    },
+    {
+     "ko": "취소됐다면, 지금 빌릴 수 있는 차가 있나요?",
+     "x": "If it was cancelled, do you have a car available now?"
+    },
+    {
+     "ko": "면책금 0인 풀커버인가요?",
+     "x": "Is this full coverage with zero excess?"
+    },
+    {
+     "ko": "면책금이 얼마인가요?",
+     "x": "How much is the excess?"
+    },
+    {
+     "ko": "면책금을 0으로 올리면 얼마인가요?",
+     "x": "How much extra to reduce the excess to zero?"
+    },
+    {
+     "ko": "주행거리 무제한인가요?",
+     "x": "Is the mileage unlimited?"
+    },
+    {
+     "ko": "22일에 루가노에서 반납합니다. 편도 반납 되나요? 비용은요?",
+     "x": "I return the car in Lugano on the 22nd. Is a one-way drop-off possible, and how much is the fee?"
+    },
+    {
+     "ko": "전부 포함해서 총액이 얼마인가요?",
+     "x": "What is the total price, including everything?"
+    },
+    {
+     "ko": "카드에 보증금을 얼마나 잡나요?",
+     "x": "How much will you hold on my credit card as a deposit?"
+    },
+    {
+     "ko": "고속도로 비네트가 붙어 있나요?",
+     "x": "Is the motorway vignette already on the car?"
+    },
+    {
+     "ko": "연료는 휘발유 95인가요, 경유인가요?",
+     "x": "Which fuel does it take — petrol 95 or diesel?"
+    },
+    {
+     "ko": "블루존 주차 디스크 주세요",
+     "x": "Could I have a blue-zone parking disc, please?"
+    },
+    {
+     "ko": "기름 가득 채워서 반납하면 되나요?",
+     "x": "Do I return it with a full tank?"
+    },
+    {
+     "ko": "인수 전부터 있던 흠집입니다 (영상 있습니다)",
+     "x": "This scratch was already there at pick-up — I have it on video."
+    },
+    {
+     "ko": "반납합니다. 손상 없는 것 확인해 주시겠어요?",
+     "x": "I'd like to return the car. Could you confirm there is no damage?"
+    },
+    {
+     "ko": "천천히 말씀해 주세요",
+     "x": "Could you speak slowly, please?"
+    }
+   ]
+  },
+  "border": {
+   "name": "입국·출국 심사 (영어)",
+   "lines": [
+    {
+     "ko": "\"방문 목적은?\" → 신혼여행",
+     "x": "We're on our honeymoon."
+    },
+    {
+     "ko": "\"얼마나 머무나요?\" → 3주, 10월 3일 출국",
+     "x": "Three weeks. We fly home from Prague on October 3rd."
+    },
+    {
+     "ko": "\"어디서 묵나요?\" → 오늘은 캠핑장",
+     "x": "Tonight we stay at a campsite in Lauterbrunnen."
+    },
+    {
+     "ko": "\"예약 보여주세요\" → 화면 보여주기",
+     "x": "Here is our booking confirmation."
+    },
+    {
+     "ko": "\"어디를 다니나요?\" → 스페인·스위스·이탈리아·체코",
+     "x": "Spain, Switzerland, Italy and the Czech Republic."
+    },
+    {
+     "ko": "\"언제 입국했나요?\" → 9월 14일 바르셀로나",
+     "x": "We entered in Barcelona on September 14th."
+    },
+    {
+     "ko": "\"직업은?\" → 서울에서 근무, 휴가 중",
+     "x": "We both work in Seoul. We're on annual leave."
+    },
+    {
+     "ko": "\"신고할 물건 있나요?\" → 개인 물품·캠핑 장비뿐",
+     "x": "Nothing to declare — just personal belongings and camping gear."
+    },
+    {
+     "ko": "\"현금 얼마 가지고 있나요?\"",
+     "x": "Less than 10,000 francs in cash."
+    },
+    {
+     "ko": "\"돌아가는 표 있나요?\" → 대한항공 10/3 프라하",
+     "x": "Yes — Korean Air from Prague on October 3rd."
+    },
+    {
+     "ko": "\"둘은 어떤 사이인가요?\" → 부부",
+     "x": "We're married. This is our honeymoon."
+    },
+    {
+     "ko": "천천히 말씀해 주세요 / 영어가 서툽니다",
+     "x": "Could you speak slowly, please? My English isn't very good."
     }
    ]
   }

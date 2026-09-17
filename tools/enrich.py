@@ -162,7 +162,11 @@ def main():
                 # 데이터가 없는 도시에 칩이 붙으면 빈 카드가 됩니다
                 if it.get('food') and not menus.get(cid if it['food'] is True else it['food']):
                     it.pop('food')
-                if it.get('say') and city_lang.get(cid) not in langs:
+                # say 가 문자열이면 도시 언어가 아니라 그 묶음을 가리킵니다
+                # (렌터카 카운터 · 입국심사 처럼 영어로 하는 자리)
+                if it.get('say') is True and city_lang.get(cid) not in langs:
+                    it.pop('say')
+                elif isinstance(it.get('say'), str) and it['say'] not in langs:
                     it.pop('say')
 
     ORDER = ('time', 'end', 'name', 'kind', 'booked', 'food', 'gift', 'say', 'desc',
