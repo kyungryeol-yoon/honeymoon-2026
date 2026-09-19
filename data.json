@@ -1022,14 +1022,11 @@
      "name": "Hertz 렌터카 픽업",
      "kind": "car",
      "booked": "예약",
-     "desc": "예약가 CHF 443.58 — 예약이 살아 있을 때만 · 현장 재예약이면 금액·조건 다시 받기 · 차량 외관 360도 영상 · 비네트 부착 · 연료 종류 (Bleifrei 95 / Diesel) · 블루존 주차 디스크 · 내비·카플레이 세팅",
+     "desc": "노쇼 위기였지만 현장에서 기존 요금 그대로 인수 · VW Tiguan 4x4 — 연료 디젤 (예약은 Kia Sportage 였습니다)",
      "place": "Zurich Airport",
      "prep": [
-      "지참 4종: 국제면허증 · 한국면허증 · 여권 · 실물 마스터카드",
-      "직불·체크카드 불가 · 본인 명의만",
-      "재예약이면 루가노 편도 반납 되는지 먼저",
-      "보험 풀커버 · 주행거리 무제한 확인",
-      "인수 ~40분 → 13:30 출발"
+      "차량 = VW Tiguan 4x4",
+      "연료 디젤 — 휘발유 넣지 말 것"
      ],
      "say": "car"
     },
@@ -1040,17 +1037,6 @@
      "map": false,
      "prep": [
       "A6 툰남~슈피츠 공사 구간"
-     ]
-    },
-    {
-     "time": "15:00",
-     "name": "(선택) Coop Bahnhof 인터라켄",
-     "kind": "shop",
-     "desc": "가스 카트리지 · 라이터 · 매일 06:00~21:00",
-     "place": "Coop Bahnhof Interlaken West",
-     "prep": [
-      "가스는 항공 반입 불가 → 여기서",
-      "라우터브룬넨에 없으면 여기가 마지막"
      ]
     },
     {
@@ -1068,6 +1054,16 @@
      "prep": [
       "빵·라클렛 치즈·소시지·감자·채소·와인·물",
       "CHF 80~100"
+     ]
+    },
+    {
+     "time": "16:30",
+     "name": "INTERSPORT Lauterbrunnen — 가스 구매",
+     "kind": "shop",
+     "desc": "버너가 나사식 전용이라 EN417 나사식 카트리지 · 마트에는 없었습니다",
+     "place": "INTERSPORT Rent-Network Lauterbrunnen",
+     "prep": [
+      "나사식(EN417) 전용 — 끼움식 불가"
      ]
     },
     {
@@ -1171,15 +1167,58 @@
    "items": [
     {
      "time": "06:00",
-     "name": "기상 — 날씨 확인 후 융프라우 진행 여부 결정",
+     "name": "기상 — 날씨 확인 · 융프라우 진행",
      "kind": "rest",
      "booked": "예약",
-     "desc": "jungfrau.ch 정상 웹캠 확인 (계곡 날씨 아님) · 맑음 → 진행 / 정상 구름 속 → 취소 · 계곡 흐림 + 정상 맑음 = \"Blau über weiss\" → 진행 · 좌석예약(CHF 10/인)은 이미 확보 — 매진 걱정 없음 · 진행 시 즉시 온라인 좌석예약 (당일 매진 가능)",
-     "map": false,
+     "desc": "정상 웹캠 확인 후 진행 결정",
+     "map": false
+    },
+    {
+     "time": "07:27",
+     "name": "융프라우 왕복권 구매",
+     "kind": "train",
+     "booked": "예약",
+     "desc": "동신항운 할인권 · CHF 163/인 = CHF 326 · 라우터브룬넨역 창구",
+     "place": "Lauterbrunnen Bahnhof",
      "prep": [
-      "진행 시 티켓만 역에서 구매하면 됨",
-      "취소 시 좌석예약 CHF 20만 손실 (환불 불가)"
+      "여권 필요 (실명 확인)"
      ]
+    },
+    {
+     "time": "08:00",
+     "name": "라우터브룬넨 → 융프라우요흐",
+     "kind": "train",
+     "desc": "Wengen · 클라이네샤이덱 환승 · 톱니바퀴 열차",
+     "map": false
+    },
+    {
+     "time": "10:30",
+     "name": "융프라우요흐",
+     "kind": "nature",
+     "star": true,
+     "desc": "유럽 최고 높이 역 (3,454m) · 얼음 궁전 · 실내 전망대 · 알파인 센세이션",
+     "place": "Jungfraujoch"
+    },
+    {
+     "time": "12:30",
+     "name": "하산 — 클라이네샤이덱 경유",
+     "kind": "train",
+     "map": false
+    },
+    {
+     "time": "14:00",
+     "end": "15:00",
+     "name": "Badestelle Neuhaus 수영",
+     "kind": "nature",
+     "desc": "툰 호수 · 9/17 에 못 갔던 곳을 여기서 만회",
+     "place": "Neuhaus Swimming Steps"
+    },
+    {
+     "time": "15:30",
+     "name": "인터라켄 Coop 장보기",
+     "kind": "shop",
+     "desc": "Bündnerfleisch · Weggli · 라클렛 치즈 · Hallauer 피노누아 · Burehamme · Cervelat",
+     "place": "Coop Interlaken"
     },
     {
      "time": "19:30",
@@ -1195,233 +1234,6 @@
      "map": false
     }
    ],
-   "options": [
-    {
-     "id": "jungfrau",
-     "label": "융프라우 진행",
-     "recommended": true,
-     "summary": "융프라우 진행",
-     "items": [
-      {
-       "time": "06:30",
-       "name": "세면 · 방한복 착장",
-       "kind": "rest",
-       "desc": "아침 안 먹음 · 발열내의 + 플리스 + 경량패딩 + 장갑·비니",
-       "map": false
-      },
-      {
-       "time": "07:20",
-       "name": "백팩 (물·간식·여권·보조배터리·선글라스)",
-       "kind": "meal",
-       "map": false
-      },
-      {
-       "time": "07:45",
-       "name": "라우터브룬넨역 도보 5분",
-       "kind": "walk",
-       "desc": "티켓 현장 구매 CHF 190~210/인 · (캠프에서)",
-       "place": "Lauterbrunnen Bahnhof",
-       "move": "캠프 도보 5분",
-       "prep": [
-        "티켓시간보다 30분 일찍 출발할 수 있음",
-        "개찰구는 출발 10분 전까지 통과"
-       ]
-      },
-      {
-       "time": "08:00",
-       "name": "라우터브룬넨 → Wengen 톱니바퀴 기차",
-       "kind": "train",
-       "desc": "예매 시 라우터브룬넨 출발 시각 별도 확인",
-       "map": false,
-       "prep": [
-        "e티켓 + 여권 함께",
-        "굿모닝 티켓 = 이른 3편",
-        "티켓 시각이 Kleine Scheidegg 기준일 수 있음"
-       ]
-      },
-      {
-       "time": "08:30",
-       "name": "Wengen 도착",
-       "desc": "(차 없는 마을)",
-       "place": "Wengen"
-      },
-      {
-       "time": "08:45",
-       "name": "Wengen → Kleine Scheidegg",
-       "kind": "train",
-       "desc": "초원 위 빨간 기차 사진 명소",
-       "map": false
-      },
-      {
-       "time": "09:30",
-       "name": "Kleine Scheidegg 도착",
-       "booked": "예약",
-       "desc": "2,061m) — 환승 · 여기서부터 좌석예약 구간 · (7km 터널) · 터널 30분 = 경치 안 보임",
-       "map": false
-      },
-      {
-       "time": "09:45",
-       "name": "Kleine Scheidegg → 융프라우요흐",
-       "kind": "cable",
-       "desc": "7km 터널 · (2,061m) · 아이거 북벽 정면 조망",
-       "place": "Kleine Scheidegg",
-       "move": "산악열차 20분 (추정)",
-       "prep": [
-        "터널 30분 = 경치 안 보임"
-       ]
-      },
-      {
-       "time": "10:30",
-       "name": "융프라우요흐 도착",
-       "kind": "cable",
-       "desc": "3,454m · (3,463m) 톱 오브 유럽",
-       "place": "Wengen",
-       "move": "융프라우 철도 35분 (추정)",
-       "prep": [
-        "방한복 (정상 영하)"
-       ]
-      },
-      {
-       "time": "10:40",
-       "name": "얼음 궁전",
-       "kind": "ruins",
-       "desc": "Ice Palace) — 실내, 30분 · (Ice Palace) + 실내 전망대 · 스핑크스 야외 데크 X (고소공포) · 고산 = 천천히 움직이기, 두통 시 하산",
-       "place": "Jungfraujoch"
-      },
-      {
-       "time": "11:20",
-       "name": "실내 전망대 · 알파인 센세이션",
-       "kind": "nature",
-       "desc": "30분",
-       "place": "Jungfraujoch",
-       "prep": [
-        "스핑크스 야외 데크 안 감 (고소공포)",
-        "고산 = 천천히 움직이기, 두통 시 즉시 하산"
-       ]
-      },
-      {
-       "time": "12:00",
-       "name": "정상 간식 or 레스토랑",
-       "kind": "meal",
-       "desc": "도시락 권장, 정상 비쌈 · (또는 도시락)",
-       "map": false
-      },
-      {
-       "time": "12:30",
-       "name": "하산 시작",
-       "desc": "굿모닝 티켓 = 하산 시간 제한 (정오~13시대 확인)",
-       "map": false,
-       "prep": [
-        "하산시간 제한 확인",
-        "실제 체류 약 2시간 (야외 데크 제외 시 볼 것 적음)"
-       ]
-      },
-      {
-       "time": "13:15",
-       "name": "Kleine Scheidegg 하차",
-       "kind": "train",
-       "desc": "오늘의 하이라이트 · 해발 2,061m, 아이거·묀히·융프라우 삼봉 정면 · 평지 초원 = 고소공포 무관 · 야외 테라스 레스토랑 (정상보다 저렴·분위기 좋음) · 하산길은 좌석예약 제약 없음 = 원하는 만큼 체류 · 열차 20~30분 간격",
-       "map": false
-      },
-      {
-       "time": "14:45",
-       "name": "Wengen행 열차",
-       "kind": "train",
-       "place": "Wengen, Switzerland"
-      },
-      {
-       "time": "15:30",
-       "name": "라우터브룬넨 복귀",
-       "map": false
-      },
-      {
-       "time": "16:00",
-       "name": "캠프 휴식 · 빨래",
-       "kind": "rest",
-       "desc": "WeWash 앱, 1회",
-       "map": false
-      },
-      {
-       "time": "18:00",
-       "name": "마을 산책 or Staubbach 폭포 재방문",
-       "kind": "nature",
-       "desc": "뒤편 전망대까지 도보",
-       "place": "Staubbachfall"
-      }
-     ]
-    },
-    {
-     "id": "valley",
-     "label": "취소 · 계곡 저지대",
-     "summary": "융프라우 취소 — 계곡 저지대",
-     "items": [
-      {
-       "time": "09:00",
-       "name": "Trümmelbach 폭포",
-       "kind": "nature",
-       "desc": "산 안 폭포 10개, 실내형 · CHF 18/인 = CHF 36 / 09:00~ 17:00 고소공포 무관 (동굴 내부형, 엘리베이터 이동)",
-       "place": "Trümmelbachfälle"
-      },
-      {
-       "time": "10:30",
-       "name": "Wengen 마을",
-       "kind": "train",
-       "desc": "기차 15분, 차 없는 마을 산책",
-       "place": "Wengen"
-      },
-      {
-       "time": "12:00",
-       "name": "라우터브룬넨 마을 점심",
-       "kind": "meal",
-       "food": true,
-       "say": true,
-       "desc": "[대안 A] 노이하우스 호숫가 (툰 호수) — 권장",
-       "map": false
-      },
-      {
-       "time": "13:00",
-       "name": "출발 → Badestelle Neuhaus",
-       "kind": "car",
-       "desc": "차 25~30분",
-       "place": "Neuhaus Swimming Steps"
-      },
-      {
-       "time": "13:30",
-       "name": "Badestelle Neuhaus 도착",
-       "kind": "train",
-       "desc": "주차 유료 / 무료 구역(Schülerbad) 입장 무료 · Swimming Steps — 주차장 왼쪽 배구 네트 근처 · 호수로 바로 내려가는 계단 + 부유 플랫폼 · 넓은 잔디밭 · 그늘 나무 · 니젠 봉우리 정면 · 화장실·탈의실·샤워 있음 · Kiffersinseli — 주차장 오른쪽 델타, 바비큐 자리",
-       "place": "Neuhaus Swimming Steps",
-       "prep": [
-        "9월 하순 수온 15~18℃"
-       ]
-      },
-      {
-       "time": "16:30",
-       "name": "인터라켄 경유 · 마트 보충",
-       "kind": "shop",
-       "desc": "필요시 · 17:30 캠프 복귀 · [대안 B] Blausee 드라이브 · [대안 C] 캠프에서 쉬기 · 13:00 Staubbach 폭포 · 계곡 산책 · 15:00 캠프 휴식 · 빨래 · [대안 B] Blausee 또는 Aareschlucht 드라이브",
-       "map": false,
-       "prep": [
-        "9/17에 안 갔다면 여기서 소화",
-        "평지 산책, 고소공포 무관"
-       ]
-      },
-      {
-       "time": "17:00",
-       "name": "마을 카페",
-       "kind": "meal",
-       "map": false
-      },
-      {
-       "time": "18:00",
-       "name": "캠프에서 여유로운 저녁 → 융프라우",
-       "kind": "meal",
-       "food": true,
-       "map": false
-      }
-     ]
-    }
-   ],
    "label": "라우터브룬넨",
    "map": "라우터브룬넨, Switzerland",
    "stay": {
@@ -1430,13 +1242,18 @@
    },
    "chips": [
     {
-     "t": "여권 필수 (e티켓)",
+     "t": "융프라우 진행 · 왕복 CHF 326",
      "warn": true
     },
     {
-     "t": "하산 정오~13시대"
+     "t": "툰 호수 수영 = 9/17 만회"
     }
-   ]
+   ],
+   "cash": {
+    "amount": "CHF 326",
+    "for": "융프라우 왕복 2인 (동신항운)",
+    "note": "현장 결제 완료"
+   }
   },
   {
    "date": "2026-09-19",
@@ -1450,30 +1267,23 @@
      "map": false
     },
     {
-     "time": "08:00",
+     "time": "08:30",
      "name": "텐트 철수 · 캠프 정리",
      "kind": "stay",
      "desc": "첫 철수 = 수납백에 넣는 데 시간 걸림",
      "map": false
     },
     {
-     "time": "08:45",
+     "time": "10:00",
      "name": "Camping Jungfrau 체크아웃",
      "kind": "stay",
      "desc": "잔금 CHF 90 정산",
      "map": false
     },
     {
-     "time": "09:15",
-     "name": "Trümmelbach Falls",
-     "kind": "nature",
-     "desc": "차 10분 · CHF 18/인 = CHF 36 / 소요 1시간 · 산 안쪽 폭포 10개, 엘리베이터 이동 · 고소공포 무관 (동굴 내부형)",
-     "place": "Trümmelbachfälle, Lauterbrunnen"
-    },
-    {
-     "time": "10:45",
+     "time": "10:30",
      "name": "그린델발트 이동",
-     "desc": "차 25분 · 11:30 Camping Eigernordwand 도착 · [B] 어제 Trümmelbach 봤다면 → 바로 그린델발트 · 09:15 그린델발트 직행 (차 35분) · 이른 도착 = 자리 선점 + 만석 시 대응 여유",
+     "desc": "차 25분 · 계곡 내려갔다 다시 올라갑니다",
      "map": false,
      "prep": [
       "마을 진입 30km/h 단속"
@@ -1500,6 +1310,17 @@
      "kind": "stay",
      "desc": "2번째",
      "map": false
+    },
+    {
+     "time": "12:30",
+     "name": "그린델발트 Coop 장보기",
+     "kind": "shop",
+     "desc": "내일 일요일은 마트 전부 휴무 — 2일치",
+     "place": "Coop Grindelwald",
+     "prep": [
+      "토요일 마감 빠름 (17~18시)",
+      "빵·치즈·소시지·와인·물"
+     ]
     },
     {
      "time": "13:00",
@@ -1664,7 +1485,12 @@
     {
      "t": "마을 진입 30km/h"
     }
-   ]
+   ],
+   "cash": {
+    "amount": "CHF 180~200",
+    "for": "라우터브룬넨 잔금 90 + 그린델발트 2박 90~110",
+    "note": "Eigernordwand 는 AMEX 불가"
+   }
   },
   {
    "date": "2026-09-20",
@@ -1715,8 +1541,7 @@
     {
      "id": "neuhaus",
      "label": "노이하우스 · 툰 호수",
-     "recommended": true,
-     "summary": "노이하우스 (툰 호수) — 물놀이·피크닉",
+     "summary": "노이하우스 (툰 호수) — 9/18 에 다녀온 곳",
      "items": [
       {
        "time": "10:00",
@@ -2160,8 +1985,11 @@
      "time": "07:40",
      "name": "주유 (전날 확인해둔 주유소)",
      "kind": "car",
-     "desc": "만탱크",
-     "map": false
+     "desc": "디젤(Diesel) 만탱크 — VW Tiguan 은 경유입니다",
+     "map": false,
+     "prep": [
+      "휘발유(Bleifrei) 넣지 말 것"
+     ]
     },
     {
      "time": "08:00",
