@@ -1334,146 +1334,26 @@
      "name": "캠프 복귀",
      "kind": "stay",
      "map": false,
-     "desc": "반나절을 장보기에 씀"
-    }
-   ],
-   "options": [
-    {
-     "id": "iseltwald",
-     "label": "Iseltwald",
-     "recommended": true,
-     "summary": "Iseltwald + 브리엔츠 호수 — 물놀이·피크닉",
-     "items": [
-      {
-       "time": "14:30",
-       "name": "출발 → Iseltwald",
-       "kind": "car",
-       "desc": "차 35분 · 차로 35분",
-       "place": "Iseltwald",
-       "move": "렌터카 35분"
-      },
-      {
-       "time": "15:15",
-       "name": "Iseltwald 도착",
-       "desc": "주차 CHF 0.50/시간 (19:00~ 07:00 무료, 단속 있음) · Strandbad Iseltwald — 입장 무료 · 탈의실 · 화장실 · 샤워 · 비스트로 · 잔디밭 · 물 위 뗏목까지 헤엄쳐 갈 수 있음 · 발 담그기·피크닉 수준 · 사랑의 불시착 피아노 부두 €5/인 (선택)",
-       "place": "Iseltwald",
-       "prep": [
-        "차량은 마을 안까지 진입 불가, 진입로 주차장 이용",
-        "경사진 주차장",
-        "9월 하순 수온 14~17℃ (빙하수, 툰보다 차가움)",
-        "시즌 종료 시 시설은 닫혀도 호숫가 접근은 자유",
-        "부두 자체는 작음 / 마을·호수가 진짜 볼거리"
-       ]
-      },
-      {
-       "time": "17:00",
-       "name": "Brienzersee 호숫가 산책",
-       "kind": "nature",
-       "desc": "에메랄드빛 · 이른 저녁 해질녘 만이 특히 아름다움 · 17:45 캠프 복귀 · [옵션 A-2] 노이하우스 (툰 호수) — 물이 조금 따뜻 · 14:30 출발 → Badestelle Neuhaus (차 40~45분) · 15:15 도착 · 주차 유료 / 무료 구역(Schülerbad) 입장 무료",
-       "place": "Brienzersee",
-       "prep": [
-        "수온 15~18℃"
-       ]
-      },
-      {
-       "time": "17:15",
-       "name": "캠프 복귀",
-       "kind": "stay",
-       "map": false,
-       "move": "렌터카 50분 (추정)"
-      }
-     ]
+     "desc": "반나절을 장보기에 씀 · 이후 캠프에서만"
     },
     {
-     "id": "rosenlaui",
-     "label": "Rosenlaui 협곡",
-     "summary": "Rosenlaui 협곡 — 자연 취향이면",
-     "items": [
-      {
-       "time": "14:30",
-       "name": "출발 → Rosenlaui",
-       "kind": "car",
-       "desc": "차 40분, 마이링겐 방향 · 산길 · 좁은 구간 있음",
-       "map": false,
-       "move": "렌터카 50분 (추정)"
-      },
-      {
-       "time": "15:15",
-       "end": "16:30",
-       "name": "Rosenlaui 빙하 협곡",
-       "kind": "nature",
-       "desc": "CHF 12~14/인 / 소요 1시간 · 빙하가 깎은 협곡, 통로 산책",
-       "place": "Rosenlauischlucht",
-       "prep": [
-        "CHF 10/인 현장",
-        "미끄러운 계단",
-        "방수 겉옷"
-       ]
-      },
-      {
-       "time": "17:00",
-       "name": "캠프 복귀",
-       "kind": "stay",
-       "desc": "마이링겐 방향 우회 필요, 사전 확인",
-       "map": false,
-       "prep": [
-        "Grosse Scheidegg 산악도로는 일반차 통행 제한"
-       ]
-      }
-     ]
+     "time": "19:30",
+     "name": "캠프 디너",
+     "kind": "meal",
+     "map": false,
+     "desc": "인터라켄에서 사온 고기 · 라클렛"
     },
     {
-     "id": "rest",
-     "label": "캠프 휴식",
-     "summary": "캠프에서 쉬기",
-     "items": [
-      {
-       "time": "14:30",
-       "name": "마을 산책 · 카페",
-       "kind": "meal",
-       "map": false
-      },
-      {
-       "time": "16:00",
-       "name": "캠프 휴식 · 아이거 조망",
-       "kind": "nature",
-       "map": false,
-       "prep": [
-        "어제 융프라우 다녀왔으면 이쪽 권장"
-       ]
-      },
-      {
-       "time": "18:30",
-       "name": "마트 보충 쇼핑",
-       "kind": "shop",
-       "say": true,
-       "desc": "Coop 그린델발트 · 일·월 아침까지 먹을 것 오늘 다 사둘 것 · 빵·계란·치즈·소시지·과일·물·와인 · 가스 카트리지 잔량 확인",
-       "map": false,
-       "prep": [
-        "내일(9/20) 일요일 = 스위스 마트 전면 휴무",
-        "Migros는 주류 미판매 → Coop 또는 Denner"
-       ]
-      },
-      {
-       "time": "19:30",
-       "name": "캠프 디너",
-       "kind": "meal",
-       "food": true,
-       "map": false
-      },
-      {
-       "time": "21:00",
-       "name": "아이거 북벽 야경 · 별",
-       "kind": "walk",
-       "map": false
-      },
-      {
-       "time": "22:00",
-       "name": "취침",
-       "kind": "rest",
-       "map": false
-      }
-     ]
+     "time": "21:00",
+     "name": "아이거 북벽 야경 · 별",
+     "kind": "nature",
+     "map": false
+    },
+    {
+     "time": "22:00",
+     "name": "취침",
+     "kind": "rest",
+     "map": false
     }
    ],
    "label": "그린델발트",
@@ -1484,11 +1364,14 @@
    },
    "chips": [
     {
-     "t": "캠프 선착순 · 정오 도착",
+     "t": "장보기에 반나절 (주차·고기)",
      "warn": true
     },
     {
-     "t": "마을 진입 30km/h"
+     "t": "블루존은 디스크만 놓으면 무료"
+    },
+    {
+     "t": "내일 = 캠핑만"
     }
    ],
    "cash": {
@@ -1506,11 +1389,49 @@
      "time": "07:30",
      "name": "기상, 캠프 조식",
      "kind": "meal",
-     "desc": "(전날 사둔 재료) · 오늘 일요일 = 마트 전부 휴무",
+     "desc": "전날 사둔 재료",
      "map": false,
      "prep": [
-      "오늘 일요일 = 마트 전부 휴무 (식당은 영업)"
+      "오늘은 캠핑만 — 이동 없음"
      ]
+    },
+    {
+     "time": "09:00",
+     "name": "그린델발트 Coop 잠깐",
+     "kind": "shop",
+     "desc": "일요일도 08:00~19:00 (관광지 예외) · 빵·우유 정도만",
+     "place": "Coop Grindelwald",
+     "prep": [
+      "고기는 어제도 없었음 — 기대하지 말 것",
+      "인터라켄·다른 마을은 일요일 휴무"
+     ]
+    },
+    {
+     "time": "10:00",
+     "name": "캠프에서 아이거 조망하며 휴식",
+     "kind": "rest",
+     "map": false,
+     "desc": "울타리 쪽 = 북벽 정면"
+    },
+    {
+     "time": "12:00",
+     "name": "캠프 점심",
+     "kind": "meal",
+     "map": false,
+     "desc": "남은 재료로 간단히"
+    },
+    {
+     "time": "14:00",
+     "name": "빨래 · 장비 정리",
+     "kind": "stay",
+     "map": false,
+     "desc": "내일 루가노 이동 대비"
+    },
+    {
+     "time": "16:00",
+     "name": "마을 산책 · 카페",
+     "kind": "walk",
+     "place": "Grindelwald"
     },
     {
      "time": "19:30",
@@ -1542,142 +1463,6 @@
      ]
     }
    ],
-   "options": [
-    {
-     "id": "neuhaus",
-     "label": "노이하우스 · 툰 호수",
-     "summary": "노이하우스 (툰 호수) — 9/18 에 다녀온 곳",
-     "items": [
-      {
-       "time": "10:00",
-       "name": "출발 → Badestelle Neuhaus",
-       "kind": "car",
-       "desc": "차 40~45분",
-       "map": false
-      },
-      {
-       "time": "10:45",
-       "name": "Badestelle Neuhaus 도착",
-       "kind": "nature",
-       "desc": "주차 유료 (동전 또는 카드) · 무료 구역(Schülerbad) 입장 무료 · Swimming Steps — 주차장 왼쪽 배구 네트 근처 · 호수로 바로 내려가는 계단 + 부유 플랫폼 · Kiffersinseli — 주차장 오른쪽 델타, 바비큐 자리 · 넓은 잔디밭 · 그늘 나무 · 니젠 봉우리 정면 · 화장실",
-       "place": "Neuhaus Swimming Steps",
-       "prep": [
-        "주차 동전 미리 · 앱은 EasyPark",
-        "수온 15~18℃ — 발 담그기·피크닉 수준",
-        "일요일이라 현지인 많을 수 있음"
-       ]
-      },
-      {
-       "time": "12:30",
-       "name": "호숫가 피크닉",
-       "kind": "meal",
-       "food": true,
-       "say": true,
-       "desc": "전날 사둔 재료",
-       "map": false
-      },
-      {
-       "time": "14:00",
-       "name": "인터라켄 산책 or 아레강변",
-       "kind": "cable",
-       "map": false
-      },
-      {
-       "time": "16:00",
-       "name": "캠프 복귀",
-       "kind": "stay",
-       "desc": "[옵션 A-3] Iseltwald + Giessbach (브리엔츠 호수) · 10:00 출발 → Iseltwald (차 35분) · 10:45 Strandbad Iseltwald — 입장 무료 · 주차 CHF 0.50/시간 · 탈의실 · 샤워 · 비스트로 · 잔디밭 · 12:30 호숫가 피크닉 또는 마을 식당",
-       "map": false,
-       "prep": [
-        "주차 동전 미리 · 앱은 EasyPark",
-        "수온 14~17℃"
-       ]
-      }
-     ]
-    },
-    {
-     "id": "giessbach",
-     "label": "Iseltwald + Giessbach",
-     "summary": "Iseltwald + Giessbach (브리엔츠 호수)",
-     "items": [
-      {
-       "time": "10:00",
-       "name": "출발 → Iseltwald",
-       "kind": "car",
-       "desc": "차 35분",
-       "map": false
-      },
-      {
-       "time": "10:45",
-       "name": "Strandbad Iseltwald",
-       "desc": "입장 무료 · 주차 CHF 0.50/시간 (19:00~ 07:00 무료) · 탈의실 · 샤워 · 비스트로 · 잔디밭 · 물 위 뗏목까지 헤엄쳐 갈 수 있음 · 사랑의 불시착 피아노 부두 €5/인 (선택)",
-       "place": "Strandbad Iseltwald",
-       "prep": [
-        "주차 동전 미리 · 앱은 EasyPark",
-        "차량 마을 진입 불가, 진입로 주차장 이용",
-        "수온 14~17℃ (빙하수, 툰보다 차가움)"
-       ]
-      },
-      {
-       "time": "12:30",
-       "name": "호숫가 피크닉 또는 마을 식당",
-       "kind": "nature",
-       "map": false
-      },
-      {
-       "time": "14:00",
-       "name": "Giessbach 폭포",
-       "kind": "rest",
-       "desc": "차 15분 · 14단 폭포 + 클래식 그랜드호텔 + 숲길 · 도보 전망대 (평지 산책로, 고소공포 무관) · 푸니쿨라 CHF 12/인 — 선택, 완만하나 경사 궤도 · ❓ 9월 푸니쿨라 운영 여부 현장 확인",
-       "place": "Giessbachfälle",
-       "prep": [
-        "케이블 궤도라 부담되면 도보로 우회 가능"
-       ]
-      },
-      {
-       "time": "16:30",
-       "name": "캠프 복귀",
-       "kind": "stay",
-       "map": false
-      }
-     ]
-    },
-    {
-     "id": "rest",
-     "label": "캠프 휴식",
-     "summary": "쉬는 날",
-     "items": [
-      {
-       "time": "09:30",
-       "name": "그린델발트 마을 · 카페",
-       "kind": "meal",
-       "place": "Grindelwald"
-      },
-      {
-       "time": "11:00",
-       "name": "캠프에서 아이거 조망하며 휴식",
-       "kind": "nature",
-       "map": false
-      },
-      {
-       "time": "14:00",
-       "name": "빨래 · 장비 정리",
-       "kind": "rest",
-       "map": false
-      },
-      {
-       "time": "16:00",
-       "name": "마을 산책",
-       "kind": "walk",
-       "map": false,
-       "prep": [
-        "스위스 5박 중 유일한 완전 휴식 옵션",
-        "어제 융프라우 다녀왔으면 이쪽 권장"
-       ]
-      }
-     ]
-    }
-   ],
    "label": "그린델발트",
    "map": "그린델발트, Switzerland",
    "stay": {
@@ -1686,15 +1471,15 @@
    },
    "chips": [
     {
-     "t": "일요일 = 마트 휴무",
+     "t": "오늘은 캠핑만 · 이동 없음"
+    },
+    {
+     "t": "그린델발트 Coop 은 일요일도 영업",
      "warn": true
     },
     {
-     "t": "주차 = 동전 or 블루존 디스크",
+     "t": "디너 예약 권장 (일요일)",
      "warn": true
-    },
-    {
-     "t": "First 케이블카 X"
     }
    ]
   },
