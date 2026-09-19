@@ -1281,7 +1281,7 @@
      "map": false
     },
     {
-     "time": "10:30",
+     "time": "10:05",
      "name": "그린델발트 이동",
      "desc": "차 25분 · 계곡 내려갔다 다시 올라갑니다",
      "map": false,
@@ -1290,11 +1290,11 @@
      ]
     },
     {
-     "time": "11:00",
+     "time": "10:30",
      "name": "Eigernordwand 현장 체크인",
      "kind": "stay",
      "say": true,
-     "desc": "선착순 · 2박 CHF 90~110 현장 결제 (AMEX 불가) · 울타리(fence) 쪽 = 아이거 북벽 정면 뷰 · 오전 도착이면 바로 이동 가능",
+     "desc": "10:30 도착 · 선착순 · 2박 CHF 90~110 현장 결제 (AMEX 불가) · 울타리 쪽 = 아이거 북벽 정면",
      "place": "Camping Eigernordwand, Grindelwald",
      "move": "차로 25분",
      "prep": [
@@ -1305,31 +1305,36 @@
      ]
     },
     {
-     "time": "11:45",
+     "time": "11:00",
      "name": "텐트 셋업",
      "kind": "stay",
      "desc": "2번째",
      "map": false
     },
     {
-     "time": "12:30",
+     "time": "12:00",
      "name": "그린델발트 Coop 장보기",
      "kind": "shop",
-     "desc": "내일 일요일은 마트 전부 휴무 — 2일치",
+     "desc": "주차 결제가 안 돼 헤맴 (카드 불가 · 기계 고장 · 동전 없음) · 고기가 없어 인터라켄까지",
      "place": "Coop Grindelwald",
      "prep": [
-      "토요일 마감 빠름 (17~18시)",
-      "빵·치즈·소시지·와인·물"
+      "블루존은 주차 디스크만 놓으면 무료",
+      "동전 CHF 1·2·5 상비"
      ]
     },
     {
-     "time": "13:00",
-     "name": "그린델발트 마을 점심",
-     "kind": "meal",
-     "food": true,
-     "say": true,
-     "place": "Grindelwald",
-     "move": "도보 10분 (오르막)"
+     "time": "13:30",
+     "name": "인터라켄 Coop — 고기 구매",
+     "kind": "shop",
+     "desc": "그린델발트 Coop 에 고기가 없어 여기까지 · 왕복 1시간 30분",
+     "place": "Coop Interlaken"
+    },
+    {
+     "time": "15:30",
+     "name": "캠프 복귀",
+     "kind": "stay",
+     "map": false,
+     "desc": "반나절을 장보기에 씀"
     }
    ],
    "options": [
@@ -1557,6 +1562,7 @@
        "desc": "주차 유료 (동전 또는 카드) · 무료 구역(Schülerbad) 입장 무료 · Swimming Steps — 주차장 왼쪽 배구 네트 근처 · 호수로 바로 내려가는 계단 + 부유 플랫폼 · Kiffersinseli — 주차장 오른쪽 델타, 바비큐 자리 · 넓은 잔디밭 · 그늘 나무 · 니젠 봉우리 정면 · 화장실",
        "place": "Neuhaus Swimming Steps",
        "prep": [
+        "주차 동전 미리 · 앱은 EasyPark",
         "수온 15~18℃ — 발 담그기·피크닉 수준",
         "일요일이라 현지인 많을 수 있음"
        ]
@@ -1583,6 +1589,7 @@
        "desc": "[옵션 A-3] Iseltwald + Giessbach (브리엔츠 호수) · 10:00 출발 → Iseltwald (차 35분) · 10:45 Strandbad Iseltwald — 입장 무료 · 주차 CHF 0.50/시간 · 탈의실 · 샤워 · 비스트로 · 잔디밭 · 12:30 호숫가 피크닉 또는 마을 식당",
        "map": false,
        "prep": [
+        "주차 동전 미리 · 앱은 EasyPark",
         "수온 14~17℃"
        ]
       }
@@ -1606,6 +1613,7 @@
        "desc": "입장 무료 · 주차 CHF 0.50/시간 (19:00~ 07:00 무료) · 탈의실 · 샤워 · 비스트로 · 잔디밭 · 물 위 뗏목까지 헤엄쳐 갈 수 있음 · 사랑의 불시착 피아노 부두 €5/인 (선택)",
        "place": "Strandbad Iseltwald",
        "prep": [
+        "주차 동전 미리 · 앱은 EasyPark",
         "차량 마을 진입 불가, 진입로 주차장 이용",
         "수온 14~17℃ (빙하수, 툰보다 차가움)"
        ]
@@ -1679,6 +1687,10 @@
    "chips": [
     {
      "t": "일요일 = 마트 휴무",
+     "warn": true
+    },
+    {
+     "t": "주차 = 동전 or 블루존 디스크",
      "warn": true
     },
     {
