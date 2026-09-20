@@ -1599,7 +1599,7 @@
      "id": "gotthard",
      "label": "Gotthard 터널",
      "recommended": true,
-     "summary": "Gotthard 터널 — 표준, 약 3시간 (안전)",
+     "summary": "Gotthard 터널 — 약 270km · 주행 3시간 30분~4시간 + 터널 대기",
      "items": [
       {
        "time": "09:00",
@@ -1640,8 +1640,16 @@
        "desc": "(17km) · 평균속도 단속 (입 · 출구 시간 측정) — 규정 속도 엄수 · 터널 내 차간거리 50m · 성수기 정체 가능 (대기 시 여유)",
        "map": false,
        "prep": [
-        "평균 속도 단속 주의",
-        "정체 가능 (1시간 이상 대기 시 벨린초나 생략)"
+        "출발 전 실시간 대기 확인",
+        "평균속도 단속 (입·출구 시간 측정)",
+        "남행 대기는 Göschenen 북쪽 입구",
+        "대기 1km ≈ 11~12분"
+       ],
+       "links": [
+        {
+         "label": "고타르 실시간 대기",
+         "url": "https://www.gotthard-live.ch/en/live-traffic"
+        }
        ]
       },
       {
@@ -1669,7 +1677,7 @@
     {
      "id": "passes",
      "label": "Furka · Grimsel 고갯길",
-     "summary": "Grimsel + Furka + 구 Gotthard 고갯길 (경치 최고)",
+     "summary": "Grimsel + Furka + 구 Gotthard 고갯길 — 경치 최고, 1~2시간 더",
      "items": [
       {
        "time": "09:00",
@@ -1742,7 +1750,7 @@
      "warn": true
     },
     {
-     "t": "성수기 정체"
+     "t": "루가노까지 약 270km · 4시간"
     },
     {
      "t": "Ticino Ticket = 티치노 교통 무료"
