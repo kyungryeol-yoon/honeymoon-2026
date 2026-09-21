@@ -1502,21 +1502,21 @@
      "map": false
     },
     {
-     "time": "08:30",
-     "name": "Camping Eigernordwand 체크아웃",
+     "time": "09:00",
+     "name": "Eigernordwand 체크아웃 · 출발",
      "kind": "stay",
-     "desc": "2박 CHF 90~110 현장 결제",
+     "desc": "2박 CHF 90~110 정산 · 경유 없이 루가노 직행",
      "map": false
     },
     {
-     "time": "16:30",
+     "time": "13:00",
      "name": "Camping TCS Lugano-Muzzano 체크인",
      "kind": "stay",
      "booked": "예약",
      "say": true,
-     "desc": "Premium lake pitch (호수뷰) / 전기·주차 포함 · Via alla Foce 14, 6933 Muzzano",
+     "desc": "약 270km · 4시간 · Premium lake pitch (호수뷰) / 전기·주차 포함 · Via alla Foce 14, 6933 Muzzano",
      "place": "Camping TCS Lugano-Muzzano",
-     "move": "렌터카 35분 (추정)",
+     "move": "렌터카 4시간 (경유 없이)",
      "prep": [
       "텐트 자리 체크인 13:00부터",
       "도착 마감 없음 — 9/17 과 다름",
@@ -1526,11 +1526,25 @@
      ]
     },
     {
-     "time": "17:00",
+     "time": "13:30",
      "name": "마지막 텐트 셋업",
      "kind": "stay",
      "desc": "3번째 · 내일 아침 철수 = 오늘 밤 짐 대부분 차에 두기",
      "map": false
+    },
+    {
+     "time": "14:30",
+     "name": "캠핑장 매점",
+     "kind": "shop",
+     "map": false,
+     "desc": "쌀 · 토마토 소스만 — 시내 마트는 안 감"
+    },
+    {
+     "time": "15:00",
+     "name": "캠프 휴식",
+     "kind": "rest",
+     "map": false,
+     "desc": "4시간 운전 뒤 · 호숫가 자리"
     },
     {
      "time": "18:00",
@@ -1568,11 +1582,9 @@
     },
     {
      "time": "19:30",
-     "name": "호숫가 디너",
+     "name": "캠프 디너 (파스타)",
      "kind": "meal",
-     "food": true,
-     "say": true,
-     "desc": "티치노 요리: 폴렌타 / 메를롯 와인 · 스위스 마지막 밤",
+     "desc": "매점에서 산 쌀·토마토 소스 · 스위스 마지막 밤",
      "map": false
     },
     {
@@ -1594,148 +1606,6 @@
      ]
     }
    ],
-   "options": [
-    {
-     "id": "gotthard",
-     "label": "Gotthard 터널",
-     "recommended": true,
-     "summary": "Gotthard 터널 — 약 270km · 주행 3시간 30분~4시간 + 터널 대기",
-     "items": [
-      {
-       "time": "09:00",
-       "name": "출발 → Andermatt",
-       "kind": "car",
-       "desc": "차 1시간 30분 · (차로 약 1시간 30분) · 알프스 고산 마을, 잠시 휴식",
-       "map": false
-      },
-      {
-       "time": "10:30",
-       "name": "Andermatt 산악 마을",
-       "kind": "rest",
-       "desc": "알프스 고산 마을, 휴식·커피",
-       "place": "Andermatt",
-       "prep": [
-        "오늘 월요일 = 마트 정상 영업 (필요시 보충)"
-       ]
-      },
-      {
-       "time": "11:30",
-       "name": "Andermatt 점심",
-       "kind": "meal",
-       "food": true,
-       "say": true,
-       "desc": "전통 스위스",
-       "map": false
-      },
-      {
-       "time": "13:00",
-       "name": "출발 → Gotthard 터널",
-       "kind": "car",
-       "map": false
-      },
-      {
-       "time": "13:30",
-       "name": "Gotthard 터널 통과",
-       "kind": "car",
-       "desc": "(17km) · 평균속도 단속 (입 · 출구 시간 측정) — 규정 속도 엄수 · 터널 내 차간거리 50m · 성수기 정체 가능 (대기 시 여유)",
-       "map": false,
-       "prep": [
-        "출발 전 실시간 대기 확인",
-        "남행 대기는 Göschenen 북쪽 입구",
-        "대기 1km ≈ 11~12분"
-       ],
-       "links": [
-        {
-         "label": "고타르 실시간 대기",
-         "url": "https://www.gotthard-live.ch/en/live-traffic"
-        }
-       ]
-      },
-      {
-       "time": "14:30",
-       "name": "Bellinzona 도착",
-       "desc": "(이탈리아어권 진입) · 도착",
-       "place": "Bellinzona",
-       "move": "렌터카 · Gotthard 경유 1시간 20분 (추정)"
-      },
-      {
-       "time": "15:00",
-       "name": "Bellinzona 성",
-       "kind": "ruins",
-       "desc": "UNESCO, 30분 · Castelgrande 성벽·외관 무료",
-       "place": "Castelgrande Bellinzona castello"
-      },
-      {
-       "time": "16:00",
-       "name": "루가노 이동",
-       "desc": "차 30분 · (차로 30분)",
-       "map": false
-      }
-     ]
-    },
-    {
-     "id": "passes",
-     "label": "Furka · Grimsel 고갯길",
-     "summary": "Grimsel + Furka + 구 Gotthard 고갯길 — 경치 최고, 1~2시간 더",
-     "items": [
-      {
-       "time": "09:00",
-       "name": "출발 → Grimsel Pass",
-       "kind": "car",
-       "desc": "차 1시간 20분 · 댐 호수 · 헤어핀 도로",
-       "place": "Grimsel Pass"
-      },
-      {
-       "time": "10:20",
-       "name": "Grimsel Pass",
-       "kind": "car",
-       "desc": "빙하호·황량한 화강암 풍경",
-       "place": "Grimsel Pass"
-      },
-      {
-       "time": "11:00",
-       "name": "Furka Pass",
-       "kind": "car",
-       "desc": "007 골드핑거 촬영지 · Rhône 빙하 전망 (Belvédère) · 빙하 얼음동굴 CHF 9/인 = CHF 18 (선택) · 주차 무료",
-       "place": "Furka Pass"
-      },
-      {
-       "time": "12:00",
-       "name": "Andermatt 점심",
-       "kind": "meal",
-       "food": true,
-       "say": true,
-       "desc": "차 30분",
-       "map": false
-      },
-      {
-       "time": "13:30",
-       "name": "San Gottardo Pass",
-       "kind": "car",
-       "desc": "구 고갯길, Tremola 石畳",
-       "place": "San Gottardo Pass",
-       "prep": [
-        "커브 다수, 운전 집중 필요"
-       ]
-      },
-      {
-       "time": "15:00",
-       "name": "Bellinzona",
-       "desc": "차 1시간",
-       "place": "Castelgrande Bellinzona castello"
-      },
-      {
-       "time": "16:00",
-       "name": "루가노 이동",
-       "map": false,
-       "prep": [
-        "루트 A보다 1~2시간 더 걸림",
-        "아침에 고갯길 통행 상태 확인 (9월 첫눈 가능)"
-       ]
-      }
-     ]
-    }
-   ],
    "label": "루가노",
    "map": "루가노, Switzerland",
    "stay": {
@@ -1745,14 +1615,14 @@
    },
    "chips": [
     {
-     "t": "Gotthard 평균속도 단속",
+     "t": "루가노 직행 4시간 · 경유 없음"
+    },
+    {
+     "t": "내일 주유는 디젤",
      "warn": true
     },
     {
-     "t": "루가노까지 약 270km · 4시간"
-    },
-    {
-     "t": "Ticino Ticket = 티치노 교통 무료"
+     "t": "CHF 잔액 소진"
     }
    ]
   },
