@@ -1494,6 +1494,9 @@ const MUST = /금지|필수|거부|불가|엄수|벌금/;
 const CK  = `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>`;
 const ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16"/><path d="M6 14l6 6 6-6"/></svg>`;
 const CHEV  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`;
+/* 앱 안의 다른 페이지로 가는 링크 표식. 새 창으로 튀지 않으므로
+   EXT(창 밖으로 나가는 화살표)를 쓰면 거짓말이 됩니다. */
+const GOTO  = `<svg class="ex" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>`;
 const STAR  = `<span class="star-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5l2.4 6.9 6.9 2.4-6.9 2.4L12 22.5l-2.4-6.9L2.7 13.2l6.9-2.4z"/></svg></span>`;
 const COIN  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.6-.9-1.7-1.5-3-1.5-2 0-3.5 1.8-3.5 4s1.5 4 3.5 4c1.3 0 2.4-.6 3-1.5"/><path d="M7.5 11.5h5M7.5 13.5h5"/></svg>`;
 
@@ -1890,10 +1893,19 @@ function itemHTML(it, city, cls, day, next){
         `<i class="${MUST.test(p) ? 'must' : ''}">${esc(p)}</i>`).join('')}</span></div>`
     : '';
 
-  // 바깥 링크 (웹캠·운행상황 등). http(s) 만 — javascript: 같은 스킴은 버립니다
+  /* 링크. 바깥(웹캠·운행상황)은 http(s) 만 받습니다 — javascript: 같은 스킴은 버립니다.
+     앱에 딸린 페이지(가이드 등)는 상대경로로 적고 **그 자리에서** 엽니다 —
+     홈 화면에서 띄운 PWA 에서 target=_blank 는 사파리로 튕겨 나가고,
+     그러면 오프라인 캐시도 못 씁니다. 상대경로 규칙에 : 를 넣지 않아
+     javascript: 스킴은 애초에 통과하지 못합니다. */
   const links = (it.links || [])
-    .filter(l => l && l.url && /^https?:\/\//i.test(l.url))
-    .map(l => `<a class="ext" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label || l.url)}${EXT}</a>`)
+    .filter(l => l && l.url && (/^https?:\/\//i.test(l.url) || /^\.{0,2}\/?[\w./-]+$/.test(l.url)))
+    .map(l => {
+      const inApp = !/^https?:\/\//i.test(l.url);
+      return inApp
+        ? `<a class="ext" href="${esc(l.url)}">${esc(l.label || l.url)}${GOTO}</a>`
+        : `<a class="ext" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label || l.url)}${EXT}</a>`;
+    })
     .join('');
 
   // 흐리게 처리한 지난 일정도 스크린리더가 알 수 있게

@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>다비드로 가는 길</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+  :root{
+    color-scheme: light;
+    --bg:#F1F2F5; --surface:#FFFFFF; --ink:#15171C; --soft:#4B505B; --faint:#767C89;
+    --rule:#D7DAE1; --accent:#27407A; --accent-tint:#E7EBF4; --hl:#FBF0CE;
+    --gold:#8C6F27; --gold-tint:#F4EFE0; --barbg:#FFFFFFEE;
+    --idbg:#EFF3EC; --idline:#5B7C4F;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --bg:#111318; --surface:#1A1D24; --ink:#E9EAEE; --soft:#A6ACB8; --faint:#7D8494;
+      --rule:#2A2E37; --accent:#8FADEA; --accent-tint:#1C2333; --hl:#3A3520;
+      --gold:#CBAA55; --gold-tint:#2A2517; --barbg:#1A1D24EE;
+      --idbg:#182016; --idline:#8FB380;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --bg:#111318; --surface:#1A1D24; --ink:#E9EAEE; --soft:#A6ACB8; --faint:#7D8494;
+    --rule:#2A2E37; --accent:#8FADEA; --accent-tint:#1C2333; --hl:#3A3520;
+    --gold:#CBAA55; --gold-tint:#2A2517; --barbg:#1A1D24EE;
+    --idbg:#182016; --idline:#8FB380;
+  }
+
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    font-size:16px; line-height:1.55; -webkit-text-size-adjust:100%;
+    margin:0;
+  }
+  .wrap{ max-width:660px; margin:0 auto; padding-inline:20px; padding-block:40px 140px; }
+
+  .back{
+    display:inline-flex; align-items:center; gap:6px; margin-bottom:18px;
+    font-size:13px; color:var(--faint); text-decoration:none;
+  }
+  .back:hover{ color:var(--accent); }
+  .mast{ border-bottom:1px solid var(--rule); padding-bottom:26px; margin-bottom:26px; }
+  .mast .kicker{ font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); font-weight:700; margin:0 0 14px; }
+  h1{ font-family:"EB Garamond",Georgia,serif; font-weight:600; font-size:clamp(34px,8vw,46px); line-height:1.1; margin:0 0 6px; text-wrap:balance; letter-spacing:-.01em; }
+  .mast .sub{ margin:0; color:var(--soft); font-size:15px; }
+  .mast .ital{ font-family:"EB Garamond",Georgia,serif; font-style:italic; font-size:17px; color:var(--faint); margin:10px 0 0; }
+
+  h2{ font-size:20px; font-weight:700; line-height:1.35; margin:0 0 4px; text-wrap:balance; }
+  p{ margin:0 0 15px; color:var(--ink); }
+  .stop p, .outro p{ line-height:1.85; }
+
+  .start{ background:var(--accent); color:#fff; border-radius:6px; padding:22px; margin-bottom:22px; }
+  .start h3{ font-size:15px; font-weight:700; margin:0 0 6px; }
+  .start p{ color:inherit; opacity:.88; font-size:14px; line-height:1.7; margin:0 0 16px; }
+  .bigplay{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    width:100%; padding:15px; border:0; border-radius:5px; cursor:pointer;
+    background:#fff; color:#27407A; font-family:inherit; font-size:16px; font-weight:700;
+  }
+  .bigplay:active{ transform:translateY(1px); }
+
+  .panel{ background:var(--surface); border:1px solid var(--rule); border-radius:4px; padding:20px 22px; margin-bottom:22px; }
+  .panel h3{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); font-weight:700; margin:0 0 14px; }
+  dl{ margin:0; display:grid; grid-template-columns:auto 1fr; gap:9px 18px; font-size:14.5px; }
+  dt{ color:var(--faint); white-space:nowrap; }
+  dd{ margin:0; color:var(--ink); font-variant-numeric:tabular-nums; }
+
+  details{ background:var(--surface); border:1px solid var(--rule); border-radius:4px; padding:14px 18px; margin-bottom:40px; }
+  summary{ cursor:pointer; font-size:14px; font-weight:500; color:var(--soft); }
+  details p{ font-size:14px; color:var(--soft); line-height:1.7; margin:12px 0 0; }
+  details b{ color:var(--ink); }
+
+  .stop{ margin-bottom:54px; }
+  .stop-head{ display:flex; gap:16px; align-items:baseline; margin-bottom:12px; }
+  .num{ font-family:"EB Garamond",Georgia,serif; font-size:40px; line-height:1; color:var(--accent); font-weight:600; flex:none; min-width:36px; }
+  .eyebrow{ font-family:"EB Garamond",Georgia,serif; font-style:italic; font-size:16px; color:var(--faint); margin:0 0 2px; }
+  .stop-head .txt{ flex:1 1 auto; min-width:0; }
+
+  .jump{
+    display:inline-flex; align-items:center; gap:7px; background:none;
+    border:1px solid var(--rule); border-radius:100px; color:var(--accent);
+    font-family:inherit; font-size:12.5px; font-weight:500; padding:6px 13px; cursor:pointer; margin:0 0 18px;
+  }
+  .jump:hover{ border-color:var(--accent); }
+
+  /* 식별 카드 */
+  .ident{ background:var(--idbg); border-left:3px solid var(--idline); border-radius:0 5px 5px 0; padding:16px 18px; margin:0 0 22px; }
+  .ident .lbl{ font-size:11.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--idline); font-weight:700; margin:0 0 11px; }
+  .label-it{
+    font-family:"EB Garamond",Georgia,serif; font-size:17px; line-height:1.45;
+    color:var(--ink); margin:0 0 4px; font-weight:600;
+  }
+  .label-sub{ font-family:"EB Garamond",Georgia,serif; font-style:italic; font-size:14.5px; color:var(--faint); margin:0 0 12px; }
+  .ident ul{ margin:0; padding-left:17px; }
+  .ident li{ font-size:14px; color:var(--soft); line-height:1.7; margin-bottom:5px; }
+  .ident li:last-child{ margin-bottom:0; }
+
+  .photo{
+    display:inline-flex; align-items:center; gap:7px; margin-top:13px;
+    font-size:13.5px; font-weight:500; color:var(--idline); text-decoration:none;
+    border:1px solid var(--idline); border-radius:100px; padding:7px 14px;
+  }
+  .photo:hover{ background:var(--idline); color:var(--idbg); }
+
+
+  .look{ border-left:2px solid var(--accent); background:var(--surface); padding:15px 18px; margin:22px 0 0; border-radius:0 4px 4px 0; }
+  .look .lbl{ font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:700; margin:0 0 8px; }
+  .look p{ font-size:14.5px; color:var(--soft); line-height:1.75; margin:0 0 9px; }
+  .look p:last-child{ margin-bottom:0; }
+
+  .gold .num, .gold .jump{ color:var(--gold); }
+  .gold .look{ border-left-color:var(--gold); background:var(--gold-tint); }
+  .gold .look .lbl{ color:var(--gold); }
+
+  hr{ border:0; border-top:1px solid var(--rule); margin:0 0 52px; }
+  .outro{ border-top:1px solid var(--rule); padding-top:34px; }
+  .outro h2{ margin-bottom:14px; }
+  .note{ font-size:13.5px; color:var(--faint); line-height:1.7; margin-top:30px; }
+
+  .speaking{ background:var(--hl); box-shadow:0 0 0 6px var(--hl); border-radius:2px; }
+
+  #bar{
+    position:fixed; left:0; right:0; bottom:0; z-index:50;
+    background:var(--barbg); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+    border-top:1px solid var(--rule);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
+  }
+  #bar .inner{ max-width:660px; margin:0 auto; display:flex; align-items:center; gap:10px; }
+  #bar button{ border:1px solid var(--rule); background:var(--surface); color:var(--ink); border-radius:100px; cursor:pointer; font-family:inherit; display:flex; align-items:center; justify-content:center; }
+  #bar .side{ width:40px; height:40px; flex:none; font-size:15px; }
+  #bar #pp{ width:52px; height:52px; flex:none; background:var(--accent); border-color:var(--accent); color:var(--surface); font-size:19px; }
+  #status{ flex:1 1 auto; min-width:0; font-size:12.5px; color:var(--faint); line-height:1.4; }
+  #status b{ display:block; color:var(--ink); font-size:13.5px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #rate{ flex:none; font-family:inherit; font-size:13px; padding:8px 6px; background:var(--surface); color:var(--ink); border:1px solid var(--rule); border-radius:6px; }
+  .barrow2{ max-width:660px; margin:8px auto 0; display:flex; align-items:center; gap:14px; flex-wrap:wrap; font-size:12.5px; color:var(--faint); }
+  .barrow2 label{ display:flex; align-items:center; gap:6px; cursor:pointer; }
+  #unsupported{ display:none; font-size:12.5px; color:var(--faint); line-height:1.5; }
+  @media (prefers-reduced-motion:reduce){ *{ scroll-behavior:auto !important; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="back" href="../index.html">← 일정으로</a>
+
+  <header class="mast">
+    <p class="kicker">피렌체</p>
+    <h1>다비드로 가는 길</h1>
+    <p class="sub">아카데미아 미술관 자가 가이드 — 공식 동선 순서 여덟 정거장</p>
+    <p class="ital">Galleria dell'Accademia di Firenze</p>
+  </header>
+
+  <section class="start">
+    <h3>들으면서 걸으세요</h3>
+    <p>아래 버튼을 누르면 한국어로 읽어줍니다. 읽는 문단이 노란색으로 표시돼요. 초록색 상자는 작품이 맞는지 눈으로 대조하는 칸이라 읽어주기에서 빠집니다.</p>
+    <button class="bigplay" id="hero" type="button">▶ 처음부터 재생</button>
+  </section>
+
+  <details id="fallback">
+    <summary>소리가 안 나오면 (다른 방법)</summary>
+    <p><b>아이폰</b> — 설정, 손쉬운 사용, 말하기 콘텐츠, <b>화면 말하기</b>를 켜고 두 손가락으로 화면 위에서 아래로 쓸어내리세요.</p>
+    <p><b>음량</b> — 재생 중일 때 볼륨 버튼을 누르세요. 멈춘 상태에서 누르면 벨소리 음량만 올라갑니다.</p>
+    <p>화면을 끄거나 다른 앱으로 넘어가면 재생이 멈춥니다.</p>
+  </details>
+
+  <section class="panel">
+    <h3>입장 정보</h3>
+    <dl>
+      <dt>예약 입장</dt><dd>예약한 시간에 입장</dd>
+      <dt>개관</dt><dd>08:15 – 18:50</dd>
+      <dt>마지막 입장</dt><dd>18:20</dd>
+      <dt>입구</dt><dd>Via Ricasoli 58</dd>
+      <dt>매표소</dt><dd>Via Ricasoli 105</dd>
+      <dt>관람</dt><dd>1시간 30분 ~ 2시간</dd>
+      <dt>악기관</dt><dd>18:40 이후 입장 제한</dd>
+      <dt>사진</dt><dd>플래시·삼각대 금지</dd>
+    </dl>
+  </section>
+
+  <hr>
+
+  <article class="stop" data-stop="① 콜로소의 방">
+    <div class="stop-head">
+      <div class="num">1</div>
+      <div class="txt">
+        <p class="eyebrow">Sala del Colosso</p>
+        <h2>콜로소의 방 — 어제 본 조각의 원본 모형</h2>
+      </div>
+    </div>
+    <button class="jump" type="button">▶ 여기부터 듣기</button>
+
+    <div class="ident">
+      <p class="lbl">이 작품이 맞는지 확인</p>
+      <p class="label-it">Ratto delle Sabine</p>
+      <p class="label-sub">Giambologna · modello · 1582</p>
+      <ul>
+        <li>방 한가운데 혼자 서 있는 거대한 조각. 다른 전시물은 전부 벽에 걸린 그림입니다</li>
+        <li>세 사람이 나선처럼 위로 꼬여 있음 — 아래 웅크린 남자, 가운데 들어올리는 남자, 위에서 팔을 뻗은 여자</li>
+        <li><b>흰 대리석이 아니라 흙빛에 가까운 탁한 색.</b> 표면이 매끄럽지 않습니다</li>
+      </ul>
+      <a class="photo" href="https://www.google.com/search?tbm=isch&q=Giambologna+Ratto+delle+Sabine+modello+Accademia+Firenze" target="_blank" rel="noopener">📷 사진 보기</a>
+    </div>
+
+    <p>들어서면 첫 번째 큰 방입니다. 한가운데 세 인물이 나선처럼 뒤엉킨 커다란 조각이 서 있습니다. 어제 시뇨리아 광장 로지아 데이 란치에서 보신 잠볼로냐의 사비니 여인의 약탈, 바로 그 작품입니다. 다만 이것은 완성된 대리석이 아니라 그 이전 단계예요.</p>
+    <p>미술관 공식 설명에 따르면 이것은 굽지 않은 점토로 만든 실물 크기 모형입니다. 1582년 작이고, 16세기의 1대 1 모형이 이렇게 온전히 남은 경우는 드뭅니다.</p>
+    <p>대리석은 실수하면 되돌릴 수 없습니다. 한 번 떼어낸 조각은 다시 붙일 수 없어요. 그래서 조각가는 먼저 실물과 똑같은 크기로 모형을 만들어 형태를 완전히 확정한 다음, 그것을 보면서 돌을 깎았습니다. 지금 보고 계신 것이 그 설계도입니다. 어제 본 대리석보다 이 모형이 먼저 존재했어요.</p>
+    <p>만든 사람 이야기를 조금 하겠습니다. 잠볼로냐는 이탈리아 사람이 아닙니다. 지금의 프랑스 북부, 당시 플랑드르 지역에서 태어난 장 드 불로뉴라는 조각가였어요. 로마로 공부하러 왔다가 피렌체에 눌러앉았고, 메디치 가문의 궁정 조각가가 되면서 이름을 이탈리아식으로 바꿔 잠볼로냐가 됐습니다. 미켈란젤로 다음 세대의 피렌체를 대표하는 조각가예요.</p>
+    <p>이 작품에는 재미있는 이야기가 전해집니다. 잠볼로냐는 처음에 무슨 이야기를 조각할지 정하지 않고 시작했다는 거예요. 하나의 돌덩어리에서 세 사람을 한꺼번에 꺼낼 수 있다는 것을 보여주려고 만들었고, 사비니 여인의 약탈이라는 제목은 완성된 뒤에 붙었다고 합니다. 주제가 먼저가 아니라 기술이 먼저였던 셈입니다.</p>
+    <p>그 기술이 무엇이냐면, 정면이 없는 조각입니다. 그전까지 조각에는 대개 정면이 있었어요. 화면처럼 앞에서 보라고 만든 겁니다. 그런데 이 작품은 어느 쪽에서 봐도 새로운 자세가 나옵니다. 세 사람의 몸이 불꽃처럼 비틀려 올라가서, 보는 사람이 한 바퀴 돌아야만 전체가 완성돼요. 이것을 나선형 인물상이라고 부릅니다.</p>
+    <p>그러니 이 모형 앞에서 한 바퀴 도세요. 어제 광장에서는 사람도 많고 조각이 높은 단 위에 있어서 제대로 못 도셨을 겁니다. 여기서는 눈높이에 가깝고 사람도 적습니다. 같은 작품을 제대로 볼 기회는 오늘이에요.</p>
+    <p>이 방의 벽에는 회화가 걸려 있습니다. 어떤 그림이 걸려 있을지는 자료마다 달라서 현장에서 보셔야 합니다. 조각을 먼저 보고 그림은 라벨을 읽으며 도세요.</p>
+
+    <div class="look">
+      <p class="lbl">눈으로 확인</p>
+      <p>표면에 남은 거친 질감과 이음새를 찾아보세요. 대리석이라면 광을 내면서 전부 사라졌을 흔적입니다. 손가락으로 흙을 눌러 붙인 자국이 남아 있는 곳도 있습니다.</p>
+      <p>세 사람의 시선이 각각 어디를 향하는지 보세요. 아래 남자는 위를 올려다보고, 가운데 남자는 앞을 보고, 위 여자는 뒤로 몸을 젖히며 반대편을 봅니다. 시선이 세 방향으로 흩어지면서 조각이 계속 회전하는 느낌을 만듭니다.</p>
+      <p>어제 본 대리석과 비교해보세요. 인물의 자세가 거의 그대로입니다.</p>
+    </div>
+  </article>
+
+  <article class="stop" data-stop="② 노예들의 회랑">
+    <div class="stop-head">
+      <div class="num">2</div>
+      <div class="txt">
+        <p class="eyebrow">Galleria dei Prigioni</p>
+        <h2>노예들의 회랑 — 돌에서 빠져나오다 멈춘 사람들</h2>
+      </div>
+    </div>
+    <button class="jump" type="button">▶ 여기부터 듣기</button>
+
+    <div class="ident">
+      <p class="lbl">이 작품들이 맞는지 확인</p>
+      <p class="label-it">Prigioni &nbsp;·&nbsp; San Matteo &nbsp;·&nbsp; Pietà di Palestrina</p>
+      <p class="label-sub">Michelangelo Buonarroti</p>
+      <ul>
+        <li><b>Prigioni</b> — 긴 복도 양옆 네 점. 사람 형상이 돌덩어리에서 반쯤 빠져나오다 멈춰 있습니다</li>
+        <li><b>Atlante</b> — 네 점 중 <b>머리가 아예 없는 것</b>. 등에 거대한 돌덩이를 그대로 짊어진 모습</li>
+        <li><b>San Matteo</b> — 복도에 따로 선 한 점. 책을 든 팔이 몸에서 비틀려 나오려는 자세</li>
+        <li><b>Pietà di Palestrina</b> — 서 있는 인물이 아니라 <b>죽은 그리스도를 떠받친 무리</b>. 미켈란젤로 작인지 학계 논쟁이 있습니다</li>
+      </ul>
+      <a class="photo" href="https://www.google.com/search?tbm=isch&q=Michelangelo+Prigioni+Atlante+Accademia+Firenze" target="_blank" rel="noopener">📷 사진 보기</a>
+    </div>
+
+    <p>이제 긴 복도로 들어섭니다. 양옆으로 커다란 대리석 덩어리 네 개가 서 있어요. 사람의 형상이 반쯤 빠져나오다 멈춰 있습니다. 미켈란젤로가 만들다 만 노예들입니다.</p>
+    <p>원래는 교황 율리우스 2세의 무덤을 장식할 조각이었습니다. 처음 계획은 어마어마했어요. 사방에서 볼 수 있는 거대한 무덤에 조각 수십 점을 세우는 구상이었고, 미켈란젤로는 그 일에 인생을 걸었습니다. 그런데 교황이 마음을 바꿔 시스티나 성당 천장을 먼저 그리라고 했고, 교황이 죽은 뒤에는 후계자들이 예산을 줄였습니다. 계약은 몇 번이나 다시 쓰였고 규모는 그때마다 작아졌습니다.</p>
+    <p>미켈란젤로는 이 무덤 하나에 40년을 끌려다녔습니다. 스스로 무덤의 비극이라고 불렀어요. 결국 완성된 것은 처음 구상의 그림자 같은 작은 무덤이었고, 이 네 점은 갈 자리를 잃었습니다.</p>
+    <p>그런데 미완성이라는 사실이 오히려 이 조각들을 특별하게 만듭니다. 미켈란젤로는 돌 안에 이미 형상이 들어 있고, 조각가가 하는 일은 그것을 덮고 있는 불필요한 부분을 덜어내는 것뿐이라고 말했습니다. 이 네 점에서는 그 말이 문자 그대로 눈앞에 보입니다. 어깨와 가슴은 이미 빠져나왔는데 다리는 아직 돌 속에 갇혀 있어요.</p>
+    <p>바사리는 미켈란젤로가 돌을 깎는 방식을 이렇게 묘사했습니다. 물이 가득 찬 욕조에서 사람이 천천히 몸을 일으키는 것 같았다고요. 다른 조각가들은 사방에서 골고루 깎아 들어가는데, 미켈란젤로는 정면 한쪽에서부터 파고들었습니다. 그래서 작업을 멈추면 앞쪽은 사람이고 뒤쪽은 아직 바위인 상태가 됩니다. 지금 눈앞의 네 점이 정확히 그 상태예요.</p>
+    <p>표면에 남은 자국도 보세요. 굵고 평행한 선들은 치아처럼 생긴 끌로 쪼아낸 흔적입니다. 완성된 조각에서는 광을 내면서 전부 사라지는 자국인데, 여기서는 작업이 멈춘 그 순간 그대로 남아 있습니다. 끌이 지나간 방향을 따라가면 미켈란젤로가 어느 쪽에 서서 망치를 들었는지까지 짐작할 수 있어요.</p>
+    <p>이 네 점이 여기 오기까지도 사연이 있습니다. 미켈란젤로가 죽은 뒤 조카가 이 조각들을 메디치 가문에 바쳤고, 한동안은 보볼리 정원의 인공 동굴 벽에 박혀 있었습니다. 동굴 장식의 일부로 쓰인 거예요. 20세기 초에야 이 미술관으로 옮겨왔고, 지금 보볼리에 있는 것은 복제본입니다.</p>
+    <p>같은 복도에 성 마태오라는 미완성 사도상이 있습니다. 이것은 두오모를 위해 시작된 작품이었어요. 어제 다녀오신 오페라 델 두오모 박물관의 그 두오모입니다. 열두 사도를 대성당에 세우는 계획이 있었고, 미켈란젤로가 첫 번째를 맡았다가 이 상태로 멈췄습니다. 나머지 열한 점은 아예 시작도 되지 않았습니다.</p>
+    <p>그리고 팔레스트리나 피에타라고 부르는 조각도 이 복도에 있습니다. 죽은 그리스도를 여러 인물이 떠받치고 있는 군상인데, 이것이 정말 미켈란젤로의 작품인지는 아직 논쟁 중입니다. 확정된 사실이 아니라는 점을 알고 보세요.</p>
+    <p>마지막으로 이 복도 자체를 보세요. 19세기에 다비드를 옮겨오면서 새로 지은 공간입니다. 미완성 네 점을 양옆에 세우고 그 끝에 다비드를 놓은 것은 건축가의 연출이에요. 원래부터 이렇게 있던 게 아닙니다.</p>
+
+    <div class="look">
+      <p class="lbl">눈으로 확인</p>
+      <p>네 점 중 머리가 깎이지 않은 것을 찾아보세요. 아틀라스라고 부릅니다. 돌을 짊어진 형상이 가장 극적입니다.</p>
+      <p>복도 끝에 다비드가 보입니다. 이 배치는 우연이 아닙니다. 미완성을 지나야 완성에 닿도록 만들어 놓은 길이에요.</p>
+    </div>
+  </article>
+
+  <article class="stop" data-stop="③ 다비드">
+    <div class="stop-head">
+      <div class="num">3</div>
+      <div class="txt">
+        <p class="eyebrow">Tribuna del David</p>
+        <h2>다비드 — 아직 아무 일도 일어나지 않았다</h2>
+      </div>
+    </div>
+    <button class="jump" type="button">▶ 여기부터 듣기</button>
+
+    <div class="ident">
+      <p class="lbl">이 작품이 맞는지 확인</p>
+      <p class="label-it">David</p>
+      <p class="label-sub">Michelangelo Buonarroti · 1501–1504</p>
+      <ul>
+        <li>천장에서 빛이 떨어지는 <b>둥근 홀 한가운데</b>, 높은 원통형 받침 위. 헷갈릴 수가 없습니다</li>
+        <li>높이 <b>5m 17cm</b>. 왼쪽 어깨에 물매 끈, 오른손은 아래로 늘어뜨린 채 돌을 쥐고 있음</li>
+        <li>발밑에 <b>잘린 머리가 없습니다.</b> 골리앗의 머리가 있으면 다른 작가의 다비드예요</li>
+      </ul>
+      <a class="photo" href="https://www.google.com/search?tbm=isch&q=Michelangelo+David+Galleria+Accademia+Firenze" target="_blank" rel="noopener">📷 사진 보기</a>
+    </div>
+
+    <p>천장에서 빛이 떨어지는 둥근 홀에 다비드가 서 있습니다. 높이 5미터 17센티미터. 미켈란젤로가 스물여섯에 시작해 스물아홉에 끝냈습니다.</p>
+    <p>이 돌은 40년 동안 아무도 손대지 못한 실패작이었습니다. 1464년에 다른 조각가가 이미 몸통과 다리를 깎다가 스승이 죽자 포기했고, 그다음 사람도 계약만 하고 손을 뗐습니다. 그 뒤로 25년 동안 두오모 공방 마당에 누운 채 비바람을 맞았어요. 사람들은 그것을 그냥 거인이라고 불렀습니다. 미켈란젤로는 남이 이미 잘라낸 그 좁은 폭 안에서 이 인물을 꺼냈습니다.</p>
+    <p>그게 왜 대단한지 한 번 생각해보세요. 새 돌을 받아 시작한 게 아닙니다. 앞사람이 잘못 깎아놓은 자국을 피해가면서, 남은 두께 안에서만 자세를 잡아야 했어요. 여유가 없으니 실수도 허용되지 않았습니다. 3년 동안 작업장에 나무 울타리를 두르고 아무에게도 보여주지 않았다고 합니다.</p>
+    <p>이 조각이 다른 다비드들과 결정적으로 다른 점이 하나 있습니다. 도나텔로도 베로키오도 골리앗의 잘린 머리를 발밑에 두고 선 승리자를 만들었어요. 미켈란젤로는 싸우기 전을 만들었습니다. 왼쪽 어깨에 물매를 걸치고, 오른손에 돌을 쥐고, 아직 만나지 않은 상대를 노려보는 중입니다. 아직 아무 일도 일어나지 않았어요.</p>
+    <p>그 긴장이 몸 전체에 퍼져 있습니다. 목의 힘줄이 서 있고, 눈썹 사이가 좁혀져 있고, 오른손 등의 혈관이 부풀어 있습니다. 왼발은 살짝 들려 있고 몸무게는 오른다리에 실려 있어요. 지금 막 한 발을 내디디려는 자세입니다. 정지한 조각인데 다음 동작이 보입니다.</p>
+    <p>머리와 손이 유난히 큰 것은 비례를 잘못 잡은 게 아니라, 원래 대성당 지붕 높이에 올려 아래에서 올려다볼 조각으로 설계됐기 때문입니다. 완성되고 보니 너무 훌륭해서 지붕에 올리기 아깝다는 말이 나왔고, 어디에 세울지 정하려고 위원회가 열렸습니다. 레오나르도 다 빈치와 보티첼리도 그 자리에 있었어요. 결론은 시청사인 베키오 궁전 정문 앞이었습니다.</p>
+    <p>자리가 바뀌면서 의미도 바뀌었습니다. 성당 지붕 위의 성경 인물이 아니라, 시청 앞에 선 도시의 상징이 된 거예요. 당시 피렌체는 메디치 가문을 쫓아내고 공화국을 막 되찾은 참이었습니다. 거인 앞에 선 작은 소년은 강대국 사이에 낀 이 도시 자신이었습니다. 그래서 이 조각은 종교화가 아니라 정치 선언에 가깝습니다.</p>
+    <p>1873년에 시뇨리아 광장에서 이곳으로 옮겨왔고, 1882년에 지금 이 채광창 홀이 완성됐습니다. 광장에 서 있는 것은 복제본입니다. 370년 동안 비와 바람을 맞은 뒤에야 지붕 아래로 들어온 셈이에요. 지금도 발목 부분의 미세한 균열 때문에 정기적으로 상태를 점검합니다.</p>
+
+    <div class="look">
+      <p class="lbl">눈으로 확인</p>
+      <p>한 바퀴 도세요. 왼쪽 옆, 뒤, 오른쪽 옆, 정면 순서로요. 등의 근육과 척추의 비틀림은 뒤에서만 보입니다.</p>
+      <p>옆에서 보면 놀랄 만큼 얇습니다. 남이 이미 잘라낸 폭 안에서만 작업할 수 있었던 결과예요.</p>
+      <p>왼발을 보세요. 1991년에 한 남자가 망치로 발가락을 부순 일이 있었습니다. 복원됐지만 흔적이 남아 있습니다.</p>
+      <p>눈동자가 깊게 파여 있습니다. 그림자가 고이면서 시선이 살아나도록 판 것입니다.</p>
+    </div>
+  </article>
+
+  <article class="stop" data-stop="④ 석고관">
+    <div class="stop-head">
+      <div class="num">4</div>
+      <div class="txt">
+        <p class="eyebrow">Gipsoteca Bartolini · Salone dell'Ottocento</p>
+        <h2>석고관 — 조각 공장의 내부</h2>
+      </div>
+    </div>
+    <button class="jump" type="button">▶ 여기부터 듣기</button>
+
+    <div class="ident">
+      <p class="lbl">이 방이 맞는지 확인</p>
+      <p class="label-it">Gipsoteca Bartolini</p>
+      <p class="label-sub">Lorenzo Bartolini · Luigi Pampaloni · 19세기</p>
+      <ul>
+        <li>다비드 홀에서 <b>왼쪽</b>으로 나가면 나오는 길고 밝은 방</li>
+        <li><b>흰 석고 흉상과 전신상이 수백 점</b> 빼곡히 늘어서 있습니다. 한 점씩 떨어뜨려 놓은 다른 방들과 완전히 다른 풍경이에요</li>
+        <li>가까이 가면 얼굴 표면에 <b>작은 검은 점(금속 못)</b>이 박혀 있습니다. 이게 결정적인 표시입니다</li>
+      </ul>
+      <a class="photo" href="https://www.google.com/search?tbm=isch&q=Gipsoteca+Bartolini+Accademia+Firenze" target="_blank" rel="noopener">📷 사진 보기</a>
+    </div>
+
+    <p>다비드 홀 왼쪽으로 나가면 흰 석고상이 빼곡히 들어찬 긴 방이 나옵니다. 19세기 조각가 로렌초 바르톨리니와 루이지 팜팔로니의 작업실 유산을 그대로 옮겨 놓은 것입니다. 흉상과 전신상 수백 점이 한꺼번에 서 있어서, 갑자기 사람 많은 방에 들어선 느낌이 듭니다.</p>
+    <p>이 방에서 꼭 보실 것은 석고 표면에 박힌 작은 금속 못들입니다. 얼굴과 어깨 여기저기에 검은 점처럼 박혀 있어요. 장식이 아닙니다. 석고 모형을 대리석으로 옮길 때 쓰는 기준점입니다. 못 하나하나의 좌표를 측정해 대리석 블록 위에 옮기고, 그 깊이까지 깎아 들어가면 형태가 정확히 재현됩니다.</p>
+    <p>이 방식을 점 찍기라고 부릅니다. 모형 위의 못과 대리석 위의 같은 점 사이를 기계 팔로 재서, 여기를 몇 센티미터 깎으라고 알려주는 겁니다. 그러면 조각가 본인이 아니라 공방의 직인들이 깎아도 형태가 어긋나지 않아요. 유명 조각가는 점토로 모형만 만들고, 대리석은 사람을 써서 옮기는 분업이 가능해집니다. 19세기 조각이 그렇게 만들어졌습니다.</p>
+    <p>세 번째 방에서 본 다비드가 한 사람의 손과 판단으로 만들어진 것이라면, 이 방은 조각이 어떻게 산업이 되었는지를 보여줍니다. 350년 사이의 차이입니다.</p>
+    <p>바르톨리니라는 사람 자체도 재미있습니다. 그는 이 건물에 있던 미술학교의 조각 교수였는데, 당시 아카데미의 규칙과 사이가 나빴습니다. 학생들에게 이상적인 고대 조각만 베끼게 하는 교육에 반대했어요. 사람 몸은 원래 울퉁불퉁하고 각자 다르게 생겼다는 겁니다. 그래서 일부러 몸이 굽은 사람을 교실에 세워놓고 그리게 했다는 이야기가 전해집니다. 학교가 발칵 뒤집혔다고 해요.</p>
+    <p>그 관점으로 이 석고상들을 보시면 얼굴이 다르게 보입니다. 신화 속 미남미녀가 아니라, 턱이 처지고 코가 휘고 이마가 벗겨진 실제 사람들의 얼굴이 많습니다. 주문한 사람의 얼굴을 그대로 남긴 초상 조각이에요. 19세기 피렌체에 살던 사람들의 얼굴이 이 방에 그대로 있습니다.</p>
+
+    <div class="look">
+      <p class="lbl">눈으로 확인</p>
+      <p>얼굴에 박힌 검은 점들을 찾아보세요. 코끝, 광대, 턱처럼 튀어나온 부분에 집중적으로 박혀 있습니다. 평평한 뺨에는 거의 없어요. 굴곡이 심한 곳일수록 기준점이 더 필요했기 때문입니다.</p>
+      <p>같은 인물의 흉상이 여러 점 나란히 선 경우를 찾아보세요. 주문이 들어올 때마다 같은 모형에서 계속 복제했다는 뜻입니다.</p>
+    </div>
+  </article>
+
+  <article class="stop gold" data-stop="⑤ 중세 회화실">
+    <div class="stop-head">
+      <div class="num">5</div>
+      <div class="txt">
+        <p class="eyebrow">Sale di Pacino · Giotto · Giovanni da Milano e Orcagna</p>
+        <h2>중세 회화실 셋 — 둥근 얼굴들의 방</h2>
+      </div>
+    </div>
+    <button class="jump" type="button">▶ 여기부터 듣기</button>
+
+    <div class="ident">
+      <p class="lbl">이 방들이 맞는지 확인</p>
+      <p class="label-it">Albero della Vita</p>
+      <p class="label-sub">Pacino di Bonaguida · 14세기 초</p>
+      <ul>
+        <li>석고관을 지나면 나오는 <b>같은 층의 어두운 방 셋</b>입니다. 위층이 아닙니다</li>
+        <li>전부 <b>금박 바탕 패널화</b>. 액자가 뾰족한 삼각형이나 아치 모양</li>
+        <li><b>생명의 나무</b> — 큰 세로 패널에 <b>나무가 그려져 있고 가지마다 작은 원형 장면</b>이 달려 있습니다. 이 방의 간판 작품이에요</li>
+        <li>조토와 그 제자들의 방, 조반니 다 밀라노와 오르카냐 형제의 방이 이어집니다</li>
+      </ul>
+      <a class="photo" href="https://www.galleriaaccademiafirenze.it/en/artworks/the-tree-of-life-pacino-da-bonaguida/" target="_blank" rel="noopener">📷 사진 보기</a>
+    </div>
+
+    <p>석고관을 지나면 어두운 방 셋이 이어집니다. 위층이 아니라 같은 층이에요. 전부 금박 바탕의 패널화입니다.</p>
+    <p>첫 번째는 파치노 디 보나구이다의 방입니다. 여기 생명의 나무라는 큰 그림이 있어요. 십자가가 나무로 자라나고 가지마다 작은 원 안에 그리스도의 생애 장면이 하나씩 들어 있습니다. 한 화면에 이야기 수십 개를 동시에 담는 중세식 구성이에요.</p>
+    <p>이 그림은 화가가 지어낸 구도가 아닙니다. 성 보나벤투라라는 신학자가 쓴 생명의 나무라는 책이 있는데, 그리스도의 일생을 나무 한 그루에 비유해 가지와 열매로 나눠 설명한 글입니다. 이 그림은 그 책을 그대로 그림으로 옮긴 겁니다. 글을 못 읽는 사람도 그림만 보면 순서대로 따라갈 수 있게요. 수녀원에 걸려 있던 그림이고, 수녀들이 이 앞에서 순서대로 묵상했습니다.</p>
+    <p>그러니 이 그림은 한 장면을 감상하는 그림이 아니라 읽는 그림입니다. 아래에서 위로 올라가며 읽습니다. 맨 아래에는 아담과 이브의 이야기가, 위로 갈수록 그리스도의 생애가 펼쳐지고, 꼭대기에 천국이 있어요.</p>
+    <p>다음은 조토와 그 제자들의 방, 그리고 조반니 다 밀라노와 오르카냐 형제의 방입니다.</p>
+    <p>어제 두오모 박물관에서 왜 그림 속 사람들 얼굴이 전부 둥근지 물어보셨죠. 이 방들이 그 질문의 답입니다.</p>
+    <p>화가들은 얼굴을 원에서 시작해 그렸습니다. 두개골을 원 하나로 잡고 가로로 삼등분한 다음 이목구비를 끼워 넣었어요. 얼굴은 특정한 사람이 아니라 기호였습니다. 젊은 성인, 늙은 주교, 성모. 필요한 유형이 정해져 있었고, 화가는 공방의 도안집에서 그것을 베꼈습니다. 개성을 넣으면 오히려 잘못된 그림이었어요.</p>
+    <p>재료 때문이기도 합니다. 이 시대 그림은 유화가 아니라 달걀 노른자에 안료를 갠 템페라입니다. 템페라는 몇 초 만에 마르기 때문에 색을 문질러 섞을 수가 없어요. 유화처럼 부드럽게 그라데이션을 만드는 대신, 가는 붓질을 수없이 겹쳐서 밝기를 올려야 합니다. 그래서 피부가 매끈한 덩어리가 아니라 촘촘한 선의 집합으로 보입니다.</p>
+    <p>한 가지 더 있습니다. 당시 화가들은 살색을 칠하기 전에 바탕을 초록빛 회색으로 깔았습니다. 그 위에 밝은 살색을 얇게 얹으면 그늘진 부분에서 아래의 초록이 비쳐 나와요. 중세 그림 속 얼굴이 어딘가 창백하고 푸르스름해 보이는 이유가 이것입니다. 실수가 아니라 정해진 공정이었어요.</p>
+    <p>이걸 누가 어떻게 했는지도 기록이 남아 있습니다. 바로 이 시기 피렌체의 화가가 공방에서 쓰는 기술을 전부 받아쓴 책을 남겼거든요. 안료를 어떻게 갈고, 금박을 어떻게 붙이고, 얼굴을 어느 순서로 칠하는지가 요리법처럼 적혀 있습니다. 지금 보고 계신 그림들이 그 설명서대로 만들어진 물건입니다.</p>
+    <p>그리고 이 방들을 나와 다비드 쪽을 다시 지나가게 됩니다. 100년 뒤에 태어난, 뼈와 근육과 핏줄이 있는 얼굴이요. 오늘 하루에 그 변화를 두 번 보시는 셈입니다.</p>
+
+    <div class="look">
+      <p class="lbl">눈으로 확인</p>
+      <p>등장인물 스무 명의 얼굴을 훑어보세요. 거의 구분이 안 됩니다. 그게 당시의 목표였습니다.</p>
+      <p>금박 위에 찍힌 작은 무늬들을 찾아보세요. 도구로 눌러 찍은 것이라 각도를 바꾸면 빛이 다르게 튑니다. 원래 이 그림들은 촛불 아래 걸려 있었습니다. 불꽃이 흔들릴 때마다 금박이 같이 일렁였을 거예요.</p>
+      <p>성모의 겉옷 색을 보세요. 유난히 진한 파랑이면 청금석을 갈아 만든 안료입니다. 아프가니스탄에서 실어 온 돌이라 금보다 비쌌고, 계약서에 이 색을 얼마나 쓸지 못박는 일도 있었습니다. 제일 비싼 색을 제일 중요한 인물에게 입힌 겁니다.</p>
+      <p>그림 아래쪽 가장자리를 보세요. 촛농이나 손때로 닳은 자국이 남은 것들이 있습니다. 미술관 작품이기 전에 매일 쓰이던 물건이었습니다.</p>
+    </div>
+  </article>
+
+  <article class="stop" data-stop="⑥ 악기 박물관">
+    <div class="stop-head">
+      <div class="num">6</div>
+      <div class="txt">
+        <p class="eyebrow">Museo degli Strumenti Musicali</p>
+        <h2>악기 박물관 — 피아노가 태어난 도시</h2>
+      </div>
+    </div>
+    <button class="jump" type="button">▶ 여기부터 듣기</button>
+
+    <div class="ident">
+      <p class="lbl">이 방이 맞는지 확인</p>
+      <p class="label-it">Viola tenore &nbsp;·&nbsp; Violoncello</p>
+      <p class="label-sub">Antonio Stradivari</p>
+      <p class="label-it">Spinetta</p>
+      <p class="label-sub">Bartolomeo Cristofori</p>
+      <ul>
+        <li>유리 진열장 안에 <b>악기 약 50점</b>. 메디치가와 로렌 가문의 수집품입니다</li>
+        <li>스트라디바리는 <b>현악기 두 점</b> — 테너 비올라와 첼로. 바이올린이 아닙니다</li>
+        <li>크리스토포리는 <b>스피넷(작은 건반악기)</b>. 피아노 실물은 여기 없습니다</li>
+        <li>악기관은 <b>18:40 이후 입장이 제한</b>됩니다</li>
+      </ul>
+      <a class="photo" href="https://www.google.com/search?tbm=isch&q=Cristofori+spinetta+Stradivari+strumenti+musicali+Accademia+Firenze" target="_blank" rel="noopener">📷 사진 보기</a>
+    </div>
+
+    <p>악기만 모아둔 방이 있습니다. 사람들이 잘 안 들르는 곳인데, 놓치기 아까운 방입니다. 메디치 가문과 로렌 가문이 수집한 악기 오십여 점이 있어요.</p>
+    <p>안토니오 스트라디바리가 만든 현악기 두 점이 있습니다. 테너 비올라와 첼로예요. 메디치가 주문한 한 벌 중 남은 것들입니다. 원래는 바이올린 둘, 비올라 둘, 첼로 하나로 된 다섯 점 한 세트였는데 뿔뿔이 흩어졌고, 여기 두 점이 남았습니다. 특히 테너 비올라는 스트라디바리가 만든 것 중 온전히 남은 몇 안 되는 예로 꼽힙니다.</p>
+    <p>왜 메디치가 크레모나의 장인에게 직접 주문했느냐면, 당시 이 궁정에 음악에 미친 사람이 있었기 때문입니다. 페르디난도 데 메디치라는 왕자였어요. 직접 건반을 잘 쳤고, 유럽에서 좋다는 악기와 연주자를 끌어모았습니다. 이 방의 수집품 대부분이 그 사람 취미의 결과입니다.</p>
+    <p>그리고 바르톨로메오 크리스토포리가 만든 건반악기가 있습니다. 크리스토포리는 파도바 출신인데 그 왕자가 스카우트해서 피렌체로 데려왔고, 궁정의 악기를 관리하고 만드는 일을 맡았습니다. 그리고 바로 이 도시에서 피아노를 발명했습니다.</p>
+    <p>그전까지 건반악기의 왕은 쳄발로였습니다. 건반을 누르면 지렛대가 올라가면서 작은 깃촉이 줄을 튕기는 구조예요. 뜯는 방식이라 손가락에 아무리 힘을 줘도 튕기는 세기가 같습니다. 여리게 치든 세게 치든 나오는 소리 크기가 똑같아요. 연주자가 표현할 수 있는 게 빠르기와 장식음뿐이었습니다.</p>
+    <p>크리스토포리는 줄을 튕기지 않고 때리기로 했습니다. 작은 망치로 줄을 쳐서 소리를 내면, 손가락에 힘을 준 만큼 망치가 세게 날아가니 소리도 커집니다. 문제는 그다음이에요. 망치가 줄에 붙어 있으면 소리가 바로 죽어버립니다. 그래서 망치가 줄을 때린 직후 스스로 튕겨 물러나되, 건반에서 손을 떼기 전까지는 다시 때리지 않고 대기하는 장치를 만들었습니다. 이게 발명의 핵심이고, 오늘날 피아노 안에도 같은 원리가 들어 있습니다.</p>
+    <p>그가 이 악기에 붙인 이름이 약하게도 세게도 소리 나는 쳄발로였습니다. 이탈리아어로 피아노는 약하게, 포르테는 세게라는 뜻이에요. 그 긴 이름이 줄고 줄어서 오늘날의 피아노가 됐습니다. 악기 이름에 그 악기가 해결한 문제가 그대로 들어 있는 셈입니다.</p>
+    <p>다만 크리스토포리가 만든 피아노 실물은 여기에 없습니다. 현존하는 세 대는 뉴욕과 로마와 라이프치히에 있어요. 여기 있는 것은 그가 만든 다른 건반악기입니다. 발명품 자체는 없지만, 발명한 사람이 일하던 궁정의 악기들이 여기 있는 겁니다.</p>
+    <p>한 가지 덧붙이면, 이 발명은 당대에 별로 주목받지 못했습니다. 너무 복잡하고 비쌌고, 소리도 쳄발로만큼 화려하지 않다는 평이 있었어요. 피아노가 쳄발로를 밀어내는 데는 그 뒤로 백 년 가까이 걸립니다. 모차르트가 활동할 무렵에야 표준이 됐어요.</p>
+
+    <div class="look">
+      <p class="lbl">눈으로 확인</p>
+      <p>건반 악기의 뚜껑 안쪽 장식을 보세요. 메디치 문장이 그려진 것들이 있습니다. 궁정 악기는 소리만큼이나 보여주는 물건이기도 했습니다.</p>
+      <p>현악기의 옆면과 뒷면을 보세요. 나뭇결이 호랑이 무늬처럼 물결치는 단풍나무를 씁니다. 빛을 비추는 각도에 따라 무늬가 살아 움직입니다.</p>
+      <p>바이올린 계열 악기의 f자 구멍 모양과 크기를 서로 비교해보세요. 만든 사람마다 다릅니다. 지금은 이 곡선 하나로 제작자를 구분합니다.</p>
+    </div>
+  </article>
+
+  <article class="stop" data-stop="⑦ 특별전시실">
+    <div class="stop-head">
+      <div class="num">7</div>
+      <div class="txt">
+        <p class="eyebrow">Mostre temporanee</p>
+        <h2>특별전시실 — 무엇이 걸려 있는지는 모릅니다</h2>
+      </div>
+    </div>
+    <button class="jump" type="button">▶ 여기부터 듣기</button>
+
+    <div class="ident">
+      <p class="lbl">확인할 것</p>
+      <p class="label-it">Mostre temporanee</p>
+      <p class="label-sub">악기관과 서점 사이</p>
+      <ul>
+        <li>입구에서 받는 안내지나 방 앞 안내판에 <b>전시 제목</b>이 적혀 있습니다</li>
+        <li>특별전 때문에 <b>상설 작품이 자리를 옮기거나 잠시 빠질 수</b> 있습니다</li>
+      </ul>
+      <a class="photo" href="https://www.galleriaaccademiafirenze.it/en/" target="_blank" rel="noopener">🔎 현재 특별전 확인</a>
+    </div>
+
+    <p>악기관을 지나면 특별전시실이 있습니다. 여기에 지금 무엇이 걸려 있는지는 제가 확인하지 못했습니다. 현장 안내판을 읽어보세요.</p>
+    <p>한 가지 알아두실 것은, 특별전이 열리면 상설 전시 작품이 자리를 옮기거나 잠시 빠질 수 있다는 점입니다. 이 가이드에서 설명한 작품이 그 자리에 없으면 그 때문일 가능성이 큽니다. 직원에게 물어보시면 됩니다.</p>
+    <p>피곤하시면 여기는 건너뛰어도 괜찮습니다. 앞의 여섯 방이 이 미술관의 본체이고, 여기는 그때그때 바뀌는 덤입니다. 다만 다리 쉬기에는 대개 이 방이 제일 한산해요.</p>
+  </article>
+
+  <article class="stop gold" data-stop="⑧ 위층 로렌초 모나코">
+    <div class="stop-head">
+      <div class="num">8</div>
+      <div class="txt">
+        <p class="eyebrow">Primo piano · sale 10–12</p>
+        <h2>위층 — 로렌초 모나코와 후기 고딕</h2>
+      </div>
+    </div>
+    <button class="jump" type="button">▶ 여기부터 듣기</button>
+
+    <div class="ident">
+      <p class="lbl">이 방들이 맞는지 확인</p>
+      <p class="label-it">Lorenzo Monaco e il tardo gotico</p>
+      <p class="label-sub">Sale 10 – 12 · primo piano</p>
+      <ul>
+        <li><b>계단을 올라간 층</b>입니다. 5번의 중세 방들과 헷갈리지 마세요 — 그쪽은 같은 층이었습니다</li>
+        <li>역시 금박 바탕이지만 <b>색이 훨씬 화려하고 선이 하늘거립니다.</b> 옷자락이 물결치듯 휘어 있어요</li>
+        <li>13번 방은 <b>교실</b>이라 전시가 없습니다</li>
+      </ul>
+      <a class="photo" href="https://www.google.com/search?tbm=isch&q=Lorenzo+Monaco+Galleria+dell%27Accademia+Firenze" target="_blank" rel="noopener">📷 사진 보기</a>
+    </div>
+
+    <p>계단을 올라가면 로렌초 모나코와 후기 고딕 회화를 모아둔 방이 셋 있습니다. 열 번부터 열두 번 방입니다.</p>
+    <p>로렌초 모나코는 수도사이자 화가였습니다. 이름 자체가 수도사 로렌초라는 뜻이에요. 본명은 따로 있었는데 수도원에 들어가면서 이 이름을 받았고, 그대로 화가 이름이 됐습니다. 그는 피렌체의 수도원에 살면서 필사본에 그림을 그리는 일부터 시작했어요. 작은 책 속 그림을 그리던 손이 커다란 제단화로 옮겨간 겁니다. 그래서 그의 그림은 크기가 커도 세공품 같은 정밀함이 남아 있습니다.</p>
+    <p>아래층에서 보신 14세기 그림들보다 100년쯤 뒤인데, 금바탕은 그대로 쓰면서 색은 훨씬 밝아지고 선은 하늘거립니다. 분홍, 연보라, 물빛 같은 색이 나옵니다. 아래층 그림에는 없던 색이에요.</p>
+    <p>인물의 옷자락을 보세요. 아래층 그림에서는 옷이 묵직하게 떨어졌는데, 여기서는 물결처럼 휘어 오릅니다. 실제 천이라면 그렇게 접히지 않아요. 사실적으로 보이려고 그린 게 아니라 아름다운 곡선을 위해 그린 겁니다. 이런 취향이 당시 유럽 궁정에서 동시에 유행해서, 국제 고딕 양식이라고 부릅니다.</p>
+    <p>이 방들이 흥미로운 이유가 하나 더 있습니다. 로렌초 모나코가 활동하던 바로 그 시기에, 같은 도시에서 완전히 반대 방향의 실험이 시작됩니다. 브루넬레스키가 원근법을 따지고, 마사초가 사람 몸에 실제 무게를 그려 넣기 시작해요. 우아한 곡선의 마지막 세대와 사실적인 공간의 첫 세대가 같은 골목을 걸어 다녔습니다.</p>
+    <p>그러니까 오늘 이 미술관 안에서 세 단계를 다 보시는 겁니다. 14세기의 둥근 얼굴, 15세기 초의 화려한 곡선, 그리고 1504년의 다비드요. 아래층에서 위층으로 올라온 것뿐인데 200년을 건너왔습니다.</p>
+
+    <div class="look">
+      <p class="lbl">눈으로 확인</p>
+      <p>천사와 성모의 옷자락 끝을 따라가 보세요. 바닥에 닿은 다음에도 선이 한 번 더 말려 올라갑니다.</p>
+      <p>금바탕과 인물 사이의 경계를 보세요. 파낸 선으로 후광을 구분하고, 그 안에 작은 무늬를 찍어 넣었습니다.</p>
+    </div>
+  </article>
+
+  <section class="outro" data-stop="나오면서">
+    <h2>나오면서</h2>
+    <p>출구는 서점을 지나 비아 리카솔리 쪽입니다. 오전에 우피치, 오후에 아카데미아까지 보셨으니 오늘 하루에 피렌체가 가진 것의 절반 이상을 보신 겁니다.</p>
+    <p>나가기 전에 한 가지만 정리하고 가겠습니다. 오늘 이 건물에서 본 것은 결국 같은 질문의 여러 답이었어요. 돌과 나무판 앞에 선 사람이 무엇을 남길 수 있는가 하는 질문입니다. 14세기 화가는 규칙대로 그려서 이야기를 남겼고, 미켈란젤로는 남이 버린 돌에서 사람을 꺼냈고, 19세기 조각가들은 그 일을 여러 사람이 나눠 할 수 있게 만들었고, 크리스토포리는 손가락 힘이 소리가 되게 했습니다.</p>
+    <p>그중 하나만 기억하신다면 저는 두 번째 방을 고르겠습니다. 다비드는 사진으로 수없이 보셨을 겁니다. 그런데 돌에서 반쯤 빠져나오다 멈춘 네 사람은 사진으로는 아무 느낌이 없어요. 그 앞에 직접 서야만 압니다.</p>
+    <p>내일은 여섯 시 기상, 피사와 친퀘테레입니다. 오늘 저녁은 무리하지 마세요.</p>
+    <p class="note">방 순서는 미술관 공식 안내의 관람 동선을 따랐습니다. 특별전이나 보존 작업으로 작품이 자리를 옮기거나 빠져 있을 수 있습니다. 초록색 상자의 이탈리아어는 벽 라벨에 적힌 표기이니, 설명과 작품이 맞는지 그것으로 대조하세요.</p>
+  </section>
+
+</div>
+
+<div id="bar">
+  <div class="inner">
+    <button class="side" id="prev" type="button" aria-label="이전 문단">⏮</button>
+    <button id="pp" type="button" aria-label="재생">▶</button>
+    <button class="side" id="next" type="button" aria-label="다음 문단">⏭</button>
+    <div id="status"><b>준비됨</b><span id="sub">재생을 누르세요</span><span id="unsupported">이 브라우저는 읽어주기를 지원하지 않습니다.</span></div>
+    <select id="rate" aria-label="속도">
+      <option value="0.8">0.8×</option>
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1.0×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+    </select>
+  </div>
+  <div class="barrow2">
+    <label><input type="checkbox" id="inclLook" checked> "눈으로 확인"도 읽기</label>
+  </div>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var ppBtn=document.getElementById('pp'), prevBtn=document.getElementById('prev'),
+      nextBtn=document.getElementById('next'), heroBtn=document.getElementById('hero'),
+      rateSel=document.getElementById('rate'), lookChk=document.getElementById('inclLook'),
+      statTitle=document.querySelector('#status b'), statSub=document.getElementById('sub'),
+      unsup=document.getElementById('unsupported');
+
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    unsup.style.display='block'; statTitle.style.display='none'; statSub.style.display='none';
+    ppBtn.disabled=prevBtn.disabled=nextBtn.disabled=heroBtn.disabled=true;
+    document.getElementById('fallback').open=true;
+    return;
+  }
+
+  var chunks=[], idx=0, playing=false, voice=null;
+
+  function pickVoice(){
+    var vs=synth.getVoices()||[];
+    var ko=vs.filter(function(v){ return (v.lang||'').toLowerCase().indexOf('ko')===0; });
+    voice = ko.length ? ko[0] : null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function splitText(t){
+    var parts=[], cur='';
+    for(var i=0;i<t.length;i++){
+      var ch=t[i]; cur+=ch;
+      if((ch==='.'||ch==='!'||ch==='?') && (i+1>=t.length || t[i+1]===' ')){ parts.push(cur.trim()); cur=''; }
+    }
+    if(cur.trim()) parts.push(cur.trim());
+    if(!parts.length) parts=[t];
+    var out=[], buf='';
+    for(var j=0;j<parts.length;j++){
+      if((buf+parts[j]).length>170 && buf){ out.push(buf.trim()); buf=parts[j]+' '; }
+      else { buf+=parts[j]+' '; }
+    }
+    if(buf.trim()) out.push(buf.trim());
+    return out;
+  }
+
+  function build(){
+    chunks=[];
+    var blocks=document.querySelectorAll('.stop, .outro');
+    for(var b=0;b<blocks.length;b++){
+      var blk=blocks[b];
+      var name=blk.getAttribute('data-stop')||'';
+      var nodes=blk.querySelectorAll('h2, p');
+      for(var n=0;n<nodes.length;n++){
+        var el=nodes[n];
+        if(el.closest('.ident')) continue;
+        if(el.classList.contains('lbl')) continue;
+        if(el.classList.contains('note')) continue;
+        var inLook=!!el.closest('.look');
+        if(inLook && !lookChk.checked) continue;
+        var txt=(el.textContent||'').trim();
+        if(!txt) continue;
+        var pieces=splitText(txt);
+        for(var p=0;p<pieces.length;p++){ chunks.push({el:el, text:pieces[p], stop:name}); }
+      }
+    }
+  }
+  build();
+
+  function clearHL(){ var c=document.querySelector('.speaking'); if(c) c.classList.remove('speaking'); }
+  function highlight(el){
+    clearHL(); el.classList.add('speaking');
+    var r=el.getBoundingClientRect();
+    if(r.top<90 || r.bottom>window.innerHeight-160){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+  }
+  function updateUI(){
+    ppBtn.textContent = playing ? '❚❚' : '▶';
+    ppBtn.setAttribute('aria-label', playing ? '일시정지' : '재생');
+    heroBtn.textContent = playing ? '❚❚ 일시정지' : '▶ 처음부터 재생';
+    if(chunks.length){
+      var c=chunks[Math.min(idx, chunks.length-1)];
+      statTitle.textContent = c.stop || '가이드';
+      statSub.textContent = Math.min(idx+1, chunks.length)+' / '+chunks.length+(playing?' · 재생 중':'');
+    }
+  }
+  function speakCurrent(){
+    if(idx>=chunks.length){ playing=false; idx=0; clearHL(); updateUI(); return; }
+    var c=chunks[idx];
+    highlight(c.el); updateUI();
+    var u=new SpeechSynthesisUtterance(c.text);
+    u.lang='ko-KR'; if(voice) u.voice=voice;
+    u.rate=parseFloat(rateSel.value)||1; u.pitch=1;
+    u.onend=function(){ if(!playing) return; idx++; speakCurrent(); };
+    u.onerror=function(){ if(!playing) return; idx++; speakCurrent(); };
+    synth.speak(u);
+  }
+  function playFrom(i){
+    synth.cancel();
+    idx=Math.max(0, Math.min(i, chunks.length-1));
+    playing=true;
+    setTimeout(speakCurrent, 60);
+  }
+  function pause(){ playing=false; synth.cancel(); updateUI(); }
+
+  ppBtn.addEventListener('click', function(){ if(playing) pause(); else playFrom(idx); });
+  heroBtn.addEventListener('click', function(){ if(playing) pause(); else playFrom(0); });
+  prevBtn.addEventListener('click', function(){
+    var cur=chunks[idx]?chunks[idx].el:null, j=idx-1;
+    while(j>0 && chunks[j].el===cur) j--;
+    if(playing) playFrom(j); else { idx=Math.max(0,j); if(chunks[idx]) highlight(chunks[idx].el); updateUI(); }
+  });
+  nextBtn.addEventListener('click', function(){
+    var cur=chunks[idx]?chunks[idx].el:null, j=idx+1;
+    while(j<chunks.length-1 && chunks[j].el===cur) j++;
+    if(playing) playFrom(j); else { idx=Math.min(chunks.length-1,j); if(chunks[idx]) highlight(chunks[idx].el); updateUI(); }
+  });
+  rateSel.addEventListener('change', function(){ if(playing) playFrom(idx); });
+  lookChk.addEventListener('change', function(){
+    var was=playing, anchor=chunks[idx]?chunks[idx].el:null;
+    pause(); build();
+    var ni=0;
+    if(anchor){ for(var i=0;i<chunks.length;i++){ if(chunks[i].el===anchor){ ni=i; break; } } }
+    idx=ni;
+    if(was) playFrom(ni); else updateUI();
+  });
+
+  var jumps=document.querySelectorAll('.jump');
+  for(var k=0;k<jumps.length;k++){
+    (function(btn){
+      btn.addEventListener('click', function(){
+        var blk=btn.closest('.stop'), h=blk.querySelector('h2');
+        for(var i=0;i<chunks.length;i++){ if(chunks[i].el===h){ playFrom(i); return; } }
+      });
+    })(jumps[k]);
+  }
+  var paras=document.querySelectorAll('.stop p, .outro p, .stop h2, .outro h2');
+  for(var m=0;m<paras.length;m++){
+    (function(el){
+      el.addEventListener('click', function(){
+        for(var i=0;i<chunks.length;i++){ if(chunks[i].el===el){ playFrom(i); return; } }
+      });
+    })(paras[m]);
+  }
+  document.addEventListener('visibilitychange', function(){ if(document.hidden && playing) pause(); });
+  updateUI();
+})();
+</script>
+
+
+</body>
+</html>

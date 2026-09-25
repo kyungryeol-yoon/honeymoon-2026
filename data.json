@@ -2513,6 +2513,12 @@
       "취소·환불 불가",
       "예약 티켓도 보안검색은 거침",
       "15분 단위 시간지정, 정시 준수 엄격"
+     ],
+     "links": [
+      {
+       "label": "오디오 가이드 (여덟 정거장 · 32분)",
+       "url": "guide/accademia.html"
+      }
      ]
     },
     {
@@ -2524,6 +2530,12 @@
      "place": "Galleria dell'Accademia, Firenze",
      "prep": [
       "관람 45분~1시간 30분"
+     ],
+     "links": [
+      {
+       "label": "오디오 가이드 (여덟 정거장 · 32분)",
+       "url": "guide/accademia.html"
+      }
      ]
     },
     {

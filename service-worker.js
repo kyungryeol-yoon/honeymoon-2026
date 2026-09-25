@@ -6,13 +6,14 @@
    배포 시 VERSION 만 올리면 캐시가 통째로 교체됩니다.
    =========================================================== */
 
-const VERSION = 'v104';
+const VERSION = 'v106';
 const CACHE   = `honeymoon-2026-${VERSION}`;
 
 const SHELL = [
   './',
   './index.html',
   './data.json',
+  './guide/accademia.html',   // 미술관 안에서 신호가 없어도 열려야 합니다
   './manifest.json',
   './icons/favicon.svg',
   './icons/apple-touch-icon.png',
@@ -110,8 +111,31 @@ async function networkFirst(request){
 
 /* 화면(HTML)은 오프라인 우선 — 캐시를 먼저 띄우고 뒤에서 갱신.
    새 버전은 VERSION 을 올리면 SW 교체 → 페이지가 자동 새로고침됩니다. */
+const OFFLINE_PAGE = () => new Response(
+  '<!doctype html><meta charset="utf-8"><p style="font-family:sans-serif;padding:24px">오프라인입니다. 온라인 상태에서 한 번 열어주세요.</p>',
+  { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+);
+
+/* 앱 셸(일정 화면)인지, 앱에 딸린 별도 페이지(가이드 등)인지 가릅니다.
+   예전에는 **모든** 내비게이션에 index.html 을 돌려주고, 그 응답을
+   index.html 자리에 캐시했습니다. 페이지가 하나뿐일 때는 티가 안 났지만
+   /guide/accademia.html 을 열면 가이드가 안 뜨는 것은 물론이고
+   캐시의 일정 화면이 가이드 내용으로 덮여버립니다. */
 async function handleNavigation(request, keep){
   const cache = await caches.open(CACHE);
+  const path  = new URL(request.url).pathname;
+  const shell = new URL('./index.html', self.registration.scope).pathname;
+  const root  = new URL('./', self.registration.scope).pathname;
+
+  if(path !== shell && path !== root){
+    const hit = await cache.match(request, { ignoreSearch: true });
+    const fresh = timedFetch(request, NET_TIMEOUT).then(async res => {
+      if(res && res.ok){ try{ await cache.put(request, res.clone()); }catch(e){} }
+      return res;
+    }).catch(() => null);
+    if(hit){ keep(fresh); return hit; }
+    return (await fresh) || OFFLINE_PAGE();
+  }
 
   const update = timedFetch(request, NET_TIMEOUT).then(async res => {
     if(res && res.ok){
@@ -125,10 +149,7 @@ async function handleNavigation(request, keep){
     keep(update);
     return hit;
   }
-  return (await update) || new Response(
-    '<!doctype html><meta charset="utf-8"><p style="font-family:sans-serif;padding:24px">오프라인입니다. 온라인 상태에서 한 번 열어주세요.</p>',
-    { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
-  );
+  return (await update) || OFFLINE_PAGE();
 }
 
 self.addEventListener('fetch', (event) => {
