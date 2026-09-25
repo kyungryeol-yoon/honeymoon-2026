@@ -2516,8 +2516,9 @@
      ],
      "links": [
       {
-       "label": "오디오 가이드 (여덟 정거장 · 32분)",
-       "url": "guide/accademia.html"
+       "label": "오디오 가이드 · 8곳 32분",
+       "url": "guide/accademia.html",
+       "kind": "audio"
       }
      ]
     },
@@ -2533,8 +2534,9 @@
      ],
      "links": [
       {
-       "label": "오디오 가이드 (여덟 정거장 · 32분)",
-       "url": "guide/accademia.html"
+       "label": "오디오 가이드 · 8곳 32분",
+       "url": "guide/accademia.html",
+       "kind": "audio"
       }
      ]
     },
